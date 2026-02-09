@@ -1,0 +1,123 @@
+<header class="bg-white border-bottom py-2">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación" class="logo-top me-3">
+      <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM" class="logo-top">
+      <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas" class="logo-top me-3">
+    </div>
+  </div>
+</header>
+
+<nav class="navbar-inferior">
+  <div class="titulo-navbar">Actividades</div>
+</nav>
+
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+    <h1><i class="bi bi-bank"></i> {{ nombre || 'Cargando...' }}</h1>
+    <button class="btn btn-outline-secondary" (click)="regresar()">
+      <i class="bi bi-arrow-left"></i> Volver a la lista
+    </button>
+  </div>
+
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+      <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-proyectos">
+        Proyectos ({{ actividad?.proyectos?.length || 0 }})
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-eventos">
+        Eventos ({{ actividad?.eventos?.length || 0 }})
+      </button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-cursos">
+        Cursos ({{ actividad?.cursos?.length || 0 }})
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content shadow-sm p-4 bg-white rounded border">
+
+    <div class="tab-pane fade show active" id="tab-proyectos">
+      <div *ngIf="!actividad?.proyectos || actividad?.proyectos?.length === 0" class="text-center py-4 text-muted">
+        <i class="bi bi-folder-x display-4"></i>
+        <p>No hay proyectos registrados.</p>
+      </div>
+
+      <div class="row" *ngIf="actividad?.proyectos?.length > 0">
+        <div *ngFor="let p of actividad.proyectos" class="col-md-6 mb-3">
+          <div class="card h-100 border-primary shadow-sm">
+
+
+            
+<div class="file-preview-container" style="height: 180px; background: #eee;">
+  <img 
+    [src]="obtenerUrlImagen(p.imagenUrl)" 
+    class="card-img-top" 
+    [alt]="p.nombre"
+    style="height: 100%; width: 100%; object-fit: cover;"
+  />
+</div>
+
+
+
+            <div class="card-body">
+              <h5 class="card-title text-primary">{{ p.nombre }}</h5>
+              <p class="card-text text-truncate-3">{{ p.descripcion }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-light text-dark border">{{ p.estadoProyecto || 'N/A' }}</span>
+                <small class="text-muted">{{ p.fechaInicio | date:'mediumDate' }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="tab-eventos">
+      <div *ngIf="!actividad?.eventos || actividad?.eventos?.length === 0" class="text-center py-4 text-muted">
+        <i class="bi bi-calendar-x display-4"></i>
+        <p>No hay eventos registrados.</p>
+      </div>
+
+      <div class="row" *ngIf="actividad?.eventos?.length > 0">
+        <div *ngFor="let e of actividad.eventos" class="col-md-6 mb-3">
+          <div class="card h-100 border-warning shadow-sm">
+            <img [src]="e.rutaImagen || '/Imegenes/default_event.png'" class="card-img-top" alt="Evento"
+              style="height: 150px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">{{ e.nombre }}</h5>
+              <p class="card-text mb-1 small"><strong>Organizador:</strong> {{ e.organizador }}</p>
+              <p class="card-text mb-1 small"><strong>Lugar:</strong> {{ e.lugar }}</p>
+              <div class="mt-2">
+                <span class="badge bg-warning text-dark">{{ e.tipo }}</span>
+                <small class="ms-2">📅 {{ e.fechaInicio }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="tab-cursos">
+      <div *ngIf="!actividad?.cursos || actividad?.cursos?.length === 0" class="text-center py-4 text-muted">
+        <i class="bi bi-journal-x display-4"></i>
+        <p>No hay cursos registrados.</p>
+      </div>
+
+      <ul class="list-group list-group-flush" *ngIf="actividad?.cursos?.length > 0">
+        <li *ngFor="let c of actividad.cursos" class="list-group-item d-flex align-items-center">
+          <i class="bi bi-journal-check text-success fs-4 me-3"></i>
+          <div>
+            <h6 class="mb-0">{{ c.nombre }}</h6>
+            <small class="text-muted">Capacitación impartida por la institución</small>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>

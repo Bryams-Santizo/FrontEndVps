@@ -1,0 +1,126 @@
+<div class="admin-dashboard-layout">
+
+  <!-- HEADER -->
+  <header class="bg-white border-bottom py-2 shadow-sm">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <img src="/Imegenes/pleca_tecnm.jpg" class="logo-top me-3">
+        <img src="/Imegenes/pleca_educacion_dic24.png" class="logo-top me-3">
+        <img src="/Imegenes/Imagen1.png" class="logo-top">
+      </div>
+<div class="d-flex align-items-center">
+  <span class="text-secondary fw-bold me-3 d-none d-md-block">
+    {{ usuario }}
+  </span>
+  <i class="bi bi-person-circle fs-4 text-secondary"></i>
+</div>
+    </div>
+  </header>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#0D3B66">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold text-white">ADICAM</a>
+
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/panel">Inicio</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="Rparticipantes">
+              Gestionar Participantes
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="Rproyectos">
+              Registrar Proyectos
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a class="nav-link" routerLink="ProyectosR">
+              Proyectos registrados
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a class="nav-link" routerLink="Reventos">
+              Eventos
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a class="nav-link" routerLink="Asistencias">
+              Asistencia tecnica
+            </a>
+          </li>
+
+        </ul>
+
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <button class="btn btn-logout fw-bold" (click)="logout()">
+              Cerrar Sesión
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid mt-4 main-container">
+
+  <div *ngIf="router.url === '/panel'" class="admin-dashboard-summary">
+
+    <h2 class="mb-4 text-primary">Resumen del Sistema</h2>
+
+    <div class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="card p-3 shadow-lg border-info border-3">
+          <h3 class="text-info fw-bold">{{ totalTecnologicos }}</h3>
+          <p class="text-muted">Tecnológicos Activos</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3 shadow-lg border-success border-3">
+          <h3 class="text-success fw-bold">{{ totalProyectos }}</h3>
+          <p class="text-muted">Proyectos en el Sistema</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card p-3 shadow-lg border-warning border-3">
+          <h3 class="text-warning fw-bold">{{ totalEventos }}</h3>
+          <p class="text-muted">Eventos existentes</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card p-4 shadow-lg">
+      <h4 class="text-primary mb-3">Actividad Reciente</h4>
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let act of actividadesRecientes" class="list-group-item d-flex justify-content-between align-items-center">
+          <span>
+            <span class="badge bg-success me-2">{{ act.tipo }}</span>
+            {{ act.mensaje }}
+          </span>
+          <small class="text-muted">{{ act.tiempo }}</small>
+        </li>
+        
+        <li *ngIf="actividadesRecientes.length === 0" class="list-group-item text-center text-muted">
+          No hay actividad reciente para mostrar.
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <router-outlet></router-outlet>
+
+</div>
+</div>

@@ -1,0 +1,79 @@
+<nav class="navbar-superior">
+    <div class="logo-container">
+        <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
+        <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
+        <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
+    </div>
+</nav>
+
+<nav class="navbar-inferior">
+  <div class="titulo-navbar">Impulso Tecnológico Cafetalero</div>
+</nav>
+
+<div class="contenedor-principal">
+
+  <div class="grid-registros">
+    <div class="ficha-tecnica" *ngFor="let item of listaDatos">
+      
+      <div class="seccion-cabecera">
+        <div class="badge-tipo">
+          {{ item.tipo }} 
+          <span *ngIf="item.tipo === 'Otro' && item.especificacionOtroTipo">
+            - {{ item.especificacionOtroTipo }}
+          </span>
+        </div>
+        <h2>{{ item.nombreTecnologia }}</h2>
+      </div>
+
+      <div class="cuerpo-ficha">
+        
+        <div class="campo-dato">
+          <label>Descripción de la Tecnología Cafetalera</label>
+          <div class="contenido">{{ item.descripcion }}</div>
+        </div>
+
+        <div class="campo-dato">
+          <label>Capacidades Técnicas Aplicadas al Café</label>
+          <div class="contenido">{{ item.capacidades }}</div>
+        </div>
+
+        <div class="campo-dato" *ngIf="item.servicios">
+          <label>Servicios Tecnológicos para Productores de Café</label>
+          <div class="contenido">{{ item.servicios }}</div>
+        </div>
+
+        <div class="campo-dato">
+          <label>Requisitos para su Implementación</label>
+          <div class="contenido">{{ item.requisitos }}</div>
+        </div>
+
+        <div class="info-footer">
+          <div class="dato-footer">
+            <span class="etiqueta">Disponibilidad:</span>
+            <span class="valor">{{ item.disponibilidad }}</span>
+          </div>
+          <div class="dato-footer">
+            <span class="etiqueta">Costos o Convenios:</span>
+            <span class="valor">{{ item.costos || 'N/A' }}</span>
+          </div>
+          <div class="dato-footer">
+            <span class="etiqueta">Responsable Técnico:</span>
+            <span class="valor">{{ item.responsable }}</span>
+          </div>
+        </div>
+
+        <div class="footer-archivos">
+          <div class="item-archivo">
+            <span [innerHtml]="item.archivoDocumentos ? '' : ''"></span>
+            Manuales y Fichas Técnicas Cafetaleras
+          </div>
+          <div class="item-archivo">
+            <span [innerHtml]="item.archivoCarta ? '' : ''"></span>
+            Carta de Autorización o Uso
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

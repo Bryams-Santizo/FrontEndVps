@@ -1,0 +1,106 @@
+
+.navbar-superior { background: #fff; border-bottom: 3px solid #003b6f; padding: 5px 20px; }
+.logo-container img { height: 60px; }
+
+.navbar-inferior { background: #003b6f; color: #fff; padding: 10px 20px; font-weight: bold; }
+
+/* Contenedor principal del formulario */
+.form-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0 15px;
+}
+
+.titulo {
+    color: #003b6f;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #d4af37; /* Color Oro TecNM */
+    padding-bottom: 10px;
+}
+
+.instrucciones {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Tarjeta del formulario */
+.card-form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+}
+
+.subtitulo {
+    color: #003b6f;
+    margin-bottom: 25px;
+    font-size: 1.3rem;
+    border-left: 5px solid #003b6f;
+    padding-left: 15px;
+}
+
+/* Grid del formulario */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.full { grid-column: span 2; }
+.ancho-50 { grid-column: span 1; }
+
+/* Estilos de inputs */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #003b6f;
+    box-shadow: 0 0 5px rgba(0, 59, 111, 0.2);
+}
+
+/* Botón de envío */
+.contenedor-btn {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-guardar {
+    background: #003b6f;
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-guardar:hover {
+    background: #d4af37;
+    color: #003b6f;
+}
+
+@media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .ancho-50 { grid-column: span 2; }
+}

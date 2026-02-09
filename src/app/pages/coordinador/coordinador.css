@@ -1,0 +1,73 @@
+/* --- ESTILOS GENERALES (Mantenidos) --- */
+.navbar-custom {
+  background-color: #0D3B66;
+  padding: 1rem;
+}
+
+.navbar-custom .nav-link {
+  color: #fff;
+  margin-right: 15px;
+  transition: 0.3s;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #a3d2ff;
+}
+
+.btn-logout {
+  background-color: #f8f9fa;
+  color: #0D3B66;
+  border: 1px solid #0D3B66;
+  font-weight: bold;
+}
+
+.btn-logout:hover {
+  background-color: #0D3B66;
+  color: #fff;
+}
+
+.main-container {
+  background-color: #F7F9FC;
+  min-height: 100vh;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.logo-top {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* --- 📱 AJUSTES PARA MÓVIL (NUEVO) --- */
+@media screen and (max-width: 768px) {
+  .navbar-custom {
+    padding: 0.8rem;
+  }
+
+  /* Ajuste de los logos: más pequeños para que quepan en una fila */
+  .logo-top {
+    height: 40px; /* Reducimos el tamaño */
+  }
+
+  /* El contenedor principal reduce su padding para ganar espacio */
+  .main-container {
+    padding: 1rem; /* Menos espacio en las orillas */
+    border-radius: 0; /* Opcional: quitar bordes redondeados para que pegue a la orilla */
+  }
+
+  /* Si los links están en una lista, quitamos el margen derecho */
+  .navbar-custom .nav-link {
+    margin-right: 0;
+    margin-bottom: 10px;
+    display: block; /* Uno debajo del otro si usas menú colapsable */
+  }
+
+  /* Ajuste para el botón de cerrar sesión */
+  .btn-logout {
+    width: 100%; /* Botón ancho completo en móviles para facilitar el clic */
+    margin-top: 10px;
+    text-align: center;
+  }
+}

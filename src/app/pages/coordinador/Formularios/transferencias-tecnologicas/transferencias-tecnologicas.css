@@ -1,0 +1,295 @@
+/* =========================================================
+   NAVBAR SUPERIOR
+========================================================= */
+.navbar-superior {
+    background: white;
+    padding: 10px 25px; /* Ligeramente más padding */
+    border-bottom: 1px solid #ddd;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-container img {
+    height: 55px;
+}
+
+/* =========================================================
+   NAVBAR INFERIOR
+========================================================= */
+.navbar-inferior {
+    background: #002b5c;
+    padding: 15px 25px; /* Más espacio vertical y horizontal */
+    color: white;
+    font-size: 22px; /* Más prominente */
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: left; /* Alineación a la izquierda, más común en barras de navegación */
+}
+
+.titulo-navbar {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+========================================================= */
+.contenedor {
+    padding: 30px 20px; /* Padding ajustado para escritorio */
+    display: flex;
+    justify-content: center;
+}
+
+/* =========================================================
+   CARD DEL FORMULARIO
+========================================================= */
+.card-form {
+    background: #ffffff;
+    padding: 30px; /* Se reduce un poco para hacerlo más compacto */
+    width: 100%;
+    max-width: 1000px; /* Ancho máximo ajustado para equilibrio */
+    border-radius: 15px; /* Ligeramente más redondeado */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra más suave y moderna */
+    border: 1px solid #e0e0e0;
+}
+
+.card-form h2 {
+    text-align: left; /* Alinear a la izquierda para un diseño más profesional */
+    margin-bottom: 25px;
+    font-size: 28px;
+    color: #002b5c; /* Usar color de marca */
+    font-weight: 700;
+    /* Añadir un borde decorativo para destacar el título */
+    border-left: 6px solid #007bff; 
+    padding-left: 15px;
+}
+
+/* =========================================================
+   GRID - DISEÑO ASIMÉTRICO
+========================================================= */
+.grid {
+    display: grid;
+    /* ASIMETRÍA: Columna 1 (60%) y Columna 2 (40%) */
+    grid-template-columns: 3fr 2fr;
+    gap: 20px 30px; /* Espaciado ajustado y consistente */
+}
+
+.campo-full {
+    grid-column: span 2;
+}
+
+/* =========================================================
+   ESTILOS DE CAMPOS
+========================================================= */
+.campo label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 15px;
+    color: #333333;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 11px 14px; /* Ajuste para compactar ligeramente */
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+    background: #ffffff; /* Fondo blanco para limpiar */
+    transition: all 0.2s ease;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px 0; /* Ajuste para el input file */
+    font-size: 15px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    /* Usar el color principal de marca en el foco */
+    border-color: #002b5c; 
+    background: #ffffff;
+    /* Sombra de foco más sutil */
+    box-shadow: 0 0 0 3px rgba(0, 43, 92, 0.15); 
+}
+
+/* =========================================================
+   BOTÓN GUARDAR
+========================================================= */
+.contenedor-btn {
+    display: flex;
+    justify-content: flex-end; /* Botón a la derecha */
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.btn-guardar {
+    background: #002b5c; /* Color de marca */
+    color: white;
+    border: none;
+    padding: 13px 35px;
+    font-size: 17px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 3px 8px rgba(0, 43, 92, 0.3);
+}
+
+.btn-guardar:hover {
+    background: #004a9e; /* Tono más claro al pasar el ratón */
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(0, 43, 92, 0.4);
+}
+
+/* =========================================================
+   TOOLTIP DE AYUDA (Ajuste de margen)
+========================================================= */
+/* 1. Contenedor que alinea la etiqueta y el tooltip */
+.label-with-tooltip {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; /* Ajuste para dar aire */
+}
+
+/* 2. Asegurarse que la etiqueta dentro del contenedor no tenga margen duplicado */
+.label-with-tooltip label {
+    margin-bottom: 0;
+}
+
+/* 3. Contenedor principal del ícono de información (define la posición relativa) */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 8px;
+    cursor: help;
+    flex-shrink: 0;
+}
+
+/* 4. Estilo del ícono '?' (usando el color principal #002b5c) */
+.info-icon {
+    color: #ffffff; 
+    background-color: #002b5c; 
+    border-radius: 50%; 
+    width: 18px; 
+    height: 18px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    font-size: 13px; 
+    font-style: normal; 
+    font-weight: bold;
+    cursor: help;
+}
+
+/* 5. El cuadro de texto del tooltip (inicialmente oculto) */
+.tooltip-text {
+    visibility: hidden;
+    width: 280px; /* Ligeramente más compacto */
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 100;
+    bottom: 100%; 
+    left: 50%;
+    margin-left: -140px; 
+    margin-bottom: 12px;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: normal;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 6. Flecha inferior del tooltip */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* 7. Mostrar el tooltip al pasar el ratón */
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN (BREAKPOINTS)
+========================================================= */
+
+/* Tablets (Diseño más equilibrado 50%/50%) */
+@media (max-width: 950px) {
+    .contenedor {
+        padding: 25px 20px;
+    }
+    
+    .grid {
+        /* Asimetría más suave o equilibrio para pantallas medianas */
+        grid-template-columns: 1fr 1fr; 
+        gap: 20px;
+    }
+
+    .campo-full {
+        grid-column: span 2;
+    }
+
+    .card-form h2 {
+        font-size: 24px;
+    }
+}
+
+/* Móvil (Todo a una sola columna 100%) */
+@media (max-width: 580px) {
+    .contenedor {
+        padding: 15px; /* Más compacto en móvil */
+    }
+
+    .grid {
+        /* Colapsa todo a una sola columna */
+        grid-template-columns: 1fr;
+        gap: 20px; 
+    }
+
+    .campo-full {
+        grid-column: span 1;
+    }
+
+    .card-form {
+        padding: 20px;
+    }
+
+    .card-form h2 {
+        font-size: 22px;
+        padding-left: 10px;
+    }
+    
+    .contenedor-btn {
+        justify-content: center; /* Botón centrado en móvil */
+    }
+}

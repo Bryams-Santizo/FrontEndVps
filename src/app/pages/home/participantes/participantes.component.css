@@ -1,0 +1,160 @@
+/* --- ENCABEZADO (Headers): FONDO AZUL, LETRA BLANCA --- */
+
+.navbar-inferior { background: #003b6f; color: #fff; padding: 10px 20px; font-weight: bold; }
+.table thead tr th {
+    background-color: #1B396A !important; /* Azul Marino TecNM */
+    color: #FFFFFF !important;            /* BLANCO PURO */
+    text-align: center;
+    padding: 15px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none !important;
+}
+
+/* --- CUERPO (Body): TODAS LAS LETRAS EN NEGRO --- */
+.table tbody tr td {
+    color: #000000 !important;   /* NEGRO PURO PARA TODO */
+    background-color: #ffffff;    /* Fondo blanco para que resalte el negro */
+    padding: 12px 15px !important;
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/* --- FILAS CEBRA (Opcional, pero ayuda a leer el negro) --- */
+.table-striped tbody tr:nth-of-type(odd) td {
+    background-color: #f2f2f2 !important; /* Gris muy claro para filas impares */
+    color: #000000 !important;            /* Sigue siendo negro */
+}
+
+/* --- RESALTADO DEL NOMBRE --- */
+.nombre-resaltado {
+    font-weight: 800; /* Más negrita para el nombre */
+    color: #000000 !important;
+}
+
+/* --- BOTÓN DE ACCIÓN --- */
+.btn-accion {
+    background-color: #1B396A;
+    color: white !important;
+    border: none;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 4px;
+}
+
+.btn-accion:hover {
+    background-color: #B49448; /* Dorado al pasar el mouse */
+}
+/* --- ARREGLO DE LOGOS PARA MÓVIL --- */
+.header-logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap; /* Evita que se amontonen feo */
+}
+
+.logo-adaptable {
+    max-height: 50px; /* Limita la altura */
+    max-width: 30%;   /* Asegura que los 3 quepan en el ancho */
+    height: auto;
+    object-fit: contain;
+}
+
+/* --- TUS ESTILOS ORIGINALES --- */
+.navbar-inferior { background: #003b6f; color: #fff; padding: 10px 20px; font-weight: bold; }
+.table thead tr th {
+    background-color: #1B396A !important;
+    color: #FFFFFF !important;
+    text-align: center;
+    padding: 15px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.table tbody tr td {
+    color: #000000 !important;
+    background-color: #ffffff;
+    padding: 12px 15px !important;
+    vertical-align: middle;
+}
+
+.nombre-resaltado {
+    font-weight: 800;
+    color: #000000 !important;
+}
+
+.btn-accion {
+    background-color: #1B396A;
+    color: white !important;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 4px;
+}
+
+/* ========================================================== */
+/* 📱 DISEÑO DE TABLA ADAPTADO A TU ESTILO MÓVIL */
+/* ========================================================== */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Quitamos la forma de tabla para que no se salga de la pantalla */
+    .table, .table thead, .table tbody, .table th, .table td, .table tr {
+        display: block;
+        width: 100%;
+    }
+
+    /* 2. Escondemos la cabecera azul original */
+    .table thead {
+        display: none;
+    }
+
+    /* 3. Cada fila ahora es una tarjeta independiente */
+    .table tr {
+        margin-bottom: 25px;
+        border: 1px solid #dee2e6;
+        border-radius: 12px; /* Bordes redondeados como tus otros elementos */
+        background: #ffffff !important;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        overflow: hidden;
+    }
+
+    /* 4. Estilo de cada dato dentro de la tarjeta */
+    .table td {
+        text-align: right !important; /* El dato a la derecha */
+        padding: 15px 15px 15px 45% !important; /* Espacio para el título a la izquierda */
+        position: relative;
+        border-bottom: 1px solid #f0f0f0 !important;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    /* 5. EL TRUCO MÁGICO: Aquí aparece el nombre de la columna a la izquierda */
+    .table td::before {
+        content: attr(data-label); /* Toma el nombre del HTML */
+        position: absolute;
+        left: 15px;
+        width: 40%;
+        text-align: left;
+        font-weight: 800;
+        color: #1B396A; /* Tu azul marino */
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 0.5px;
+    }
+
+    /* 6. Celda del botón (la última de la tarjeta) */
+    .table td:last-child {
+        background: #f8f9fa;
+        justify-content: center;
+        padding: 15px !important;
+        border-bottom: none !important;
+    }
+
+    .btn-accion {
+        width: 100% !important;
+        padding: 12px !important;
+        font-size: 1rem;
+    }
+}

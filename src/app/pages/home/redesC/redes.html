@@ -1,0 +1,81 @@
+<nav class="navbar-superior">
+    <div class="logo-container">
+        <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
+        <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
+        <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
+    </div>
+</nav>
+
+<nav class="navbar-inferior">
+    <div class="titulo-navbar">Redes y Colaboraciones Cafetaleras</div>
+</nav>
+
+<div class="tecnm-container">
+    <div class="fichas-grid">
+        <div class="ficha-institucional" *ngFor="let col of listaColaboraciones">
+            
+            <div class="ficha-header">
+                <div class="header-main">
+                    <span class="tipo-badge">{{ col.tipoColaboracion }}</span>
+                    <span class="ubicacion-text">{{ col.estado | uppercase }}</span>
+                </div>
+                <h2 class="institucion-nombre">
+                    {{ col.institucionSolicitante }}
+                </h2>
+            </div>
+
+            <div class="ficha-contenido">
+                <div class="seccion-info">
+                    <label>Necesidad en el Sector Cafetalero</label>
+                    <p>{{ col.descripcionNecesidad }}</p>
+                </div>
+
+                <div class="seccion-info perfil-box">
+                    <label>Perfil y Conocimientos Requeridos en Café</label>
+                    <p>{{ col.perfilCompetencias }}</p>
+                </div>
+
+                <div class="tabla-contenedor">
+                    <div class="fila-tabla">
+                        <div class="celda">
+                            <span class="label-tabla">Participantes</span>
+                            <span class="valor-tabla">{{ col.numeroEstudiantes }}</span>
+                        </div>
+                        <div class="celda">
+                            <span class="label-tabla">Duración del Apoyo</span>
+                            <span class="valor-tabla">{{ col.duracion }}</span>
+                        </div>
+                    </div>
+                    <div class="fila-tabla single">
+                        <div class="celda">
+                            <span class="label-tabla">Beneficios para Productores de Café</span>
+                            <span class="valor-tabla beneficios-highlight">
+                                {{ col.beneficios || 'Sin especificar' }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ficha-footer">
+                <div class="contacto-principal">
+                    <span class="label-contacto">RESPONSABLE DE VINCULACIÓN CAFETALERA</span>
+                    <span class="nombre-contacto">{{ col.personaContacto }}</span>
+                </div>
+                <div class="evidencias">
+                    <span class="icon-doc" 
+                          [class.file-on]="col.documentosAdjuntos" 
+                          title="Documentos de Colaboración">
+                        📁
+                    </span>
+                    <span class="icon-doc" 
+                          [class.file-on]="col.cartaIntencion" 
+                          title="Carta de Intención Cafetalera">
+                        📜
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

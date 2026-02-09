@@ -1,0 +1,301 @@
+<div class="card">
+  <h3>Registro de Proyectos</h3>
+
+  <!-- Mensajes globales -->
+  <div *ngIf="mensajeOk" class="alert alert-success">
+    {{ mensajeOk }}
+  </div>
+  <div *ngIf="mensajeError" class="alert alert-danger">
+    {{ mensajeError }}
+  </div>
+
+  <form #f="ngForm" (ngSubmit)="registrarProyecto(f)">
+
+    <!-- Nombre del proyecto -->
+    <div class="form-group">
+      <label>Nombre del proyecto</label>
+      <input type="text"
+             name="nombre"
+             [(ngModel)]="proyecto.nombre"
+             #nombre="ngModel"
+             required
+             minlength="3">
+      <div class="error" *ngIf="(nombre.invalid && (nombre.touched || f.submitted))">
+        <small *ngIf="nombre.errors?.['required']">El nombre es obligatorio.</small>
+        <small *ngIf="nombre.errors?.['minlength']">Debe tener al menos 3 caracteres.</small>
+      </div>
+    </div>
+
+    <!-- Actividad / subtema -->
+    <div class="form-group">
+      <label>Actividad / Subtema</label>
+      <select name="actividad" 
+        [(ngModel)]="proyecto.actividad" 
+        #actividad="ngModel" 
+        required>
+  
+  <option value="" disabled selected>Seleccione la actividad específica</option>
+
+  <optgroup label="1. ESTABLECIMIENTO DEL CULTIVO">
+    <option value="Métodos de selección de variedades">Métodos de selección de variedades</option>
+    <option value="Manejo genético y viveros">Manejo genético y viveros</option>
+    <option value="Preparación de suelos">Preparación de suelos</option>
+    <option value="Diseño y trazado de plantaciones">Diseño y trazado de plantaciones</option>
+  </optgroup>
+
+  <optgroup label="1. MANEJO DEL CULTIVO">
+    <option value="Fertilización y nutrición">Fertilización y nutrición</option>
+    <option value="Manejo de sombra">Manejo de sombra</option>
+    <option value="Manejo de arvenses">Manejo de arvenses</option>
+    <option value="Podas y renovación">Podas y renovación</option>
+    <option value="Manejo hídrico">Manejo hídrico</option>
+  </optgroup>
+
+  <optgroup label="1. SANIDAD VEGETAL">
+    <option value="Roya">Roya</option>
+    <option value="Broca">Broca</option>
+    <option value="Enfermedades foliares y sistémicas">Enfermedades foliares y sistémicas</option>
+    <option value="Plagas secundarias">Plagas secundarias</option>
+    <option value="Manejo integrado (MIP)">Manejo integrado (MIP)</option>
+  </optgroup>
+
+  <optgroup label="1. TECNIFICACIÓN Y BUENAS PRÁCTICAS">
+    <option value="Sistemas agroforestales">Sistemas agroforestales</option>
+    <option value="Tecnología para monitoreo agrícola">Tecnología para monitoreo agrícola</option>
+    <option value="Agricultura de precisión">Agricultura de precisión</option>
+    <option value="Modelos de predicción climática">Modelos de predicción climática</option>
+    <option value="Innovaciones en campo">Innovaciones en campo (sensores, drones, etc.)</option>
+  </optgroup>
+
+  <optgroup label="1. ORGANIZACIÓN Y GESTIÓN">
+    <option value="Costos de producción">Costos de producción</option>
+    <option value="Administración de unidades productivas">Administración de unidades productivas</option>
+    <option value="Formalización">Formalización</option>
+    <option value="Buenas prácticas agrícolas certificables">Buenas prácticas agrícolas (BPA)</option>
+  </optgroup>
+
+  <optgroup label="1. SUSTENTABILIDAD Y CONSERVACIÓN">
+    <option value="Suelos">Suelos</option>
+    <option value="Agua">Agua</option>
+    <option value="Biodiversidad">Biodiversidad</option>
+    <option value="Captura de carbono">Captura de carbono</option>
+    <option value="Adaptación al cambio climático">Adaptación al cambio climático</option>
+  </optgroup>
+
+  <optgroup label="2. BENEFICIADO HÚMEDO">
+    <option value="Cosecha y selección del fruto">Cosecha y selección del fruto</option>
+    <option value="Despulpado">Despulpado</option>
+    <option value="Fermentación">Fermentación</option>
+    <option value="Lavado">Lavado</option>
+    <option value="Manejo de aguas mieles">Manejo de aguas mieles</option>
+  </optgroup>
+
+  <optgroup label="2. SECADO Y ALMACENAMIENTO">
+    <option value="Secado en patios">Secado en patios</option>
+    <option value="Guardiolas">Guardiolas</option>
+    <option value="Secado solar / camas africanas">Secado solar / camas africanas</option>
+    <option value="Control de humedad">Control de humedad</option>
+    <option value="Trillado">Trillado</option>
+  </optgroup>
+
+  <optgroup label="2. PROCESOS DIFERENCIADOS">
+    <option value="Honey">Honey</option>
+    <option value="Natural">Natural</option>
+    <option value="Fermentaciones controladas">Fermentaciones controladas</option>
+    <option value="Micro-lotes">Micro-lotes</option>
+    <option value="Café de especialidad">Café de especialidad</option>
+  </optgroup>
+
+  <optgroup label="2. ASEGURAMIENTO DE LA CALIDAD">
+    <option value="Análisis físico">Análisis físico</option>
+    <option value="Catación">Catación</option>
+    <option value="Trazabilidad">Trazabilidad</option>
+    <option value="Defectología">Defectología</option>
+    <option value="Normas y estándares">Normas y estándares</option>
+  </optgroup>
+
+  <optgroup label="2. INFRAESTRUCTURA Y EQUIPAMIENTO">
+    <option value="Diseño de beneficios">Diseño de beneficios</option>
+    <option value="Mantenimiento de maquinaria">Mantenimiento de maquinaria</option>
+    <option value="Innovación tecnológica en equipo">Innovación tecnológica en equipo</option>
+  </optgroup>
+
+  <optgroup label="2. GESTIÓN AMBIENTAL">
+    <option value="Tratamiento de aguas residuales">Tratamiento de aguas residuales</option>
+    <option value="Uso eficiente de energía">Uso eficiente de energía</option>
+    <option value="Manejo de residuos">Manejo de residuos</option>
+  </optgroup>
+
+  <optgroup label="3. TOSTADO Y MOLIDO">
+    <option value="Perfiles de tostado">Perfiles de tostado</option>
+    <option value="Control de calidad en tostado">Control de calidad en tostado</option>
+    <option value="Innovaciones en tostadoras">Innovaciones en tostadoras</option>
+    <option value="Estándares de molienda">Estándares de molienda</option>
+  </optgroup>
+
+  <optgroup label="3. DESARROLLO DE PRODUCTO">
+    <option value="Diseño de empaque">Diseño de empaque</option>
+    <option value="Innovación en presentaciones">Innovación en presentaciones (drip bag, cápsulas, etc.)</option>
+    <option value="Valor agregado">Valor agregado</option>
+    <option value="Normatividad (NOMs)">Normatividad (NOMs aplicables)</option>
+  </optgroup>
+
+  <optgroup label="3. DESARROLLO DE MARCA">
+    <option value="Identidad de marca">Identidad de marca</option>
+    <option value="Estrategias de branding">Estrategias de branding</option>
+    <option value="Narrativa y storytelling">Narrativa y storytelling</option>
+    <option value="Denominación de origen">Denominación de origen y marca colectiva</option>
+  </optgroup>
+
+  <optgroup label="3. MERCADOS">
+    <option value="Mercado interno">Mercado interno</option>
+    <option value="Mercado de exportación">Mercado de exportación</option>
+    <option value="Café de especialidad (Mercado)">Café de especialidad</option>
+    <option value="Mercados emergentes">Mercados emergentes</option>
+  </optgroup>
+
+  <optgroup label="3. COMERCIALIZACIÓN">
+    <option value="Ventas directas">Ventas directas</option>
+    <option value="Comercio electrónico">Comercio electrónico</option>
+    <option value="Cadenas de valor cortas">Cadenas de valor cortas</option>
+    <option value="Estrategias de precio">Estrategias de precio</option>
+    <option value="Integración a cadenas de suministro">Integración a cadenas de suministro</option>
+  </optgroup>
+
+  <optgroup label="3. CERTIFICACIONES COMERCIALES">
+    <option value="Orgánico">Orgánico</option>
+    <option value="Comercio justo">Comercio justo</option>
+    <option value="Rainforest">Rainforest</option>
+    <option value="UTZ">UTZ</option>
+    <option value="Cafés diferenciados">Cafés diferenciados por atributos</option>
+  </optgroup>
+
+  <optgroup label="3. GESTIÓN EMPRESARIAL">
+    <option value="Finanzas del negocio">Finanzas del negocio</option>
+    <option value="Planes de negocios">Planes de negocios</option>
+    <option value="Análisis de costos y márgenes">Análisis de costos y márgenes</option>
+    <option value="Estrategias de crecimiento">Estrategias de crecimiento</option>
+    <option value="Cooperativas y empresas sociales">Cooperativas y empresas sociales</option>
+  </optgroup>
+
+</select>
+      <div class="error" *ngIf="(actividad.invalid && (actividad.touched || f.submitted))">
+        <small>La actividad es obligatoria.</small>
+      </div>
+    </div>
+
+    <!-- Necesidad -->
+    <div class="form-group">
+      <label>Necesidad que atiende</label>
+      <input type="text"
+             name="necesidad"
+             [(ngModel)]="proyecto.necesidad"
+             #necesidad="ngModel"
+             required>
+      <div class="error" *ngIf="(necesidad.invalid && (necesidad.touched || f.submitted))">
+        <small>La necesidad es obligatoria.</small>
+      </div>
+    </div>
+
+    <!-- Empresa vinculada -->
+    <div class="form-group">
+      <label>Empresa vinculada</label>
+      <input type="text"
+             name="empresaVinculada"
+             [(ngModel)]="proyecto.empresaVinculada"
+             #empresaVinculada="ngModel"
+             required>
+      <div class="error" *ngIf="(empresaVinculada.invalid && (empresaVinculada.touched || f.submitted))">
+        <small>La empresa vinculada es obligatoria.</small>
+      </div>
+    </div>
+
+    <!-- Estado del proyecto -->
+    <div class="form-group">
+      <label>Estado del proyecto</label>
+      <select name="estadoProyecto"
+              [(ngModel)]="proyecto.estadoProyecto"
+              #estadoProyecto="ngModel"
+              required>
+        <option value="" disabled selected>Selecciona un estado</option>
+        <option value="En curso">En curso</option>
+        <option value="Finalizado">Finalizado</option>
+        <option value="En planeación">En planeación</option>
+      </select>
+      <div class="error" *ngIf="(estadoProyecto.invalid && (estadoProyecto.touched || f.submitted))">
+        <small>El estado del proyecto es obligatorio.</small>
+      </div>
+    </div>
+
+    <!-- Fechas -->
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Fecha de inicio</label>
+        <input type="date"
+               name="fechaInicio"
+               [(ngModel)]="proyecto.fechaInicio"
+               #fechaInicio="ngModel"
+               required>
+        <div class="error" *ngIf="(fechaInicio.invalid && (fechaInicio.touched || f.submitted))">
+          <small>La fecha de inicio es obligatoria.</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Fecha de fin</label>
+        <input type="date"
+               name="fechaFin"
+               [(ngModel)]="proyecto.fechaFin"
+               #fechaFin="ngModel"
+               required>
+        <div class="error" *ngIf="(fechaFin.invalid && (fechaFin.touched || f.submitted))">
+          <small>La fecha de fin es obligatoria.</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Descripción -->
+    <div class="form-group">
+      <label>Descripción del proyecto</label>
+      <textarea name="descripcion"
+                [(ngModel)]="proyecto.descripcion"
+                #descripcion="ngModel"
+                rows="4"
+                required
+                minlength="10"></textarea>
+      <div class="error" *ngIf="(descripcion.invalid && (descripcion.touched || f.submitted))">
+        <small *ngIf="descripcion.errors?.['required']">La descripción es obligatoria.</small>
+        <small *ngIf="descripcion.errors?.['minlength']">Debe tener al menos 10 caracteres.</small>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- IMAGEN REPRESENTATIVA -->
+    <div class="form-group">
+      <label>Imagen representativa del proyecto</label>
+      <input id="imagenInput"
+             type="file"
+             accept="image/*"
+             (change)="onImagenChange($event)">
+      <small class="text-muted">Esta imagen se mostrará en la página informativa.</small>
+    </div>
+
+    <!-- DOCUMENTO PRINCIPAL -->
+    <div class="form-group">
+      <label>Documento del proyecto (PDF / Word / etc.)</label>
+      <input id="documentoInput"
+             type="file"
+             accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip,image/*"
+             (change)="onDocumentoChange($event)">
+      <small class="text-muted">Opcional: archivo principal del proyecto.</small>
+    </div>
+
+    <!-- Botón -->
+    <button type="submit"
+            class="btn-primary">
+      Registrar proyecto
+    </button>
+
+  </form>
+</div>

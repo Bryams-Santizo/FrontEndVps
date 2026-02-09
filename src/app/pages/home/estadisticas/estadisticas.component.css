@@ -1,0 +1,36 @@
+.navbar-superior { background: #fff; border-bottom: 3px solid #003b6f; padding: 10px 20px; }
+.logo-container img { height: 60px; }
+.navbar-inferior { background: #003b6f; color: #fff; padding: 20px 20px; font-weight: bold; }
+
+.dashboard-container {
+    background-color: #f8f9fc;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    background-color: white;
+}
+
+.border-left-primary { border-left: 0.25rem solid #4e73df !important; }
+.border-left-success { border-left: 0.25rem solid #1cc88a !important; }
+.border-left-info { border-left: 0.25rem solid #36b9cc !important; }
+
+.text-gray-800 { color: #5a5c69 !important; }
+.text-xs { font-size: .75rem; font-weight: bold; }
+.font-weight-bold { font-weight: 700; }
+
+.chart-area { position: relative; height: 320px; width: 100%; }
+.chart-area-large { position: relative; height: 400px; width: 100%; }
+.chart-pie { position: relative; height: 300px; width: 100%; }
+
+.shadow {
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15) !important;
+}
+
+.card-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+}

@@ -1,0 +1,218 @@
+:root {
+  --color-tecnm-blue: #0D3B66;
+  --color-tecnm-light: #f8f9fa;
+  --color-gray-text: #555555;
+  --color-input-border: #d9d9d9;
+}
+
+.login-background {
+  background: linear-gradient(135deg, #0D3B66 0%, #071e35 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Botón de Salir (Esquina superior) */
+.btn-exit {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.85rem;
+  background: rgba(255,255,255,0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: 0.3s;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn-exit:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.05);
+}
+
+.login-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 400px; /* Un poco más angosta */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+/* Botón de Login Sólido */
+.btn-tecnm-login {
+  width: 100%;
+  background-color: var(--color-tecnm-blue) !important;
+  color: white !important;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 15px;
+  box-shadow: 0 4px 10px rgba(13, 59, 102, 0.3);
+  transition: 0.3s;
+}
+
+.btn-tecnm-login:hover {
+  background-color: #092a4a !important;
+  box-shadow: 0 6px 15px rgba(13, 59, 102, 0.5);
+}
+
+.signup-section {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.signup-link {
+  color: var(--color-tecnm-blue);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.input-underline {
+  width: 100%; border: none; border-bottom: 2px solid var(--color-input-border);
+  padding: 10px 5px 10px 35px; background: transparent; transition: 0.3s;
+}
+.input-underline:focus { outline: none; border-bottom-color: var(--color-tecnm-blue); }
+
+
+/* ========================================================== */
+/* 🔐 INPUTS LOGIN – VERSION PRO */
+/* ========================================================== */
+
+.input-box {
+  position: relative;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.input-box label {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+/* Icono */
+.input-box i {
+  position: absolute;
+  top: 42px;
+  left: 12px;
+  color: #9aa3af;
+  font-size: 1.1rem;
+}
+
+/* Input con marco */
+.input-box input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border-radius: 8px;
+  border: 1.8px solid #d9d9d9;
+  background-color: #f9fafb;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+/* Focus elegante */
+.input-box input:focus {
+  outline: none;
+  border-color: var(--color-tecnm-blue);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(13, 59, 102, 0.15);
+}
+
+/* Icono cambia con focus */
+.input-box input:focus + i,
+.input-box:focus-within i {
+  color: var(--color-tecnm-blue);
+}
+
+/* Link forgot */
+.forgot-link {
+  font-size: 11px;
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* ========================================================== */
+/* 📱 LOGIN RESPONSIVO – TELEFONO */
+/* ========================================================== */
+
+@media (max-width: 576px) {
+
+  .login-background {
+    padding: 20px;
+  }
+
+  .login-card {
+    padding: 25px 20px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  }
+
+  .login-card img {
+    width: 160px !important;
+    margin-bottom: 15px !important;
+  }
+
+  .login-card h2 {
+    font-size: 1.3rem !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* Inputs */
+  .input-box input {
+    padding: 14px 12px 14px 42px;
+    font-size: 1rem;
+  }
+
+  .input-box i {
+    top: 45px;
+    left: 14px;
+    font-size: 1.15rem;
+  }
+
+  .input-box label {
+    font-size: 12px;
+  }
+
+  /* Botón */
+  .btn-tecnm-login {
+    padding: 14px;
+    font-size: 0.9rem;
+    border-radius: 30px;
+  }
+
+  /* Forgot password */
+  .forgot-link {
+    font-size: 12px;
+  }
+
+  /* Botón salir */
+  .btn-exit {
+    top: 12px;
+    right: 12px;
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  .signup-section {
+    margin-top: 20px;
+  }
+
+}

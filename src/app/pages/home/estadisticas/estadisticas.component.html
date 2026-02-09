@@ -1,0 +1,78 @@
+<nav class="navbar-superior">
+    <div class="logo-container">
+        <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
+        <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
+        <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
+    </div>
+</nav>
+
+<nav class="navbar-inferior">
+    <div class="titulo-navbar">Estadísticas</div>
+</nav>
+
+<div class="dashboard-container">
+  <div class="container-fluid">
+   
+
+    <div class="row mb-4">
+      <div class="col-md-6 col-xl-4 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Proyectos</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ totalProyectos }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-4 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Participantes</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ totalParticipantes }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Proyectos por Mes</h6>
+          </div>
+          <div class="card-body">
+            <div class="chart-area">
+              <canvas #proyectosMesCanvas></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Distribución de Actividades</h6>
+          </div>
+          <div class="card-body">
+            <div class="chart-pie">
+              <canvas #tiposCanvas></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Histórico de Participantes</h6>
+          </div>
+          <div class="card-body">
+            <div class="chart-area-large">
+              <canvas #participantesCanvas></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

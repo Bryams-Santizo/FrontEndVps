@@ -1,0 +1,704 @@
+/* ===== Layout general ===== */
+.contenedor-principal {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* ===== Navbars ===== */
+.navbar-superior {
+  background: #ffffff;
+  padding: 0.5rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo-container img {
+  height: 60px;
+  object-fit: contain;
+}
+
+.navbar-inferior {
+  background: #003b6f;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo-navbar {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.menu-item {
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem 0; /* Añadimos un poco de padding para aumentar el área de contacto */
+}
+
+.menu-item:hover .submenu {
+  display: block;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%; /* CAMBIO: De 130% a 100% para que pegue justo al borde */
+  left: 0;
+  background: #ffffff;
+  color: #111827;
+  border-radius: 0.5rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  min-width: 240px;
+  z-index: 100; /* Aumentamos el z-index para que flote sobre todo */
+}
+
+.submenu::before {
+  content: "";
+  position: absolute;
+  top: -10px; /* Crea un área sensible arriba del cuadro blanco */
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: transparent;
+}
+
+.submenu a {
+  display: block;
+  padding: 0.6rem 1.2rem; /* Más espacio para el dedo/cursor */
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #1f2937;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.submenu a:hover {
+  background: #f3f4f6;
+  color: #003b6f; /* Color azul del navbar al pasar el mouse */
+}
+
+/* ===== Sección proyectos ===== */
+.projects-section {
+  margin-top: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* ===== Tarjetas ===== */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.file-item {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+}
+
+.file-preview {
+  height: 160px;
+  background: #f3f4f6;
+}
+
+.file-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.file-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: #6b7280;
+}
+
+.project-info {
+  padding: 0.9rem 0.9rem 0;
+}
+
+.project-title {
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
+.project-category {
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.project-author {
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.project-status {
+  margin-top: 0.45rem;
+}
+
+/* ===== Badges de estado ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.badge-encurso {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.badge-finalizado {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-cancelado {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.badge-default {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* ===== Botones en tarjeta ===== */
+.card-actions {
+  margin-top: 0.75rem;
+  padding: 0.3rem 0.9rem 0.75rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+
+.btn-card {
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.78rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: background .15s ease, color .15s ease, box-shadow .15s ease, transform .08s ease;
+}
+
+.btn-card:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Colores */
+.btn-view {
+  background: #ffffff;
+  color: #003b6f;
+  border-color: #003b6f;
+}
+
+.btn-preview {
+  background: #f97316;
+  color: #ffffff;
+  border-color: #ea580c;
+}
+
+.btn-download {
+  background: #003b6f;
+  color: #ffffff;
+  border-color: #003b6f;
+}
+
+.btn-card:not(:disabled):hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+
+/* ===== Detalle del proyecto ===== */
+.detalle-proyecto-card {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+  gap: 1.5rem;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+  position: relative;
+}
+
+.btn-cerrar-detalle {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.85rem;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.btn-cerrar-detalle:hover {
+  color: #111827;
+}
+
+.detalle-imagen img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.placeholder-imagen {
+  width: 100%;
+  height: 220px;
+  border-radius: 12px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+}
+
+.detalle-info h3 {
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.detalle-info p {
+  margin: 0.1rem 0;
+  font-size: 0.9rem;
+}
+
+.detalle-actions {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* Botones grandes de detalle */
+.btn-download-large {
+  background: #003b6f;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 1.3rem;
+  cursor: pointer;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: background .15s ease, box-shadow .15s ease, transform .08s ease;
+}
+
+.btn-download-large:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+
+.btn-secondary-large {
+  background: #ffffff;
+  color: #003b6f;
+  border: 1px solid #003b6f;
+}
+
+
+/* ========================================================== */
+/* 📱 DISEÑO PARA MÓVIL (PROJECTS & MENU) */
+/* ========================================================== */
+@media screen and (max-width: 768px) {
+    /* 1. Navbars y Logos */
+    .navbar-superior {
+        padding: 0.5rem 1rem;
+    }
+
+    .logo-container {
+        gap: 0.8rem;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .logo-container img {
+        height: 35px; /* Logos más pequeños para que no se desborden */
+    }
+
+    .navbar-inferior {
+        flex-direction: column; /* Título arriba, menú abajo */
+        gap: 0.8rem;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    /* 2. Menú Adaptativo (Sin Hover) */
+    .menu {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .menu-item:hover .submenu {
+        display: none; /* Desactivamos el hover en móvil */
+    }
+
+    /* Nota: En móvil el submenú debería activarse con un click/tap (clase .active) */
+    .submenu {
+        position: static; /* Se inserta en el flujo natural */
+        width: 100%;
+        min-width: 100%;
+        box-shadow: none;
+        background: #f9fafb;
+        border-radius: 0;
+        margin-top: 0.5rem;
+    }
+
+    /* 3. Galería de Proyectos */
+    .gallery {
+        grid-template-columns: 1fr; /* Una tarjeta por fila en móviles pequeños */
+        gap: 1.2rem;
+    }
+
+    /* 4. Detalle del Proyecto (Grid a Columna) */
+    .detalle-proyecto-card {
+        grid-template-columns: 1fr; /* Apilamos imagen e información */
+        padding: 1rem;
+        margin: 1rem 0.5rem;
+    }
+
+    .detalle-imagen img, .placeholder-imagen {
+        height: 200px;
+    }
+
+    .detalle-actions {
+        flex-direction: column; /* Botones uno sobre otro */
+    }
+
+    .btn-download-large, .btn-secondary-large {
+        width: 100%;
+        justify-content: center;
+        padding: 0.8rem;
+    }
+
+    /* 5. Ajustes de tarjetas */
+    .file-preview {
+        height: 140px;
+    }
+
+    .card-actions {
+        justify-content: space-around; /* Botones más grandes para el dedo */
+        padding: 1rem;
+    }
+
+    .btn-card {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+/*=====*/
+/* ========================================================== */
+/* 🆕 REGLAS PARA SUB-SUBMENÚS (CASCADA LATERAL) */
+/* ========================================================== */
+
+/* Contenedor del título de la categoría (ej: Sanidad Vegetal) */
+.sub-submenu-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Estilo del título que dispara el menú lateral */
+.sub-title {
+  display: block;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sub-title:hover {
+  background: #f3f4f6;
+  color: #003b6f;
+}
+
+/* El contenido del sub-submenú (oculto por defecto) */
+.sub-submenu-content {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%; /* Se despliega a la derecha del menú actual */
+  background: #ffffff;
+  min-width: 220px;
+  box-shadow: 6px 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0.5rem 0.5rem 0.5rem;
+  padding: 0.5rem 0;
+  z-index: 110;
+}
+
+/* Mostrar al hacer hover */
+.sub-submenu-container:hover .sub-submenu-content {
+  display: block;
+}
+
+/* Indicador visual de que hay más contenido (flechita) */
+.sub-title::after {
+  content: "▸";
+  font-size: 0.7rem;
+  margin-left: 10px;
+  color: #9ca3af;
+}
+
+/* ========================================================== */
+/* 🛠️ AJUSTES AL CSS EXISTENTE (CORRECCIONES) */
+/* ========================================================== */
+
+/* ===== Layout general ===== */
+.contenedor-principal {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* ===== Navbars ===== */
+.navbar-superior {
+  background: #ffffff;
+  padding: 0.5rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo-container img {
+  height: 60px;
+  object-fit: contain;
+}
+
+.navbar-inferior {
+  background: #003b6f;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* Importante para posicionamiento de hijos */
+}
+
+.titulo-navbar {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.menu-item {
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+
+.menu-item:hover .submenu {
+  display: block;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  background: #ffffff;
+  color: #111827;
+  border-radius: 0.5rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  min-width: 240px;
+  z-index: 100;
+}
+
+/* Área de seguridad para no perder el hover al mover el mouse */
+.submenu::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: transparent;
+}
+
+.submenu a {
+  display: block;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #1f2937;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.submenu a:hover {
+  background: #f3f4f6;
+  color: #003b6f;
+}
+
+/* ===== Sección proyectos ===== */
+.projects-section {
+  margin-top: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* ===== Tarjetas ===== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.file-item {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.file-preview {
+  height: 160px;
+  background: #f3f4f6;
+}
+
+.file-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Badges de estado ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.badge-encurso { background: #e0f2fe; color: #0369a1; }
+.badge-finalizado { background: #dcfce7; color: #166534; }
+.badge-cancelado { background: #fee2e2; color: #b91c1c; }
+
+/* ===== Botones en tarjeta ===== */
+.card-actions {
+  margin-top: auto; /* Empuja los botones al final de la tarjeta */
+  padding: 1rem 0.9rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+
+.btn-card {
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.78rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-view { background: #ffffff; color: #003b6f; border-color: #003b6f; }
+.btn-download { background: #003b6f; color: #ffffff; }
+
+/* ========================================================== */
+/* 📱 DISEÑO PARA MÓVIL (CORREGIDO) */
+/* ========================================================== */
+@media screen and (max-width: 768px) {
+    .navbar-inferior {
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 1rem;
+    }
+
+    .menu {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* En móvil, los submenús se despliegan hacia abajo para evitar desbordes */
+    .submenu, .sub-submenu-content {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        border: 1px solid #e5e7eb;
+        display: none; /* Se recomienda usar una clase .active con JS */
+    }
+
+    .sub-title::after {
+        content: "▼"; /* Flecha hacia abajo en móvil */
+    }
+
+    /* Regla para que el último menú no se rompa */
+    .menu-item:last-child .sub-submenu-content {
+      right: auto;
+      left: 0; 
+    }
+}
+
+/* Evita que el último menú (Comercialización) se salga por la derecha en PC */
+.menu-item:last-child .sub-submenu-content {
+  left: auto;
+  right: 100%; 
+  border-radius: 0.5rem 0 0.5rem 0.5rem;
+}

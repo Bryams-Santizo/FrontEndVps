@@ -1,0 +1,117 @@
+.navbar-superior { background: #fff; border-bottom: 3px solid #003b6f; padding: 5px 20px; }
+.logo-container img { height: 60px; }
+
+.navbar-inferior { background: #003b6f; color: #fff; padding: 10px 20px; font-weight: bold; }
+
+.contenedor-principal {
+  padding: 40px 20px;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.header-pagina {
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+
+.grid-registros {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 25px;
+}
+
+.ficha-tecnica {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border: 1px solid #e1e4e8;
+  display: flex;
+  flex-direction: column;
+}
+
+.seccion-cabecera {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #007bff;
+  border-radius: 10px 10px 0 0;
+}
+
+.badge-tipo {
+  background: #007bff;
+  color: white;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.seccion-cabecera h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #1a202c;
+}
+
+.cuerpo-ficha {
+  padding: 20px;
+}
+
+.campo-dato {
+  margin-bottom: 15px;
+}
+
+.campo-dato label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #718096;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.campo-dato .contenido {
+  font-size: 0.95rem;
+  color: #2d3748;
+  line-height: 1.5;
+  background: #fdfdfd;
+}
+
+.info-footer {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f7fafc;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.dato-footer {
+  margin-bottom: 5px;
+}
+
+.dato-footer .etiqueta {
+  font-weight: bold;
+  color: #4a5568;
+  margin-right: 5px;
+}
+
+.footer-archivos {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #edf2f7;
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-archivo {
+  font-size: 0.8rem;
+  color: #4a5568;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

@@ -1,0 +1,177 @@
+/* =========================================================
+   1. TU DISEÑO ORIGINAL (INTACTO)
+   ========================================================= */
+.navbar-superior {
+    background-color: #ffffff;
+    padding: 10px 25px;
+    border-bottom: 2px solid #dcdcdc;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-top {
+    height: 55px;
+    object-fit: contain;
+}
+
+.navbar-inferior {
+    background-color: #003366;
+    color: #ffffff;
+    padding: 15px 25px;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.form-container {
+    max-width: 1100px; 
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.titulo {
+    color: #003366;
+    font-weight: bold;
+    border-left: 8px solid #003366;
+    padding-left: 15px;
+    font-size: 32px;
+    margin-bottom: 0;
+}
+
+.card-form {
+    width: 100%;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.subtitulo {
+    margin-bottom: 25px;
+    color: #003366;
+    font-size: 24px;
+    border-left: 6px solid #5fa8d3;
+    padding-left: 15px;
+    font-weight: 600;
+}
+
+/* GRID ASIMÉTRICO ORIGINAL */
+.form-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 25px 35px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: span 2;
+}
+
+/* Ficha 2 asimetría original */
+.card-form:nth-of-type(2) .form-grid {
+    grid-template-columns: 2fr 1fr;
+}
+
+.card-form:nth-of-type(2) .form-grid .form-group:nth-child(3) {
+    grid-column: 2 / 3;
+}
+
+label {
+    font-weight: 600;
+    color: #333333;
+    font-size: 15px;
+}
+
+input, select, textarea {
+    padding: 11px 13px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    background: #ffffff;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #003366;
+    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.15);
+    outline: none;
+}
+
+.contenedor-btn {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: right;
+}
+
+.btn-guardar {
+    background-color: #003366;
+    color: #ffffff;
+    padding: 13px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 51, 102, 0.3);
+}
+
+/* =========================================================
+   2. MEJORA DE SOLICITUDES (CON EL BOTÓN AZUL A LA DERECHA)
+   ========================================================= */
+.lista-solicitudes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.solicitud-item {
+    display: flex;
+    justify-content: space-between; /* Botón a la derecha */
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #fcfcfc;
+    transition: all 0.2s;
+}
+
+.solicitud-item:hover {
+    border-color: #003366;
+    background-color: #f0f4f8;
+}
+
+.nombre-productor {
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+}
+
+.btn-atender {
+    background-color: #003366; /* Azul institucional */
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.btn-atender:hover {
+    background-color: #0058b4;
+}
+
+/* TOOLTIP Y RESPONSIVE ORIGINALES ABAJO... */

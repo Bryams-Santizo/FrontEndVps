@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+:host {
+    --azul-tecnm: #003b6f;
+    --oro-tecnm: #B38E5D;
+    --gris-fondo: #f3f4f6;
+    --blanco: #ffffff;
+}
+
+/* Navbars */
+.navbar-superior { 
+    background: #fff; 
+    border-bottom: 3px solid var(--azul-tecnm); 
+    padding: 8px 30px; 
+}
+.logo-container img { height: 60px; }
+
+.navbar-inferior { 
+    background: var(--azul-tecnm); 
+    color: #fff; 
+    padding: 12px 30px; 
+    font-weight: bold; 
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Contenedor Principal */
+.tecnm-container {
+    padding: 2.5rem 5%;
+    background-color: var(--gris-fondo);
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.fichas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 2.5rem;
+}
+
+/* Card */
+.ficha-institucional {
+    background: var(--blanco);
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Importante para que el footer respete el redondeado */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.ficha-header {
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+}
+
+.tipo-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--azul-tecnm);
+    background: #e0f2fe;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+.ubicacion-text {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--oro-tecnm);
+}
+
+.institucion-nombre {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--azul-tecnm); /* Texto en azul institucional */
+    margin: 0;
+}
+
+/* Contenido */
+.ficha-contenido { padding: 1.5rem; flex-grow: 1; }
+
+.seccion-info { margin-bottom: 1.5rem; }
+.seccion-info label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--azul-tecnm); /* Etiqueta en azul institucional */
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.seccion-info p {
+    font-size: 0.9rem;
+    color: #333; /* Texto de lectura para contraste */
+    line-height: 1.6;
+}
+
+.perfil-box {
+    background-color: #f8fafc;
+    padding: 1.2rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--oro-tecnm);
+}
+
+/* Tabla Interna */
+.tabla-contenedor {
+    border: 1px solid #f1f5f9;
+    border-radius: 8px;
+}
+.fila-tabla { display: flex; border-bottom: 1px solid #f1f5f9; }
+.fila-tabla.single { border-bottom: none; }
+.celda { padding: 12px; flex: 1; }
+.celda:not(:last-child) { border-right: 1px solid #f1f5f9; }
+
+.label-tabla { display: block; font-size: 0.65rem; color: var(--azul-tecnm); font-weight: 700; text-transform: uppercase; }
+.valor-tabla { font-size: 0.9rem; font-weight: 600; color: var(--azul-tecnm); }
+.beneficios-highlight { color: #16a34a; }
+
+/* Footer Azul Institucional #003b6f */
+.ficha-footer {
+    padding: 1.2rem 1.5rem;
+    background: var(--azul-tecnm); /* Fondo Azul Institucional */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff; /* Texto blanco para que resalte en el azul */
+}
+
+.label-contacto { 
+    display: block; 
+    font-size: 0.65rem; 
+    color: rgba(255,255,255,0.8); /* Blanco translúcido para etiquetas */
+    font-weight: 700; 
+}
+
+.nombre-contacto { 
+    font-size: 0.9rem; 
+    color: #ffffff; 
+    font-weight: 600; 
+}
+
+.evidencias { display: flex; gap: 10px; }
+.icon-doc { 
+    font-size: 1.2rem; 
+    filter: brightness(0) invert(1); /* Convierte los iconos a blanco */
+    opacity: 0.3; 
+}
+.icon-doc.file-on { opacity: 1; }

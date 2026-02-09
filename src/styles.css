@@ -1,1 +1,249 @@
-/* You can add global styles to this file, and also import other style files */
+/* ========================================================== */
+/* 🎨 VARIABLES Y RESET */
+/* ========================================================== */
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css";
+
+:root {
+    --color-tecnm-blue: #0D3B66; 
+    --color-secondary: #6c757d;
+    --color-dark: #212529;
+    --color-white: #ffffff;
+    --color-gray-soft: #f4f6f9; 
+    --color-success: #3D9970; 
+    --color-dark-hover: #082a49;
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --accent-color: #004d99; 
+    --contrast-color: #ff9900; 
+    --dark-premium: #343a40;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-gray-soft);
+    overflow-x: hidden; /* Evita el scroll horizontal molesto */
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ========================================================== */
+/* 🧩 UTILIDADES GLOBALES */
+/* ========================================================== */
+.text-primary-custom { color: var(--color-tecnm-blue) !important; }
+.bg-primary-custom { background-color: var(--color-tecnm-blue) !important; }
+.text-success-custom { color: var(--color-success) !important; }
+
+.btn-primary-custom {
+    background-color: var(--color-tecnm-blue);
+    border-color: var(--color-tecnm-blue);
+    color: var(--color-white);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+}
+
+/* ========================================================== */
+/* 🔝 NAVEGACIÓN Y HEADER */
+/* ========================================================== */
+.logo-top {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .logo-top { height: 45px; }
+    .navbar-collapse {
+        background-color: var(--color-dark-hover);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-top: 10px;
+    }
+}
+
+/* Dropdown Multi-nivel */
+.dropdown-submenu { position: relative; }
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    display: none;
+    border-top: 3px solid var(--color-success);
+}
+.dropdown-submenu:hover > .dropdown-menu { display: block; }
+
+@media (max-width: 991px) {
+    .dropdown-submenu .dropdown-menu {
+        left: 0;
+        margin-left: 1rem;
+        display: block !important; /* En móvil mejor que siempre se vean si se expanden */
+        position: static;
+    }
+}
+
+/* ========================================================== */
+/* 📸 HERO BANNER (CARRUSEL) */
+/* ========================================================== */
+.carousel-item img {
+    height: 500px; 
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    bottom: 15%;
+}
+
+.carousel-caption h2 { font-size: 3rem; font-weight: 800; }
+
+@media (max-width: 768px) {
+    .carousel-item img { height: 350px; }
+    .carousel-caption {
+        bottom: 5%;
+        width: 90%;
+        left: 5%;
+        padding: 10px;
+    }
+    .carousel-caption h2 { font-size: 1.4rem; }
+    .carousel-caption p { font-size: 0.9rem; }
+}
+
+/* ========================================================== */
+/* 🌟 TARJETAS DE INSTITUCIONES (EL ARREGLO CRÍTICO) */
+/* ========================================================== */
+.institucion-card-compacta {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    background: white;
+    box-shadow: var(--shadow-light);
+}
+
+.institucion-card-compacta .col-md-5 { flex: 0 0 45%; max-width: 45%; }
+.institucion-card-compacta .col-md-7 { flex: 0 0 55%; max-width: 55%; }
+
+@media (max-width: 768px) {
+    .institucion-card-compacta {
+        flex-direction: column; /* SE APILA EN MÓVIL */
+    }
+    .institucion-card-compacta .col-md-5, 
+    .institucion-card-compacta .col-md-7 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .logo-compacto {
+        border-radius: 15px 15px 0 0 !important;
+        height: 200px !important;
+    }
+    .card-body-personalizado { padding: 20px !important; }
+}
+
+.logo-compacto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ========================================================== */
+/* 🗓 EVENTOS Y CARDS PREMIUM */
+/* ========================================================== */
+.card-premium-effect {
+    position: relative;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: white;
+    transition: transform 0.3s;
+}
+
+.card-premium-effect img {
+    height: 250px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .card-premium-effect img { height: 200px; }
+    .card-overlay-content {
+        padding: 1rem !important;
+    }
+    /* Si el overlay es muy grande, en móvil lo hacemos scrollable */
+    .card-overlay-content {
+        overflow-y: auto;
+    }
+}
+
+/* ========================================================== */
+/* 🔄 FLIP CARDS (PROYECTOS) */
+/* ========================================================== */
+.flip-card {
+    min-height: 450px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 0.5rem;
+}
+
+.flip-card-back { transform: rotateY(180deg); padding: 20px; }
+
+@media (max-width: 768px) {
+    .flip-card { min-height: 400px; margin-bottom: 20px; }
+}
+
+/* ========================================================== */
+/* 🏗 LAYOUT RESPONSIVO (CLASES MÁGICAS) */
+/* ========================================================== */
+.grid-auto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 15px;
+}
+
+@media (max-width: 576px) {
+    .grid-auto {
+        grid-template-columns: 1fr; /* Una sola columna en teléfonos pequeños */
+    }
+}
+
+/* ========================================================== */
+/* 📜 FOOTER */
+/* ========================================================== */
+.footer-section {
+    padding: 3rem 0;
+    background-color: var(--color-dark);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .footer-section { text-align: center; }
+    .footer-section h5::after { margin: 5px auto; }
+}

@@ -1,0 +1,55 @@
+<header class="bg-white border-bottom py-2">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación" class="logo-top me-3">
+      <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM" class="logo-top">
+      <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas" class="logo-top me-3">
+    </div>
+    <div class="d-flex align-items-center">
+    </div>
+  </div>
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-white" href="#">ADICAM</a>
+
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" routerLink="inicio">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="registro">Registrar Proyecto</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="proyectos">Proyectos</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="galeria">Galería</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="contacto">Contacto</a></li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMas" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Más
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMas">
+            <li><a class="dropdown-item" routerLink="participantes">Participantes</a></li>
+            <li><a class="dropdown-item" routerLink="mapas_regionales">Mapas regionales</a></li>
+            <li><a class="dropdown-item" routerLink="capacitacion_certificacion">Capacitacion y certificaciones</a></li>
+            <li><a class="dropdown-item" routerLink="asistencia-tecnica">Asistencia tecnica</a></li>
+            <li><a class="dropdown-item" routerLink="redes-colaboraciones">Redes y Colaboraciones</a></li>
+            <li><a class="dropdown-item" routerLink="transferencias-tecnologicas">Impulso tecnlogico</a></li>
+             <li><a class="dropdown-item" routerLink="eventos">Eventos</a></li>
+          </ul>
+        </li>
+
+
+
+
+
+        <li class="nav-item">
+          <button class="btn btn-logout" (click)="cerrarSesion()">Cerrar Sesión</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid mt-4 main-container">
+  <router-outlet></router-outlet>
+</div>

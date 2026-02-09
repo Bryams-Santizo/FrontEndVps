@@ -1,0 +1,203 @@
+<nav class="navbar-superior">
+    <div class="logo-container">
+        <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
+        <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
+        <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
+    </div>
+</nav>
+
+<nav class="navbar-inferior">
+    <div class="titulo-navbar">Mapa Regional de Café Chiapas</div>
+</nav>
+
+<div class="contenedor-principal-mapa mt-3 px-3">
+    <div class="row g-0 h-100">
+
+        <div class="col-md-2 sidebar-institucional mb-3 mb-md-0">
+            <div class="p-3">
+                <h6 class="text-white fw-bold mb-3">Filtros Regionales</h6>
+                <hr class="border-white opacity-50">
+                <div class="mb-3">
+                    <label class="small text-white-50">Eslabón:</label>
+                    <select class="form-select form-select-sm bg-dark text-white border-secondary">
+                        <option *ngFor="let e of eslabones">{{e}}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="small text-white-50">Certificación:</label>
+                    <select class="form-select form-select-sm bg-dark text-white border-secondary">
+                        <option *ngFor="let c of certificaciones">{{c}}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="small text-white-50">Tecnológico Responsable:</label>
+                    <select class="form-select form-select-sm bg-dark text-white border-secondary" [(ngModel)]="selectedTec">
+                        <option value="">-- Seleccionar --</option>
+                        <option *ngFor="let t of tecnologicos" [value]="t">{{t}}</option>
+                    </select>
+                </div>
+                <button class="btn btn-light btn-sm w-100 mt-3 fw-bold" (click)="applyFilters()">Filtrar</button>
+            </div>
+        </div>
+
+        <div class="col-md-7 position-relative px-2 mb-3 mb-md-0">
+            <div id="map-container" class="rounded border shadow-sm" style="min-height: 450px; height: 100%; width: 100%;"></div>
+        </div>
+
+        <div class="col-md-3 sidebar-institucional">
+            <div *ngIf="selectedRegionData; else emptyState" class="p-3">
+                <h4 class="text-white border-bottom pb-2 mb-3">{{ selectedRegionData.nombreRegion }}</h4>
+
+                <div class="mb-3">
+                    <label class="small text-warning fw-bold">Municipios (clic para detalle):</label>
+                    <div class="d-flex flex-wrap gap-1 mt-1">
+                        <button *ngFor="let m of selectedRegionData.municipios"
+                            (click)="seleccionarMunicipio(m, selectedRegionData.nombreRegion)" 
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalMunicipio"
+                            class="badge border border-light small bg-transparent btn-municipio-link"
+                            style="font-size: 0.7rem; cursor: pointer;">
+                            {{m}}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="accordion accordion-flush" id="accInfo">
+                    <div class="accordion-item bg-transparent border-light">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#secA">
+                                Actores Registrados
+                            </button>
+                        </h2>
+                        <div id="secA" class="accordion-collapse collapse" data-bs-parent="#accInfo">
+                            <div class="accordion-body text-white-50 small">
+                                <div class="item-info"><span>Productores Ind.:</span><b>{{selectedRegionData.actoresDetalle.productores}}</b></div>
+                                <div class="item-info"><span>Cooperativas:</span><b>{{selectedRegionData.actoresDetalle.cooperativas}}</b></div>
+                                <div class="item-info"><span>Exportadores:</span><b>{{selectedRegionData.actoresDetalle.exportadores}}</b></div>
+                                <div class="item-info"><span>Ayuntamientos:</span><b>{{selectedRegionData.actoresDetalle.ayuntamientos}}</b></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item bg-transparent border-light">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#secB">
+                                Número de Productores
+                            </button>
+                        </h2>
+                        <div id="secB" class="accordion-collapse collapse" data-bs-parent="#accInfo">
+                            <div class="accordion-body text-white-50 small">
+                                <div class="item-info"><span>Pequeños (<2ha):</span><b>{{selectedRegionData.productoresPorTamano.small}}</b></div>
+                                <div class="item-info"><span>Medianos (2-10ha):</span><b>{{selectedRegionData.productoresPorTamano.medium}}</b></div>
+                                <div class="item-info"><span>Grandes (>10ha):</span><b>{{selectedRegionData.productoresPorTamano.large}}</b></div>
+                                <hr class="border-secondary">
+                                <div class="text-warning">Promedio: {{selectedRegionData.productoresPorTamano.promedioSuperficie}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item bg-transparent border-light">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#secC">
+                                Altura Promedio
+                            </button>
+                        </h2>
+                        <div id="secC" class="accordion-collapse collapse" data-bs-parent="#accInfo">
+                            <div class="accordion-body text-white-50 small">
+                                <div class="item-info"><span>Rango:</span><b>{{selectedRegionData.rangoAltitudinal}}</b></div>
+                                <div class="item-info"><span>Dominante:</span><b>{{selectedRegionData.altitudPromedio}} msnm</b></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item bg-transparent border-light">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#secD">
+                                Variedades Predominantes
+                            </button>
+                        </h2>
+                        <div id="secD" class="accordion-collapse collapse" data-bs-parent="#accInfo">
+                            <div class="accordion-body text-white-50 small">
+                                <div class="d-flex flex-wrap gap-1">
+                                    <span *ngFor="let v of selectedRegionData.variedadesPredominantes" class="badge bg-secondary text-wrap">{{v}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item bg-transparent border-light">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed bg-transparent text-white" type="button" data-bs-toggle="collapse" data-bs-target="#secE">
+                                Producción Estimada
+                            </button>
+                        </h2>
+                        <div id="secE" class="accordion-collapse collapse" data-bs-parent="#accInfo">
+                            <div class="accordion-body text-white-50 small">
+                                <div class="item-info"><span>Nivel:</span><b>{{selectedRegionData.produccionEstimada}}</b></div>
+                                <div class="item-info"><span>Total:</span><b>{{selectedRegionData.totalProduccion}}</b></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-white w-100 mt-4 fw-bold shadow-lg" (click)="generateReport()">
+                    <i class="fas fa-file-pdf"></i> DESCARGAR REPORTE PDF
+                </button>
+            </div>
+
+            <ng-template #emptyState>
+                <div class="h-100 d-flex flex-column justify-content-center align-items-center p-4 text-center text-white-50">
+                    <i class="fas fa-hand-pointer fa-3x mb-3 text-warning"></i>
+                    <p>Haz clic en el mapa de Chiapas y selecciona un <b>triángulo café</b> para ver la información real.</p>
+                </div>
+            </ng-template>
+        </div>
+    </div> <div class="modal fade" id="modalMunicipio" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title text-warning" id="exampleModalLabel">
+                        <i class="fas fa-map-marker-alt"></i> Detalle Municipal: {{ selectedMunicipio?.nombre }}
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body" *ngIf="selectedMunicipio">
+                    <div class="row">
+                        <div class="col-md-6 border-end border-secondary">
+                            <h6 class="text-warning border-bottom border-secondary pb-2">Información Geográfica</h6>
+                            <p class="mb-1"><span class="text-white-50">Zona:</span> {{ selectedMunicipio.zona }}</p>
+                            <p class="mb-1"><span class="text-white-50">Altitud:</span> {{ selectedMunicipio.altura }}</p>
+                            <p class="mb-1"><span class="text-white-50">Clima:</span> {{ selectedMunicipio.clima || 'No especificado' }}</p>
+                            
+                            <h6 class="text-warning border-bottom border-secondary pb-2 mt-4">Producción y Variedades</h6>
+                            <p class="mb-1"><span class="text-white-50">Superficie/Prod:</span> {{ selectedMunicipio.produccionHa }}</p>
+                            <p class="mb-1"><span class="text-white-50">Variedades:</span> 
+                                <span class="badge bg-secondary me-1" *ngFor="let v of selectedMunicipio.variedades">{{ v }}</span>
+                            </p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h6 class="text-warning border-bottom border-secondary pb-2">Actores Clave</h6>
+                            <ul class="list-unstyled small">
+                                <li><i class="fas fa-users text-success me-2"></i><strong>Productores:</strong> {{ selectedMunicipio.actores.productores }}</li>
+                                <li><i class="fas fa-handshake text-success me-2"></i><strong>Cooperativas:</strong> {{ selectedMunicipio.actores.cooperativas }}</li>
+                                <li><i class="fas fa-ship text-success me-2"></i><strong>Exportación:</strong> {{ selectedMunicipio.actores.exportacion }}</li>
+                                <li><i class="fas fa-landmark text-success me-2"></i><strong>Ayuntamiento:</strong> {{ selectedMunicipio.actores.ayuntamiento }}</li>
+                            </ul>
+
+                            <h6 class="text-warning border-bottom border-secondary pb-2 mt-3">Perfil del Productor</h6>
+                            <p class="mb-1 small"><span class="text-white-50">Distribución:</span> {{ selectedMunicipio.infoProductores.perfil }}</p>
+                            <p class="mb-1 small"><span class="text-white-50">Finca Promedio:</span> {{ selectedMunicipio.infoProductores.promedioFinca }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-outline-warning btn-sm" (click)="generateReport()">Descargar PDF</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> ```

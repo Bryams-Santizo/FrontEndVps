@@ -1,0 +1,434 @@
+<div class="contenedor">
+    <h2 class="titulo">Participantes</h2>
+
+    <form [formGroup]="form">
+
+        <div class="card-form" id="step-1" *ngIf="step === 1">
+            <h2>Datos generales</h2>
+
+            <div class="grid">
+
+                <div class="campo campo-full">
+                    <div class="label-with-tooltip">
+                        <label>Nombre de la institución / empresa / productor *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Nombre completo y oficial de la entidad que se registra.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="text" formControlName="nombreInstitucion" placeholder="">
+                    <small class="error"
+                        *ngIf="form.get('nombreInstitucion')?.invalid && form.get('nombreInstitucion')?.touched">
+                        Campo requerido (mínimo 3 caracteres)
+                    </small>
+                </div>
+
+                <div class="campo campo-full">
+                    <div class="label-with-tooltip">
+                        <label>Tipo de participante *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Selecciona la categoría que mejor describa la naturaleza de tu entidad (ej: universidad,
+                                productor, empresa).
+                            </span>
+                        </div>
+                    </div>
+                    <select formControlName="tipoParticipante">
+                        <option value="" disabled>Seleccione...</option>
+                        <option *ngFor="let tipo of tiposParticipante" [value]="tipo">{{ tipo }}</option>
+                    </select>
+                    <small class="error"
+                        *ngIf="form.get('tipoParticipante')?.invalid && form.get('tipoParticipante')?.touched">
+                        Campo requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-full" *ngIf="mostrarOtroTipoParticipante">
+                    <div class="label-with-tooltip">
+                        <label>Especifique Tipo de Participante *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Por favor, escriba la categoría específica de su entidad, si seleccionó "Otro" en el
+                                campo anterior.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="text" formControlName="especificacionOtroTipoParticipante" placeholder="">
+                    <small class="error"
+                        *ngIf="form.get('especificacionOtroTipoParticipante')?.invalid && form.get('especificacionOtroTipoParticipante')?.touched">
+                        Campo de especificación requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-full">
+                    <div class="label-with-tooltip">
+                        <label>Descripción institucional *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Breve reseña del objetivo, misión y principales logros o áreas de enfoque de la
+                                institución/empresa.
+                            </span>
+                        </div>
+                    </div>
+                    <textarea rows="3" formControlName="descripcionInstitucional" placeholder=""></textarea>
+                    <small class="error"
+                        *ngIf="form.get('descripcionInstitucional')?.invalid && form.get('descripcionInstitucional')?.touched">
+                        Campo requerido (mínimo 10 caracteres)
+                    </small>
+                </div>
+
+                <div class="campo campo-largo">
+                    <div class="label-with-tooltip">
+                        <label>Representante oficial *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Nombre de la persona autorizada para representar a la entidad ante la plataforma.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="text" formControlName="representante" placeholder="">
+                    <small class="error"
+                        *ngIf="form.get('representante')?.invalid && form.get('representante')?.touched">
+                        Campo requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-corto">
+                    <div class="label-with-tooltip">
+                        <label>Cargo *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Puesto o título oficial del representante.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="text" formControlName="cargo" placeholder="">
+                    <small class="error" *ngIf="form.get('cargo')?.invalid && form.get('cargo')?.touched">
+                        Campo requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-largo">
+                    <div class="label-with-tooltip">
+                        <label>Correo institucional *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Dirección de correo electrónico oficial para notificaciones y contacto.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="email" formControlName="correo" placeholder="">
+                    <small class="error" *ngIf="form.get('correo')?.invalid && form.get('correo')?.touched">
+                        Ingresa un correo válido
+                    </small>
+                </div>
+
+                <div class="campo campo-corto">
+                    <div class="label-with-tooltip">
+                        <label>Teléfono *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Número de contacto principal de la entidad o del representante oficial.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="text" formControlName="telefono" placeholder="">
+                    <small class="error" *ngIf="form.get('telefono')?.invalid && form.get('telefono')?.touched">
+                        Campo requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-corto">
+                    <div class="label-with-tooltip">
+                        <label>RFC (si aplica)</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Registro federal de contribuyentes de la institución o empresa.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="text" formControlName="rfc" placeholder="">
+                </div>
+
+                <div class="campo campo-largo">
+                    <div class="label-with-tooltip">
+                        <label>Página web (si aplica)</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Dirección de la página web oficial de la entidad.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="text" formControlName="paginaWeb" placeholder="">
+                </div>
+            </div>
+
+            <div class="contenedor-btn">
+                <button type="button" class="btn-siguiente" (click)="siguiente()" [disabled]="!esStepValido(1)">
+                    Siguiente →
+                </button>
+            </div>
+        </div>
+
+        <div class="card-form" id="step-2" *ngIf="step === 2">
+            <h2>Paso 2 de 4: b. perfil del participante</h2>
+
+            <div class="grid">
+                <div class="campo campo-full">
+                    <div class="label-with-tooltip">
+                        <label>Sector al que pertenece *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Clasificación del área de actividad principal (ej: académico, productivo,
+                                gubernamental).
+                            </span>
+                        </div>
+                    </div>
+                    <select formControlName="sector">
+                        <option value="" disabled>Seleccione...</option>
+                        <option *ngFor="let sector of sectores" [value]="sector">{{ sector }}</option>
+                    </select>
+                    <small class="error" *ngIf="form.get('sector')?.invalid && form.get('sector')?.touched">
+                        Campo requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-full" *ngIf="mostrarOtroSector">
+                    <div class="label-with-tooltip">
+                        <label>Especifique Sector *</label>
+                    </div>
+                    <input type="text" formControlName="especificacionOtroSector" placeholder="Ej: Financiero">
+                    <small class="error"
+                        *ngIf="form.get('especificacionOtroSector')?.invalid && form.get('especificacionOtroSector')?.touched">
+                        Campo de especificación requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-full">
+                    <div class="label-with-tooltip">
+                        <label>Actividades principales relacionadas con el café *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Describe de manera concisa tu rol y las principales actividades que realizas en la
+                                cadena de valor del café (ej: producción, investigación, financiamiento).
+                            </span>
+                        </div>
+                    </div>
+                    <textarea rows="3" formControlName="actividadesCafe" placeholder=""></textarea>
+                    <small class="error"
+                        *ngIf="form.get('actividadesCafe')?.invalid && form.get('actividadesCafe')?.touched">
+                        Campo requerido (mínimo 10 caracteres)
+                    </small>
+                </div>
+
+                <div class="campo campo-largo">
+                    <div class="label-with-tooltip">
+                        <label>Región donde opera *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Región o zona específica de mayor operación.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="text" formControlName="region" placeholder="">
+                    <small class="error" *ngIf="form.get('region')?.invalid && form.get('region')?.touched">
+                        Campo requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-corto">
+                    <div class="label-with-tooltip">
+                        <label>Estado donde opera *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Estado de la república donde se concentra tu actividad.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="text" formControlName="estado" placeholder="">
+                    <small class="error" *ngIf="form.get('estado')?.invalid && form.get('estado')?.touched">
+                        Campo requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-full">
+                    <div class="label-with-tooltip">
+                        <label>Tamaño / nivel de impacto *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Indica el alcance geográfico de tu operación (ej: local, regional, nacional).
+                            </span>
+                        </div>
+                    </div>
+                    <select formControlName="impacto">
+                        <option value="" disabled>Seleccione...</option>
+                        <option *ngFor="let impacto of impactos" [value]="impacto">{{ impacto }}</option>
+                    </select>
+                    <small class="error" *ngIf="form.get('impacto')?.invalid && form.get('impacto')?.touched">
+                        Campo requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-full" *ngIf="mostrarOtroImpacto">
+                    <div class="label-with-tooltip">
+                        <label>Especifique Nivel de Impacto *</label>
+                    </div>
+                    <input type="text" formControlName="especificacionOtroImpacto" placeholder="Ej: Transnacional">
+                    <small class="error"
+                        *ngIf="form.get('especificacionOtroImpacto')?.invalid && form.get('especificacionOtroImpacto')?.touched">
+                        Campo de especificación requerido
+                    </small>
+                </div>
+            </div>
+
+            <div class="contenedor-btn">
+                <button type="button" class="btn-regresar" (click)="regresar()">← Regresar</button>
+                <button type="button" class="btn-siguiente" (click)="siguiente()" [disabled]="!esStepValido(2)">
+                    Siguiente →
+                </button>
+            </div>
+        </div>
+
+        <div class="card-form" id="step-3" *ngIf="step === 3">
+            <h2>Paso 3 de 4: c. rol en la plataforma</h2>
+
+            <div class="grid">
+
+                <div class="campo campo-full">
+                    <div class="label-with-tooltip">
+                        <label>Aportaciones previstas *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                ¿Qué recursos, conocimientos o capacidades está dispuesto a ofrecer a los demás
+                                participantes de la plataforma? (seleccione la más relevante).
+                            </span>
+                        </div>
+                    </div>
+                    <select formControlName="aportaciones">
+                        <option value="" disabled>Seleccione...</option>
+                        <option *ngFor="let aportacion of aportacionesLista" [value]="aportacion">{{ aportacion }}
+                        </option>
+                    </select>
+                    <small class="error" *ngIf="form.get('aportaciones')?.invalid && form.get('aportaciones')?.touched">
+                        Campo requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-full" *ngIf="mostrarOtroAportacion">
+                    <div class="label-with-tooltip">
+                        <label>Especifique Aportación *</label>
+                    </div>
+                    <input type="text" formControlName="especificacionOtroAportacion"
+                        placeholder="Ej: Servicios Legales">
+                    <small class="error"
+                        *ngIf="form.get('especificacionOtroAportacion')?.invalid && form.get('especificacionOtroAportacion')?.touched">
+                        Campo de especificación requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-full">
+                    <div class="label-with-tooltip">
+                        <label>Intereses en la plataforma *</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                ¿Qué tipo de información, recursos o vinculaciones espera obtener de la plataforma?
+                                (seleccione el más relevante).
+                            </span>
+                        </div>
+                    </div>
+                    <select formControlName="intereses">
+                        <option value="" disabled>Seleccione...</option>
+                        <option *ngFor="let interes of interesesLista" [value]="interes">{{ interes }}</option>
+                    </select>
+                    <small class="error" *ngIf="form.get('intereses')?.invalid && form.get('intereses')?.touched">
+                        Campo requerido
+                    </small>
+                </div>
+
+                <div class="campo campo-full" *ngIf="mostrarOtroInteres">
+                    <div class="label-with-tooltip">
+                        <label>Especifique Interés *</label>
+                    </div>
+                    <input type="text" formControlName="especificacionOtroInteres"
+                        placeholder="Ej: Acceso a mercados internacionales">
+                    <small class="error"
+                        *ngIf="form.get('especificacionOtroInteres')?.invalid && form.get('especificacionOtroInteres')?.touched">
+                        Campo de especificación requerido
+                    </small>
+                </div>
+            </div>
+
+            <div class="contenedor-btn">
+                <button type="button" class="btn-regresar" (click)="regresar()">← Regresar</button>
+                <button type="button" class="btn-siguiente" (click)="siguiente()" [disabled]="!esStepValido(3)">
+                    Siguiente →
+                </button>
+            </div>
+        </div>
+
+        <div class="card-form" id="step-4" *ngIf="step === 4">
+            <h2>Paso 4 de 4: d. documentos que acompañan el registro</h2>
+
+            <div class="grid">
+
+                <div class="campo campo-largo">
+                    <div class="label-with-tooltip">
+                        <label>Logo institucional</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Archivo de imagen de su logotipo (png o jpg). se utilizará para identificar a su entidad
+                                en la plataforma.
+                            </span>
+                        </div>
+                    </div>
+                    <input type="file" accept="image/*" (change)="onFileChange($event, 'logo')">
+                    <small *ngIf="logoFile" class="file-info">✓ Archivo: {{ logoFile.name }}</small>
+                </div>
+
+                <div class="campo campo-corto">
+                    <div class="label-with-tooltip">
+                        <label>Carta de intención / convenio</label>
+                        <div class="tooltip-container">
+                            <i class="info-icon">?</i>
+                            <span class="tooltip-text">
+                                Documento formal que avala la participación o el acuerdo de colaboración (pdf o doc).
+                            </span>
+                        </div>
+                    </div>
+                    <input type="file" accept=".pdf,.doc,.docx" (change)="onFileChange($event, 'cartaIntencion')">
+                    <small *ngIf="cartaFile" class="file-info">✓ Archivo: {{ cartaFile.name }}</small>
+                </div>
+
+            </div>
+
+            <div class="contenedor-btn">
+                <button type="button" class="btn-regresar" (click)="regresar()">← Regresar</button>
+                <button type="button" class="btn-guardar" (click)="guardarParticipante()">
+                    Guardar participante
+                </button>
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

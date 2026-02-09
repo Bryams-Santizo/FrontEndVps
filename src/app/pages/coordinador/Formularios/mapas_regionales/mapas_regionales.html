@@ -1,0 +1,439 @@
+<div class="contenedor">
+    <div class="card-form">
+        <h2>Registro de Actor</h2>
+
+        <h3 class="seccion-titulo">1. Datos del Levantamiento</h3>
+        <div class="grid">
+            <div class="campo">
+                <label>Institución</label>
+                <input type="text" [(ngModel)]="mapaRegional.institucion" name="institucion">
+            </div>
+            <div class="campo">
+                <label>Departamento / Academia responsable</label>
+                <input type="text" [(ngModel)]="mapaRegional.departamentoAcademia" name="departamentoAcademia">
+            </div>
+            <div class="campo">
+                <label>Nombre del responsable del levantamiento</label>
+                <input type="text" [(ngModel)]="mapaRegional.nombreResponsableLevantamiento" name="nombreResponsableLevantamiento">
+            </div>
+            <div class="campo">
+                <label>Carrera participante</label>
+                <input type="text" [(ngModel)]="mapaRegional.carreraParticipante" name="carreraParticipante">
+            </div>
+            <div class="campo">
+                <label>Equipo de campo (alumnos)</label>
+                <input type="text" [(ngModel)]="mapaRegional.equipoDeCampo" name="equipoDeCampo">
+            </div>
+            <div class="campo">
+                <label>Fecha de levantamiento</label>
+                <input type="date" [(ngModel)]="mapaRegional.fechaLevantamiento" name="fechaLevantamiento">
+            </div>
+            <div class="campo campo-full">
+                <label>Municipio donde se realizó el levantamiento</label>
+                <input type="text" [(ngModel)]="mapaRegional.municipioLevantamiento" name="municipioLevantamiento">
+            </div>
+        </div>
+
+        <hr> 
+        <h3 class="seccion-titulo">2. Identificación del Actor</h3>
+        <div class="grid">
+            
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Nombre del actor</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Nombre legal o comercial de la persona u organización a registrar.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.nombreActor" name="nombreActor">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Tipo de actor</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Clasificación de la entidad (ej: productor, cooperativa, institución pública).</span></div>
+                </div>
+                <select [(ngModel)]="mapaRegional.tipoActor" name="tipoActor" (ngModelChange)="onTipoActorChange()">
+                    <option value="" disabled selected>Seleccione…</option>
+                    <option *ngFor="let tipo of tiposActor">{{ tipo }}</option>
+                </select>
+            </div>
+            
+            <div class="campo" *ngIf="mostrarCampoOtroTipoActor">
+                <div class="label-with-tooltip">
+                    <label>Especifique Tipo de Actor</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Escriba el tipo de actor si seleccionó 'Otro'.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.especificacionOtroTipoActor" name="especificacionOtroTipoActor" required>
+            </div>
+            <div class="campo" *ngIf="!mostrarCampoOtroTipoActor"></div> <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Razón social (si aplica)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Nombre fiscal o legal de la entidad.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.razonSocial" name="razonSocial">
+            </div>
+
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Representante o persona de contacto</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Nombre de la persona clave para establecer comunicación.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.representanteContacto" name="representanteContacto">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Cargo</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Cargo o puesto de la persona de contacto.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.cargoContacto" name="cargoContacto">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Teléfono y/o WhatsApp</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Número de teléfono principal de contacto.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.telefono" name="telefono">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Correo electrónico</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Dirección de correo electrónico de contacto principal.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.correoElectronico" name="correoElectronico">
+            </div>
+        </div>
+
+        <hr>
+        <h3 class="seccion-titulo">3. Ubicación Geográfica</h3>
+        <div class="grid">
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Región</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Región de Chiapas (Sierra, Soconusco, Fronteriza, etc.).</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.regionGeografica" name="regionGeografica" placeholder="(Sierra, Soconusco, Fronteriza, etc.)">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Municipio</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Municipio donde se ubica el actor.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.municipioGeografico" name="municipioGeografico">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Localidad / Ejido</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Nombre específico de la localidad o ejido.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.localidadEjido" name="localidadEjido">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Dirección (si aplica)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Domicilio completo de la sede principal.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.direccion" name="direccion">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Coordenada GPS: Latitud</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Latitud de la ubicación principal (ej: 15.1234).</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.latitudGPS" name="latitudGPS">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Coordenada GPS: Longitud</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Longitud de la ubicación principal (ej: -92.5678).</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.longitudGPS" name="longitudGPS">
+            </div>
+            
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Nivel de presencia</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Alcance geográfico de sus operaciones (regional, nacional, etc.).</span></div>
+                </div>
+                <select [(ngModel)]="mapaRegional.presencia" name="presencia" (ngModelChange)="onNivelPresenciaChange()">
+                    <option value="" disabled selected>Seleccione…</option>
+                    <option *ngFor="let nivel of nivelesPresencia">{{ nivel }}</option>
+                </select>
+            </div>
+            <div class="campo" *ngIf="mostrarCampoOtroNivelPresencia">
+                <label>Especifique Nivel de Presencia</label>
+                <input type="text" [(ngModel)]="mapaRegional.especificacionOtroPresencia" name="especificacionOtroPresencia" required>
+            </div>
+            
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Tamaño</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Clasificación del actor por su volumen de operación o empleados.</span></div>
+                </div>
+                <select [(ngModel)]="mapaRegional.tamanio" name="tamanio" (ngModelChange)="onTamanioChange()">
+                    <option value="" disabled selected>Seleccione…</option>
+                    <option *ngFor="let t of tamanios">{{ t }}</option>
+                </select>
+            </div>
+            <div class="campo" *ngIf="mostrarCampoOtroTamanio">
+                <label>Especifique Tamaño</label>
+                <input type="text" [(ngModel)]="mapaRegional.especificacionOtroTamanio" name="especificacionOtroTamanio" required>
+            </div>
+        </div>
+
+        <hr>
+        <h3 class="seccion-titulo">4. Caracterización Productiva (Cultivo o Procesamiento)</h3>
+        <div class="grid">
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Superficie total en café (ha)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Área total dedicada al cultivo de café en hectáreas.</span></div>
+                </div>
+                <input type="number" [(ngModel)]="mapaRegional.superficieTotalCafeHa" name="superficieTotalCafeHa">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Número estimado de productores asociados</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Solo si es una cooperativa u organización.</span></div>
+                </div>
+                <input type="number" [(ngModel)]="mapaRegional.numProductoresAsociados" name="numProductoresAsociados">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Altitud promedio del cultivo (msnm)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Altitud promedio sobre el nivel del mar.</span></div>
+                </div>
+                <input type="number" [(ngModel)]="mapaRegional.altitudPromedioMsnm" name="altitudPromedioMsnm">
+            </div>
+            <div class="campo-full">
+                <div class="label-with-tooltip">
+                    <label>Rango altitudinal (msnm)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Rango de altitud donde se encuentran los cultivos.</span></div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <input type="number" [(ngModel)]="mapaRegional.altitudMinima" name="altitudMinima" placeholder="Mínimo">
+                    <input type="number" [(ngModel)]="mapaRegional.altitudMaxima" name="altitudMaxima" placeholder="Máximo">
+                </div>
+            </div>
+            
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>4.2 Variedades cultivadas (marcar todas las que apliquen)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Tipos de variedades de café que maneja el productor.</span></div>
+                </div>
+                <div class="checkbox-group grid-variedades">
+                    <ng-container *ngFor="let variedad of variedadesCafe">
+                        <label class="checkbox-item">
+                            <input type="checkbox" 
+                                   [checked]="mapaRegional.variedadesCultivadas.includes(variedad)"
+                                   (change)="onVariedadChange(variedad, $event)">
+                            {{ variedad }}
+                        </label>
+                    </ng-container>
+                </div>
+                <input *ngIf="mapaRegional.variedadesCultivadas.includes('Otra')" 
+                       type="text" 
+                       [(ngModel)]="mapaRegional.especificacionOtraVariedad" 
+                       name="especificacionOtraVariedad" 
+                       placeholder="Especifique la otra variedad">
+            </div>
+            
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>4.3 Producción anual estimada</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Volumen de producción estimado por año.</span></div>
+                </div>
+                <input type="number" [(ngModel)]="mapaRegional.produccionAnual" name="produccionAnual">
+            </div>
+            <div class="campo">
+                <label>Unidad de producción</label>
+                <select [(ngModel)]="mapaRegional.unidadProduccion" name="unidadProduccion">
+                    <option value="" disabled selected>Seleccione…</option>
+                    <option *ngFor="let unidad of unidadesProduccion">{{ unidad }}</option>
+                </select>
+            </div>
+        </div>
+
+        <hr>
+        <h3 class="seccion-titulo">5. Infraestructura</h3>
+        <div class="grid">
+            
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>5.1 Producción (Viveros, Sombra, Riego, Maquinaria agrícola)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Marque las instalaciones de infraestructura primaria que posee el actor.</span></div>
+                </div>
+                <div class="checkbox-group formal-checkbox-list">
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraViveros" name="infraViveros"> Viveros</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraSistemasSombra" name="infraSistemasSombra"> Sistemas de sombra</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraRiego" name="infraRiego"> Riego</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraMaquinariaAgricola" name="infraMaquinariaAgricola"> Maquinaria agrícola</label>
+                </div>
+            </div>
+            
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>5.2 Beneficiado (Húmedo/Seco)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Marque las instalaciones de procesamiento de café que posee.</span></div>
+                </div>
+                <div class="checkbox-group formal-checkbox-list">
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraDespulpadora" name="infraDespulpadora"> Despulpadora</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraDesmucilaginador" name="infraDesmucilaginador"> Desmucilaginador</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraFermentacion" name="infraFermentacion"> Infraestructura de fermentación</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraSecadoraSol" name="infraSecadoraSol"> Secadora al sol (patios)</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraSecadoraMecanica" name="infraSecadoraMecanica"> Secadora mecánica</label>
+                </div>
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>5.3 Transformación</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Marque el equipo que posee para la transformación a producto final.</span></div>
+                </div>
+                <div class="checkbox-group formal-checkbox-list">
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraTostador" name="infraTostador"> Tostador</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraMolino" name="infraMolino"> Molino</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraEmpacadora" name="infraEmpacadora"> Empacadora</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraLaboratorioCalidad" name="infraLaboratorioCalidad"> Laboratorio de calidad</label>
+                </div>
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>5.4 Comercialización</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Aspectos relacionados con la venta y marca.</span></div>
+                </div>
+                <div class="checkbox-group formal-checkbox-list">
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraPuntoVenta" name="infraPuntoVenta"> Punto de venta</label>
+                    <label class="checkbox-item"><input type="checkbox" [(ngModel)]="mapaRegional.infraMarcaPropia" name="infraMarcaPropia"> Marca propia</label>
+                </div>
+                
+                <label class="checkbox-label-cert">Certificaciones (Específicas):</label>
+                <div class="checkbox-group formal-checkbox-list">
+                    <ng-container *ngFor="let cert of certificacionesComercializacion">
+                        <label class="checkbox-item">
+                            <input type="checkbox" 
+                                   [checked]="mapaRegional.certificacionesDetalle.includes(cert)"
+                                   (change)="onCertificacionDetalleChange(cert, $event)">
+                            {{ cert }}
+                        </label>
+                    </ng-container>
+                </div>
+            </div>
+            
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Certificaciones (Descripción general)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Describa otras certificaciones o el contexto general de las mismas.</span></div>
+                </div>
+                <textarea rows="2" [(ngModel)]="mapaRegional.certificaciones" name="certificaciones" placeholder="Describa otras certificaciones o contexto."></textarea>
+            </div>
+            
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Descripción de oferta / servicios</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Detalle los productos o servicios que ofrece el actor a la cadena de valor.</span></div>
+                </div>
+                <textarea rows="3" [(ngModel)]="mapaRegional.descripcionOfertaServicios" name="descripcionOfertaServicios"></textarea>
+            </div>
+            
+        </div>
+
+        <hr>
+        <h3 class="seccion-titulo">6. Necesidades y Oportunidades de Colaboración (Información para el ITFC)</h3>
+        <div class="grid">
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>6.1 Necesidades expresadas por el actor (Seleccione o describa)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Áreas donde el actor requiere apoyo o colaboración.</span></div>
+                </div>
+                <div class="checkbox-group grid-necesidades">
+                    <ng-container *ngFor="let necesidad of necesidadesOpciones">
+                        <label class="checkbox-item">
+                            <input type="checkbox" 
+                                   [checked]="mapaRegional.necesidadesExpresadas.includes(necesidad)"
+                                   (change)="onNecesidadChange(necesidad, $event)">
+                            {{ necesidad }}
+                        </label>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="campo campo-full">
+                <label>Descripción libre de necesidades</label>
+                <textarea rows="3" [(ngModel)]="mapaRegional.necesidadDescripcionLibre" name="necesidadDescripcionLibre" placeholder="Detalle otras necesidades o ampliación de las seleccionadas."></textarea>
+            </div>
+            
+            <div class="campo campo-full">
+                <label>6.2 Oportunidades de colaboración con el ITFC: Posibles proyectos</label>
+                <textarea rows="2" [(ngModel)]="mapaRegional.posiblesProyectosITFC" name="posiblesProyectosITFC" placeholder="Describa ideas de proyectos en colaboración."></textarea>
+            </div>
+            
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Área(s) del ITFC que pueden participar</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Carreras o áreas académicas del ITFC relevantes para la colaboración.</span></div>
+                </div>
+                <div class="checkbox-group grid-areas-itfc">
+                    <ng-container *ngFor="let area of areasITFC">
+                        <label class="checkbox-item">
+                            <input type="checkbox" 
+                                   [checked]="mapaRegional.areasColaboracionITFC.includes(area)"
+                                   (change)="onAreaITFCChange(area, $event)">
+                            {{ area }}
+                        </label>
+                    </ng-container>
+                </div>
+                <input *ngIf="mostrarCampoOtraAreaITFC" 
+                       type="text" 
+                       [(ngModel)]="mapaRegional.especificacionOtraAreaITFC" 
+                       name="especificacionOtraAreaITFC" 
+                       placeholder="Especifique la otra área del ITFC">
+            </div>
+        </div>
+
+        <hr>
+        <h3 class="seccion-titulo">7. Documentación Adjunta</h3>
+        <div class="grid">
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Subir Documentación</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Seleccione fotografías georreferenciadas, evidencia de infraestructura, certificaciones y otros documentos relevantes (PDF, imágenes, etc.).</span></div>
+                </div>
+                <input type="file" name="documentacionArchivos" multiple>
+                <small style="color:#666; margin-top: 5px;">Archivos a subir: Fotografías georreferenciadas, Evidencia de infraestructura, Certificaciones, Archivos PDF relevantes, etc.</small>
+            </div>
+             <div class="campo campo-full">
+                <label>Notas sobre Documentación (Opcional)</label>
+                 <textarea rows="2" [(ngModel)]="mapaRegional.documentacionAdjunta" name="documentacionAdjunta" placeholder="Escriba notas relevantes sobre la documentación adjunta o faltante."></textarea>
+            </div>
+        </div>
+        
+        <hr>
+        <h3 class="seccion-titulo">8. Validación</h3>
+        <div class="grid">
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Responsable del levantamiento (Firma o Nombre)</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Nombre del alumno o responsable que llenó la ficha.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.nombreResponsableLevantamiento" name="nombreResponsableLevantamiento_v" disabled> 
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Vo.Bo. Coordinador de Módulo</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Visto Bueno del coordinador encargado de validar la información.</span></div>
+                </div>
+                <input type="text" [(ngModel)]="mapaRegional.voboCoordinador" name="voboCoordinador">
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Fecha de validación</label>
+                    <div class="tooltip-container"><i class="info-icon">?</i><span class="tooltip-text">Fecha en que el coordinador valida la ficha.</span></div>
+                </div>
+                <input type="date" [(ngModel)]="mapaRegional.fechaValidacion" name="fechaValidacion">
+            </div>
+        </div>
+
+        <div class="contenedor-btn">
+            <button type="submit" class="btn-guardar">Guardar datos</button>
+        </div>
+
+    </div>
+</div>

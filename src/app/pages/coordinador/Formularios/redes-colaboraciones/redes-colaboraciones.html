@@ -1,0 +1,184 @@
+<div class="contenedor">
+
+    <div class="card-form">
+        <h2>Redes / colaboraciones</h2>
+
+        <div class="grid">
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Institución o empresa solicitante</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Nombre completo de la entidad que está solicitando la colaboración (ej. la empresa que
+                            requiere un residente).
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="colaboracion.institucionSolicitante" name="institucionSolicitante"
+                    required>
+            </div>
+
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Estado</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Estado o provincia de la institución o empresa solicitante.
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="colaboracion.estado" name="estado" required>
+            </div>
+
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Tipo de colaboración</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Selecciona el tipo de vínculo que deseas establecer (ej: servicio social, residencia,
+                            proyecto).
+                        </span>
+                    </div>
+                </div>
+                <select [(ngModel)]="colaboracion.tipoColaboracion" name="tipoColaboracion" required>
+                    <option value="" disabled selected>Seleccione…</option>
+                    <option *ngFor="let tipo of tiposColaboracion" [value]="tipo">{{ tipo }}</option>
+                </select>
+            </div>
+
+            <div class="campo campo-full" *ngIf="mostrarOtroTipo">
+                <div class="label-with-tooltip">
+                    <label>Especifique Tipo de Colaboración *</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Por favor, escriba el tipo de colaboración que no se encuentra en el listado.
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="colaboracion.especificacionOtroTipo" name="especificacionOtroTipo"
+                    placeholder="">
+            </div>
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Descripción de la necesidad</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Detalle la actividad o el problema específico que se busca resolver con esta colaboración.
+                        </span>
+                    </div>
+                </div>
+                <textarea rows="3" [(ngModel)]="colaboracion.descripcionNecesidad" name="descripcionNecesidad"
+                    required></textarea>
+            </div>
+
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Número de estudiantes requeridos</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Cantidad de estudiantes o personal que se requiere para la actividad.
+                        </span>
+                    </div>
+                </div>
+                <input type="number" [(ngModel)]="colaboracion.numeroEstudiantes" name="numeroEstudiantes">
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Perfil y competencias del estudiante</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Describe la carrera, el nivel académico y las habilidades técnicas o blandas indispensables.
+                        </span>
+                    </div>
+                </div>
+                <textarea rows="3" [(ngModel)]="colaboracion.perfilCompetencias" name="perfilCompetencias"
+                    required></textarea>
+            </div>
+
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Duración estimada</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Tiempo aproximado que durará la colaboración o residencia (ej: 6 meses, 480 horas, 1
+                            semestre).
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="colaboracion.duracion" name="duracion" required>
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Beneficios para el estudiante</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Detalle cualquier apoyo económico, oportunidad de crecimiento, capacitación o certificación
+                            ofrecida.
+                        </span>
+                    </div>
+                </div>
+                <textarea rows="3" [(ngModel)]="colaboracion.beneficios" name="beneficios"></textarea>
+            </div>
+
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Persona de contacto</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Nombre y cargo de la persona dentro de la entidad solicitante que dará seguimiento.
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="colaboracion.personaContacto" name="personaContacto" required>
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Documentos adjuntos</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Archivos complementarios relacionados con la necesidad o proyecto (ej: bases, requerimientos
+                            técnicos).
+                        </span>
+                    </div>
+                </div>
+                <input type="file" (change)="onFileChange($event, 'documentosAdjuntos')">
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Carta de intención / cooperación</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Documento formal firmado que expresa el compromiso e intención de colaborar.
+                        </span>
+                    </div>
+                </div>
+                <input type="file" (change)="onFileChange($event, 'cartaIntencion')">
+            </div>
+
+        </div>
+
+        <div class="contenedor-btn">
+            <button class="btn-guardar" (click)="guardarDatos()">Guardar solicitud</button>
+        </div>
+    </div>
+
+</div>

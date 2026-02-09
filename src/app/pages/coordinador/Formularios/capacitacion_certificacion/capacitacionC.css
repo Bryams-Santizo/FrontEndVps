@@ -1,0 +1,217 @@
+/* =======================
+   NAVBARS
+======================= */
+.navbar-superior {
+    background-color: white;
+    padding: 10px 25px;
+    border-bottom: 2px solid #ddd;
+}
+.navbar-superior img {
+    height: 55px;
+    margin-right: 15px;
+}
+
+.navbar-inferior {
+    background-color: #003366;
+    color: white;
+    padding: 15px 25px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* =======================
+   CONTENEDOR
+======================= */
+.contenedor {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+/* TARJETA */
+.card-form {
+    width: 90%;
+    max-width: 950px;
+    background: white;
+    padding: 40px 45px;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.18);
+}
+
+.card-form h2 {
+    margin-bottom: 25px;
+    color: #003366;
+    font-size: 24px;
+    font-weight: bold;
+    border-left: 10px solid #003366;
+    padding-left: 12px;
+}
+
+/* =======================
+   FORMULARIO
+======================= */
+.formulario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 28px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+.campo-full {
+    grid-column: span 2;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #003366;
+}
+
+input, select, textarea {
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.25s;
+    background-color: #fdfdfd;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #0055aa;
+    box-shadow: 0 0 5px rgba(0,85,170,0.35);
+    outline: none;
+}
+
+/* =======================
+   BOTÓN
+======================= */
+.contenedor-btn {
+    grid-column: span 2;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-guardar {
+    background-color: #003366;
+    color: white;
+    padding: 14px 36px;
+    border: none;
+    border-radius: 10px;
+    font-size: 19px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.25s;
+}
+.btn-guardar:hover {
+    background-color: #0055aa;
+    transform: scale(1.03);
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
+@media (max-width: 768px) {
+    .formulario {
+        grid-template-columns: 1fr;
+    }
+    .campo-full {
+        grid-column: span 1;
+    }
+    .card-form {
+        padding: 25px;
+    }
+}
+
+
+	/* =========================================================
+   TOOLTIP DE AYUDA (Mismos estilos que el formulario anterior)
+   ========================================================= */
+
+/* 1. Contenedor que alinea la etiqueta y el tooltip */
+.label-with-tooltip {
+    display: flex;
+    align-items: center;
+    /* Quitamos el margen inferior de la etiqueta individual y lo movemos al contenedor */
+    margin-bottom: 6px; /* Ajuste para coincidir con el margin-bottom de label en este CSS */
+}
+
+/* 2. Asegurarse que la etiqueta dentro del contenedor no tenga margen duplicado */
+.label-with-tooltip label {
+    margin-bottom: 0;
+}
+
+/* 3. Contenedor principal del ícono de información (define la posición relativa) */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 8px;
+    cursor: help;
+}
+
+/* 4. Estilo del ícono '?' */
+.info-icon {
+    /* Estilos del ícono de ayuda '?' */
+    color: #ffffff; /* Color del texto (blanco) */
+    background-color: #003366; /* Color de fondo (azul marino) */
+    border-radius: 50%; /* Lo hace un círculo */
+    width: 18px; /* Ancho del círculo */
+    height: 18px; /* Alto del círculo */
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    font-size: 13px; /* Tamaño de la fuente '?' */
+    font-style: normal; /* Asegura que no se vea cursiva */
+    font-weight: bold;
+    cursor: help;
+}
+
+/* 5. El cuadro de texto del tooltip (inicialmente oculto) */
+.tooltip-text {
+    visibility: hidden;
+    width: 280px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    border-radius: 6px;
+    
+    /* Posicionamiento */
+    position: absolute;
+    z-index: 10;
+    bottom: 100%; /* Coloca el tooltip arriba del ícono */
+    left: 50%;
+    margin-left: -140px; /* Centra el tooltip (mitad del ancho) */
+    margin-bottom: 12px;
+
+    /* Transición de aparición */
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+
+    /* Fuente */
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: normal;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 6. Flecha inferior del tooltip */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* 7. Mostrar el tooltip al pasar el ratón */
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+

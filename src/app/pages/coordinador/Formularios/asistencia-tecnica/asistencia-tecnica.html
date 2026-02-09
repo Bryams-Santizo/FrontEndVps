@@ -1,0 +1,85 @@
+<div class="form-container">
+  <h2 class="titulo">Panel de Vinculación - Asistencia Técnica</h2>
+
+  <section class="card-form" *ngIf="!solicitudSeleccionada">
+    <h3 class="subtitulo">Solicitudes de Productores por Atender</h3>
+    
+    <div class="lista-solicitudes">
+      <div class="solicitud-item" *ngFor="let item of listaPendientes">
+        <div class="solicitud-info">
+          <div class="solicitud-header">
+            <span class="nombre-productor">{{ item.nombreSolicitante }}</span>
+            <span class="ubicacion-tag"><i class="icon">📍</i> {{ item.ubicacion }}</span>
+          </div>
+          <p class="problema-resumen">
+            <strong>Problema:</strong> {{ item.problemaEspecifico | slice:0:150 }}...
+          </p>
+        </div>
+        <div class="solicitud-accion">
+          <button class="btn-atender" (click)="seleccionarParaResponder(item)">Atender Solicitud</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card-form" *ngIf="solicitudSeleccionada">
+    <div class="header-retorno">
+        <button class="btn-volver" (click)="solicitudSeleccionada = null">← Volver al listado</button>
+        <h3 class="subtitulo">Vincular Institución a: {{ solicitudSeleccionada.nombreSolicitante }}</h3>
+    </div>
+
+    <div class="atencion-grid">
+      
+      <div class="info-productor-detalle">
+        <label class="label-detalle">Datos del Productor</label>
+        <div class="detalle-content">
+          <p><strong>Ubicación:</strong> {{ solicitudSeleccionada.ubicacion }}</p>
+          <p><strong>Tipo de Solicitante:</strong> {{ solicitudSeleccionada.tipoSolicitante }}</p>
+          <hr>
+          <p><strong>Descripción de la Necesidad:</strong></p>
+          <p class="texto-completo">{{ solicitudSeleccionada.problemaEspecifico }}</p>
+        </div>
+      </div>
+
+      <div class="form-vinculacion">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Tipo de Institución:</label>
+            <select [(ngModel)]="tipoSeleccionado" (change)="cargarCatalogoPorTipo()">
+                <option value="EMPRESA">Empresa</option>
+                <option value="GOBIERNO">Gobierno</option>
+                <option value="ORGANIZACION">Organización</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label>A. Institución / Equipo Técnico:</label>
+            <select [(ngModel)]="idInstitucionSeleccionada">
+                <option *ngFor="let inst of listaCatalogo" [value]="inst.id">{{ inst.nombre }}</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label>B. Tipo de asistencia:</label>
+            <input type="text" [(ngModel)]="asistencia.tipoAsistencia" placeholder="Ej. Capacitación Técnica">
+          </div>
+
+          <div class="form-group full">
+            <label>C. Especialistas disponibles:</label>
+            <textarea rows="2" [(ngModel)]="asistencia.especialistas"></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label>G. Costos (si aplica):</label>
+            <input type="text" [(ngModel)]="asistencia.costos" placeholder="Ej: Sin costo">
+          </div>
+        </div>
+
+        <div class="contenedor-btn">
+          <button class="btn-guardar" (click)="confirmarVinculacion()">Confirmar Vinculación</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>

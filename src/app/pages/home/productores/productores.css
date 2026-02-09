@@ -1,0 +1,139 @@
+.navbar-superior { background: #fff; border-bottom: 3px solid #003b6f; padding: 5px 20px; }
+.logo-container img { height: 60px; }
+
+.navbar-inferior { background: #003b6f; color: #fff; padding: 10px 20px; font-weight: bold; }
+
+
+.container {
+  padding: 30px;
+  background-color: #f8f9fa;
+}
+
+/* ===== HEADER ===== */
+.header-prod {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* ===== TARJETA ===== */
+.calc-card {
+  max-width: 500px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* ===== CABECERA ===== */
+.calc-header {
+  background: #1B396A;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.calc-header h2 {
+  margin-bottom: 6px;
+}
+
+.calc-header p {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* ===== CUERPO ===== */
+.calc-body {
+  padding: 25px;
+}
+
+/* ===== INPUTS ===== */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #444;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: #1B396A;
+  box-shadow: 0 0 0 2px rgba(27, 57, 106, 0.15);
+}
+
+/* ===== RESULTADOS ===== */
+.results {
+  background: #f1f4f8;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+.result-item span:first-child {
+  color: #555;
+}
+
+.highlight {
+  border-top: 2px solid #ccc;
+  padding-top: 15px;
+  font-weight: bold;
+  color: #1B396A;
+}
+
+/* ===== VALORES ===== */
+.value {
+  font-weight: 600;
+}
+
+.value.total {
+  font-size: 1.5rem;
+}
+
+/* ===== PIE ===== */
+.calc-footer {
+  padding: 15px;
+  text-align: center;
+}
+
+.calc-footer small {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* ===== BOTÓN (por si luego lo usas) ===== */
+.btn-save {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  background: #28a745;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-save:hover {
+  background: #218838;
+}

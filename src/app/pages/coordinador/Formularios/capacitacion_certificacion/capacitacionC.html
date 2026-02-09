@@ -1,0 +1,211 @@
+<div class="contenedor">
+
+    <div class="card-form">
+        <h2>Capacitación y certificación</h2>
+
+        <form (ngSubmit)="guardarDatos()" class="formulario">
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Nombre del curso / certificación</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            El título completo y oficial con el que se ofrece el programa educativo.
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="capacitacion.nombre" name="nombre">
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Tipo</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Seleccione la modalidad principal de la oferta educativa (curso, taller, certificación, etc.).
+                        </span>
+                    </div>
+                </div>
+                <select [(ngModel)]="capacitacion.tipo" name="tipo" (change)="onTipoChange()">
+                    <option disabled selected>Seleccione…</option>
+                    <option *ngFor="let t of tiposCapacitacion">{{t}}</option>
+                </select>
+            </div>
+
+            <div class="campo campo-full" *ngIf="mostrarCampoOtroTipo">
+                <div class="label-with-tooltip">
+                    <label>Especifique otro tipo</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Escriba el tipo de capacitación o certificación que no está en la lista.
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="capacitacion.tipoOtro" name="tipoOtro" required>
+            </div>
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Duración</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Indique el tiempo total del programa. ej: "40 horas", "3 meses", "5 sesiones".
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="capacitacion.duracion" name="duracion">
+            </div>
+
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Requisitos de ingreso</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Documentos, conocimientos previos o nivel académico requerido para la inscripción.
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="capacitacion.requisitos" name="requisitos">
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Competencias que desarrolla</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Habilidades, conocimientos o actitudes que el participante adquirirá al finalizar el programa.
+                        </span>
+                    </div>
+                </div>
+                <textarea rows="2" [(ngModel)]="capacitacion.competencias" name="competencias"></textarea>
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Público objetivo</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Describa a quién va dirigido el curso. ej: "productores de café", "personal administrativo".
+                        </span>
+                    </div>
+                </div>
+                <textarea rows="2" [(ngModel)]="capacitacion.publicoObjetivo" name="publico"></textarea>
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Contenido estructurado (temario)</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Detalle los módulos, temas o unidades principales del programa.
+                        </span>
+                    </div>
+                </div>
+                <textarea rows="3" [(ngModel)]="capacitacion.contenido" name="contenido"></textarea>
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Materiales descargables</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Listado de recursos complementarios que se entregan al participante. ej: presentaciones, guías, lecturas.
+                        </span>
+                    </div>
+                </div>
+                <textarea rows="2" [(ngModel)]="capacitacion.materiales" name="materiales"></textarea>
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Constancia / certificación emitida por</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Institución o dependencia que avala y firma el documento comprobatorio (diploma, certificado).
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="capacitacion.emisor" name="emisor">
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Criterios de evaluación</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Métodos y requisitos para acreditar el curso. ej: "80% de asistencia y proyecto final aprobado".
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="capacitacion.criteriosEvaluacion" name="evaluacion">
+            </div>
+
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Fechas de disponibilidad</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Especifique las próximas fechas o si está disponible de forma continua (bajo demanda).
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="capacitacion.disponibilidad" name="disponibilidad">
+            </div>
+
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Costo (si aplica)</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Precio total del curso, o indicar "gratuito" o "sin costo".
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="capacitacion.costo" name="costo">
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Instructor(es)</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Nombre y/o perfil del personal técnico o académico que imparte el curso.
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="capacitacion.instructores" name="instructor">
+            </div>
+
+            <div class="campo campo-full">
+                <div class="label-with-tooltip">
+                    <label>Documento de autorización institucional</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Documento oficial (ej. oficio, acta) que respalda la validez y la oferta del programa.
+                        </span>
+                    </div>
+                </div>
+                <input type="file" accept=".pdf,.doc,.docx">
+            </div>
+
+            <div class="contenedor-btn">
+                <button class="btn-guardar" type="submit">Guardar registro</button>
+            </div>
+
+        </form>
+    </div>
+</div>

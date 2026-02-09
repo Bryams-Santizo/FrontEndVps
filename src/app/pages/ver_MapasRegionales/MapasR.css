@@ -1,0 +1,88 @@
+/* NAVBARS */
+.navbar-superior { background: #fff; border-bottom: 3px solid #003b6f; padding: 5px 20px; }
+.logo-container img { height: 60px; }
+.navbar-inferior { background: #003b6f; color: #fff; padding: 10px 20px; font-weight: bold; }
+
+/* CONTENEDOR PRINCIPAL */
+/* Importante: height 100% para que el mapa respire en desktop */
+.contenedor-principal-mapa { 
+    height: calc(100vh - 160px); 
+    min-height: 500px;
+}
+
+.sidebar-institucional { 
+    background: #003b6f !important; 
+    border-radius: 8px; 
+    color: white; 
+    overflow-y: auto; 
+    max-height: 100%; /* Evita que el sidebar estire la pantalla en desktop */
+}
+
+/* 🗺️ FIX DEL MAPA: Usamos el ID del HTML */
+#map-container { 
+    height: 100%; 
+    width: 100%; 
+    background-color: #f0f0f0; 
+    border-radius: 10px;
+    min-height: 400px; /* Garantía de visibilidad */
+}
+
+/* ELEMENTOS DE INFORMACIÓN */
+.item-info { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 5px 0; }
+.accordion-button:not(.collapsed) { background-color: rgba(255,255,255,0.1); color: #ffc107 !important; }
+
+.btn-municipio-link:hover {
+    background-color: #8B4513 !important;
+    color: white !important;
+    transform: scale(1.05);
+    transition: all 0.2s ease;
+}
+
+/* MODAL */
+.modal-content {
+    background-color: #1a1a1a !important;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* ========================================================== */
+/* 📱 DISEÑO PARA MÓVIL (CORREGIDO) */
+/* ========================================================== */
+@media screen and (max-width: 768px) {
+    .contenedor-principal-mapa {
+        display: block !important; /* Block es mejor para el flujo natural en móvil */
+        height: auto !important; 
+        overflow-y: visible !important;
+    }
+
+    /* Forzamos que el row de Bootstrap no intente ser una fila */
+    .contenedor-principal-mapa .row {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* EL MAPA: Referencia por ID para asegurar que tome el estilo */
+    #map-container {
+        height: 450px !important; /* Altura generosa para manejarlo con el dedo */
+        width: 100% !important;
+        margin-bottom: 15px;
+        order: 1; /* El mapa primero en móvil */
+    }
+
+    .col-md-2.sidebar-institucional { order: 2; } /* Filtros segundo */
+    .col-md-3.sidebar-institucional { order: 3; } /* Info tercero */
+
+    .sidebar-institucional {
+        height: auto !important;
+        max-height: none !important;
+        width: 100% !important;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+
+    /* Ajuste de logos para pantallas pequeñas */
+    .logo-container img {
+        height: 35px;
+        max-width: 30%;
+        object-fit: contain;
+    }
+}

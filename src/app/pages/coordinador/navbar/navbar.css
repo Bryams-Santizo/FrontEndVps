@@ -1,0 +1,14 @@
+.navbar {
+  background-color: var(--color-white);
+  border-bottom: 3px solid var(--color-tecnm-blue);
+}
+
+.nav-link {
+  color: var(--color-tecnm-blue);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--color-dark-hover);
+}

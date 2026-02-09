@@ -1,0 +1,48 @@
+<header class="bg-white border-bottom py-2">
+  <div class="container d-flex align-items-center">
+    <div class="d-flex align-items-center logo-group">
+      <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación" class="logo-top">
+      <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM" class="logo-top">
+      <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas" class="logo-top">
+    </div>
+  </div>
+</header>
+
+<nav class="navbar-inferior">
+  <div class="container">
+    <div class="titulo-navbar">Participantes</div>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <div class="shadow-sm border rounded">
+    <table class="table table-striped table-hover mb-0">
+      <thead>
+        <tr>
+          <th>Institución / Participante</th>
+          <th>Tipo</th>
+          <th>Correo de Contacto</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of participantes">
+          <td data-label="Institución" class="nombre-resaltado">
+            {{ p.tecnologico?.nombre || p.nombre }}
+          </td>
+          <td data-label="Tipo" class="text-center">{{ p.tipo }}</td>
+          <td data-label="Correo">{{ p.tecnologico?.correo || p.correo }}</td>
+          <td data-label="Estado" class="text-center">
+            {{ p.tecnologico?.estado || p.estado || 'Chiapas' }}
+          </td>
+          <td data-label="Acciones" class="text-center">
+            <button class="btn btn-accion" (click)="verActividad(p.id)">
+              VER ACTIVIDAD
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

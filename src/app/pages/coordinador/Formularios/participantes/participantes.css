@@ -1,0 +1,331 @@
+/* =======================
+   NAVBARS (MISMO ESTILO)
+======================== */
+.navbar-superior {
+    background-color: white;
+    padding: 10px 25px;
+    border-bottom: 2px solid #ddd;
+}
+.navbar-superior img {
+    height: 55px;
+    margin-right: 15px;
+}
+
+.navbar-inferior {
+    background-color: #0D3B66;
+    color: white;
+    padding: 13px 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* =======================
+   CONTENEDOR Y TARJETAS
+======================== */
+.contenedor {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    /* Ajuste de ancho máximo para mejor lectura en pantallas grandes */
+    max-width: 1200px; 
+    margin: 0 auto; /* Centrar el contenedor principal */
+}
+
+form {
+    width: 100%;
+}
+
+.card-form {
+    width: 100%;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    border-left: 5px solid #0D3B66;
+}
+
+.card-form h2 {
+    margin-bottom: 20px;
+    color: #0D3B66;
+    border-bottom: 2px solid #0D3B66;
+    padding-bottom: 10px;
+    font-size: 22px;
+}
+
+/* =======================
+    GRID DEL FORMULARIO: DISEÑO ASIMÉTRICO EQUILIBRADO
+======================== */
+.grid {
+    display: grid;
+    /* Usamos 10 columnas como base para proporciones precisas (6/10 y 4/10) */
+    grid-template-columns: repeat(10, 1fr); 
+    gap: 18px 25px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 1. Ancho completo (100%): para descripciones o elementos críticos */
+.campo-full, .campo-doble-ancho {
+    grid-column: span 10; 
+}
+
+/* 2. Ancho largo (60%): para campos que necesitan más espacio (ej: nombre, correo, región) */
+.campo-largo {
+    grid-column: span 6; 
+}
+
+/* 3. Ancho corto (40%): para campos pequeños (ej: cargo, teléfono, estado) */
+.campo-corto {
+    grid-column: span 4; 
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #0D3B66;
+}
+
+/* Estilos de inputs, selects, textareas y errores... (se mantienen) */
+input, select, textarea {
+    padding: 12px;
+    border: 2px solid #0D3B66;
+    border-radius: 6px;
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #0D3B66;
+    box-shadow: 0 0 6px rgba(13, 59, 102, 0.3);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+.file-info {
+    color: #2e7d32;
+    font-size: 13px;
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+/* =======================
+   BOTONES (se mantienen, con ajuste en la responsividad)
+======================== */
+.contenedor-btn {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-guardar,
+.btn-siguiente,
+.btn-regresar {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* Ajuste para que se estiren en desktop si solo hay dos botones */
+    flex: 1; 
+    min-width: 150px;
+}
+
+/* [Estilos de .btn-guardar, .btn-siguiente, .btn-regresar se mantienen aquí] */
+.btn-guardar {
+    background-color: #0D3B66;
+    color: white;
+    box-shadow: 0 2px 8px rgba(13, 59, 102, 0.2);
+}
+
+.btn-guardar:hover {
+    background-color: #0A2D4F;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 59, 102, 0.3);
+}
+
+.btn-guardar:active {
+    transform: translateY(0);
+}
+
+.btn-siguiente {
+    background-color: #0D3B66;
+    color: white;
+    box-shadow: 0 2px 8px rgba(13, 59, 102, 0.2);
+}
+
+.btn-siguiente:hover:not(:disabled) {
+    background-color: #0A2D4F;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 59, 102, 0.3);
+}
+
+.btn-siguiente:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn-siguiente:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #999;
+}
+
+.btn-regresar {
+    background-color: #0D3B66;
+    color: white;
+    box-shadow: 0 2px 8px rgba(13, 59, 102, 0.2);
+}
+
+.btn-regresar:hover {
+    background-color: #0A2D4F;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 59, 102, 0.3);
+}
+
+.btn-regresar:active {
+    transform: translateY(0);
+}
+
+/* =======================
+   RESPONSIVE (Ajuste para una sola columna en móvil)
+======================== */
+@media (max-width: 768px) {
+    .contenedor {
+        padding: 20px;
+    }
+    
+    /* En móvil, regresamos a una columna simétrica (100% para todo) */
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 15px 0;
+    }
+
+    /* Todas las clases de ancho vuelven a ocupar el ancho completo */
+    .campo-full, .campo-doble-ancho, .campo-largo, .campo-corto {
+        grid-column: span 1; 
+    }
+    
+    .contenedor-btn {
+        flex-direction: column;
+    }
+
+    .btn-guardar,
+    .btn-siguiente,
+    .btn-regresar {
+        min-width: 100%;
+    }
+
+    .card-form {
+        padding: 20px;
+    }
+
+    .card-form h2 {
+        font-size: 18px;
+    }
+}
+
+
+/* =========================================================
+   TOOLTIP DE AYUDA (Se mantiene, con ligeras optimizaciones)
+   ========================================================= */
+
+/* 1. Contenedor que alinea la etiqueta y el tooltip */
+.label-with-tooltip {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; 
+}
+
+/* 2. Asegurarse que la etiqueta dentro del contenedor no tenga margen duplicado */
+.label-with-tooltip label {
+    margin-bottom: 0;
+}
+
+/* 3. Contenedor principal del ícono de información (define la posición relativa) */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 8px;
+    cursor: help;
+}
+
+/* 4. Estilo del ícono '?' */
+.info-icon {
+    color: #ffffff;
+    background-color: #0D3B66; 
+    border-radius: 50%; 
+    width: 18px; 
+    height: 18px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    font-size: 13px; 
+    font-style: normal; 
+    font-weight: bold;
+    cursor: help;
+}
+
+/* 5. El cuadro de texto del tooltip (inicialmente oculto) */
+.tooltip-text {
+    visibility: hidden;
+    width: 280px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    border-radius: 6px;
+    
+    /* Posicionamiento */
+    position: absolute;
+    z-index: 10;
+    bottom: 100%; 
+    left: 50%;
+    margin-left: -140px; 
+    margin-bottom: 12px;
+
+    /* Transición de aparición */
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+
+    /* Fuente */
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: normal;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 6. Flecha inferior del tooltip */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* 7. Mostrar el tooltip al pasar el ratón */
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}

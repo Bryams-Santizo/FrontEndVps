@@ -1,0 +1,47 @@
+/* --- ENCABEZADO (Headers): FONDO AZUL, LETRA BLANCA --- */
+
+.navbar-inferior { background: #003b6f; color: #fff; padding: 10px 20px; font-weight: bold; }
+.table thead tr th {
+    background-color: #1B396A !important; /* Azul Marino TecNM */
+    color: #FFFFFF !important;            /* BLANCO PURO */
+    text-align: center;
+    padding: 15px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none !important;
+}
+
+/* --- CUERPO (Body): TODAS LAS LETRAS EN NEGRO --- */
+.table tbody tr td {
+    color: #000000 !important;   /* NEGRO PURO PARA TODO */
+    background-color: #ffffff;    /* Fondo blanco para que resalte el negro */
+    padding: 12px 15px !important;
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/* --- FILAS CEBRA (Opcional, pero ayuda a leer el negro) --- */
+.table-striped tbody tr:nth-of-type(odd) td {
+    background-color: #f2f2f2 !important; /* Gris muy claro para filas impares */
+    color: #000000 !important;            /* Sigue siendo negro */
+}
+
+/* --- RESALTADO DEL NOMBRE --- */
+.nombre-resaltado {
+    font-weight: 800; /* Más negrita para el nombre */
+    color: #000000 !important;
+}
+
+/* --- BOTÓN DE ACCIÓN --- */
+.btn-accion {
+    background-color: #1B396A;
+    color: white !important;
+    border: none;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 4px;
+}
+
+.btn-accion:hover {
+    background-color: #B49448; /* Dorado al pasar el mouse */
+}

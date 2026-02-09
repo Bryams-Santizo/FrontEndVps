@@ -1,0 +1,121 @@
+/* Estilos Generales y Contenedores */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+}
+.card {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+}
+.upload-box {
+    background-color: #f7f9fc;
+    border-left: 5px solid #0D3B66; /* Borde de color principal */
+}
+h3 {
+    color: #0D3B66;
+    margin-bottom: 10px;
+}
+h2 {
+    color: #333;
+    border-bottom: 2px solid #0D3B66;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.file-input {
+    padding: 10px;
+    border: 1px dashed #0D3B66;
+    border-radius: 8px;
+    width: 100%;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+.loading-message {
+    color: #0D3B66;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Galería de Imágenes */
+.gallery-container {
+    margin-top: 20px;
+}
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+.img-box {
+    position: relative;
+    background-color: #fff;
+    border: 2px solid #0D3B66;
+    padding: 5px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+.img-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+.img-box img {
+    width: 250px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Numeración de Evidencia */
+.evidence-number {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(13, 59, 102, 0.9); 
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.file-name {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #555;
+    word-break: break-all; /* Evita desbordamiento de nombres largos */
+}
+
+/* Botón de Eliminar */
+.delete-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 5px;
+    transition: color 0.2s;
+}
+.delete-btn:hover {
+    color: #ffcccc;
+}
+
+/* Mensaje sin datos */
+.no-data {
+    padding: 20px;
+    background-color: #ffe0e0; 
+    border: 1px solid #ffcccc;
+    border-radius: 8px;
+    color: #990000;
+    text-align: center;
+    font-size: 1.1rem;
+}

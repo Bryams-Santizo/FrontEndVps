@@ -1,0 +1,45 @@
+<section class="login-background">
+  <a href="/" class="btn-exit">
+    <i class="bi bi-box-arrow-left me-2"></i>SALIR
+  </a>
+
+  <div class="login-card animate__animated animate__fadeIn">
+
+    <img src="Imegenes/pleca_tecnm.jpg" alt="TecNM" style="width: 200px; margin-bottom: 20px;">
+
+    <h2 style="font-weight: 700; color: #333; margin-bottom: 30px; font-size: 1.5rem;">Iniciar sesión</h2>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+
+      <div class="input-box">
+        <label>Nombre de usuario</label>
+        <i class="bi bi-person"></i>
+        <input type="email" name="correo" [(ngModel)]="correo" placeholder="Type your username" required>
+      </div>
+
+      <div class="input-box">
+        <label>Contraseña</label>
+        <i class="bi bi-lock"></i>
+        <input type="password" name="password" [(ngModel)]="password" placeholder="Type your password" required>
+        <div class="text-end">
+          <a href="#" class="text-muted small text-decoration-none" data-bs-toggle="modal"
+            data-bs-target="#forgotPasswordModal" style="font-size: 11px;">Olvidaste tu contraseña?</a>
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger py-2 small mb-3">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn-tecnm-login">
+        INICIAR SESIÓN
+      </button>
+
+      <div class="signup-section">
+        <p class="text-muted small mb-1">¿No tienes una cuenta?</p>
+        <a href="/registro" class="signup-link">REGISTRARSE</a>
+      </div>
+
+    </form>
+  </div>
+</section>

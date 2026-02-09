@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold text-primary" href="#">
+      <i class="bi bi-cup-hot-fill me-2"></i> TecNM Café
+    </a>
+
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <li class="nav-item"><a class="nav-link" routerLink="/coordinador/dashboard">Inicio</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/coordinador/proyectos">Registro de proyectos</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/coordinador/avances">Avances</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/coordinador/reportes">Reportes</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/coordinador/galeria">Galería</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/coordinador/contacto">Contacto</a></li>
+      <li class="nav-item ms-3">
+        <button class="btn btn-outline-danger btn-sm" (click)="logout()">Cerrar sesión</button>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,124 @@
+<div class="card">
+  <h2>Proyectos registrados</h2>
+  <div *ngIf="proyectos.length === 0" class="no-data">
+    <p>Aún no hay proyectos registrados en el sistema.</p>
+  </div>
+
+  <table class="table mt-4" *ngIf="proyectos.length > 0">
+    <thead>
+      <tr>
+        <th>Nombre del Proyecto</th>
+        <th>Empresa</th>
+        <th>Estado</th>
+        <th>Actividad</th>
+        <th style="width: 180px;">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proyecto of proyectos">
+        <td><strong>{{ proyecto.nombre }}</strong></td>
+        <td>{{ proyecto.empresaVinculada }}</td>
+        <td><span class="badge badge-estado">{{ proyecto.estadoProyecto }}</span></td>
+        <td class="descripcion-cell">{{ proyecto.actividad }}</td>
+        <td>
+          <button (click)="abrirModalEdicion(proyecto)" class="btn btn-sm btn-warning">
+            <i class="bi bi-pencil"></i> Editar
+          </button>
+          <button (click)="eliminarProyectoCompleto(proyecto)" class="btn btn-sm btn-danger ms-2">
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="proyecto-modal-backdrop" *ngIf="mostrarModalDocs">
+  <div class="proyecto-modal">
+    <div class="modal-header">
+      <div>
+        <h3>Editar: {{ proyectoEnEdicion?.nombre }}</h3>
+        <div class="modal-subtitle" *ngIf="proyectoEnEdicion as p">
+          <span class="badge badge-estado">{{ p.estadoProyecto }}</span>
+          <span class="badge badge-empresa">{{ p.empresaVinculada }}</span>
+        </div>
+      </div>
+      <button type="button" class="btn-icon" (click)="cerrarModalDocumentos()">✖</button>
+    </div>
+
+    <div class="modal-body" *ngIf="proyectoEnEdicion as p">
+      <div class="modal-layout">
+        
+        <div class="modal-left">
+          <div class="soft-card portada-card">
+            <h4>Imagen representativa</h4>
+            <ng-container *ngIf="imagenes.length > 0; else noImg">
+              <img [src]="getMediaUrl(imagenes[0])" class="portada-img" />
+            </ng-container>
+            <ng-template #noImg>
+              <div class="portada-placeholder"><span>Sin imagen</span></div>
+            </ng-template>
+            
+            <div class="form-group mt-3">
+              <label>Cambiar imagen</label>
+              <input type="file" (change)="onFileChangeNuevo($event, 'imagen')" accept="image/*" />
+            </div>
+          </div>
+
+          <div class="soft-card">
+            <h4>Documento del proyecto</h4>
+            <div *ngIf="otrosDocumentos.length > 0" class="file-list">
+              <li>
+                <span class="file-name"> {{ otrosDocumentos[0].fileName }}</span>
+                <button (click)="verDocumento(otrosDocumentos[0])" class="btn btn-xs btn-info">Ver</button>
+              </li>
+            </div>
+            <div class="form-group mt-2">
+              <label>Reemplazar archivo</label>
+              <input type="file" (change)="onFileChangeNuevo($event, 'documento')" />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-right">
+          <div class="soft-card">
+            <h4>Datos del proyecto</h4>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>Nombre</label>
+                <input type="text" [(ngModel)]="p.nombre" />
+              </div>
+              <div class="form-group">
+                <label>Estado</label>
+                <input type="text" [(ngModel)]="p.estadoProyecto" />
+              </div>
+              <div class="form-group">
+                <label>Empresa</label>
+                <input type="text" [(ngModel)]="p.empresaVinculada" />
+              </div>
+              <div class="form-group">
+                <label>Actividad</label>
+                <input type="text" [(ngModel)]="p.actividad" />
+              </div>
+              <div class="form-group">
+                <label>Necesidad</label>
+                <input type="text" [(ngModel)]="p.necesidad" />
+              </div>
+              <div class="form-group full-width">
+                <label>Descripción</label>
+                <textarea [(ngModel)]="p.descripcion" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary me-2" (click)="cerrarModalDocumentos()">Cancelar</button>
+      <button class="btn btn-primary" (click)="guardarTodo()">
+        Guardar todos los cambios
+      </button>
+    </div>
+  </div>
+</div>

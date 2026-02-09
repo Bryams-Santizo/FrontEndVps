@@ -1,0 +1,112 @@
+<nav class="navbar-superior">
+    <div class="logo-container">
+        <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
+        <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
+        <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
+    </div>
+</nav>
+
+<nav class="navbar-inferior">
+  <div class="titulo-navbar">Panel de Productores</div>
+</nav>
+
+<div class="container">
+  
+
+  <div class="modulo-calculadora">
+    <div class="calc-card">
+
+      <div class="calc-header">
+        <h2>Calculadora del Productor de Café</h2>
+        <p class="text-muted">
+          El resultado es un estimado y puede variar por temporada, región y mercado.
+        </p>
+      </div>
+
+      <div class="calc-body">
+
+        <!-- UNIDAD -->
+        <div class="input-group">
+          <label>¿Cómo venderás tu café?</label>
+          <select [(ngModel)]="unidadVenta">
+            <option value="quintal">Quintales (Costal)</option>
+            <option value="kilo">Kilogramos</option>
+          </select>
+        </div>
+
+        <!-- CANTIDAD -->
+        <div class="input-group">
+          <label>Cantidad</label>
+          <input type="number" [(ngModel)]="cantidad" placeholder="Ej: 20">
+        </div>
+
+        <!-- TIPO DE CAFÉ -->
+        <div class="input-group">
+          <label>Tipo de café</label>
+          <select [(ngModel)]="tipoCafe">
+            <option value="cereza">Cereza</option>
+            <option value="pergamino">Pergamino</option>
+            <option value="oro">Oro</option>
+            <option value="tostado">Tostado</option>
+            <option value="molido">Molido</option>
+          </select>
+        </div>
+
+        <!-- CALIDAD -->
+        <div class="input-group">
+          <label>Calidad</label>
+          <select [(ngModel)]="calidad">
+            <option value="comercial">Comercial</option>
+            <option value="primera">Primera</option>
+            <option value="especial">Especial</option>
+          </select>
+        </div>
+
+        <!-- CERTIFICACIÓN -->
+        <div class="input-group">
+          <label>Certificación</label>
+          <select [(ngModel)]="certificacion">
+            <option value="ninguna">Ninguna</option>
+            <option value="organico">Orgánico</option>
+            <option value="comercioJusto">Comercio Justo</option>
+          </select>
+        </div>
+
+        <hr>
+
+        <!-- RESULTADOS -->
+        <div class="results">
+
+          <div class="result-item">
+            <span>Precio de referencia aplicado:</span>
+            <span class="value">
+              {{ precioReferencia | currency }} /
+              {{ unidadVenta === 'quintal' ? 'quintal' : 'kg' }}
+            </span>
+          </div>
+
+          <div class="result-item">
+            <span>Total equivalente en kilos:</span>
+            <span class="value">{{ totalKilos }} kg</span>
+          </div>
+
+          <div class="result-item highlight">
+            <span>Valor estimado de la cosecha:</span>
+            <span class="value total">
+              {{ totalEstimado | currency }}
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="calc-footer">
+        <small class="text-muted">
+          *Estimación basada en precios promedio. No representa un precio oficial de compra.
+        </small>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,284 @@
+/* =======================
+   NAVBAR SUPERIOR BLANCO
+======================== */
+.navbar-superior {
+    background-color: white;
+    padding: 10px 25px;
+    border-bottom: 2px solid #ddd;
+}
+.navbar-superior img {
+    height: 55px;
+    margin-right: 15px;
+}
+
+/* =======================
+   NAVBAR INFERIOR AZUL
+======================== */
+.navbar-inferior {
+    background-color: #003366;
+    color: white;
+    padding: 13px 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* =======================
+   CONTENEDOR PRINCIPAL
+======================== */
+.contenedor {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.card-form {
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.card-form h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #003366;
+    font-size: 24px;
+}
+
+/* Estilo de los títulos de sección */
+.seccion-titulo {
+    color: #0055aa;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    border-left: 5px solid #003366;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+/* =======================
+   FORMULARIO - GRID
+======================== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 25px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-full {
+    grid-column: span 2;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+/* Ajuste crucial para que todos los campos de texto/select/textarea 
+   tengan el mismo ancho dentro de su columna (100%)
+*/
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: all 0.2s;
+    width: 100%; 
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #003366;
+    box-shadow: 0 0 4px rgba(0,51,102,0.4);
+}
+
+/* Estilo para el input file */
+input[type="file"] {
+    border: 1px solid #003366;
+    padding: 10px;
+    background-color: #f0f4f8;
+}
+
+
+/* =========================================================
+   ESTILOS PARA CHECKBOXES Y FORMALIDAD (SECCIONES 4, 5, 6)
+   ========================================================= */
+
+/* Contenedor general de checkboxes */
+.checkbox-group {
+    margin-top: 5px;
+    padding: 5px 0;
+}
+
+/* 4.2 Variedades y 6.1 Necesidades/Áreas ITFC: Distribución en múltiples columnas */
+.grid-variedades {
+    grid-template-columns: repeat(4, 1fr);
+    display: grid;
+    gap: 8px 15px;
+}
+.grid-necesidades {
+    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    gap: 8px 15px;
+}
+.grid-areas-itfc {
+    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    gap: 8px 15px;
+}
+
+/* 5. Infraestructura: Lista formal (como filas justificadas en 2 columnas) */
+.formal-checkbox-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 5px 20px;
+    margin-bottom: 10px;
+    padding-left: 10px; 
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+}
+@media (max-width: 768px) {
+    .formal-checkbox-list {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+    }
+}
+
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: auto; 
+    margin-right: 8px;
+}
+
+.checkbox-label-cert {
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+
+/* =======================
+   BOTÓN AZUL
+======================== */
+.contenedor-btn {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn-guardar {
+    background-color: #003366;
+    color: white;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-guardar:hover {
+    background-color: #0055aa;
+}
+
+
+/* =========================================================
+   TOOLTIP DE AYUDA
+   ========================================================= */
+
+/* 1. Contenedor que alinea la etiqueta y el tooltip */
+.label-with-tooltip {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px; 
+}
+
+/* 2. Asegurarse que la etiqueta dentro del contenedor no tenga margen duplicado */
+.label-with-tooltip label {
+    margin-bottom: 0;
+}
+
+/* 3. Contenedor principal del ícono de información (define la posición relativa) */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 8px;
+    cursor: help;
+}
+
+/* 4. Estilo del ícono '?' */
+.info-icon {
+    color: #ffffff; 
+    background-color: #003366; 
+    border-radius: 50%; 
+    width: 18px; 
+    height: 18px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    font-size: 13px; 
+    font-style: normal; 
+    font-weight: bold;
+    cursor: help;
+}
+
+/* 5. El cuadro de texto del tooltip (inicialmente oculto) */
+.tooltip-text {
+    visibility: hidden;
+    width: 280px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    border-radius: 6px;
+    
+    /* Posicionamiento */
+    position: absolute;
+    z-index: 10;
+    bottom: 100%; 
+    left: 50%;
+    margin-left: -140px; 
+    margin-bottom: 12px;
+
+    /* Transición de aparición */
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+
+    /* Fuente */
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: normal;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 6. Flecha inferior del tooltip */
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* 7. Mostrar el tooltip al pasar el ratón */
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}

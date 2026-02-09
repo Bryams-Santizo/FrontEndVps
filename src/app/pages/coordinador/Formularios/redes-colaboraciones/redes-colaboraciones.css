@@ -1,0 +1,261 @@
+/* =========================================================
+   NAVBARS
+========================================================= */
+.navbar-superior {
+    background-color: white;
+    padding: 10px 25px;
+    border-bottom: 2px solid #ddd;
+}
+
+.navbar-superior img {
+    height: 55px;
+    margin-right: 15px;
+}
+
+.navbar-inferior {
+    background-color: #003366;
+    color: white;
+    padding: 15px 25px; /* Ligeramente más padding */
+    font-size: 22px; /* Ligeramente más grande */
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* =========================================================
+   CONTENEDOR Y TARJETAS
+========================================================= */
+.contenedor {
+    /* Nuevo: Limitar ancho máximo y centrar para mejor lectura en desktop */
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px; 
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* Espacio consistente entre tarjetas */
+}
+
+.card-form {
+    background: white;
+    padding: 30px; /* Se reduce un poco para hacerlo más compacto */
+    border-radius: 12px;
+    /* Sombra más moderna y suave */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #e0e0e0;
+}
+
+.card-form h2 {
+    margin-bottom: 25px; /* Aumenta el espacio inferior */
+    color: #003366;
+    /* Ajuste en el borde y padding */
+    border-left: 6px solid #5fa8d3; 
+    padding-left: 15px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   GRID - DISEÑO ASIMÉTRICO
+========================================================= */
+.grid {
+    display: grid;
+    /* ASIMETRÍA: Usar 3fr (60%) y 2fr (40%) para campos adyacentes. */
+    grid-template-columns: 3fr 2fr; 
+    gap: 20px 30px; /* Espaciado ajustado y consistente */
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Los campos 'full' siempre ocupan el 100% (60% + 40%) */
+.campo-full {
+    grid-column: span 2;
+}
+
+label {
+    font-weight: 600;
+    /* El margen se maneja en '.label-with-tooltip' */
+    color: #333333;
+    font-size: 15px;
+}
+
+input, select, textarea {
+    padding: 11px 13px; /* Se ajusta el padding para compactar */
+    border: 1px solid #cccccc;
+    border-radius: 8px; /* Se redondea un poco más */
+    background: #ffffff;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    background: #ffffff;
+    border-color: #003366;
+    /* Sombra de foco sutil */
+    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.15); 
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px; /* Altura mínima para hacerlo más compacto */
+}
+
+/* =========================================================
+   BOTÓN
+========================================================= */
+.contenedor-btn {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: right; /* Alineación a la derecha */
+}
+
+.btn-guardar {
+    background-color: #003366;
+    color: white;
+    padding: 13px 30px; 
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 600; /* Ligeramente menos grueso */
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 3px 8px rgba(0, 51, 102, 0.3);
+}
+
+.btn-guardar:hover {
+    background-color: #0058b4;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(0, 51, 102, 0.4);
+}
+
+/* =========================================================
+   TOOLTIP DE AYUDA (Se mantienen los estilos, se ajustan los márgenes)
+   ========================================================= */
+.label-with-tooltip {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px; /* Ajuste para dar un poco más de aire */
+}
+
+.label-with-tooltip label {
+    margin-bottom: 0;
+}
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 8px;
+    cursor: help;
+    flex-shrink: 0;
+}
+
+.info-icon {
+    color: #ffffff; 
+    background-color: #003366; 
+    border-radius: 50%; 
+    width: 18px; 
+    height: 18px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    font-size: 13px; 
+    font-style: normal; 
+    font-weight: bold;
+    cursor: help;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 280px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 100;
+    bottom: 100%; 
+    left: 50%;
+    margin-left: -140px; 
+    margin-bottom: 12px;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: normal;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN (BREAKPOINTS)
+   ========================================================= */
+
+/* Tablets grandes (Diseño más equilibrado) */
+@media (max-width: 1050px) {
+    .contenedor {
+        padding: 30px 20px;
+    }
+}
+
+/* Tablets (Colapso parcial a 50%/50% y campos 'full' a 100%) */
+@media (max-width: 768px) {
+    .grid {
+        /* Se usa 1fr 1fr para una división más simétrica en tablet, manteniendo el orden de dos columnas */
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    
+    .campo-full {
+        grid-column: span 2;
+    }
+    
+    .card-form {
+        padding: 25px;
+    }
+}
+
+/* Móvil (Todo a una sola columna para máxima usabilidad) */
+@media (max-width: 550px) {
+    .contenedor {
+        padding: 20px 15px; /* Más compacto en móvil */
+        gap: 30px;
+    }
+
+    .grid {
+        /* Colapsa todo a una sola columna */
+        grid-template-columns: 1fr;
+        gap: 25px; 
+    }
+
+    .campo-full {
+        grid-column: span 1;
+    }
+
+    .card-form h2 {
+        font-size: 20px;
+        padding-left: 10px;
+    }
+    
+    .contenedor-btn {
+        text-align: center;
+    }
+}

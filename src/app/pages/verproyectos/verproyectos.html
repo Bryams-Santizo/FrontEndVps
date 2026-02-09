@@ -1,0 +1,323 @@
+<!-- =======================
+       NAVBAR SUPERIOR BLANCO
+======================= -->
+<nav class="navbar-superior">
+  <div class="logo-container">
+
+    <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
+    <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
+    <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
+
+  </div>
+</nav>
+
+<!-- =======================
+       NAVBAR INFERIOR AZUL
+======================= -->
+<nav class="navbar-inferior">
+  <div class="titulo-navbar">
+    Consulta de Proyectos
+  </div>
+  <div class="menu">
+    <div class="menu-item" (click)="filtrarPorSubtema('Todos')">
+      Todos
+    </div>
+
+    <div class="menu-item">
+      PRODUCCIÓN / CULTIVO
+      <div class="submenu">
+        <div class="sub-submenu-container">
+          <span class="sub-title">Establecimiento del cultivo</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Métodos de selección de variedades')">Selección de variedades</a>
+            <a (click)="filtrarPorSubtema('Manejo genético y viveros')">Manejo genético y viveros</a>
+            <a (click)="filtrarPorSubtema('Preparación de suelos')">Preparación de suelos</a>
+            <a (click)="filtrarPorSubtema('Diseño y trazado de plantaciones')">Diseño y trazado</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Manejo del cultivo</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Fertilización y nutrición')">Fertilización y nutrición</a>
+            <a (click)="filtrarPorSubtema('Manejo de sombra')">Manejo de sombra</a>
+            <a (click)="filtrarPorSubtema('Manejo de arvenses')">Manejo de arvenses</a>
+            <a (click)="filtrarPorSubtema('Podas y renovación')">Podas y renovación</a>
+            <a (click)="filtrarPorSubtema('Manejo hídrico')">Manejo hídrico</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Sanidad vegetal</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Roya')">Roya</a>
+            <a (click)="filtrarPorSubtema('Broca')">Broca</a>
+            <a (click)="filtrarPorSubtema('Enfermedades foliares y sistémicas')">Enfermedades foliares</a>
+            <a (click)="filtrarPorSubtema('Plagas secundarias')">Plagas secundarias</a>
+            <a (click)="filtrarPorSubtema('Manejo integrado (MIP)')">Manejo integrado (MIP)</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Tecnificación y Buenas Prácticas</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Sistemas agroforestales')">Sistemas agroforestales</a>
+            <a (click)="filtrarPorSubtema('Tecnología para monitoreo agrícola')">Monitoreo agrícola</a>
+            <a (click)="filtrarPorSubtema('Agricultura de precisión')">Agricultura de precisión</a>
+            <a (click)="filtrarPorSubtema('Modelos de predicción climática')">Predicción climática</a>
+            <a (click)="filtrarPorSubtema('Innovaciones en campo (sensores, drones, etc.)')">Innovaciones (Drones/Sensores)</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Organización y Gestión</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Costos de producción')">Costos de producción</a>
+            <a (click)="filtrarPorSubtema('Administración de unidades productivas')">Administración</a>
+            <a (click)="filtrarPorSubtema('Formalización')">Formalización</a>
+            <a (click)="filtrarPorSubtema('Buenas prácticas agrícolas certificables (BPA)')">BPA Certificables</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Sustentabilidad y Conservación</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Suelos')">Suelos</a>
+            <a (click)="filtrarPorSubtema('Agua')">Agua</a>
+            <a (click)="filtrarPorSubtema('Biodiversidad')">Biodiversidad</a>
+            <a (click)="filtrarPorSubtema('Captura de carbono')">Captura de carbono</a>
+            <a (click)="filtrarPorSubtema('Adaptación al cambio climático')">Cambio climático</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      PROCESAMIENTO / CALIDAD
+      <div class="submenu">
+        <div class="sub-submenu-container">
+          <span class="sub-title">Beneficiado Húmedo</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Cosecha y selección del fruto')">Cosecha y selección</a>
+            <a (click)="filtrarPorSubtema('Despulpado')">Despulpado</a>
+            <a (click)="filtrarPorSubtema('Fermentación')">Fermentación</a>
+            <a (click)="filtrarPorSubtema('Lavado')">Lavado</a>
+            <a (click)="filtrarPorSubtema('Manejo de aguas mieles')">Manejo de aguas mieles</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Secado y Almacenamiento</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Secado en patios')">Secado en patios</a>
+            <a (click)="filtrarPorSubtema('Guardiolas')">Guardiolas</a>
+            <a (click)="filtrarPorSubtema('Secado solar / camas africanas')">Secado solar</a>
+            <a (click)="filtrarPorSubtema('Control de humedad')">Control de humedad</a>
+            <a (click)="filtrarPorSubtema('Trillado')">Trillado</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Procesos Diferenciados</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Honey')">Honey</a>
+            <a (click)="filtrarPorSubtema('Natural')">Natural</a>
+            <a (click)="filtrarPorSubtema('Fermentaciones controladas')">Fermentaciones controladas</a>
+            <a (click)="filtrarPorSubtema('Micro-lotes')">Micro-lotes</a>
+            <a (click)="filtrarPorSubtema('Café de especialidad')">Café de especialidad</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Aseguramiento de la Calidad</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Análisis físico')">Análisis físico</a>
+            <a (click)="filtrarPorSubtema('Catación')">Catación</a>
+            <a (click)="filtrarPorSubtema('Trazabilidad')">Trazabilidad</a>
+            <a (click)="filtrarPorSubtema('Defectología')">Defectología</a>
+            <a (click)="filtrarPorSubtema('Normas y estándares')">Normas y estándares</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Infraestructura y Equipo</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Diseño de beneficios')">Diseño de beneficios</a>
+            <a (click)="filtrarPorSubtema('Mantenimiento de maquinaria')">Mantenimiento de maquinaria</a>
+            <a (click)="filtrarPorSubtema('Innovación tecnológica en equipo')">Innovación tecnológica</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Gestión Ambiental</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Tratamiento de aguas residuales')">Tratamiento de aguas</a>
+            <a (click)="filtrarPorSubtema('Uso eficiente de energía')">Uso eficiente de energía</a>
+            <a (click)="filtrarPorSubtema('Manejo de residuos')">Manejo de residuos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-item">
+      COMERCIALIZACIÓN Y MARCA
+      <div class="submenu">
+        <div class="sub-submenu-container">
+          <span class="sub-title">Tostado y Molido</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Perfiles de tostado')">Perfiles de tostado</a>
+            <a (click)="filtrarPorSubtema('Control de calidad en tostado')">Control en tostado</a>
+            <a (click)="filtrarPorSubtema('Innovaciones en tostadoras')">Innovaciones</a>
+            <a (click)="filtrarPorSubtema('Estándares de molienda')">Estándares de molienda</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Desarrollo de Producto</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Diseño de empaque')">Diseño de empaque</a>
+            <a (click)="filtrarPorSubtema('Innovación en presentaciones')">Nuevas presentaciones</a>
+            <a (click)="filtrarPorSubtema('Valor agregado')">Valor agregado</a>
+            <a (click)="filtrarPorSubtema('Normatividad (NOMs aplicables)')">Normatividad (NOMs)</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Desarrollo de Marca</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Identidad de marca')">Identidad de marca</a>
+            <a (click)="filtrarPorSubtema('Estrategias de branding')">Branding</a>
+            <a (click)="filtrarPorSubtema('Narrativa y storytelling')">Storytelling</a>
+            <a (click)="filtrarPorSubtema('Denominación de origen y marca colectiva')">Denominación de origen</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Mercados</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Mercado interno')">Mercado interno</a>
+            <a (click)="filtrarPorSubtema('Mercado de exportación')">Exportación</a>
+            <a (click)="filtrarPorSubtema('Café de especialidad')">Café de especialidad</a>
+            <a (click)="filtrarPorSubtema('Mercados emergentes')">Mercados emergentes</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Ventas y Comercialización</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Ventas directas')">Ventas directas</a>
+            <a (click)="filtrarPorSubtema('Comercio electrónico')">E-commerce</a>
+            <a (click)="filtrarPorSubtema('Cadenas de valor cortas')">Cadenas de valor cortas</a>
+            <a (click)="filtrarPorSubtema('Estrategias de precio')">Estrategias de precio</a>
+            <a (click)="filtrarPorSubtema('Integración a cadenas de suministro')">Cadenas de suministro</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Certificaciones Comerciales</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Orgánico')">Orgánico</a>
+            <a (click)="filtrarPorSubtema('Comercio justo')">Comercio justo</a>
+            <a (click)="filtrarPorSubtema('Rainforest')">Rainforest</a>
+            <a (click)="filtrarPorSubtema('UTZ')">UTZ</a>
+            <a (click)="filtrarPorSubtema('Cafés diferenciados por atributos')">Cafés diferenciados</a>
+          </div>
+        </div>
+        <div class="sub-submenu-container">
+          <span class="sub-title">Gestión Empresarial</span>
+          <div class="sub-submenu-content">
+            <a (click)="filtrarPorSubtema('Finanzas del negocio')">Finanzas del negocio</a>
+            <a (click)="filtrarPorSubtema('Planes de negocios')">Planes de negocios</a>
+            <a (click)="filtrarPorSubtema('Análisis de costos y márgenes')">Análisis de costos</a>
+            <a (click)="filtrarPorSubtema('Estrategias de crecimiento')">Estrategias de crecimiento</a>
+            <a (click)="filtrarPorSubtema('Cooperativas y empresas sociales')">Cooperativas y sociales</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ======================================
+         CONTENEDOR PRINCIPAL
+======================================= -->
+<div class="contenedor-principal">
+
+  <!-- =======================
+         GALERÍA DE PROYECTOS GUARDADOS
+  ======================= -->
+  <div class="projects-section" *ngIf="savedProjects().length > 0">
+    <h3 class="section-title">Proyectos Registrados</h3>
+
+    <div class="gallery">
+      <div class="file-item" *ngFor="let project of savedProjects()">
+        <div class="file-preview">
+          <img *ngIf="project.imagenUrl" [src]="project.imagenUrl" [alt]="project.nombre" class="file-image" />
+          <div *ngIf="!project.imagenUrl" class="file-icon">
+            <span class="icon"></span>
+          </div>
+        </div>
+
+        <div class="project-info">
+          <div class="project-title">{{ project.nombre }}</div>
+          <div class="project-category">{{ project.actividad || 'Sin categoría' }}</div>
+          <div class="project-author">Tec: {{ project.tecnologico }}</div>
+          <div class="project-status">
+            <span [ngClass]="obtenerClaseEstatus(project.estado)">
+              {{ project.estado }}
+            </span>
+          </div>
+        </div>
+
+        <!-- ACCIONES DE LA TARJETA -->
+        <div class="card-actions">
+          <button type="button" class="btn-card btn-view" (click)="verProyecto(project)">
+            Info
+          </button>
+
+          <button type="button" class="btn-card btn-preview" (click)="previewFile(project)"
+            [disabled]="!project.documentoUrl"
+            [title]="project.documentoUrl ? 'Visualizar documento' : 'Sin documento'">
+            Visualizar
+          </button>
+
+          <button type="button" class="btn-card btn-download" (click)="downloadFile(project)"
+            [disabled]="!project.documentoUrl" [title]="project.documentoUrl ? 'Descargar documento' : 'Sin documento'">
+            Descargar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================
+         DETALLE DEL PROYECTO (OPCIONAL)
+  ======================= -->
+  <div *ngIf="proyectoSeleccionado as p" class="detalle-proyecto-card">
+    <button type="button" class="btn-cerrar-detalle" (click)="cerrarDetalle()">
+
+    </button>
+
+    <div class="detalle-imagen">
+      <img *ngIf="p.imagenUrl; else noImagen" [src]="p.imagenUrl" alt="Imagen representativa del proyecto">
+      <ng-template #noImagen>
+        <div class="placeholder-imagen">
+          Sin imagen disponible
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="detalle-info">
+      <h3>{{ p.nombre }}</h3>
+      <p><strong>Tecnológico:</strong> {{ p.tecnologico }}</p>
+      <p><strong>Empresa vinculada:</strong> {{ p.empresaVinculada }}</p>
+      <p>
+        <strong>Estado:</strong>
+        <span [ngClass]="obtenerClaseEstatus(p.estado || '')">
+          {{ p.estado }}
+        </span>
+      </p>
+      <p><strong>Actividad / subtema:</strong> {{ p.actividad }}</p>
+      <p><strong>Descripción:</strong></p>
+      <p>{{ p.descripcion }}</p>
+
+      <div class="detalle-actions">
+        <button *ngIf="p.documentoUrl" type="button" class="btn-download-large" (click)="previewFile(p)">
+          Visualizar documento
+        </button>
+
+        <button *ngIf="p.documentoUrl" type="button" class="btn-download-large btn-secondary-large"
+          (click)="downloadFile(p)">
+          Descargar documento
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
