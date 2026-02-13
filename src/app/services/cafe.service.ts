@@ -8,7 +8,7 @@ import { API_BASE } from '../config/api-base';
 })
 export class CafeService {
   // Asegúrate de que esta URL coincida con tu Backend en Spring Boot
-  private apiUrl = '${API_BASE}/auth/api/bolsa/cafe-hoy';
+  private apiUrl = '${API_BASE}/bolsa/cafe-hoy';
 
   constructor(private http: HttpClient) {}
 
