@@ -1,43 +1,67 @@
+
 <div class="main-container">
-  <div class="card upload-box">
-    <h3>Subir Evidencia</h3>
-    <p class="text-muted">Selecciona una o varias imágenes para registrar el avance.</p>
-    
-    <input 
-      type="file" 
-      (change)="handleFileInput($event)" 
-      accept="image/*" 
-      multiple
-      class="file-input"
-    >
-    
-    <p *ngIf="isLoading()" class="loading-message">Cargando imágenes...</p>
-  </div>
-  
-  <div class="gallery-container">
-    <h2>Evidencias Registradas ({{ evidencias().length }})</h2>
-    
-    <div *ngIf="evidencias().length === 0" class="no-data">
-      <p>Aún no hay evidencias registradas para este proyecto.</p>
+  <div class="card upload-box p-4 shadow-sm mb-4">
+    <h3 class="text-primary"><i class="bi bi-camera-fill"></i> Registrar Avance del Café</h3>
+    <p class="text-muted">Documenta las actividades desde la siembra hasta la comercialización.</p>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label font-weight-bold">¿Qué actividad realizas?</label>
+        <input type="text" class="form-control" placeholder="Ej: Establecimiento del cultivo"
+               [value]="actividadInput()" (input)="actividadInput.set($any($event.target).value)">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label font-weight-bold">Subtema / Detalle</label>
+        <input type="text" class="form-control" placeholder="Ej: Manejo genético y viveros"
+               [value]="subtemaInput()" (input)="subtemaInput.set($any($event.target).value)">
+      </div>
+      <div class="col-md-12">
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" class="form-control file-input">
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-success w-10" [disabled]="isLoading()" (click)="subir()">
+          <span *ngIf="!isLoading()"><i class=""></i> Subir Evidencia</span>
+          <span *ngIf="isLoading()">Cargando...</span>
+        </button>
+      </div>
     </div>
-    
-    <div class="gallery">
-      <div *ngFor="let evidencia of evidencias(); let i = index" class="img-box">
-        
-        <div class="evidence-number">
-          #{{ i + 1 }}
-          <button class="delete-btn" (click)="eliminarEvidencia(evidencia.id)">
-            &times;
-          </button>
+  </div>
+
+  <hr>
+
+  <div class="gallery-results mt-4">
+    <div *ngIf="evidencias().length === 0" class="text-center py-5">
+      <i class="bi bi-folder2-open display-1 text-muted"></i>
+      <p>No hay evidencias registradas todavía.</p>
+    </div>
+
+    <div *ngFor="let grupo of evidenciasAgrupadas() | keyvalue" class="category-section mb-5">
+      <h2 class="actividad-titulo" style="color: #2c5e1a; border-bottom: 2px solid #7b3f00; padding-bottom: 5px;">
+        <i class="bi bi-journal-check"></i> {{ grupo.key }}
+      </h2>
+      
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div *ngFor="let ev of $any(grupo.value)" class="col">
+          <div class="card h-100 evidence-card shadow-sm border-0">
+            <div class="img-container" style="position: relative; height: 200px;">
+              <img [src]="'http://localhost:8080/uploads/' + ev.rutaImagen" 
+                   class="card-img-top" [alt]="ev.subtema"
+                   style="height: 100%; width: 100%; object-fit: cover;">
+              
+              <button class="btn btn-danger btn-sm" 
+                      style="position: absolute; top: 10px; right: 10px; border-radius: 50%;"
+                      (click)="eliminar(ev.id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title mb-1">{{ ev.subtema }}</h6>
+              <p class="card-text small text-muted">
+                <i class="bi bi-calendar3"></i> {{ ev.fechaRegistro | date:'medium' }}
+              </p>
+            </div>
+          </div>
         </div>
-        
-        <img 
-          [src]="evidencia.simulatedUrl" 
-          [alt]="'Evidencia ' + (i + 1) + ': ' + evidencia.fileName"
-          onerror="this.onerror=null;this.src='https://placehold.co/400x300/e0e0e0/333?text=Sin+Imagen';"
-        >
-        
-        <div class="file-name">{{ evidencia.fileName }}</div>
       </div>
     </div>
   </div>
