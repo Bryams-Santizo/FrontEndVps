@@ -1,60 +1,125 @@
+
 <nav class="navbar-superior">
-    <div class="logo-container">
-        <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
-        <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
-        <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
-    </div>
+  <div class="logo-container">
+    <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
+    <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
+    <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
+  </div>
 </nav>
 
 <nav class="navbar-inferior">
   <div class="titulo-navbar">Capacitación Cafetalera</div>
 </nav>
 
-<div class="main-container">
-  <div class="page-header">
-    <p>Fortalece tus conocimientos en la producción, manejo y comercialización del café.</p>
+<div class="search-section">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input 
+      type="text" 
+      [(ngModel)]="terminoBusqueda" 
+      (input)="filtrarCursos()" 
+      placeholder="Buscar por nombre de curso o competencia...">
   </div>
+</div>
 
-  <div class="cards-grid">
-    
-    <!-- CURSO DE CAFÉ -->
-    <div class="course-card highlighted">
-      <div class="card-tag">Curso</div>
+<div class="cards-grid">
+  @for (curso of cursosFiltrados; track curso.id) {
+    <div class="course-card">
+      <div class="card-tag">{{ curso.tipo }}</div>
+      
       <div class="card-content">
-        <h2 class="course-title">Producción y Manejo del Café</h2>
+        <h2 class="course-title">{{ curso.nombre }}</h2>
         
-        <div class="meta-info">
+        <div class="meta-info-compact">
           <div class="meta-item">
-            <span class="icon">⏱</span>
-            <span><strong>Duración:</strong> 40 horas</span>
+             <span class="icon">Duracion:</span>
+             <span>{{ curso.duracion }}</span>
           </div>
           <div class="meta-item">
-            <span class="icon">👨‍🌾</span>
-            <span><strong>Instructor:</strong> Ing. Agrónomo Especialista en Café</span>
-          </div>
-          <div class="meta-item">
-            <span class="icon">💰</span>
-            <span><strong>Costo:</strong> Gratuito</span>
+             <span class="icon">Costo:</span>
+             <span>{{ curso.costo }}</span>
           </div>
         </div>
 
-        <div class="course-description">
-          <h3>Lo que aprenderás:</h3>
-          <p>
-            Manejo del cafetal, prácticas agrícolas sustentables, control de plagas y enfermedades,
-            cosecha adecuada y mejora de la calidad del grano de café.
-          </p>
-        </div>
-
-        <div class="academic-details">
-          <p><strong>Requisitos:</strong> Productores de café, estudiantes del área agrícola o público interesado.</p>
-          <p><strong>Avalado por:</strong> Programa Regional del Café</p>
+        <div class="academic-preview">
+          <p><strong>Impartido por:</strong> {{ curso.emisor }}</p>
         </div>
       </div>
+
       <div class="card-action">
-        <button class="btn-info">Más información</button>
+        <button class="btn-info" (click)="abrirModal(curso)">Más información</button>
+        @if (curso.activo) {
+          <button class="btn-enroll" (click)="abrirInscripcion(curso)">Inscribirme</button>
+        }
       </div>
     </div>
+  } @empty {
+    <div class="no-data-message">No se encontraron cursos con ese nombre.</div>
+  }
+</div>
 
+
+<div class="modal-overlay" *ngIf="cursoSeleccionado && !mostrarFormularioInscripcion" (click)="cerrarModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ cursoSeleccionado.nombre }}</h2>
+      <button class="btn-close" (click)="cerrarModal()">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <section>
+        <h3> Contenido del Programa</h3>
+        <p>{{ cursoSeleccionado.contenido }}</p>
+      </section>
+
+      <section>
+        <h3> Público Objetivo</h3>
+        <p>{{ cursoSeleccionado.publicoObjetivo }}</p>
+      </section>
+
+      <section>
+        <h3>Requisitos de Ingreso</h3>
+        <p>{{ cursoSeleccionado.requisitos }}</p>
+      </section>
+
+      <div class="modal-footer-info">
+        <span><strong>Avalado por:</strong> {{ cursoSeleccionado.emisor }}</span>
+        <span><strong>Tipo:</strong> {{ cursoSeleccionado.tipo }}</span>
+      </div>
+
+      <div class="modal-action-button" style="margin-top: 25px; text-align: center;">
+        @if (cursoSeleccionado.activo) {
+          <button class="btn-enroll" (click)="abrirInscripcion(cursoSeleccionado)" style="width: 100%;">
+            Inscribirme ahora
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarFormularioInscripcion" (click)="cerrarFormulario()">
+  <div class="modal-container inscription-modal" (click)="$event.stopPropagation()">
+    
+    <div class="modal-header">
+      <h2>Inscripción: {{ cursoSeleccionado?.nombre }}</h2>
+      <button class="btn-close" (click)="cerrarFormulario()">&times;</button>
+    </div>
+    <form class="modal-body" (ngSubmit)="enviarInscripcion()">
+      <div class="campo-form">
+        <label>Nombre Completo</label>
+        <input type="text" name="nombreAlumno" [(ngModel)]="datosAlumno.nombre" required placeholder="">
+      </div>
+      <div class="campo-form">
+        <label>Correo Electrónico</label>
+        <input type="email" name="emailAlumno" [(ngModel)]="datosAlumno.email" required placeholder="">
+      </div>
+      <div class="campo-form">
+        <label>Teléfono / WhatsApp</label>
+        <input type="tel" name="telAlumno" [(ngModel)]="datosAlumno.telefono" placeholder="">
+      </div>
+      <p class="aviso-inscripcion">Al confirmar, te enviaremos los detalles de acceso a tu correo.</p>
+      <button type="submit" class="btn-enroll">Confirmar Inscripción</button>
+    </form>
   </div>
 </div>
