@@ -1,13 +1,7 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Añadido FormsModule por si lo necesitas más adelante
-
-// Interfaz para la imagen con su URL simulada
-interface Evidencia {
-  id: number;
-  fileName: string;
-  simulatedUrl: string; 
-}
+import { Component, OnInit, signal, computed, inject, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { GaleriaService } from '../../../services/galeria.service';
 
 @Component({
   selector: 'app-galeria',
@@ -17,85 +11,96 @@ interface Evidencia {
   styleUrls: ['./galeria.css']
 })
 export class GaleriaComponent implements OnInit {
-  // Utilizamos Signals para manejar el estado de las imágenes
-  evidencias: WritableSignal<Evidencia[]> = signal([]);
-  isLoading: WritableSignal<boolean> = signal(false);
-
-  // Clave de almacenamiento
-  private STORAGE_KEY = 'project_evidences';
+  private galeriaService = inject(GaleriaService);
   
-  // Contador para asignar IDs únicos, importante para la eliminación
-  private nextId = 0;
+  evidencias = signal<any[]>([]);
+  isLoading = signal(false);
+  actividadInput = signal('');
+  subtemaInput = signal('');
+  archivoSeleccionado: File | null = null;
 
-  ngOnInit() {
-    if (typeof window !== 'undefined') {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  // Agrupación automática por actividad
+  evidenciasAgrupadas = computed(() => {
+    const grupos: { [key: string]: any[] } = {};
+    this.evidencias().forEach(ev => {
+      const nombreActividad = ev.actividad || 'General';
+      if (!grupos[nombreActividad]) grupos[nombreActividad] = [];
+      grupos[nombreActividad].push(ev);
+    });
+    return grupos;
+  });
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
       this.cargarEvidencias();
     }
   }
 
-  // --- Lógica de Persistencia (LocalStorage) ---
-  
-  cargarEvidencias() {
+ cargarEvidencias() {
+  this.galeriaService.listar().subscribe({
+    next: (data) => {
+      console.log('Datos recibidos:', data);
+      this.evidencias.set(data);
+    },
+    error: (err) => console.error(err)
+  });
+}
+
+
+  onFileSelected(event: any) {
+    this.archivoSeleccionado = event.target.files[0];
+  }
+
+  subir() {
+    if (!this.archivoSeleccionado || !this.actividadInput()) {
+      alert('Por favor selecciona una imagen y describe la actividad.');
+      return;
+    }
+
     this.isLoading.set(true);
-    if (typeof window !== 'undefined') {
-      const storedEvidences = localStorage.getItem(this.STORAGE_KEY);
-      if (storedEvidences) {
-        const data: Evidencia[] = JSON.parse(storedEvidences);
-        this.evidencias.set(data);
-        // Aseguramos que el nextId sea mayor que el ID máximo existente
-        if (data.length > 0) {
-          this.nextId = Math.max(...data.map(e => e.id)) + 1;
-        }
+    const formData = new FormData();
+    formData.append('file', this.archivoSeleccionado);
+
+    const metadatos = {
+      actividad: this.actividadInput(),
+      subtema: this.subtemaInput()
+    };
+
+    formData.append('evidencia', new Blob([JSON.stringify(metadatos)], { 
+      type: 'application/json' 
+    }));
+
+    this.galeriaService.crearEvidencia(formData).subscribe({
+      next: (res) => {
+        alert('¡Evidencia guardada!');
+        this.evidencias.update(prev => [...prev, res]);
+        this.limpiar();
+        this.isLoading.set(false);
+      },
+      error: (err) => {
+        alert('Error al subir: ' + err.message);
+        this.isLoading.set(false);
       }
-    }
-    this.isLoading.set(false);
+    });
   }
 
-  guardarEvidencias() {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.evidencias()));
-    }
-  }
-
-  // --- Lógica de Subida y Manejo de Archivos ---
-
-  handleFileInput(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.isLoading.set(true);
-      
-      const newEvidences: Evidencia[] = [];
-      const filesArray = Array.from(input.files);
-
-      filesArray.forEach(file => {
-        // SIMULACIÓN: Crea una URL de placeholder con el nombre del archivo
-        const placeholderUrl = `https://placehold.co/400x300/0D3B66/ffffff?text=${file.name.substring(0, 10) + '...'}\\nEVIDENCIA+DE+PROYECTO`;
-        
-        newEvidences.push({
-          id: this.nextId++,
-          fileName: file.name,
-          simulatedUrl: placeholderUrl
-        });
+  eliminar(id: number) {
+    if (confirm('¿Eliminar esta evidencia?')) {
+      this.galeriaService.eliminar(id).subscribe({
+        next: () => this.evidencias.update(list => list.filter(e => e.id !== id))
       });
-      
-      // Actualizar el estado y guardar
-      this.evidencias.update(currentEvidences => [...currentEvidences, ...newEvidences]);
-      this.guardarEvidencias();
-      
-      // Limpiar el input
-      input.value = '';
-      this.isLoading.set(false);
     }
   }
 
-  eliminarEvidencia(id: number) {
-    if (typeof window === 'undefined') return;
-    if (confirm('¿Estás seguro de que quieres eliminar esta evidencia?')) {
-      this.evidencias.update(currentEvidences => 
-        currentEvidences.filter(e => e.id !== id)
-      );
-      this.guardarEvidencias();
-      alert(`Evidencia eliminada.`);
+  limpiar() {
+    this.actividadInput.set('');
+    this.subtemaInput.set('');
+    this.archivoSeleccionado = null;
+    if (isPlatformBrowser(this.platformId)) {
+      const input = document.querySelector('.file-input') as HTMLInputElement;
+      if (input) input.value = '';
     }
   }
 }
