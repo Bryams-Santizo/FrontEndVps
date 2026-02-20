@@ -24,7 +24,8 @@
                     <div class="tooltip-container">
                         <i class="info-icon">?</i>
                         <span class="tooltip-text">
-                            Seleccione la modalidad principal de la oferta educativa (curso, taller, certificación, etc.).
+                            Seleccione la modalidad principal de la oferta educativa (curso, taller, certificación,
+                            etc.).
                         </span>
                     </div>
                 </div>
@@ -78,7 +79,8 @@
                     <div class="tooltip-container">
                         <i class="info-icon">?</i>
                         <span class="tooltip-text">
-                            Habilidades, conocimientos o actitudes que el participante adquirirá al finalizar el programa.
+                            Habilidades, conocimientos o actitudes que el participante adquirirá al finalizar el
+                            programa.
                         </span>
                     </div>
                 </div>
@@ -117,7 +119,8 @@
                     <div class="tooltip-container">
                         <i class="info-icon">?</i>
                         <span class="tooltip-text">
-                            Listado de recursos complementarios que se entregan al participante. ej: presentaciones, guías, lecturas.
+                            Listado de recursos complementarios que se entregan al participante. ej: presentaciones,
+                            guías, lecturas.
                         </span>
                     </div>
                 </div>
@@ -130,7 +133,8 @@
                     <div class="tooltip-container">
                         <i class="info-icon">?</i>
                         <span class="tooltip-text">
-                            Institución o dependencia que avala y firma el documento comprobatorio (diploma, certificado).
+                            Institución o dependencia que avala y firma el documento comprobatorio (diploma,
+                            certificado).
                         </span>
                     </div>
                 </div>
@@ -143,11 +147,12 @@
                     <div class="tooltip-container">
                         <i class="info-icon">?</i>
                         <span class="tooltip-text">
-                            Métodos y requisitos para acreditar el curso. ej: "80% de asistencia y proyecto final aprobado".
+                            Métodos y requisitos para acreditar el curso. ej: "80% de asistencia y proyecto final
+                            aprobado".
                         </span>
                     </div>
                 </div>
-                <input type="text" [(ngModel)]="capacitacion.criteriosEvaluacion" name="evaluacion">
+                <input type="text" [(ngModel)]="capacitacion.criteriosevaluacion" name="evaluacion">
             </div>
 
             <div class="campo">
@@ -189,6 +194,19 @@
                 <input type="text" [(ngModel)]="capacitacion.instructores" name="instructor">
             </div>
 
+            <div class="campo">
+                <div class="label-with-tooltip">
+                    <label>Ubicacion y disponibilidad</label>
+                    <div class="tooltip-container">
+                        <i class="info-icon">?</i>
+                        <span class="tooltip-text">
+                            Especifique el lugar y donde estara disponible el curso o capacitacion.
+                        </span>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="capacitacion.disponibilidad" name="disponibilidad">
+            </div>
+
             <div class="campo campo-full">
                 <div class="label-with-tooltip">
                     <label>Documento de autorización institucional</label>
@@ -203,9 +221,160 @@
             </div>
 
             <div class="contenedor-btn">
-                <button class="btn-guardar" type="submit">Guardar registro</button>
+                <button *ngIf="!editando" class="btn-guardar" type="submit">
+                    Guardar registro
+                </button>
+
+                <div *ngIf="editando" style="display: flex; gap: 15px; justify-content: center;">
+                    <button class="btn-guardar" type="submit" style="background-color:  #003366;">
+                        Actualizar Registro
+                    </button>
+
+                    <button type="button" (click)="cancelarEdicion()" class="btn-guardar"
+                        style="background-color:  #003366;">
+                        Cancelar
+                    </button>
+                </div>
             </div>
 
         </form>
+
+
+
+
+
+    </div>
+</div>
+
+<hr style="margin: 40px 0; border: 0; border-top: 2px solid #eee;">
+
+<div class="contenedor" style="padding-top: 0;">
+    <div class="card-form">
+        <h2 style="color: #d97706;">Solicitudes de Inscripción Pendientes</h2>
+
+        <div *ngIf="listaSolicitudes.length === 0" class="no-data"
+            style="text-align: center; padding: 20px; color: #666;">
+            <p>No hay alumnos esperando aprobación.</p>
+        </div>
+
+        <table class="table" *ngIf="listaSolicitudes.length > 0"
+            style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                    <th style="padding: 12px; text-align: left;">Alumno</th>
+                    <th style="padding: 12px; text-align: left;">Curso Solicitado</th>
+                    <th style="padding: 12px; text-align: left;">Contacto</th>
+                    <th style="padding: 12px; text-align: center;">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let sol of listaSolicitudes" style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 12px;"><strong>{{ sol.nombreAlumno }}</strong></td>
+                    <td style="padding: 12px;">{{ sol.capacitacion.nombre }}</td>
+                    <td style="padding: 12px;">
+                        {{ sol.emailAlumno }}<br>
+                        <small style="color:#666">{{ sol.telefonoAlumno }}</small>
+                    </td>
+                    <td style="padding: 12px; text-align: center;">
+                        <button (click)="abrirModalAceptar(sol)" class="btn-guardar"
+                            style="padding: 8px 16px; background:  #003366; cursor: pointer;">
+                            ✓ Aceptar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarModalAceptacion"
+    style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+
+    <div class="modal-container"
+        style="background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 500px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+            <h3 style="margin: 0; color: #333;">Confirmar Inscripción</h3>
+            <button (click)="cerrarModal()"
+                style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+        </div>
+
+        <p style="margin-bottom: 20px;">
+            Se enviará un correo automático a:
+            <strong style="color: #2563eb;">{{ solicitudSeleccionada?.emailAlumno }}</strong>
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+
+            <div class="campo-form">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px;">Fecha de Inicio:</label>
+                <input type="date" [(ngModel)]="datosAceptacion.fechaInicio"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+
+            <div class="campo-form">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px;">Hora:</label>
+                <input type="time" [(ngModel)]="datosAceptacion.hora"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+
+            <div class="campo-form">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px;">Lugar / Enlace:</label>
+                <input type="text" [(ngModel)]="datosAceptacion.lugar" placeholder="Ej. Sala 3 o Link de Zoom"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+
+            <div class="campo-form">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px;">Mensaje Adicional:</label>
+                <textarea [(ngModel)]="datosAceptacion.mensajeAdicional" rows="3"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+            </div>
+
+            <div style="text-align: right; margin-top: 20px;">
+                <button (click)="cerrarModal()"
+                    style="padding: 10px 20px; background: #6b7280; color: white; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">
+                    Cancelar
+                </button>
+                <button (click)="confirmarAceptacion()" [disabled]="procesando"
+                    style="padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    {{ procesando ? 'Enviando...' : 'Confirmar y Enviar' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contenedor" style="margin-top: 20px;">
+    <div class="card-form">
+        <h2 style="color: #2563eb;">Cursos y Capacitaciones Registradas</h2>
+
+        <table class="table" style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+            <thead>
+                <tr style="background-color: #f1f5f9; border-bottom: 2px solid #cbd5e1;">
+                    <th style="padding: 12px; text-align: left;">Nombre</th>
+                    
+                    <th style="padding: 12px; text-align: left;">Instructor</th>
+                    <th style="padding: 12px; text-align: center;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let curso of listaCapacitaciones" style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;"><strong>{{ curso.nombre }}</strong></td>
+                 
+                    <td style="padding: 12px;">{{ curso.instructores }}</td>
+                    <td style="padding: 12px; text-align: center; display: flex; gap: 8px; justify-content: center;">
+                        <button (click)="prepararEdicion(curso)"
+                            style="background: #fbbf24; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">
+                            Editar
+                        </button>
+                        <button (click)="eliminarCurso(curso.id)"
+                            style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
