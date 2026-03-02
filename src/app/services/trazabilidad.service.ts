@@ -1,34 +1,58 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { API_BASE } from '../config/api-base';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrazabilidadService {
-  
-  private baseUrl = 'http://localhost:8080/api'; 
+
+  // Ajusta el path base del módulo según tu backend
+  private apiUrl = `${API_BASE}`;
 
   constructor(private http: HttpClient) { }
 
-  
+  // --- PRODUCTORES ---
+
   guardarProductor(productor: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/productores`, productor);
+    return this.http.post(`${this.apiUrl}/productores`, productor);
   }
 
-  
-  obtenerCertificaciones(mercado: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/certificaciones/mercado/${mercado}`);
+  // --- CERTIFICACIONES ---
+
+  obtenerCertificacionesPorMercado(mercado: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/certificaciones/mercado/${encodeURIComponent(mercado)}`);
   }
 
- 
-  calcularEvaluacion(productorId: number, certificacionId: number, aciertos: number, total: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/evaluaciones/calcular?productorId=${productorId}&certificacionId=${certificacionId}&aciertos=${aciertos}&total=${total}`, {});
+  // --- EVALUACIONES ---
+
+  /**
+   * Calcula evaluación (recomendación: mandar params con HttpParams)
+   */
+  calcularEvaluacion(
+    productorId: number,
+    certificacionId: number,
+    aciertos: number,
+    total: number
+  ): Observable<any> {
+
+    const params = new HttpParams()
+      .set('productorId', productorId)
+      .set('certificacionId', certificacionId)
+      .set('aciertos', aciertos)
+      .set('total', total);
+
+    return this.http.post(`${this.apiUrl}/evaluaciones/calcular`, {}, { params });
   }
 
-  
-  descargarPdf(evaluacionId: number) {
-    // Abre el endpoint en una nueva pestaña para disparar la descarga directa
-    window.open(`${this.baseUrl}/evaluaciones/${evaluacionId}/pdf`, '_blank');
+  /**
+   * Descarga el PDF como archivo (sin abrir pestañas)
+   * Devuelve un Blob para que el componente decida cómo guardarlo.
+   */
+  descargarPdf(evaluacionId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/evaluaciones/${evaluacionId}/pdf`, {
+      responseType: 'blob'
+    });
   }
 }
