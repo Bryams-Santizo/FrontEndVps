@@ -1,0 +1,16 @@
+.navbar-superior { background: #fff; border-bottom: 3px solid #003b6f; padding: 5px 20px; }
+.logo-container img { height: 60px; }
+
+.navbar-inferior { background: #003b6f; color: #fff; padding: 10px 20px; font-weight: bold; }
+
+
+.container {
+  padding: 30px;
+  background-color: #f8f9fa;
+}
+
+/* ===== HEADER ===== */
+.header-prod {
+  margin-bottom: 30px;
+  text-align: center;
+}
