@@ -1,0 +1,145 @@
+<nav class="navbar-superior shadow-sm">
+  <div class="logo-container">
+    <img src="/Imegenes/pleca_educacion_dic24.png" alt="Secretaría de Educación">
+    <img src="/Imegenes/pleca_tecnm.jpg" alt="TecNM">
+    <img src="/Imegenes/Imagen1.png" alt="Logo Regional">
+  </div>
+</nav>
+
+<nav class="navbar-inferior">
+  <div class="container-fluid">
+    <span class="titulo-navbar"><i class="bi bi-clipboard-check"></i> Módulo de Trazabilidad y Certificaciones</span>
+  </div>
+</nav>
+
+<div class="container mt-5 mb-5">
+  <div class="card shadow-sm p-4">
+
+    <div id="seccion-registro">
+      <h2 class="mb-4">Paso 1: Perfil Oficial del Productor</h2>
+      <fieldset [disabled]="pasoActual >= 2">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="fw-bold text-secondary">Nombre del Productor / Cooperativa</label>
+            <input [(ngModel)]="productor.nombreProductor" class="form-control" placeholder="Ej. Finca El Mirador SPR">
+          </div>
+          <div class="col-md-6">
+            <label class="fw-bold text-secondary">Nombre de la Finca</label>
+            <input [(ngModel)]="productor.nombreFinca" class="form-control" placeholder="Ej. El Mirador">
+          </div>
+          <div class="col-md-6">
+            <label class="fw-bold text-secondary">Ubicación (Estado/Municipio)</label>
+            <input [(ngModel)]="productor.ubicacion" class="form-control" placeholder="Ej. Soconusco, Chiapas">
+          </div>
+          <div class="col-md-6">
+            <label class="fw-bold text-secondary">Superficie (Hectáreas)</label>
+            <input type="number" [(ngModel)]="productor.hectareas" class="form-control" placeholder="0.0">
+          </div>
+          <div class="col-md-4">
+            <label class="fw-bold text-secondary">Altitud (msnm)</label>
+            <input type="number" [(ngModel)]="productor.altitudPromedio" class="form-control" placeholder="1200">
+          </div>
+          <div class="col-md-4">
+            <label class="fw-bold text-secondary">Volumen Anual (Quintales)</label>
+            <input type="number" [(ngModel)]="productor.volumenProduccion" class="form-control" placeholder="0.0">
+          </div>
+          <div class="col-md-4">
+            <label class="fw-bold text-secondary">Variedades Cultivadas</label>
+            <input [(ngModel)]="productor.variedades" class="form-control" placeholder="Typica, Bourbon...">
+          </div>
+        </div>
+        <div class="text-end mt-4">
+          <button class="btn btn-primary btn-lg px-5 shadow-sm" (click)="guardarPerfil()" *ngIf="pasoActual === 1">
+            <i class="bi bi-save"></i> Guardar y Continuar
+          </button>
+          <span class="badge bg-success fs-6 py-2 px-3" *ngIf="pasoActual >= 2">
+            <i class="bi bi-check-lg"></i> Datos Registrados
+          </span>
+        </div>
+      </fieldset>
+    </div>
+
+    <hr class="my-5" *ngIf="pasoActual >= 2">
+
+    <div *ngIf="pasoActual >= 2">
+      <h2 class="mb-4">Evaluacion de Certificaciones</h2>
+      
+      <div class="row mb-4">
+        <div class="col-md-12 mb-4">
+          <div class="card bg-institucional-azul text-center shadow-sm" (click)="iniciarDiagnosticoGeneral()" style="cursor: pointer;">
+            <div class="card-body py-4">
+              <h3 class="card-title fw-bold"><i class="bi bi-search"></i> Diagnóstico General Integral ADICAM</h3>
+              <p class="card-text fs-5">Evaluación técnica para determinar la normativa internacional más adecuada para su finca.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="text-center text-muted mb-3">O seleccione un mercado específico:</h4>
+      <div class="d-flex justify-content-center gap-3 mb-4 flex-wrap">
+        <button *ngFor="let mercado of mercados" 
+                class="btn btn-outline-dark px-4 py-2"
+                [class.active]="mercadoSeleccionado === mercado"
+                (click)="seleccionarMercado(mercado)">
+          {{ mercado }}
+        </button>
+      </div>
+
+      <div *ngIf="certificacionesDisponibles.length > 0" class="mt-4 animate__animated animate__fadeIn">
+        <h5 class="text-dark fw-bold mb-3">Normativas encontradas:</h5>
+        <div class="list-group shadow-sm">
+          <div *ngFor="let cert of certificacionesDisponibles" class="list-group-item d-flex justify-content-between align-items-center p-3">
+            <div>
+              <h5 class="mb-1 fw-bold">{{ cert.nombre }}</h5>
+              <p class="mb-0 text-muted small">{{ cert.descripcion }}</p>
+            </div>
+            <button class="btn btn-primary" (click)="iniciarTesting(cert)">Iniciar Evaluación</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-5" *ngIf="pasoActual >= 3">
+
+    <div *ngIf="pasoActual >= 3" id="seccion-testing">
+      <h2 class="mb-4 text-primary">Evaluación de - {{ certificacionSeleccionada.nombre }}</h2>
+      <div class="alert alert-light border-start border-4 border-primary shadow-sm mb-4">
+        <i class="bi bi-info-circle-fill text-primary"></i> Por favor, responda con veracidad para obtener un dictamen técnico preciso.
+      </div>
+
+      <div class="card mb-2 border-0 bg-light" *ngFor="let pregunta of preguntasActuales; let i = index">
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <span class="fs-5"><strong>{{ i + 1 }}.</strong> {{ pregunta.texto }}</span>
+          <div class="form-check form-switch ms-3">
+            <input class="form-check-input" type="checkbox" role="switch" [(ngModel)]="pregunta.respuesta" style="transform: scale(1.6); cursor: pointer;">
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <button class="btn btn-primary btn-lg px-5 fw-bold shadow-sm" (click)="finalizarTest()" *ngIf="pasoActual === 3">
+          <i class="bi bi-calculator"></i> Procesar Diagnóstico
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="pasoActual === 4" class="text-center animate__animated animate__fadeInUp">
+      <h2 class="mb-4">Resultados del Diagnóstico</h2>
+      
+      <div class="p-5 mb-4 rounded-3 shadow-sm" [ngClass]="resultadoFinal.porcentajeCumplimiento >= 80 ? 'bg-success text-white' : 'bg-secondary text-white'">
+        <span class="display-1 fw-bold">{{ resultadoFinal.porcentajeCumplimiento }}%</span>
+        <h4 class="mt-2">Índice de Cumplimiento Técnico</h4>
+      </div>
+
+      <div class="card p-4 my-4 text-start border-0 bg-light shadow-sm">
+        <h5 class="fw-bold border-bottom pb-2 text-primary">Dictamen de ADICAM:</h5>
+        <p class="mb-0 fs-5 mt-2 text-dark">{{ resultadoFinal.recomendacionesGeneradas }}</p>
+      </div>
+
+      <button class="btn btn-primary btn-lg w-100 py-3 shadow-sm fw-bold" (click)="descargarReporte()">
+        <i class="bi bi-file-earmark-pdf"></i> Descargar Reporte Técnico Oficial (PDF)
+      </button>
+    </div>
+
+  </div>
+</div>
