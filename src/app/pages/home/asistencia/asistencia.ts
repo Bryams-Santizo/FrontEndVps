@@ -19,13 +19,14 @@ export class AsistenciaComponent {
   campoOtro: string = '';
 
   // Objeto limpio para el productor
-  solicitud: any = {
-    nombreSolicitante: '',
-    tipoSolicitante: '',
-    problemaEspecifico: '',
-    ubicacion: '',
-    estatus: 'PENDIENTE' // El backend lo fuerza, pero es bueno tenerlo aquí
-  };
+ solicitud: any = {
+  nombreSolicitante: '',
+  emailSolicitante: '', // <-- Inicializar
+  tipoSolicitante: '',
+  problemaEspecifico: '',
+  ubicacion: '',
+  estatus: 'PENDIENTE'
+};
 
   constructor(private asistenciaService: AsistenciaService) {}
 
