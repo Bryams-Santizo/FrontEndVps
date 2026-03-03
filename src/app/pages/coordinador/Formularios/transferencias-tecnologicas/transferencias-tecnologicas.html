@@ -172,41 +172,49 @@
         </div>
     </div>
 
-    <div class="card-table" style="margin-top: 40px;">
-        <h3>Registros Almacenados</h3>
-        <div class="table-responsive">
-            <table class="tabla-gestion">
-                <thead>
-                    <tr>
-                        <th>Tecnología</th>
-                        <th>Tipo</th>
-                        <th>Responsable</th>
-                        <th>Archivos</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of listaTransferencias">
-                        <td>{{ item.nombreTecnologia }}</td>
-                        <td>{{ item.tipo }}</td>
-                        <td>{{ item.responsable }}</td>
-                        <td class="col-archivos">
-                            <span [title]="item.documentoPath ? 'Documento cargado' : 'Sin documento'" 
-                                  [class]="item.documentoPath ? 'icon-file active' : 'icon-file'">📄</span>
-                            <span [title]="item.cartaPath ? 'Carta cargada' : 'Sin carta'" 
-                                  [class]="item.cartaPath ? 'icon-file active' : 'icon-file'">✉️</span>
-                        </td>
-                        <td class="col-acciones">
-                            <button class="btn-edit" (click)="prepararEdicion(item)">Editar</button>
-                            <button class="btn-delete" (click)="eliminarRegistro(item.id)">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr *ngIf="listaTransferencias.length === 0">
-                        <td colspan="5" style="text-align: center; padding: 20px;">No hay registros disponibles.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
 
+</div>
+<div class="card-table">
+    <div class="card-header">
+        <h3>Registros Almacenados</h3>
+    </div>
+    <div class="table-responsive">
+        <table class="tabla-gestion">
+            <thead>
+                <tr>
+                    <th>Tecnología</th>
+                    <th>Tipo</th>
+                    <th>Responsable</th>
+                    <th class="text-center">Archivos</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listaTransferencias">
+                    <td><strong>{{ item.nombreTecnologia }}</strong></td>
+                    <td>{{ item.tipo }}</td>
+                    <td>{{ item.responsable }}</td>
+                    <td class="text-center">
+                        <span [title]="item.documentoPath ? 'Documento cargado' : 'Sin documento'" 
+                              [class]="item.documentoPath ? 'icon-file active' : 'icon-file'">📄</span>
+                        <span [title]="item.cartaPath ? 'Carta cargada' : 'Sin carta'" 
+                              [class]="item.cartaPath ? 'icon-file active' : 'icon-file'">✉️</span>
+                    </td>
+                    <td class="col-acciones-flex">
+                        <button class="btn-editar-colab" (click)="prepararEdicion(item)">
+                            Editar
+                        </button>
+                        <button class="btn-eliminar-colab" (click)="eliminarRegistro(item.id)">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="listaTransferencias.length === 0">
+                    <td colspan="5" class="no-data">
+                        No hay registros disponibles en este momento.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
