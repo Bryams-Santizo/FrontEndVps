@@ -1,5 +1,5 @@
+/* Contenedor Principal */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-
 :host {
     --azul-tecnm: #003b6f;
     --oro-tecnm: #B38E5D;
@@ -23,132 +23,174 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-/* Contenedor Principal */
+
+
+:host {
+    --azul-tecnm: #003b6f;
+    --oro-tecnm: #B38E5D;
+    --gris-fondo: #f3f4f6;
+    --blanco: #ffffff;
+}
+
 .tecnm-container {
-    padding: 2.5rem 5%;
+    padding: 2rem;
     background-color: var(--gris-fondo);
     min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
 }
 
+/* Grid más denso: tarjetas más pequeñas para ver más a la vez */
 .fichas-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
 }
 
-/* Card */
+/* Card Compacta */
 .ficha-institucional {
     background: var(--blanco);
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Importante para que el footer respete el redondeado */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    height: 450px; /* Altura fija para uniformidad */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
 }
 
+.ficha-institucional:hover {
+    transform: translateY(-5px);
+}
+
+/* Header más delgado */
 .ficha-header {
-    padding: 1.5rem 1.5rem 1rem;
-    border-bottom: 1px solid #f1f5f9;
+    padding: 1rem;
+    border-bottom: 2px solid var(--oro-tecnm);
 }
 
 .header-main {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.8rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 .tipo-badge {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    color: var(--azul-tecnm);
-    background: #e0f2fe;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
+    color: var(--blanco);
+    background: var(--azul-tecnm);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
     text-transform: uppercase;
 }
 
 .ubicacion-text {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--oro-tecnm);
 }
 
 .institucion-nombre {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 700;
-    color: var(--azul-tecnm); /* Texto en azul institucional */
+    color: var(--azul-tecnm);
     margin: 0;
+    display: -webkit-box;
+    
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-/* Contenido */
-.ficha-contenido { padding: 1.5rem; flex-grow: 1; }
+/* Contenido con scroll interno si es muy largo */
+.ficha-contenido { 
+    padding: 1rem; 
+    flex-grow: 1; 
+    overflow-y: auto; /* Permite scroll solo dentro de la tarjeta si hay mucho texto */
+}
 
-.seccion-info { margin-bottom: 1.5rem; }
+/* Scrollbar personalizado para las tarjetas */
+.ficha-contenido::-webkit-scrollbar { width: 4px; }
+.ficha-contenido::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+
+.seccion-info { margin-bottom: 1rem; }
 .seccion-info label {
     display: block;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    color: var(--azul-tecnm); /* Etiqueta en azul institucional */
+    color: #666;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .seccion-info p {
-    font-size: 0.9rem;
-    color: #333; /* Texto de lectura para contraste */
-    line-height: 1.6;
+    font-size: 0.85rem;
+    color: #333;
+    line-height: 1.4;
+    margin: 0;
 }
 
 .perfil-box {
-    background-color: #f8fafc;
-    padding: 1.2rem;
-    border-radius: 8px;
-    border-left: 4px solid var(--oro-tecnm);
+    background-color: #f1f5f9;
+    padding: 0.8rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--oro-tecnm);
 }
 
-/* Tabla Interna */
+/* Tabla interna más pequeña */
 .tabla-contenedor {
-    border: 1px solid #f1f5f9;
-    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin-top: 0.5rem;
 }
-.fila-tabla { display: flex; border-bottom: 1px solid #f1f5f9; }
+.fila-tabla { display: flex; border-bottom: 1px solid #e2e8f0; }
 .fila-tabla.single { border-bottom: none; }
-.celda { padding: 12px; flex: 1; }
-.celda:not(:last-child) { border-right: 1px solid #f1f5f9; }
+.celda { padding: 8px; flex: 1; text-align: center; }
+.celda:not(:last-child) { border-right: 1px solid #e2e8f0; }
 
-.label-tabla { display: block; font-size: 0.65rem; color: var(--azul-tecnm); font-weight: 700; text-transform: uppercase; }
-.valor-tabla { font-size: 0.9rem; font-weight: 600; color: var(--azul-tecnm); }
-.beneficios-highlight { color: #16a34a; }
+.label-tabla { font-size: 0.6rem; color: #666; font-weight: 700; }
+.valor-tabla { font-size: 0.8rem; font-weight: 700; color: var(--azul-tecnm); }
 
-/* Footer Azul Institucional #003b6f */
+/* Footer Fijo abajo */
 .ficha-footer {
-    padding: 1.2rem 1.5rem;
-    background: var(--azul-tecnm); /* Fondo Azul Institucional */
+    padding: 0.8rem 1rem;
+    background: var(--azul-tecnm);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #ffffff; /* Texto blanco para que resalte en el azul */
+    color: #ffffff;
 }
 
-.label-contacto { 
-    display: block; 
-    font-size: 0.65rem; 
-    color: rgba(255,255,255,0.8); /* Blanco translúcido para etiquetas */
-    font-weight: 700; 
+.nombre-contacto { font-size: 0.8rem; font-weight: 600; }
+.evidencias {
+    display: flex;
+    gap: 15px; /* Más espacio entre iconos */
+    align-items: center;
 }
 
-.nombre-contacto { 
-    font-size: 0.9rem; 
-    color: #ffffff; 
-    font-weight: 600; 
-}
-
-.evidencias { display: flex; gap: 10px; }
 .icon-doc { 
-    font-size: 1.2rem; 
-    filter: brightness(0) invert(1); /* Convierte los iconos a blanco */
-    opacity: 0.3; 
+    width: 24px; /* Tamaño fijo para el contenedor del SVG */
+    height: 24px;
+    color: #ffffff;
+    opacity: 0.15; /* Muy tenue si no hay archivo */
+    cursor: not-allowed;
+    transition: all 0.3s ease;
 }
-.icon-doc.file-on { opacity: 1; }
+
+
+
+.icon-doc svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Cuando el archivo existe */
+.icon-doc.file-on { 
+    opacity: 1; 
+    cursor: pointer;
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
+}
+
+.icon-doc.file-on:hover { 
+    transform: scale(1.15);
+    color: var(--oro-tecnm); /* Cambia a dorado al pasar el mouse */
+}
