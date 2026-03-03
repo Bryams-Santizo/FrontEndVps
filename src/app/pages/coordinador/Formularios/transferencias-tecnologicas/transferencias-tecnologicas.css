@@ -293,3 +293,109 @@ select:focus {
         justify-content: center; /* Botón centrado en móvil */
     }
 }
+
+/* =========================================================
+   ESTILO UNIFICADO (BASADO EN COLABORACIONES)
+========================================================= */
+
+.card-table {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    margin-top: 40px;
+}
+
+.card-table h3 {
+    color: #2563eb; /* El azul que usaste en el h2 */
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.tabla-gestion {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+/* Encabezado igual al de Colaboraciones */
+.tabla-gestion thead tr {
+    background-color: #f1f5f9;
+    border-bottom: 2px solid #cbd5e1;
+}
+
+.tabla-gestion th {
+    padding: 12px;
+    text-align: left;
+    color: #334155;
+    font-weight: 600;
+}
+
+/* Filas */
+.tabla-gestion td {
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #334155;
+    vertical-align: middle;
+}
+
+.text-center { text-align: center; }
+
+/* Contenedor de botones para que se vean juntos */
+.col-acciones-flex {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    padding: 12px;
+}
+
+/* BOTÓN EDITAR (Amarillo Colaboraciones) */
+.btn-editar-colab {
+    background: #fbbf24;
+    color: #000;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-editar-colab:hover {
+    background: #f59e0b;
+}
+
+/* BOTÓN ELIMINAR (Rojo Colaboraciones) */
+.btn-eliminar-colab {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-eliminar-colab:hover {
+    background: #dc2626;
+}
+
+/* Iconos de archivos */
+.icon-file {
+    margin: 0 4px;
+    opacity: 0.3;
+    font-size: 18px;
+}
+
+.icon-file.active {
+    opacity: 1;
+}
+
+/* Estado vacío */
+.no-data {
+    text-align: center;
+    padding: 20px !important;
+    color: #64748b;
+}
