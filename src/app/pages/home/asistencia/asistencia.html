@@ -1,9 +1,9 @@
 <nav class="navbar-superior">
-    <div class="logo-container">
-        <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
-        <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
-        <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
-    </div>
+  <div class="logo-container">
+    <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
+    <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
+    <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
+  </div>
 </nav>
 
 <nav class="navbar-inferior">
@@ -13,7 +13,7 @@
 
 <div class="form-container">
   <h2 class="titulo">Solicitud de Asistencia Técnica</h2>
-  <p class="instrucciones">Complete los siguientes datos para que el TecNM Frontera Comalapa pueda vincularlo con una institución especializada.</p>
+  <p class="instrucciones"></p>
 
   <section class="card-form">
     <h3 class="subtitulo">Datos del Solicitante</h3>
@@ -21,7 +21,7 @@
     <div class="form-grid">
       <div class="form-group full">
         <label>Nombre completo o contacto responsable:</label>
-        <input type="text" [(ngModel)]="solicitud.nombreSolicitante" name="nombreSolicitante" placeholder="Ej. Juan Pérez López">
+        <input type="text" [(ngModel)]="solicitud.nombreSolicitante" name="nombreSolicitante" placeholder="">
       </div>
 
       <div class="form-group ancho-50">
@@ -42,14 +42,29 @@
 
       <div class="form-group full">
         <label>Ubicación (Municipio, Localidad o Parcela):</label>
-        <input type="text" [(ngModel)]="solicitud.ubicacion" placeholder="Ej. Frontera Comalapa, Ejido Paso Hondo">
+        <input type="text" [(ngModel)]="solicitud.ubicacion" placeholder="">
       </div>
 
       <div class="form-group full">
         <label>Describa el problema o necesidad técnica:</label>
-        <textarea rows="4" [(ngModel)]="solicitud.problemaEspecifico" 
+        <textarea rows="4" [(ngModel)]="solicitud.problemaEspecifico"
           placeholder="Describa brevemente en qué necesita apoyo (plagas, fertilización, comercialización, etc.)"></textarea>
       </div>
+
+      <div class="form-group ancho-50">
+        <label>Correo Electrónico:</label>
+        <input type="email" [(ngModel)]="solicitud.emailSolicitante" name="emailSolicitante"
+          placeholder="">
+      </div>
+
+      <div class="form-group full">
+        <label>Telefono</label>
+        <input type="text" [(ngModel)]="solicitud.telefono" placeholder="">
+      </div>
+
+
+
+
     </div>
 
     <div class="contenedor-btn">
