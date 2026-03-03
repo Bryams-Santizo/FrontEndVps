@@ -1385,161 +1385,102 @@
     <!-- Cursos inicio-->
     <section id="cursos" class="py-5 bg-light font-montserrat">
         <div class="container">
+
             <div class="text-center mb-5 wow animate_animated animate_fadeIn">
                 <h2 class="display-5 fw-bold text-dark mb-3">
                     Cursos y Capacitación
                 </h2>
                 <p class="text-secondary mx-auto lead" style="max-width: 750px;">
-                    cursos dedicados al mundo del café,
-                    diseñados para fortalecer los conocimientos técnicos y prácticos de estudiantes y productores.
+                    Cursos dedicados al mundo del café.
                 </p>
             </div>
 
-            <div class="row g-4">
-
-                <div class="col-md-6 col-lg-4 wow animate_animated animate_slideInLeft">
-                    <div class="card-premium-effect shadow-lg h-100 position-relative overflow-hidden cursor-pointer"
-                        onclick="document.getElementById('enlace1').click()">
-                        <div class="date-badge">
-                            <span class="day">Día</span>
-                            <span class="month">12 de Noviembre</span>
-                        </div>
-
-                        <img src="/Imegenes/CuroB.png" class="card-img-top portfolio-img img-fluid"
-                            alt="Curso de Sensores IoT para Café">
-
-                        <div class="content-box p-3">
-                            <h5 class="fw-bolder mb-1 text-primary-accent">Barismo y arte latte</h5>
-                            <p class="text-secondary mb-0">Aprende las técnicas profesionales de preparación y
-                                decoración del café.</p>
-                            <span class="badge bg-primary-soft text-primary-accent fw-medium rounded-pill mt-2">
-                                <i class="bi bi-calendar-check me-1"></i> Más de 500 inscritos
-                            </span>
-                        </div>
-                        <div
-                            class="card-overlay-content bg-dark-premium text-white d-flex flex-column justify-content-center p-4">
-                            <h5 class="fw-bold mb-3 border-bottom pb-2">
-                                <i class="bi bi-pc-display me-2"></i> Modalidad: Híbrida (presencial y en línea)
-                            </h5>
-
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="bi bi-calendar-check me-3 fs-5"></i>
-                                <div>
-                                    <small class="text-secondary-subtle">FECHA</small>
-                                    <p class="mb-0 fw-bold">12 de Noviembre</p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-clock me-3 fs-5"></i>
-                                <div>
-                                    <small class="text-secondary-subtle">HORA</small>
-                                    <p class="mb-0 fw-bold">10:00 a.m. – 1:00 p.m.</p>
-                                </div>
-                            </div>
-
-                            <a href="#" class="btn btn-lg btn-accent-fill rounded-pill mt-3 fw-bold" id="enlace1">
-                                ¡Regístrate Ahora! <i class="bi bi-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
+            <div *ngIf="cargandoCapacitaciones" class="text-center p-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
                 </div>
+            </div>
 
+            <div *ngIf="!cargandoCapacitaciones && capacitaciones.length === 0" class="text-center p-5">
+                <p class="text-muted">No hay capacitaciones o cursos activas en este momento.</p>
+            </div>
 
+            <div *ngIf="!cargandoCapacitaciones && capacitaciones.length > 0" class="row g-4">
 
-                <div class="col-md-6 col-lg-4 wow animate_animated animate_slideInLeft">
-                    <div class="card-premium-effect shadow-lg h-100 position-relative overflow-hidden cursor-pointer"
-                        onclick="document.getElementById('enlace1').click()">
+                <div *ngFor="let curso of capacitaciones; let i = index" class="col-md-6 col-lg-4 wow animate_animated"
+                    [ngClass]="{'animate_slideInLeft': i === 0, 'animate_fadeInUp': i === 1, 'animate_slideInRight': i === 2}">
 
-                        <div class="date-badge">
-                            <span class="day">Día</span>
-                            <span class="month">15 de Diciembre</span>
+                    <div
+                        class="card-premium-effect shadow-lg h-100 position-relative overflow-hidden cursor-pointer bg-white rounded-3">
+
+                        <div class="date-badge" style="z-index: 10;">
+                            <span class="day">{{ obtenerFechaCurso(curso.id).getDate() }}</span>
+                            <span class="month">{{ obtenerFechaCurso(curso.id) | date:'MMM' }}</span>
                         </div>
-                        <img src="/Imegenes/Catacion.png" class="card-img-top portfolio-img img-fluid"
-                            alt="Curso de Sensores IoT para Café">
 
-                        <div class="content-box p-3">
-                            <h5 class="fw-bolder mb-1 text-primary-accent">Catación Profesional de Café</h5>
-                            <p class="text-secondary mb-0">Descubre cómo evaluar el aroma, sabor y cuerpo del café.</p>
-                            <span class="badge bg-primary-soft text-primary-accent fw-medium rounded-pill mt-2">
-                                <i class="bi bi-calendar-check me-1"></i> Más de 200 inscritos
-                            </span>
+                        <div class="card-header-visual d-flex align-items-center justify-content-center"
+                            style="height: 220px; background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);">
+                            <i class="bi bi-mortarboard-fill text-secondary opacity-25" style="font-size: 5rem;"></i>
                         </div>
-                        <div
-                            class="card-overlay-content bg-dark-premium text-white d-flex flex-column justify-content-center p-4">
-                            <h5 class="fw-bold mb-3 border-bottom pb-2">
-                                <i class="bi bi-pc-display me-2"></i> Modalidad: Híbrida (presencial y en línea)
-                            </h5>
 
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="bi bi-calendar-check me-3 fs-5"></i>
-                                <div>
-                                    <small class="text-secondary-subtle">FECHA</small>
-                                    <p class="mb-0 fw-bold">15 de Diciembre</p>
+                        <div class="content-box p-4">
+                            <h5 class="fw-bolder mb-2 text-primary-accent text-truncate">{{ curso.nombre }}</h5>
+
+                            <p class="text-secondary mb-3 small">
+                                {{ curso.contenido.length > 80 ? (curso.contenido | slice:0:80) + '...' :
+                                curso.contenido }}
+                            </p>
+
+                            <div class="mb-3">
+                                <div class="mb-2"> <span
+                                        class="badge bg-primary-soft text-primary-accent fw-medium rounded-pill">
+                                        <i class="bi bi-people-fill me-1"></i> {{ curso.publicoObjetivo }}
+                                    </span>
+                                </div>
+                                <div> <small class="text-muted fw-bold">
+                                        {{ curso.tipo }}
+                                    </small>
                                 </div>
                             </div>
-
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-clock me-3 fs-5"></i>
-                                <div>
-                                    <small class="text-secondary-subtle">HORA</small>
-                                    <p class="mb-0 fw-bold">9:00 a.m. – 12:30 p.m.</p>
-                                </div>
-                            </div>
-
-                            <a href="#" class="btn btn-lg btn-accent-fill rounded-pill mt-3 fw-bold" id="enlace1">
-                                ¡Regístrate Ahora! <i class="bi bi-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-md-6 col-lg-4 wow animate_animated animate_slideInRight">
-                    <div class="card-premium-effect shadow-lg h-100 position-relative overflow-hidden cursor-pointer"
-                        onclick="document.getElementById('enlace3').click()">
-                        <div class="date-badge">
-                            <span class="day">Día</span>
-                            <span class="month">08 de Enero</span>
-                        </div>
-                        <img src="/Imegenes/cultivo.png" class="card-img-top portfolio-img img-fluid"
-                            alt="Taller práctico de software">
-
-                        <div class="card-title-box p-3 text-center">
-                            <h5 class="fw-bolder mb-2 text-primary-accent">Cultivo y Manejo del Cafeto</h5>
-                            <p class="text-secondary mb-0">Conoce las mejores prácticas para sembrar, nutrir y cosechar
-                                plantas de café.</p>
-                            <span class="badge bg-primary-soft text-primary-accent fw-medium rounded-pill mt-2">
-                                <i class="bi bi-calendar-check me-1"></i> Más de 100 inscritos
-                            </span>
                         </div>
 
                         <div
-                            class="card-overlay-content bg-dark-premium text-white d-flex flex-column justify-content-center p-4">
+                            class="card-overlay-content bg-primary-custom  text-white d-flex flex-column justify-content-center p-4">
                             <h5 class="fw-bold mb-3 border-bottom pb-2">
-                                <i class="bi bi-graph-up-arrow me-2"></i> Modalidad: Híbrida (presencial y en línea)
+                                <i class="bi bi-pc-display me-2"></i> {{ curso.disponibilidad }}
                             </h5>
 
                             <div class="d-flex align-items-center mb-2">
-                                <i class="bi bi-calendar-check me-3 fs-5"></i>
+                                <i class="bi bi-clock me-3 fs-5 text-warning"></i>
                                 <div>
-                                    <small class="text-secondary-subtle">FECHA</small>
-                                    <p class="mb-0 fw-bold">08 de Enero</p>
+                                    <small class="text-secondary-subtle" style="font-size: 0.75rem;">DURACIÓN</small>
+                                    <p class="mb-0 fw-bold">{{ curso.duracion }}</p>
                                 </div>
                             </div>
 
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-pin-map-fill me-3 fs-5"></i>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-currency-dollar me-3 fs-5 text-success"></i>
                                 <div>
-                                    <small class="text-secondary-subtle">HORA</small>
-                                    <p class="mb-0 fw-bold">8:00 a.m. – 12:00 p.m.</p>
+                                    <small class="text-secondary-subtle" style="font-size: 0.75rem;">COSTO</small>
+                                    <p class="mb-0 fw-bold">{{ curso.costo }}</p>
                                 </div>
                             </div>
 
-                            <a href="#" class="btn btn-lg btn-accent-fill rounded-pill mt-3 fw-bold" id="enlace3">
-                                ¡Regístrate Ahora! <i class="bi bi-ticket-fill"></i>
+                            <div class="d-flex align-items-start mb-3" *ngIf="curso.requisitos">
+                                <i class="bi bi-info-circle me-3 fs-5 text-info"></i>
+                                <div>
+                                    <small class="text-secondary-subtle" style="font-size: 0.75rem;">REQUISITOS</small>
+                                    <p class="mb-0 small lh-sm">{{ curso.requisitos | slice:0:50 }}...</p>
+                                </div>
+                            </div>
+
+                            <a [routerLink]="['/capacitacion']"
+                                class="btn btn-light rounded-pill mt-auto fw-bold text-primary-accent w-100">
+                                Ver Detalles <i class="bi bi-arrow-right ms-1"></i>
                             </a>
+
                         </div>
+
                     </div>
                 </div>
 
@@ -1551,62 +1492,104 @@
 
     <!-- Sitios-->
 
-    <section class="partners-section py-5">
+<section id="colaboraciones" class="py-5 bg-white font-montserrat">
         <div class="container">
+
             <div class="text-center mb-5 wow animate__animated animate__fadeIn">
                 <h2 class="display-5 fw-bold text-dark mb-3">
-                    Asociados y Colaboradores
+                    Instituciones y empresas que fortalecen el sector cafetalero
                 </h2>
-                <p class="text-muted">Instituciones y empresas que fortalecen nuestro sector.</p>
             </div>
 
-            <div class="row g-4 justify-content-center">
-                <div class="col-lg-4 col-md-6">
-                    <div class="partner-card animate__animated animate__zoomIn">
-                        <img src="/Imegenes/Sistema.png" alt="Fondo Institución" class="partner-bg">
-                        <div class="partner-content">
-                            <img src="/Imegenes/SADER.jpg" alt="Logo SADER" class="partner-logo">
-                            <div class="partner-info">
-                                <h3>Institución</h3>
-                                <p>Institución del Gobierno de México que impulsa el desarrollo del campo.</p>
-                                <span class="more-info-btn">Más información</span>
+            <div *ngIf="cargandoColaboraciones" class="text-center p-5">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+            </div>
+
+            <div *ngIf="!cargandoColaboraciones && colaboraciones.length === 0" class="text-center p-5">
+                <p class="text-muted">No hay colaboraciones activas en este momento.</p>
+            </div>
+
+            <div *ngIf="!cargandoColaboraciones && colaboraciones.length > 0" class="row g-4">
+
+                <div *ngFor="let col of colaboraciones; let i = index"
+                    class="col-md-6 col-lg-4 wow animate__animated animate__fadeInUp"
+                    [attr.data-wow-delay]="(i * 0.2) + 's'">
+
+                    <div
+                        class="card-premium-effect shadow-lg h-100 position-relative overflow-hidden cursor-pointer bg-white rounded-3">
+
+                        <div class="date-badge bg-primary-accent"
+                            style="z-index: 10; width: 80px; height: 80px; border-radius: 0 0 40px 0;">
+                            <span class="month" style="font-size: 0.7rem; margin-top: 15px;">ESTADO</span>
+                            <span class="day" style="font-size: 0.9rem;">{{ col.estado | uppercase | slice:0:3 }}</span>
+                        </div>
+
+                        <div class="card-header-visual d-flex align-items-center justify-content-center"
+                            style="height: 180px; background: linear-gradient(135deg, #f1f3f5 0%, #e9ecef 100%);">
+                            <i class="bi bi-building-check text-primary opacity-25" style="font-size: 4.5rem;"></i>
+                        </div>
+
+                        <div class="content-box p-4">
+                            <h5 class="fw-bolder mb-2 text-primary-accent text-truncate"
+                                [title]="col.institucionSolicitante">
+                                {{ col.institucionSolicitante }}
+                            </h5>
+
+                            <p class="text-secondary mb-3 small" style="height: 4.5rem; overflow: hidden;">
+                                {{ col.descripcionNecesidad.length > 100 ? (col.descripcionNecesidad | slice:0:100) +
+                                '...' : col.descripcionNecesidad }}
+                            </p>
+
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <span class="badge bg-primary-soft text-primary-accent fw-medium rounded-pill">
+                                    <i class="bi bi-tag-fill me-1"></i> {{ col.tipoColaboracion }}
+                                </span>
                             </div>
                         </div>
+
+                        <div
+                            class="card-overlay-content bg-primary-custom  text-white d-flex flex-column justify-content-center p-4">
+                            <h6 class="text-warning fw-bold text-uppercase small mb-3">Detalles de Vinculación</h6>
+
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-people me-3 fs-5 text-info"></i>
+                                <div>
+                                    <small class="text-secondary-subtle"
+                                        style="font-size: 0.7rem;">REQUERIMIENTO</small>
+                                    <p class="mb-0 fw-bold small">{{ col.numeroEstudiantes }} Participantes</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-calendar-range me-3 fs-5 text-success"></i>
+                                <div>
+                                    <small class="text-secondary-subtle" style="font-size: 0.7rem;">DURACIÓN</small>
+                                    <p class="mb-0 fw-bold small">{{ col.duracion }}</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-4">
+                                <i class="bi bi-person-badge me-3 fs-5 text-warning"></i>
+                                <div>
+                                    <small class="text-secondary-subtle" style="font-size: 0.7rem;">CONTACTO</small>
+                                    <p class="mb-0 fw-bold small">{{ col.personaContacto }}</p>
+                                </div>
+                            </div>
+
+                            <a (click)="verColaboracion()"
+                                class="btn btn-outline-light rounded-pill mt-auto fw-bold w-100">
+                                Ver más <i class="bi bi-plus-lg ms-1"></i>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="partner-card animate__animated animate__zoomIn" data-wow-delay="0.2s">
-                        <img src="/Imegenes/Suelo.png" alt="Fondo Organización" class="partner-bg">
-                        <div class="partner-content">
-                            <img src="/Imegenes/AMECAFE.jpg" alt="Logo AMECAFE" class="partner-logo">
-                            <div class="partner-info">
-                                <h3>Organización</h3>
-                                <p>Organización que agrupa a todos los actores del sector cafetalero (productores,
-                                    tostadores, exportadores, etc.).</p>
-                                <span class="more-info-btn">Más información</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6">
-                    <div class="partner-card animate__animated animate__zoomIn" data-wow-delay="0.4s">
-                        <img src="/Imegenes/Suelo.png" alt="Fondo Empresa" class="partner-bg">
-                        <div class="partner-content">
-                            <img src="/Imegenes/LogoEmpresa.jpg" alt="Logo Empresa" class="partner-logo">
-                            <div class="partner-info">
-                                <h3>Empresa</h3>
-                                <p>Innovación tecnológica aplicada al beneficio del café.</p>
-                                <span class="more-info-btn">Más información</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
-
 
     <footer class="footer-section bg-primary-custom text-white py-5">
         <div class="container">
