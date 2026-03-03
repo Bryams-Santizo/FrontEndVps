@@ -147,18 +147,20 @@
                 <input type="text" [(ngModel)]="colaboracion.personaContacto" name="personaContacto" required>
             </div>
 
-            <div class="campo campo-full">
+           <div class="campo campo-full">
                 <div class="label-with-tooltip">
                     <label>Documentos adjuntos</label>
                     <div class="tooltip-container">
                         <i class="info-icon">?</i>
                         <span class="tooltip-text">
-                            Archivos complementarios relacionados con la necesidad o proyecto (ej: bases, requerimientos
-                            técnicos).
+                            Archivos complementarios relacionados con la necesidad o proyecto (ej: bases, requerimientos técnicos).
                         </span>
                     </div>
                 </div>
                 <input type="file" (change)="onFileChange($event, 'documentosAdjuntos')">
+                <small *ngIf="editandoId && colaboracion.documentosAdjuntos" style="color: #2563eb; margin-top: 5px; display: block;">
+                    Archivo actual: <strong>{{ colaboracion.documentosAdjuntos }}</strong> (Sube uno nuevo si deseas reemplazarlo)
+                </small>
             </div>
 
             <div class="campo campo-full">
@@ -172,13 +174,74 @@
                     </div>
                 </div>
                 <input type="file" (change)="onFileChange($event, 'cartaIntencion')">
+                <small *ngIf="editandoId && colaboracion.cartaIntencion" style="color: #2563eb; margin-top: 5px; display: block;">
+                    Archivo actual: <strong>{{ colaboracion.cartaIntencion }}</strong> (Sube uno nuevo si deseas reemplazarlo)
+                </small>
             </div>
 
         </div>
 
         <div class="contenedor-btn">
-            <button class="btn-guardar" (click)="guardarDatos()">Guardar solicitud</button>
+            <button *ngIf="!editandoId" class="btn-guardar" (click)="guardarDatos()">
+                Guardar solicitud
+            </button>
+
+            <div *ngIf="editandoId" style="display: flex; gap: 15px; justify-content: flex-end;">
+                <button class="btn-guardar" (click)="guardarDatos()" style="background-color: #003366;">
+                    Actualizar Registro
+                </button>
+
+                <button type="button" (click)="cancelarEdicion()" class="btn-guardar" style="background-color: #6b7280;">
+                    Cancelar
+                </button>
+            </div>
         </div>
+
+        </div>
+
+        
     </div>
 
+
+<div class="contenedor" style="margin-top: 20px;">
+    <div class="card-form">
+        <h2 style="color: #2563eb;">Registros de Colaboraciones</h2>
+
+        <table class="table" style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+            <thead>
+                <tr style="background-color: #f1f5f9; border-bottom: 2px solid #cbd5e1;">
+                    <th style="padding: 12px; text-align: left;">Institución Solicitante</th>
+                    <th style="padding: 12px; text-align: left;">Tipo</th>
+                    <th style="padding: 12px; text-align: left;">Estado</th>
+                    <th style="padding: 12px; text-align: left;">Duración</th>
+                    <th style="padding: 12px; text-align: center;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listaColaboraciones" style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 12px;"><strong>{{ item.institucionSolicitante }}</strong></td>
+                    <td style="padding: 12px;">{{ item.tipoColaboracion }}</td>
+                    <td style="padding: 12px;">{{ item.estado }}</td>
+                    <td style="padding: 12px;">{{ item.duracion }}</td>
+                    
+                    <td style="padding: 12px; text-align: center; display: flex; gap: 8px; justify-content: center;">
+                        <button (click)="editarColaboracion(item)"
+                            style="background: #fbbf24; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">
+                            Editar
+                        </button>
+                        <button (click)="eliminarColaboracion(item.id)"
+                            style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+                
+                <tr *ngIf="listaColaboraciones.length === 0" style="border-bottom: 1px solid #e2e8f0;">
+                    <td colspan="5" style="padding: 12px; text-align: center; color: #64748b;">
+                        No hay colaboraciones registradas.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
