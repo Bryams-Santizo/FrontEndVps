@@ -37,6 +37,11 @@
         Cursos ({{ actividad?.cursos?.length || 0 }})
       </button>
     </li>
+    <li class="nav-item">
+      <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-evidencias">
+        Evidencias ({{ evidencias.length || 0 }})
+      </button>
+    </li>
   </ul>
 
   <div class="tab-content shadow-sm p-4 bg-white rounded border">
@@ -52,15 +57,11 @@
           <div class="card h-100 border-primary shadow-sm">
 
 
-            
-<div class="file-preview-container" style="height: 180px; background: #eee;">
-  <img 
-    [src]="obtenerUrlImagen(p.imagenUrl)" 
-    class="card-img-top" 
-    [alt]="p.nombre"
-    style="height: 100%; width: 100%; object-fit: cover;"
-  />
-</div>
+
+            <div class="file-preview-container" style="height: 180px; background: #eee;">
+              <img [src]="obtenerUrlImagen(p.imagenUrl)" class="card-img-top" [alt]="p.nombre"
+                style="height: 100%; width: 100%; object-fit: cover;" />
+            </div>
 
 
 
@@ -94,7 +95,7 @@
               <p class="card-text mb-1 small"><strong>Lugar:</strong> {{ e.lugar }}</p>
               <div class="mt-2">
                 <span class="badge bg-warning text-dark">{{ e.tipo }}</span>
-                <small class="ms-2">📅 {{ e.fechaInicio }}</small>
+                <small class="ms-2">{{ e.fechaInicio }}</small>
               </div>
             </div>
           </div>
@@ -118,6 +119,48 @@
         </li>
       </ul>
     </div>
+
+  <div class="tab-pane fade" id="tab-evidencias">
+
+  <div *ngIf="evidencias.length === 0"
+       class="text-center py-4 text-muted">
+    <i class="bi bi-images display-4"></i>
+    <p>No hay evidencias registradas.</p>
+  </div>
+
+  <div class="row" *ngIf="evidencias.length > 0">
+    <div *ngFor="let ev of evidencias" class="col-md-4 mb-3">
+      <div class="card shadow-sm h-100">
+
+        <img
+          [src]="serverBase + '/uploads/' + ev.rutaImagen"
+          class="card-img-top"
+          style="height:180px; object-fit:cover;"
+        />
+
+        <div class="card-body">
+
+          <p class="small text-muted mb-1">
+            {{ ev.fechaRegistro | date:'mediumDate' }}
+          </p>
+
+          <p class="small fw-semibold">
+            {{ ev.actividad }}
+          </p>
+
+          <button class="btn btn-sm btn-outline-primary w-100"
+                  (click)="verDocumento(serverBase + '/uploads/' + ev.rutaImagen)">
+            Ver evidencia
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
 
   </div>
 </div>
