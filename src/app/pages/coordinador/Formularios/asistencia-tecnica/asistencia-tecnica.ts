@@ -19,16 +19,18 @@ export class AsistenciaTecnicaComponent implements OnInit {
   listaPendientes: any[] = [];
   listaCatalogo: any[] = [];
   solicitudSeleccionada: any = null;
+
+  
   
   // Datos para la vinculación
   tipoSeleccionado: string = '';
   idInstitucionSeleccionada: number | null = null;
 
   // Objeto que enviaremos al backend
-  asistencia: any = {
-    institucionId: null,
+ asistencia: any = {
+    institucionId: null, // Se puede quedar en null ya que escribirás el nombre
     tipoInstitucion: '',
-    nombreInstitucionViculada: '',
+    nombreInstitucionViculada: '', // Aquí se guarda lo que escribas
     tipoAsistencia: '',
     especialistas: '',
     costos: ''
@@ -43,7 +45,7 @@ export class AsistenciaTecnicaComponent implements OnInit {
     this.obtenerPendientes();
   }
 
-  obtenerPendientes() {
+obtenerPendientes() {
     this.asistenciaService.listarPendientes().subscribe(res => {
       this.listaPendientes = res;
     });
@@ -57,8 +59,10 @@ export class AsistenciaTecnicaComponent implements OnInit {
     }
   }
 
-  seleccionarParaResponder(solicitud: any) {
+ seleccionarParaResponder(solicitud: any) {
     this.solicitudSeleccionada = solicitud;
+    // Reiniciar el objeto de asistencia para una nueva vinculación
+    this.asistencia.nombreInstitucionViculada = '';
   }
 
   onInstitucionChange() {
@@ -71,15 +75,20 @@ export class AsistenciaTecnicaComponent implements OnInit {
   }
 
   confirmarVinculacion() {
-    if (!this.idInstitucionSeleccionada) {
-      alert("Selecciona una institución primero");
+    // Validamos que el usuario haya escrito algo
+    if (!this.asistencia.nombreInstitucionViculada || this.asistencia.nombreInstitucionViculada.trim() === '') {
+      alert("Por favor, escribe el nombre de la institución o equipo técnico.");
       return;
     }
 
-    this.asistenciaService.vincular(this.solicitudSeleccionada.id, this.asistencia).subscribe(res => {
-      alert("¡Productor vinculado con éxito!");
-      this.solicitudSeleccionada = null;
-      this.obtenerPendientes(); // Refrescar lista
+    // Llamada al servicio enviando el ID de la solicitud y los datos capturados
+    this.asistenciaService.vincular(this.solicitudSeleccionada.id, this.asistencia).subscribe({
+      next: (res) => {
+        alert("¡Productor vinculado con éxito! Se ha enviado la notificación por correo.");
+        this.solicitudSeleccionada = null;
+        this.obtenerPendientes(); // Refrescar lista
+      },
+      error: (err) => alert("Error al confirmar la vinculación.")
     });
   }
 }
