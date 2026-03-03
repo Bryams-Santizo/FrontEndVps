@@ -1,15 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Módulo necesario para Template-Driven Forms
+import { FormsModule } from '@angular/forms'; 
+import { ColaboracionService } from '../../../../services/colaboracion.service';
 
-// ===================================
-// INTERFAZ ACTUALIZADA
-// Se añade el campo de 'estado' (cambiado a camelCase)
-// ===================================
 export interface IRedColaboracion {
+  id?: number; 
   institucionSolicitante: string;
   tipoColaboracion: string;
-  especificacionOtroTipo?: string; // Nuevo campo para la especificación
+  especificacionOtroTipo?: string;
   descripcionNecesidad: string;
   numeroEstudiantes: string;
   perfilCompetencias: string;
@@ -17,8 +15,8 @@ export interface IRedColaboracion {
   beneficios: string;
   personaContacto: string;
   documentosAdjuntos: string;
-  cartaIntencion: string;
-  estado: string; // <-- CORREGIDO a camelCase
+  cartaIntencion: string;      
+  estado: string;
 }
 
 @Component({
@@ -28,23 +26,15 @@ export interface IRedColaboracion {
   templateUrl: './redes-colaboraciones.html',
   styleUrls: ['./redes-colaboraciones.css']
 })
-export class RedesColaboracionesComponent {
+export class RedesColaboracionesComponent implements OnInit {
 
-  // Se inicializa el nuevo campo
-  colaboracion: IRedColaboracion = {
-    institucionSolicitante: '',
-    tipoColaboracion: '',
-    especificacionOtroTipo: '', // Inicializar el campo
-    descripcionNecesidad: '',
-    numeroEstudiantes: '',
-    perfilCompetencias: '',
-    duracion: '',
-    beneficios: '',
-    personaContacto: '',
-    documentosAdjuntos: '',
-    cartaIntencion: '',
-    estado: '' // <-- CORREGIDO a camelCase
-  };
+  documentoArchivo: File | null = null;
+  cartaArchivo: File | null = null;
+
+  listaColaboraciones: any[] = [];
+  editandoId: number | null = null;
+
+  colaboracion: IRedColaboracion = this.inicializarColaboracion();
 
   tiposColaboracion: string[] = [
     'Servicio social',
@@ -52,44 +42,136 @@ export class RedesColaboracionesComponent {
     'Proyecto NODES',
     'Proyecto dual',
     'Investigación conjunta',
-    'Otro' // Añadido
+    'Otro'
   ];
 
-  // Propiedad calculada para controlar la visibilidad en el HTML
+  constructor(private colaboracionService: ColaboracionService) {}
+
+  ngOnInit(): void {
+    this.cargarColaboraciones();
+  }
+
   get mostrarOtroTipo(): boolean {
-    return this.colaboracion.tipoColaboracion === 'Otro';
+    return this.colaboracion.tipoColaboracion === 'Otro' || 
+           (!!this.colaboracion.tipoColaboracion && !this.tiposColaboracion.includes(this.colaboracion.tipoColaboracion) && this.colaboracion.tipoColaboracion !== '');
+  }
+
+  cargarColaboraciones(): void {
+    this.colaboracionService.getColaboraciones().subscribe({
+      next: (data) => this.listaColaboraciones = data,
+      error: (err) => console.error('Error al cargar datos', err)
+    });
   }
 
   onFileChange(event: any, field: 'documentosAdjuntos' | 'cartaIntencion'): void {
     const target = event.target as HTMLInputElement;
     if (target && target.files && target.files.length > 0) {
-      // Dado que el tipo de 'field' es solo 'documentosAdjuntos' o 'cartaIntencion',
-      // forzar el tipo aquí es seguro en el contexto de Angular.
-      this.colaboracion[field as keyof IRedColaboracion] = target.files[0].name;
+        const file = target.files[0];
+        
+        if (field === 'documentosAdjuntos') {
+          this.documentoArchivo = file;
+        } else if (field === 'cartaIntencion') {
+          this.cartaArchivo = file;
+        }
+        // Solo actualizamos el nombre visual si se sube un archivo nuevo
+        this.colaboracion[field] = file.name;
     }
   }
 
-  // Lógica para validar y guardar (MODIFICADO para consolidar el valor)
   guardarDatos(): void {
-    const datosAEnviar: IRedColaboracion = { ...this.colaboracion };
-
-    // 1. VALIDACIÓN BÁSICA (Asegurar que el campo de especificación no esté vacío si se seleccionó "Otro")
-    if (this.mostrarOtroTipo && !datosAEnviar.especificacionOtroTipo?.trim()) {
+    const datos = { ...this.colaboracion };
+    
+    if (this.mostrarOtroTipo && !datos.especificacionOtroTipo?.trim() && !this.editandoId) {
       alert('Por favor, especifique el tipo de colaboración "Otro".');
       return;
     }
 
-    // 2. CONSOLIDACIÓN: Si se seleccionó "Otro", usamos la especificación como valor final.
-    if (this.mostrarOtroTipo && datosAEnviar.especificacionOtroTipo) {
-      datosAEnviar.tipoColaboracion = datosAEnviar.especificacionOtroTipo;
+    if (this.mostrarOtroTipo && datos.especificacionOtroTipo) {
+      datos.tipoColaboracion = datos.especificacionOtroTipo;
     }
+    delete datos.especificacionOtroTipo;
 
-    // Opcional: Eliminar el campo auxiliar de la versión final
-    delete (datosAEnviar as any).especificacionOtroTipo;
+    // AHORA SIEMPRE CREAMOS UN FORMDATA (Tanto para Nuevo como para Editar)
+    const formData = new FormData();
+    formData.append('colaboracion', JSON.stringify(datos)); 
+    
+    if (this.documentoArchivo) formData.append('fileDocumento', this.documentoArchivo);
+    if (this.cartaArchivo) formData.append('fileCarta', this.cartaArchivo);
 
-    console.log('=== DATOS DE COLABORACIÓN CONSOLIDADOS ===');
-    console.log(datosAEnviar);
-    console.log('=====================================');
-    alert('Datos del módulo REDES / COLABORACIONES listos para enviar.');
+    if (this.editandoId) {
+      // Usamos un nuevo método del servicio que acepta FormData
+      this.colaboracionService.actualizarColaboracionFormData(this.editandoId, formData).subscribe({
+        next: () => {
+          alert('¡Actualizado con éxito!');
+          this.limpiarFormulario();
+          this.cargarColaboraciones(); 
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error al actualizar la información.');
+        }
+      });
+    } else {
+      this.colaboracionService.crearColaboracionFormData(formData).subscribe({
+        next: () => {
+          alert('¡Guardado con éxito!');
+          this.limpiarFormulario();
+          this.cargarColaboraciones(); 
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error al subir la información.');
+        }
+      });
+    }
+  }
+
+  editarColaboracion(item: any): void {
+    this.editandoId = item.id;
+    this.colaboracion = { ...item };
+    
+    if (!this.tiposColaboracion.includes(item.tipoColaboracion)) {
+      this.colaboracion.especificacionOtroTipo = item.tipoColaboracion;
+      this.colaboracion.tipoColaboracion = 'Otro';
+    }
+    
+    // Al editar, la ventana se desplaza hacia arriba para que el usuario vea el formulario
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // NUEVO: Método para el botón cancelar
+  cancelarEdicion(): void {
+    this.limpiarFormulario();
+  }
+
+  eliminarColaboracion(id: number): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este registro?')) {
+      this.colaboracionService.eliminarColaboracion(id).subscribe({
+        next: () => {
+          alert('Registro eliminado');
+          this.cargarColaboraciones();
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error al eliminar');
+        }
+      });
+    }
+  }
+
+  limpiarFormulario() {
+    this.colaboracion = this.inicializarColaboracion();
+    this.editandoId = null;
+    this.documentoArchivo = null;
+    this.cartaArchivo = null;
+  }
+
+  private inicializarColaboracion(): IRedColaboracion {
+    return {
+      institucionSolicitante: '', tipoColaboracion: '', especificacionOtroTipo: '',
+      descripcionNecesidad: '', numeroEstudiantes: '', perfilCompetencias: '',
+      duracion: '', beneficios: '', personaContacto: '', documentosAdjuntos: '',
+      cartaIntencion: '', estado: ''
+    };
   }
 }
