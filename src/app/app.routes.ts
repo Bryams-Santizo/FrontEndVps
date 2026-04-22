@@ -162,16 +162,6 @@ export const routes: Routes = [
         path: 'galeria',
         loadComponent: () => import('./pages/coordinador/galeria/galeria').then(m => m.GaleriaComponent)
       },
-      {
-        path: 'contacto',
-        loadComponent: () => import('./pages/coordinador/contacto/contacto').then(m => m.Contacto)
-      },
-
-    { path: 'mapas_regionales', 
-        loadComponent: () => import('./pages/coordinador/Formularios/mapas_regionales/mapas_regionales').then(m => m.MapaRegionalComponent) },
-
-    { path: 'participantes', 
-        loadComponent: () => import('./pages/coordinador/Formularios/participantes/participantes').then(m => m.ParticipantesComponent) },
         
     { path: 'capacitacion_certificacion', 
         loadComponent: () => import('./pages/coordinador/Formularios/capacitacion_certificacion/capacitacionC').then(m => m.CapacitacionesComponent) },
