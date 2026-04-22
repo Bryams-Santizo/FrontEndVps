@@ -29,25 +29,20 @@
                                     class="bi bi-people me-2"></i>Participantes</a></li>
 
 
-
-
-
-
-                        <li class="nav-item"><a class="nav-link text-white" routerLink="/verproyectos"><i
-                                    class="bi bi-folder2-open me-2"></i>Proyectos</a></li>
-
-
-
-
-
-
-                        <li class="nav-item"><a class="nav-link text-white" routerLink="/vermapas"><i
+                                <li class="nav-item"><a class="nav-link text-white" routerLink="/vermapas"><i
                                     class="bi bi-map me-2"></i>Mapas
                                 regionales</a></li>
+
+                        <li><a class="nav-link text-white" routerLink="/globo"><i
+                                    class="bi bi-globe me-2"></i>Mercado</a>
+                            
+                        <li class="nav-item"><a class="nav-link text-white" routerLink="/certificaciones"><i
+                         class="bi bi-people me-2"></i>Certificaciones</a></li>
+
+                       
                         <li class="nav-item"><a class="nav-link text-white" routerLink="/productores"><i
-                                    class="bi bi-person-badge me-2"></i>Productores</a></li>
-                        <li class="nav-item"><a class="nav-link text-white" routerLink="/capacitacion"><i
-                                    class="bi bi-mortarboard-fill me-2"></i>Capacitación</a></li>
+                                    class="bi bi-person-badge me-2"></i>Calculadora</a></li>
+
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMas" role="button"
@@ -55,14 +50,28 @@
                                 Más
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMas">
-                                <li><a class="dropdown-item" routerLink="/asistencia">Asistencia técnica</a></li>
-                                <li><a class="dropdown-item" routerLink="/redes">Redes y Colaboraciones </a></li>
 
-                                <li><a class="dropdown-item" routerLink="/tranferencia">Impulso Tecnológico</a></li>
-                                <li><a class="nav-link text-white" routerLink="/vereventos"><i
+                                 <li class="nav-item"><a class="dropdown-item" routerLink="/verproyectos"><i
+                                    class="bi bi-folder2-open me-2"></i>Proyectos</a></li>
+
+                                <li class="nav-item"><a class="dropdown-item" routerLink="/capacitacion"><i
+                                            class="bi bi-mortarboard-fill me-2"></i>Capacitación</a></li>
+
+                                <li><a class="dropdown-item" routerLink="/asistencia">
+                                        <i class="bi bi-headset me-2"></i>Asistencia técnica</a></li>
+
+                                <li><a class="dropdown-item" routerLink="/redes">
+                                        <i class="bi bi-diagram-3 me-2"></i>Redes y Colaboraciones</a></li>
+
+                                <li><a class="dropdown-item" routerLink="/tranferencia">
+                                        <i class="bi bi-rocket-takeoff me-2"></i>Impulso Tecnológico</a></li>
+
+                                <li><a class="dropdown-item" routerLink="/vereventos"><i
                                             class="bi bi-calendar-event me-2"></i>Eventos</a>
-                                <li><a class="nav-link text-white" routerLink="/verestadisticas"><i
+
+                                <li><a class="dropdown-item" routerLink="/verestadisticas"><i
                                             class="bi bi-bar-chart me-2"></i>Estadisticas</a>
+
                             </ul>
                         </li>
                     </ul>
@@ -80,35 +89,67 @@
     </nav>
 
     <!--Carrusel-->
-    <section class="hero-banner">
-        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+    <section id="eventos" class="py-5 bg-gray-soft font-montserrat">
+        <div class="container">
+
+            <!-- TÍTULO -->
+            <div class="text-center mb-5">
+                <h2 class="section-title">
+                    Importancia del café
+                </h2>
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="/Imegenes/Carrusel1.png" class="d-block w-100" alt="Investigación en Fincas">
 
-                </div>
-                <div class="carousel-item">
-                    <img src="/Imegenes/Carrusel2.png" class="d-block w-100" alt="Tecnología de Procesamiento">
+            <div class="row justify-content-center">
 
+                <!-- CARD 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="coffee-card">
+                        <img src="/Imegenes/mundial.jpg" alt="">
+                        <div class="coffee-overlay">
+                            <h5>El café de México en el mundo</h5>
+                            <p>Impacto del café mexicano en el mercado internacional.</p>
+                            <a [routerLink]="['/mapas']" class="btn-primary-custom">
+                                Ver más
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="/Imegenes/Carrusel3.png" class="d-block w-100" alt="Análisis de Bebida">
 
+                <!-- CARD 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="coffee-card">
+                        <img src="/Imegenes/nacional.jpeg" alt="">
+                        <div class="coffee-overlay">
+                            <h5>Panorama nacional</h5>
+                            <p>Producción, consumo y desarrollo del café en México.</p>
+                            <a [routerLink]="['/mapas']" class="btn-primary-custom">
+                                Ver más
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- CARD 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="coffee-card">
+                        <img src="/Imegenes/estatal.jpeg" alt="">
+                        <div class="coffee-overlay">
+                            <h5>El café en tu estado</h5>
+                            <p>Características y producción cafetalera local.</p>
+                            <a [routerLink]="['/mapas']" class="btn-primary-custom">
+                                Ver más
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
+
         </div>
     </section>
+
+
+
 
     <!-- FASES -->
     <section id="proyectos-aplicados" class="py-5 bg-white">
@@ -178,8 +219,9 @@
                                 <p>Se refiere a todas las actividades necesarias para iniciar una plantación de café:
                                     elegir variedades, preparar suelos y organizar cómo se sembrará.</p>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Métodos de selección de variedades')">✔ Métodos de selección de
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                    (click)="navegarAFiltro('Métodos de selección de variedades')">✔ Métodos de
+                                    selección de
                                     variedades</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
@@ -187,7 +229,7 @@
                                     ✔ Manejo genético y viveros
                                 </button>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Preparación de suelos')">✔ Preparación de suelos</button>
 
 
@@ -212,7 +254,8 @@
                                 <p>Son las prácticas para mantener el cafetal sano y productivo: fertilización,
                                     control de sombra, podas, riego y manejo de malezas.</p>
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Fertilización y nutrición')"> ✔ Fertilización y nutrición</button>
+                                    (click)="navegarAFiltro('Fertilización y nutrición')"> ✔ Fertilización y
+                                    nutrición</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Manejo de sombra')">✔ Manejo de sombra</button>
@@ -223,7 +266,7 @@
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Podas y renovación')">✔ Podas y renovación</button>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Manejo hídrico')">✔ Manejo hídrico</button>
 
                             </div>
@@ -245,17 +288,18 @@
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Roya')">✔ Roya</button>
 
-                               <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Broca')">✔ Broca</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Enfermedades foliares y sistémicas')">✔ Enfermedades foliares y
+                                    (click)="navegarAFiltro('Enfermedades foliares y sistémicas')">✔ Enfermedades
+                                    foliares y
                                     sistémicas</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Plagas secundarias')">✔ Plagas secundarias</button>
 
-                               <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Manejo integrado (MIP)')">✔ Manejo integrado (MIP)</button>
 
                             </div>
@@ -276,21 +320,25 @@
                                     (sensores, drones, sistemas agroforestales) para mejorar la producción y hacerlo de
                                     forma sostenible.</p>
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Sistemas agroforestales')">✔ Sistemas agroforestales</button>
+                                    (click)="navegarAFiltro('Sistemas agroforestales')">✔ Sistemas
+                                    agroforestales</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Tecnología para monitoreo agrícola')">✔ Tecnología para monitoreo
+                                    (click)="navegarAFiltro('Tecnología para monitoreo agrícola')">✔ Tecnología para
+                                    monitoreo
                                     agrícola</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Agricultura de precisión')">✔ Agricultura de precisión</button>
+                                    (click)="navegarAFiltro('Agricultura de precisión')">✔ Agricultura de
+                                    precisión</button>
 
-                               <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Modelos de predicción climática')">✔ Modelos de predicción
                                     climática</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('(sensores, drones, etc.)')">✔ Innovaciones en campo (sensores,
+                                    (click)="navegarAFiltro('(sensores, drones, etc.)')">✔ Innovaciones en campo
+                                    (sensores,
                                     drones, etc.)</button>
 
                             </div>
@@ -310,18 +358,20 @@
                                 <p>Administración del trabajo, costos, documentación y
                                     prácticas necesarias para que el productor gestione su finca de manera eficiente y
                                     formal.</p>
-                               <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Costos de producción')">✔ Costos de producción</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Administración de unidades productivas')">✔ Administración de unidades
+                                    (click)="navegarAFiltro('Administración de unidades productivas')">✔ Administración
+                                    de unidades
                                     productivas</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro(' Formalización')">✔ Formalización</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Buenas prácticas agrícolas certificables (BPA)')">✔ Buenas prácticas agrícolas
+                                    (click)="navegarAFiltro('Buenas prácticas agrícolas certificables (BPA)')">✔ Buenas
+                                    prácticas agrícolas
                                     certificables (BPA)</button>
 
                             </div>
@@ -455,7 +505,7 @@
                             <div class="modal-body">
                                 <p>Etapa crítica para preservar calidad y estabilidad del café pergamino.</p>
 
-                               <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Secado en patios')">✔ Secado en patios</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
@@ -496,12 +546,13 @@
                                     (click)="navegarAFiltro('Natural')">✔ Natural</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Fermentaciones controladas')">✔ Fermentaciones controladas</button>
+                                    (click)="navegarAFiltro('Fermentaciones controladas')">✔ Fermentaciones
+                                    controladas</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Micro-lotes')">✔ Micro-lotes</button>
 
-                               <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Café de especialidad')">✔ Café de especialidad</button>
                             </div>
 
@@ -563,7 +614,8 @@
                                     maquinaria</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Innovación tecnológica en equipo')">✔ Innovación tecnológica en
+                                    (click)="navegarAFiltro('Innovación tecnológica en equipo')">✔ Innovación
+                                    tecnológica en
                                     equipo</button>
                             </div>
 
@@ -589,7 +641,8 @@
                                     residuales</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro(' Uso eficiente de energía')">✔ Uso eficiente de energía</button>
+                                    (click)="navegarAFiltro(' Uso eficiente de energía')">✔ Uso eficiente de
+                                    energía</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Manejo de residuos')">✔ Manejo de residuos</button>
@@ -658,7 +711,7 @@
                             <div class="modal-body">
                                 <p>Etapas claves para transformar el café verde en un producto listo para consumo.</p>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro(' Perfiles de tostado')">✔ Perfiles de tostado</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
@@ -666,7 +719,8 @@
                                     tostado</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Innovaciones en tostadoras')">✔ Innovaciones en tostadoras</button>
+                                    (click)="navegarAFiltro('Innovaciones en tostadoras')">✔ Innovaciones en
+                                    tostadoras</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Estándares de molienda')">✔ Estándares de molienda</button>
@@ -689,17 +743,18 @@
                             <div class="modal-body">
                                 <p>Creación de productos diferenciados que agregan valor al café.</p>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Diseño de empaque')">✔ Diseño de empaque</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Innovación en presentaciones (drip bag, cápsulas, cold brew)')">✔ Innovación en presentaciones (drip
+                                    (click)="navegarAFiltro('Innovación en presentaciones (drip bag, cápsulas, cold brew)')">✔
+                                    Innovación en presentaciones (drip
                                     bag, cápsulas, cold brew)</button>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Valor agregado')">✔ Valor agregado</button>
 
-                               <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Normatividad (NOMs aplicables)')">✔ Normatividad (NOMs
                                     aplicables)</button>
                             </div>
@@ -722,17 +777,20 @@
                                 <p>Elementos que fortalecen la identidad y posicionamiento competitivo de una marca de
                                     café.</p>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Identidad de marca')">✔ Identidad de marca</button>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Estrategias de branding')">✔ Estrategias de branding</button>
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                    (click)="navegarAFiltro('Estrategias de branding')">✔ Estrategias de
+                                    branding</button>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Narrativa y storytelling')">✔ Narrativa y storytelling</button>
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                    (click)="navegarAFiltro('Narrativa y storytelling')">✔ Narrativa y
+                                    storytelling</button>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Denominación de origen y marca colectiva')">✔ Denominación de origen y marca
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                    (click)="navegarAFiltro('Denominación de origen y marca colectiva')">✔ Denominación
+                                    de origen y marca
                                     colectiva</button>
                             </div>
 
@@ -763,7 +821,8 @@
                                     (click)="navegarAFiltro('Café de especialidad')">✔ Café de especialidad</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Mercados emergentes (online, consumo joven, etc.)')">✔ Mercados emergentes (online,
+                                    (click)="navegarAFiltro('Mercados emergentes (online, consumo joven, etc.)')">✔
+                                    Mercados emergentes (online,
                                     consumo joven, etc.)</button>
                             </div>
 
@@ -791,14 +850,16 @@
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Comercio electrónico')">✔ Comercio electrónico</button>
 
-                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Cadenas de valor cortas')">✔ Cadenas de valor cortas</button>
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                    (click)="navegarAFiltro('Cadenas de valor cortas')">✔ Cadenas de valor
+                                    cortas</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Estrategias de precio')">✔ Estrategias de precio</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('ntegración a cadenas de suministro')">✔ Integración a cadenas de
+                                    (click)="navegarAFiltro('ntegración a cadenas de suministro')">✔ Integración a
+                                    cadenas de
                                     suministro</button>
                             </div>
 
@@ -819,7 +880,7 @@
                             <div class="modal-body">
                                 <p>Distintivos que permiten acceder a mercados especializados y con mejores precios.</p>
 
-                               <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Orgánico')">✔ Orgánico</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
@@ -831,8 +892,9 @@
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('UTZ')">✔ UTZ</button>
 
-                               <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Cafés diferenciados por atributos')">✔ Cafés diferenciados por
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                    (click)="navegarAFiltro('Cafés diferenciados por atributos')">✔ Cafés diferenciados
+                                    por
                                     atributos</button>
                             </div>
 
@@ -859,15 +921,17 @@
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro('Planes de negocios')">✔ Planes de negocios</button>
 
-                               <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
                                     (click)="navegarAFiltro(' Análisis de costos y márgenes')">✔ Análisis de costos y
                                     márgenes</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Estrategias de crecimiento')">✔ Estrategias de crecimiento</button>
+                                    (click)="navegarAFiltro('Estrategias de crecimiento')">✔ Estrategias de
+                                    crecimiento</button>
 
                                 <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Cooperativas y empresas sociales')">✔ Cooperativas y empresas
+                                    (click)="navegarAFiltro('Cooperativas y empresas sociales')">✔ Cooperativas y
+                                    empresas
                                     sociales</button>
                             </div>
 
@@ -978,7 +1042,7 @@
                                                     <i class="bi bi-facebook"></i>
                                                 </a>
 
-                                                
+
 
                                             </div>
                                         </div>
@@ -1027,7 +1091,7 @@
                                                 </a>
 
 
-                                                 <a href="https://wa.me/9616150138" target="_blank"
+                                                <a href="https://wa.me/9616150138" target="_blank"
                                                     style="display: inline-block; width: 35px; height: 40px; background-color: #25d366; color: #FFF; border-radius: 60%; text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999; text-decoration: none;">
                                                     <i class="fab fa-whatsapp" style="line-height: 35px;"></i>
                                                 </a>
@@ -1080,7 +1144,7 @@
                                                     class="social-icon facebook me-2">
                                                     <i class="bi bi-facebook"></i>
                                                 </a>
-                                                  <a href="https://wa.me/9681218826" target="_blank"
+                                                <a href="https://wa.me/9681218826" target="_blank"
                                                     style="display: inline-block; width: 35px; height: 40px; background-color: #25d366; color: #FFF; border-radius: 60%; text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999; text-decoration: none;">
                                                     <i class="fab fa-whatsapp" style="line-height: 35px;"></i>
                                                 </a>
@@ -1131,7 +1195,7 @@
                                                     <i class="bi bi-facebook"></i>
                                                 </a>
 
-                                                  <a href="https://wa.me/9631024881" target="_blank"
+                                                <a href="https://wa.me/9631024881" target="_blank"
                                                     style="display: inline-block; width: 35px; height: 40px; background-color: #25d366; color: #FFF; border-radius: 60%; text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999; text-decoration: none;">
                                                     <i class="fab fa-whatsapp" style="line-height: 35px;"></i>
                                                 </a>
@@ -1232,7 +1296,7 @@
 
                         <!-- OVERLAY -->
                         <div
-                            class="card-overlay-content bg-dark-premium text-white d-flex flex-column justify-content-center p-4">
+                            class="card-overlay-content bg-primary-custom  text-white d-flex flex-column justify-content-center p-4">
 
                             <h5 class="fw-bold mb-3 border-bottom pb-2">
                                 {{ evento.nombre }}
@@ -1356,7 +1420,7 @@
                                             Detalles del proyecto <i class="bi bi-arrow-right"></i>
                                         </a>
 
-                                       
+
 
                                         <button (click)="$event.stopPropagation(); previewFile(proyecto);"
                                             class="btn btn-sm btn-outline-light rounded-pill liquid-button mt-2">
@@ -1382,7 +1446,8 @@
     </section>
     <!-- Proyectos Fin-->
 
-    <!-- Cursos inicio-->
+    <!-- Cursos Inicio-->
+
     <section id="cursos" class="py-5 bg-light font-montserrat">
         <div class="container">
 
@@ -1487,136 +1552,170 @@
             </div>
         </div>
     </section>
-
     <!-- Cursos fin-->
 
     <!-- Sitios-->
 
-<section id="colaboraciones" class="py-5 bg-white font-montserrat">
-    <div class="container">
-        <div class="text-center mb-5 wow animate__animated animate__fadeIn">
-            <h2 class="display-5 fw-bold text-dark mb-2">Instituciones y empresas que fortalecen el sector cafetalero</h2>
-        </div>
-
-        <div class="row g-5">
-            <div class="col-lg-4 text-center">
-                <h4 class="fw-bold mb-4 text-success border-bottom pb-2">Gobierno</h4>
-                <div class="logo-grid mb-3">
-                    <a href="https://incafech.gob.mx/" target="_blank" class="logo-item shadow-sm">
-                        <img src="/Imegenes/INCAFECH.webp" alt="INCAFECH">
-                        <span class="logo-title">INCAFECH</span>
-                    </a>
-                </div>
-                <button type="button" class="btn btn-sm btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#modalGobierno">
-                    Ver todas las Instituciones
-                </button>
+    <section id="colaboraciones" class="py-5 bg-white font-montserrat">
+        <div class="container">
+            <div class="text-center mb-5 wow animate__animated animate__fadeIn">
+                <h2 class="display-5 fw-bold text-dark mb-2">Instituciones y empresas que fortalecen el sector
+                    cafetalero</h2>
             </div>
 
-            <div class="col-lg-4 text-center">
-                <h4 class="fw-bold mb-4 text-primary border-bottom pb-2">Organizaciones</h4>
-                <div class="logo-grid mb-3">
-                    <a href="https://amecafe.org.mx/" target="_blank" class="logo-item shadow-sm">
-                        <img src="/Imegenes/AMECAFE.jpg" alt="AMECAFE">
-                        <span class="logo-title">AMECAFÉ</span>
-                    </a>
+            <div class="row g-5">
+                <div class="col-lg-4 text-center">
+                    <h4 class="fw-bold mb-4 text-success border-bottom pb-2">Gobierno</h4>
+                    <div class="logo-grid mb-3">
+                        <a href="https://incafech.gob.mx/" target="_blank" class="logo-item shadow-sm">
+                            <img src="/Imegenes/INCAFECH.webp" alt="INCAFECH">
+                            <span class="logo-title">INCAFECH</span>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-success rounded-pill" data-bs-toggle="modal"
+                        data-bs-target="#modalGobierno">
+                        Ver todas las Instituciones
+                    </button>
                 </div>
-                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modalOrganizaciones">
-                    Ver más Organizaciones
-                </button>
-            </div>
 
-            <div class="col-lg-4 text-center">
-                <h4 class="fw-bold mb-4 text-dark border-bottom pb-2">Empresas</h4>
-              
+                <div class="col-lg-4 text-center">
+                    <h4 class="fw-bold mb-4 text-primary border-bottom pb-2">Organizaciones</h4>
+                    <div class="logo-grid mb-3">
+                        <a href="https://amecafe.org.mx/" target="_blank" class="logo-item shadow-sm">
+                            <img src="/Imegenes/AMECAFE.jpg" alt="AMECAFE">
+                            <span class="logo-title">AMECAFÉ</span>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-primary rounded-pill" data-bs-toggle="modal"
+                        data-bs-target="#modalOrganizaciones">
+                        Ver más Organizaciones
+                    </button>
+                </div>
+
+                <div class="col-lg-4 text-center">
+                    <h4 class="fw-bold mb-4 text-dark border-bottom pb-2">Empresas</h4>
 
 
-                <!--<button type="button" class="btn btn-sm btn-outline-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#modalEmpresas">
+
+                    <!--<button type="button" class="btn btn-sm btn-outline-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#modalEmpresas">
                     Ver todas las Empresas
                 </button>-->
-                
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- //MODAL ORGANIZACIONES//-->
+    <div class="modal fade" id="modalOrganizaciones" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold">Organizaciones Aliadas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-light">
+                    <div class="row g-4 justify-content-center">
+
+                        <div class="col-6 col-md-4">
+                            <a href="https://amecafe.org.mx/" target="_blank"
+                                class="logo-item bg-white p-3 d-block text-center rounded">
+                                <img src="/Imegenes/AMECAFE.jpg" class="img-fluid mb-2" style="max-height: 80px;">
+                                <p class="small fw-bold text-dark mb-0">AMECAFE</p>
+                            </a>
+                        </div>
+
+
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
 
-<!-- //MODAL ORGANIZACIONES//-->
-<div class="modal fade" id="modalOrganizaciones" tabindex="-1" aria-hidden="true">
+    <!-- //MODAL GOBIERNO//-->
+
+    <div class="modal fade" id="modalGobierno" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title fw-bold">Instituciones Gubernamentales</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-light">
+                    <div class="row g-4 justify-content-center">
+
+                        <div class="col-6 col-md-4">
+                            <a href="https://incafech.gob.mx/" target="_blank"
+                                class="logo-item bg-white p-3 d-block text-center rounded">
+                                <img src="/Imegenes/INCAFECH.webp" class="img-fluid mb-2" style="max-height: 80px;">
+                                <p class="small fw-bold text-dark mb-0">INCAFECH</p>
+                            </a>
+                        </div>
+
+                        <div class="col-6 col-md-4">
+                            <a href="https://www.gob.mx/agricultura" target="_blank"
+                                class="logo-item bg-white p-3 d-block text-center rounded">
+                                <img src="/Imegenes/SADER.jpg" class="img-fluid mb-2" style="max-height: 80px;">
+                                <p class="small fw-bold text-dark mb-0">SADER</p>
+                            </a>
+                        </div>
+
+                        <div class="col-6 col-md-4">
+                            <a href="https://www.gob.mx/fira" target="_blank"
+                                class="logo-item bg-white p-3 d-block text-center rounded">
+                                <img src="/Imegenes/FIRA.png" class="img-fluid mb-2" style="max-height: 80px;">
+                                <p class="small fw-bold text-dark mb-0">FIRA</p>
+                            </a>
+                        </div>
+
+                        <div class="col-6 col-md-4">
+                            <a href="https://www.gob.mx/inifap" target="_blank"
+                                class="logo-item bg-white p-3 d-block text-center rounded">
+                                <img src="/Imegenes/INAFAP.jpg" class="img-fluid mb-2" style="max-height: 80px;">
+                                <p class="small fw-bold text-dark mb-0">INIFAP</p>
+                            </a>
+                        </div>
+
+                        <div class="col-6 col-md-4">
+                            <a href="https://www.gob.mx/siap" target="_blank"
+                                class="logo-item bg-white p-3 d-block text-center rounded">
+                                <img src="/Imegenes/SIAP.jpg" class="img-fluid mb-2" style="max-height: 80px;">
+                                <p class="small fw-bold text-dark mb-0">SIAP</p>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- //MODAL EMPRESAS//-->
+    <!--<div class="modal fade" id="modalEmpresas" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content border-0 shadow">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title fw-bold">Organizaciones Aliadas</h5>
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title fw-bold">Empresas del Sector</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body bg-light">
                 <div class="row g-4 justify-content-center">
                     
                     <div class="col-6 col-md-4">
-                        <a href="https://amecafe.org.mx/" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
-                            <img src="/Imegenes/AMECAFE.jpg" class="img-fluid mb-2" style="max-height: 80px;">
-                            <p class="small fw-bold text-dark mb-0">AMECAFE</p>
+                        <a href="#" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
+                            <img src="assets/img/colaboradores/emp-1.png" class="img-fluid mb-2" style="max-height: 80px;">
+                            <p class="small fw-bold text-dark mb-0">Exportadora Central</p>
                         </a>
                     </div>
-
                     
-
-                </div>
+                    </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- //MODAL GOBIERNO//-->
-
-<div class="modal fade" id="modalGobierno" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content border-0 shadow">
-            <div class="modal-header bg-success text-white">
-                <h5 class="modal-title fw-bold">Instituciones Gubernamentales</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body bg-light">
-                <div class="row g-4 justify-content-center">
-                    
-                    <div class="col-6 col-md-4">
-                        <a href="https://incafech.gob.mx/" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
-                            <img src="/Imegenes/INCAFECH.webp" class="img-fluid mb-2" style="max-height: 80px;">
-                            <p class="small fw-bold text-dark mb-0">INCAFECH</p>
-                        </a>
-                    </div>
-
-                    <div class="col-6 col-md-4">
-                        <a href="https://www.gob.mx/agricultura" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
-                            <img src="/Imegenes/SADER.jpg" class="img-fluid mb-2" style="max-height: 80px;">
-                            <p class="small fw-bold text-dark mb-0">SADER</p>
-                        </a>
-                    </div>
-
-                    <div class="col-6 col-md-4">
-                        <a href="https://www.gob.mx/fira" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
-                            <img src="/Imegenes/FIRA.png" class="img-fluid mb-2" style="max-height: 80px;">
-                            <p class="small fw-bold text-dark mb-0">FIRA</p>
-                        </a>
-                    </div>
-
-                    <div class="col-6 col-md-4">
-                        <a href="https://www.gob.mx/inifap" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
-                            <img src="/Imegenes/INAFAP.jpg" class="img-fluid mb-2" style="max-height: 80px;">
-                            <p class="small fw-bold text-dark mb-0">INIFAP</p>
-                        </a>
-                    </div>
-
-                    <div class="col-6 col-md-4">
-                        <a href="https://www.gob.mx/siap" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
-                            <img src="/Imegenes/SIAP.jpg" class="img-fluid mb-2" style="max-height: 80px;">
-                            <p class="small fw-bold text-dark mb-0">SIAP</p>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</div> -->
 
     <footer class="footer-section bg-primary-custom text-white py-5">
         <div class="container">
@@ -1626,18 +1725,18 @@
                     <div class="row">
                         <!-- Logo -->
 
+
                         <!-- Enlaces -->
                         <div class="col-md-3 mb-3">
                             <h5>Enlaces Rápidos</h5>
-                            <a href="/sobre-nosotros" class="d-block text-white-50 mb-2">Sobre Coordinacion Nacional Del
-                                Cafe</a>
+                            <a href="/sobre-nosotros" class="d-block text-white-50 mb-2">Sobre ADICAM</a>
 
                         </div>
 
                         <!-- Servicios -->
                         <div class="col-md-3 mb-3">
                             <h5>Servicios</h5>
-                            <a href="/tazza" class="d-block text-white-50 mb-2">Cursos y Capacitación</a>
+                            <a href="/capacitacion" class="d-block text-white-50 mb-2">Cursos y Capacitación</a>
 
                             <a href="/contacto" class="d-block text-white-50 mb-2">Contacto</a>
                         </div>
