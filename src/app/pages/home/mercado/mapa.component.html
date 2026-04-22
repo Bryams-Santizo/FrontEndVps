@@ -1,0 +1,127 @@
+<nav class="navbar-superior">
+  <div class="logo-container">
+    <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo Educación">
+    <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo TecNM">
+    <img src="/Imegenes/Imagen1.png" alt="Logo Chiapas">
+  </div>
+</nav>
+
+<nav class="navbar-inferior">
+  <div class="titulo-navbar">
+  Mercados
+  </div>
+</nav>
+
+<div class="globo-page">
+  <aside class="sidebar sidebar-left">
+    <h2 class="sidebar-title">Filtros de Mercado</h2>
+    
+    <div class="market-selector">
+      <button (click)="setMarket('nacional')" [class.active]="selectedMarket === 'nacional'" class="btn-toggle">
+        NACIONAL
+      </button>
+      <button (click)="setMarket('internacional')" [class.active]="selectedMarket === 'internacional'" class="btn-toggle">
+        INTERNACIONAL
+      </button>
+    </div>
+
+    <hr class="divider">
+
+    <div class="market-list">
+      <h3 class="section-label">Selecciona Segmento</h3>
+      <button *ngFor="let s of segmentsData" 
+              (click)="selectSegment(s)" 
+              [class.active]="selectedSegment?.id === s.id" 
+              class="btn-market-card">
+        {{ s.nombre }}
+      </button>
+    </div>
+
+    <div class="market-list fade-in" *ngIf="selectedSegment">
+      <h3 class="section-label-gold">Nichos de Alto Valor</h3>
+      <p style="font-size: 0.6rem; margin-bottom: 10px; opacity: 0.8;">Especialidades dentro de este segmento:</p>
+      <button *ngFor="let n of getNichesForSegment(selectedSegment.id)" 
+              (click)="selectNiche(n)" 
+              [class.active]="selectedNiche?.nombre === n.nombre"
+              class="btn-niche-card">
+        {{ n.nombre }}
+      </button>
+    </div>
+  </aside>
+
+  <main class="globe-wrapper">
+    <div id="coffee-globe"></div>
+    <div class="view-indicator">
+      {{ selectedMarket === 'nacional' ? ' MÉXICO: ANÁLISIS POR ESTADO' : ' MUNDIAL: ANÁLISIS DE EXPORTACIÓN' }}
+    </div>
+  </main>
+
+  <aside class="sidebar sidebar-right" *ngIf="selectedSegment">
+    <div class="info-content fade-in">
+      <div class="header-segment">
+        <span class="badge-category">{{ selectedMarket | uppercase }}</span>
+        <h2 class="info-title">{{ selectedSegment.nombre }}</h2>
+      </div>
+      <div class="gold-line"></div>
+      
+      <p class="market-desc">{{ selectedSegment.descripcion }}</p>
+
+      <div class="analysis-card">
+        <h4 class="card-subtitle"><i class="icon-money"></i> ECONOMÍA Y PRECIOS</h4>
+        <div class="variable-grid">
+          <div class="var-item full">
+            <span class="var-label">Estructura de Precio:</span>
+            <span class="var-value highlight-gold">{{ selectedSegment.indicadores.precio }}</span>
+          </div>
+          <div class="var-item">
+            <span class="var-label">Volumen:</span>
+            <span class="var-value">{{ selectedSegment.indicadores.volumen }}</span>
+          </div>
+          <div class="var-item">
+            <span class="var-label">Actor Clave:</span>
+            <span class="var-value">{{ selectedSegment.indicadores.dominio }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-card alternate">
+        <h4 class="card-subtitle"><i class="icon-check"></i> REQUISITOS DE ENTRADA</h4>
+        <div class="info-list">
+          <div class="info-list-item">
+            <strong>Calidad/Físico:</strong> {{ selectedSegment.indicadores.entrada }}
+          </div>
+          <div class="info-list-item">
+            <strong>Normativa:</strong> {{ selectedSegment.detallesExtendidos.normativa }}
+          </div>
+          <div class="info-list-item">
+            <strong>Logística:</strong> {{ selectedSegment.detallesExtendidos.logistica }}
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-card">
+        <h4 class="card-subtitle"><i class="icon-user"></i> PERFIL DEL CONSUMIDOR</h4>
+        <p class="small-text">{{ selectedSegment.detallesExtendidos.consumidor }}</p>
+      </div>
+
+      <h3 class="section-label-gold">
+        {{ selectedMarket === 'nacional' ? 'ESTADOS ESTRATÉGICOS' : 'DESTINOS LÍDERES' }}
+      </h3>
+      
+      <div class="items-grid">
+        <div *ngFor="let item of (selectedMarket === 'nacional' ? selectedSegment.estados : selectedSegment.paises)" 
+             class="badge-item-gold">
+          {{ item }}
+        </div>
+      </div>
+
+      
+    </div>
+  </aside>
+
+  <aside class="sidebar sidebar-right" *ngIf="!selectedSegment && !selectedNiche">
+    <div class="empty-state">
+      <p>Seleccione un segmento de mercado para iniciar el análisis geográfico.</p>
+    </div>
+  </aside>
+</div>
