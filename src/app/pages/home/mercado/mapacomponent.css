@@ -1,0 +1,333 @@
+/* =========================================
+   CONFIGURACIÓN GENERAL Y NAVBARS
+   ========================================= */
+.navbar-superior { 
+    background: #fff; 
+    border-bottom: 3px solid #003b6f; 
+    padding: 5px 20px; 
+    display: flex;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.logo-container img { height: 50px; }
+
+.navbar-inferior { 
+    background: #003b6f; 
+    color: #fff; 
+    padding: 12px 25px; 
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.globo-page {
+    display: grid;
+    grid-template-columns: 300px 1fr 340px;
+    height: calc(100vh - 130px);
+    background: #e0f2fe; 
+    overflow: hidden;
+}
+
+/* =========================================
+   SIDEBARS (ESTILO DARK & PROFESSIONAL)
+   ========================================= */
+.sidebar {
+    background: #1a3c6d;
+    color: white;
+    padding: 24px;
+    overflow-y: auto;
+    z-index: 50;
+    scrollbar-width: thin;
+    scrollbar-color: #ffd700 transparent;
+}
+
+.sidebar-left { 
+    border-right: 1px solid rgba(255,255,255,0.1); 
+}
+
+.sidebar-right { 
+    border-left: 3px solid #ffd700; 
+    background: linear-gradient(180deg, #1a3c6d 0%, #0d1f38 100%);
+}
+
+.sidebar-title {
+    font-size: 1.1rem;
+    color: #ffd700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-label-gold {
+    color: #ffd700;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 25px 0 12px;
+    text-transform: uppercase;
+    display: block;
+}
+
+/* =========================================
+   BOTONES Y SELECTORES
+   ========================================= */
+.market-selector { 
+    display: flex; 
+    gap: 8px; 
+    margin: 15px 0; 
+}
+
+.btn-toggle {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 10px 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.7rem;
+    transition: all 0.3s ease;
+}
+
+.btn-toggle.active { 
+    background: #ffd700; 
+    color: #1a3c6d; 
+    border-color: #ffd700;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.btn-market-card {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-market-card:hover {
+    background: rgba(255,255,255,0.12);
+    transform: translateX(5px);
+}
+
+.btn-market-card.active { 
+    background: #a67c52; 
+    border-color: #ffd700; 
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
+}
+
+.btn-niche-card {
+    width: 100%;
+    background: rgba(255, 215, 0, 0.05);
+    border: 1px dashed rgba(255, 215, 0, 0.4);
+    color: #ffd700;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: 0.2s;
+}
+
+.btn-niche-card.active { 
+    background: #ffd700; 
+    color: #1a3c6d; 
+    border-style: solid;
+}
+
+/* =========================================
+   CONTENEDOR DEL GLOBO (MAPA)
+   ========================================= */
+.globe-wrapper { 
+    position: relative; 
+    background: linear-gradient(to bottom, #87ceeb 0%, #e0f2fe 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#coffee-globe { 
+    width: 100%; 
+    height: 100%; 
+    outline: none;
+    transform: translateX(-30px);
+}
+
+.view-indicator {
+    position: absolute;
+    top: 25px;
+    left: 50%; 
+    transform: translateX(-50%);
+    background: rgba(26, 60, 109, 0.9);
+    backdrop-filter: blur(8px);
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: 1px solid #ffd700;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+/* =========================================
+   FICHAS DE INTELIGENCIA (SIDEBAR DERECHO)
+   ========================================= */
+.info-title { 
+    color: #ffd700; 
+    font-size: 1.4rem; 
+    font-weight: bold; 
+    margin-top: 5px;
+}
+
+.badge-category {
+    background: #ffd700;
+    color: #1a3c6d;
+    font-size: 0.6rem;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.gold-line { 
+    width: 40px; 
+    height: 4px; 
+    background: #ffd700; 
+    margin: 15px 0; 
+    border-radius: 2px;
+}
+
+.market-desc { 
+    font-size: 0.85rem; 
+    color: #cfd8dc; 
+    line-height: 1.5;
+    margin-bottom: 20px; 
+}
+
+.analysis-card {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 18px;
+    border-radius: 12px;
+    border-left: 4px solid #ffd700;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.analysis-card.alternate {
+    border-left-color: #a67c52;
+}
+
+.card-subtitle {
+    font-size: 0.75rem;
+    margin-bottom: 12px;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.variable-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.var-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 6px;
+}
+
+.var-item.full {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.var-label { font-size: 0.65rem; color: #ffd700; opacity: 0.8; }
+.var-value { font-size: 0.75rem; color: #fff; font-weight: 500; }
+.highlight-gold { color: #ffd700; font-size: 0.95rem; font-weight: 700; }
+
+/* Grilla de Estados/Destinos */
+.items-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; 
+    margin-top: 15px;
+}
+
+.badge-item-gold {
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: #ffd700;
+    padding: 10px 5px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.badge-item-gold:hover {
+    background: rgba(255, 215, 0, 0.15);
+}
+
+/* =========================================
+   UTILIDADES Y ANIMACIONES
+   ========================================= */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding: 30px;
+    opacity: 0.5;
+}
+
+.footer-sidebar {
+    margin-top: 30px;
+    font-size: 0.6rem;
+    text-align: center;
+    opacity: 0.4;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.fade-in { 
+    animation: fadeIn 0.4s ease-out forwards; 
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 20px 0;
+}
