@@ -121,12 +121,12 @@ export const routes: Routes = [
   {
     path: 'mapas',
     loadComponent: () =>
-      import('./pages/home/mapas/mapas').then(m => m.mapas)
+      import('./pages/home/importanciacafe/mapas').then(m => m.mapas)
   },
   {
     path: 'globo',
     loadComponent: () =>
-      import('./pages/home/globo/mapa.component').then(m => m.mundo)
+      import('./pages/home/mercado/mapa.component').then(m => m.mundo)
   },
   
      
