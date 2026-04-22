@@ -25,7 +25,7 @@ evidencias: any[] = [];
   nombre: string = '';
   
   // Quitamos la inicialización con 'window' de aquí arriba
-  serverBase: string = 'http://localhost:8080'; 
+  serverBase: string = ''; 
 
  ngOnInit() {
   if (isPlatformBrowser(this.platformId)) {

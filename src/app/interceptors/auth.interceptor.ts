@@ -18,12 +18,12 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.authService.getToken();
 
     //  NO agregar token a rutas públicas
-    const isPublic =
-      req.url.includes('/api/public/') ||
-      req.url.includes('/api/media/view/') ||
-      req.url.includes('/api/auth/login') ||
-      req.url.includes('/api/estadisticas/');
-
+const isPublic =
+  req.url.includes('/api/public/') ||
+  req.url.includes('/api/media/view/') ||
+  req.url.includes('/api/auth/login') ||
+  req.url.includes('/api/estadisticas/') ||
+  req.url.includes('/api/bolsa/');
     if (isPublic) {
       return next.handle(req);
     }

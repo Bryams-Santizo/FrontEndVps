@@ -1,9 +1,9 @@
 <nav class="navbar-superior">
-    <div class="logo-container">
-        <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
-        <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
-        <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
-    </div>
+  <div class="logo-container">
+    <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
+    <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
+    <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
+  </div>
 </nav>
 
 <nav class="navbar-inferior">
@@ -14,10 +14,10 @@
 
   <div class="grid-registros">
     <div class="ficha-tecnica" *ngFor="let item of listaDatos">
-      
+
       <div class="seccion-cabecera">
         <div class="badge-tipo">
-          {{ item.tipo }} 
+          {{ item.tipo }}
           <span *ngIf="item.tipo === 'Otro' && item.especificacionOtroTipo">
             - {{ item.especificacionOtroTipo }}
           </span>
@@ -26,7 +26,7 @@
       </div>
 
       <div class="cuerpo-ficha">
-        
+
         <div class="campo-dato">
           <label>Descripción de la Tecnología Cafetalera</label>
           <div class="contenido">{{ item.descripcion }}</div>
@@ -62,15 +62,11 @@
           </div>
         </div>
 
-        <div class="footer-archivos">
-          <div class="item-archivo">
-            <span [innerHtml]="item.archivoDocumentos ? '' : ''"></span>
-            Manuales y Fichas Técnicas Cafetaleras
-          </div>
-          <div class="item-archivo">
-            <span [innerHtml]="item.archivoCarta ? '' : ''"></span>
-            Carta de Autorización o Uso
-          </div>
+        <div class="contenedor-foto" *ngIf="item.documentoPath">
+          <label style="display: block; font-size: 0.8rem; color: #666;">Tecnología:</label>
+          <img [src]="URL_ARCHIVOS + item.documentoPath" alt="Imagen Tecnología"
+            style="width: 100%; max-width: 150px; border-radius: 8px; border: 1px solid #ddd; cursor: pointer;"
+            (click)="descargarArchivo(item.documentoPath)">
         </div>
 
       </div>

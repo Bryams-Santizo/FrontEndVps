@@ -44,7 +44,7 @@
         <div *ngFor="let ev of $any(grupo.value)" class="col">
           <div class="card h-100 evidence-card shadow-sm border-0">
             <div class="img-container" style="position: relative; height: 200px;">
-              <img [src]="'http://localhost:8080/uploads/' + ev.rutaImagen" 
+              <img [src]="'/uploads/' + ev.rutaImagen" 
                    class="card-img-top" [alt]="ev.subtema"
                    style="height: 100%; width: 100%; object-fit: cover;">
               

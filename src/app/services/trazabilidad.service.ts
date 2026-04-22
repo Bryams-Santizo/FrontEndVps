@@ -1,58 +1,37 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_BASE } from '../config/api-base';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class TrazabilidadService {
 
-  // Ajusta el path base del módulo según tu backend
-  private apiUrl = `${API_BASE}`;
+  private apiUrl = API_BASE; // o `${API_BASE}`
 
-  constructor(private http: HttpClient) { }
-
-  // --- PRODUCTORES ---
+  constructor(private http: HttpClient) {}
 
   guardarProductor(productor: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/productores`, productor);
   }
 
-  // --- CERTIFICACIONES ---
-
-  obtenerCertificacionesPorMercado(mercado: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/certificaciones/mercado/${encodeURIComponent(mercado)}`);
+  obtenerCertificaciones(mercado: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/certificaciones/mercado/${mercado}`);
   }
 
-  // --- EVALUACIONES ---
-
-  /**
-   * Calcula evaluación (recomendación: mandar params con HttpParams)
-   */
   calcularEvaluacion(
     productorId: number,
     certificacionId: number,
     aciertos: number,
-    total: number
+    total: number,
+    recomendaciones: string
   ): Observable<any> {
+    const url = `${this.apiUrl}/evaluaciones/calcular`;
 
-    const params = new HttpParams()
-      .set('productorId', productorId)
-      .set('certificacionId', certificacionId)
-      .set('aciertos', aciertos)
-      .set('total', total);
-
-    return this.http.post(`${this.apiUrl}/evaluaciones/calcular`, {}, { params });
+    const body = { productorId, certificacionId, aciertos, total, recomendaciones };
+    return this.http.post(url, body);
   }
 
-  /**
-   * Descarga el PDF como archivo (sin abrir pestañas)
-   * Devuelve un Blob para que el componente decida cómo guardarlo.
-   */
-  descargarPdf(evaluacionId: number): Observable<Blob> {
-    return this.http.get(`${this.apiUrl}/evaluaciones/${evaluacionId}/pdf`, {
-      responseType: 'blob'
-    });
+  descargarPdf(evaluacionId: number) {
+    window.open(`${this.apiUrl}/evaluaciones/${evaluacionId}/pdf`, '_blank');
   }
 }

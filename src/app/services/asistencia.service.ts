@@ -8,7 +8,7 @@ import { API_BASE } from '../config/api-base';
 export class AsistenciaService {
 
   // Ajusta esta URL según tu configuración de Spring Boot
-  private apiUrl = `${API_BASE}/asistencias`;
+  private apiUrl = `${API_BASE}/asistencia`;
 
   constructor(private http: HttpClient) { }
 

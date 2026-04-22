@@ -1378,3 +1378,52 @@ img {
   max-width: 100%;
   height: auto;
 }
+/* Cuadrícula de logos en la sección principal */
+.logo-grid {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    text-decoration: none !important;
+    background: white;
+    width: 160px;
+    transition: all 0.3s ease;
+}
+
+.logo-item:hover {
+    transform: translateY(-5px);
+    border-color: #28a745;
+}
+
+.logo-item img {
+    max-height: 80px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.logo-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* Ajustes para el Modal */
+.modal-content {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.modal-body .logo-item {
+    width: 100%; /* Que ocupe el ancho de la columna del modal */
+    height: 100%;
+}

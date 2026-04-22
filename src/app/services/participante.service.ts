@@ -7,54 +7,67 @@ import { API_BASE } from '../config/api-base';
 
 @Injectable({ providedIn: 'root' })
 export class ParticipanteService {
-
-  private baseUrl = `${API_BASE}/participantes`; // /api/participantes
+  private participantesUrl = `${API_BASE}/participantes`; // /api/participantes
+  private rolesUrl = `${API_BASE}/roles`;                 // /api/roles
 
   constructor(private http: HttpClient) {}
 
-  getParticipantes(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl);
+  // ✅ Roles
+  getRoles(): Observable<any[]> {
+    return this.http.get<any[]>(this.rolesUrl);
   }
 
+  // ✅ Listado
+  getParticipantes(): Observable<any[]> {
+    return this.http.get<any[]>(this.participantesUrl);
+  }
+
+  // ✅ Registro completo (ajusta si tu backend usa otra ruta)
+  registrarParticipanteCompleto(datos: any): Observable<any> {
+    return this.http.post(`${this.participantesUrl}/registro-completo`, datos);
+  }
+
+  // ✅ Actualizar
+  actualizarParticipante(id: number, datos: any): Observable<any> {
+    return this.http.put(`${this.participantesUrl}/${id}`, datos);
+  }
+
+  // ✅ Eliminar
+  eliminarParticipante(id: number): Observable<any> {
+    return this.http.delete(`${this.participantesUrl}/${id}`);
+  }
+
+  // ✅ Actividad completa
   getActividadCompleta(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/actividad-completa/${id}`).pipe(
-      map(data => ({
+    return this.http.get<any>(`${this.participantesUrl}/actividad-completa/${id}`).pipe(
+      map((data) => ({
         ...data,
 
         proyectos: (data.proyectos || []).map((p: any) => {
           let imgUrl = p.imagenUrl;
           let docUrl = p.documentoUrl;
 
-          // Puede venir en medias o avances
           const listaArchivos = p.medias || p.avances || [];
 
           if (listaArchivos.length > 0) {
-            // Imagen (por fileType)
             const archivoImagen = listaArchivos.find((m: any) => m.fileType?.includes('image'));
             if (archivoImagen?.id) {
               imgUrl = `${API_BASE}/media/download/${archivoImagen.id}`;
             }
 
-            // PDF
-            const archivoDoc = listaArchivos.find((m: any) =>
-              m.fileType?.includes('pdf') || m.url?.endsWith('.pdf')
+            const archivoDoc = listaArchivos.find(
+              (m: any) => m.fileType?.includes('pdf') || m.url?.endsWith('.pdf')
             );
 
-            if (archivoDoc) {
-              // Si el backend usa download por ID, usamos /api/media/download/:id
-              if (archivoDoc.id) {
-                docUrl = `${API_BASE}/media/download/${archivoDoc.id}`;
-              } else if (archivoDoc.url) {
-                // Si ya viene URL absoluta (ej. S3), la respetamos
-                docUrl = archivoDoc.url;
-              }
+            if (archivoDoc?.id) {
+              docUrl = `${API_BASE}/media/download/${archivoDoc.id}`;
+            } else if (archivoDoc?.url) {
+              docUrl = archivoDoc.url;
             }
           }
 
-          // ✅ IMPORTANTÍSIMO:
-          // Ya NO pegamos serverBase con :8080.
-          // Si viene absoluta (http), se queda. Si es relativa, la dejamos relativa.
-          const normaliza = (u: string | null) => {
+          // Si es absoluta, la respetamos. Si es relativa, la hacemos relativa a dominio.
+          const normaliza = (u: string | null | undefined) => {
             if (!u) return null;
             if (u.startsWith('http')) return u;
             return u.startsWith('/') ? u : `/${u}`;
@@ -63,16 +76,15 @@ export class ParticipanteService {
           return {
             ...p,
             imagenUrl: normaliza(imgUrl),
-            documentoUrl: normaliza(docUrl)
+            documentoUrl: normaliza(docUrl),
           };
         }),
 
-        // Eventos: igual, todo relativo a dominio
         eventos: (data.eventos || []).map((e: any) => ({
           ...e,
           rutaImagen: e.rutaImagen ? `/uploads/${e.rutaImagen}` : null,
-          rutaEvidencia: e.rutaEvidencia ? `/uploads/${e.rutaEvidencia}` : null
-        }))
+          rutaEvidencia: e.rutaEvidencia ? `/uploads/${e.rutaEvidencia}` : null,
+        })),
       }))
     );
   }

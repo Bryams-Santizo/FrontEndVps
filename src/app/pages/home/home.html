@@ -1493,103 +1493,130 @@
     <!-- Sitios-->
 
 <section id="colaboraciones" class="py-5 bg-white font-montserrat">
-        <div class="container">
+    <div class="container">
+        <div class="text-center mb-5 wow animate__animated animate__fadeIn">
+            <h2 class="display-5 fw-bold text-dark mb-2">Instituciones y empresas que fortalecen el sector cafetalero</h2>
+        </div>
 
-            <div class="text-center mb-5 wow animate__animated animate__fadeIn">
-                <h2 class="display-5 fw-bold text-dark mb-3">
-                    Instituciones y empresas que fortalecen el sector cafetalero
-                </h2>
-            </div>
-
-            <div *ngIf="cargandoColaboraciones" class="text-center p-5">
-                <div class="spinner-border text-success" role="status">
-                    <span class="visually-hidden">Cargando...</span>
+        <div class="row g-5">
+            <div class="col-lg-4 text-center">
+                <h4 class="fw-bold mb-4 text-success border-bottom pb-2">Gobierno</h4>
+                <div class="logo-grid mb-3">
+                    <a href="https://incafech.gob.mx/" target="_blank" class="logo-item shadow-sm">
+                        <img src="/Imegenes/INCAFECH.webp" alt="INCAFECH">
+                        <span class="logo-title">INCAFECH</span>
+                    </a>
                 </div>
+                <button type="button" class="btn btn-sm btn-outline-success rounded-pill" data-bs-toggle="modal" data-bs-target="#modalGobierno">
+                    Ver todas las Instituciones
+                </button>
             </div>
 
-            <div *ngIf="!cargandoColaboraciones && colaboraciones.length === 0" class="text-center p-5">
-                <p class="text-muted">No hay colaboraciones activas en este momento.</p>
-            </div>
-
-            <div *ngIf="!cargandoColaboraciones && colaboraciones.length > 0" class="row g-4">
-
-                <div *ngFor="let col of colaboraciones; let i = index"
-                    class="col-md-6 col-lg-4 wow animate__animated animate__fadeInUp"
-                    [attr.data-wow-delay]="(i * 0.2) + 's'">
-
-                    <div
-                        class="card-premium-effect shadow-lg h-100 position-relative overflow-hidden cursor-pointer bg-white rounded-3">
-
-                        <div class="date-badge bg-primary-accent"
-                            style="z-index: 10; width: 80px; height: 80px; border-radius: 0 0 40px 0;">
-                            <span class="month" style="font-size: 0.7rem; margin-top: 15px;">ESTADO</span>
-                            <span class="day" style="font-size: 0.9rem;">{{ col.estado | uppercase | slice:0:3 }}</span>
-                        </div>
-
-                        <div class="card-header-visual d-flex align-items-center justify-content-center"
-                            style="height: 180px; background: linear-gradient(135deg, #f1f3f5 0%, #e9ecef 100%);">
-                            <i class="bi bi-building-check text-primary opacity-25" style="font-size: 4.5rem;"></i>
-                        </div>
-
-                        <div class="content-box p-4">
-                            <h5 class="fw-bolder mb-2 text-primary-accent text-truncate"
-                                [title]="col.institucionSolicitante">
-                                {{ col.institucionSolicitante }}
-                            </h5>
-
-                            <p class="text-secondary mb-3 small" style="height: 4.5rem; overflow: hidden;">
-                                {{ col.descripcionNecesidad.length > 100 ? (col.descripcionNecesidad | slice:0:100) +
-                                '...' : col.descripcionNecesidad }}
-                            </p>
-
-                            <div class="d-flex justify-content-between align-items-center mt-auto">
-                                <span class="badge bg-primary-soft text-primary-accent fw-medium rounded-pill">
-                                    <i class="bi bi-tag-fill me-1"></i> {{ col.tipoColaboracion }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <div
-                            class="card-overlay-content bg-primary-custom  text-white d-flex flex-column justify-content-center p-4">
-                            <h6 class="text-warning fw-bold text-uppercase small mb-3">Detalles de Vinculación</h6>
-
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="bi bi-people me-3 fs-5 text-info"></i>
-                                <div>
-                                    <small class="text-secondary-subtle"
-                                        style="font-size: 0.7rem;">REQUERIMIENTO</small>
-                                    <p class="mb-0 fw-bold small">{{ col.numeroEstudiantes }} Participantes</p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex align-items-center mb-2">
-                                <i class="bi bi-calendar-range me-3 fs-5 text-success"></i>
-                                <div>
-                                    <small class="text-secondary-subtle" style="font-size: 0.7rem;">DURACIÓN</small>
-                                    <p class="mb-0 fw-bold small">{{ col.duracion }}</p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex align-items-center mb-4">
-                                <i class="bi bi-person-badge me-3 fs-5 text-warning"></i>
-                                <div>
-                                    <small class="text-secondary-subtle" style="font-size: 0.7rem;">CONTACTO</small>
-                                    <p class="mb-0 fw-bold small">{{ col.personaContacto }}</p>
-                                </div>
-                            </div>
-
-                            <a (click)="verColaboracion()"
-                                class="btn btn-outline-light rounded-pill mt-auto fw-bold w-100">
-                                Ver más <i class="bi bi-plus-lg ms-1"></i>
-                            </a>
-                        </div>
-
-                    </div>
+            <div class="col-lg-4 text-center">
+                <h4 class="fw-bold mb-4 text-primary border-bottom pb-2">Organizaciones</h4>
+                <div class="logo-grid mb-3">
+                    <a href="https://amecafe.org.mx/" target="_blank" class="logo-item shadow-sm">
+                        <img src="/Imegenes/AMECAFE.jpg" alt="AMECAFE">
+                        <span class="logo-title">AMECAFÉ</span>
+                    </a>
                 </div>
+                <button type="button" class="btn btn-sm btn-outline-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modalOrganizaciones">
+                    Ver más Organizaciones
+                </button>
+            </div>
 
+            <div class="col-lg-4 text-center">
+                <h4 class="fw-bold mb-4 text-dark border-bottom pb-2">Empresas</h4>
+              
+
+
+                <!--<button type="button" class="btn btn-sm btn-outline-dark rounded-pill" data-bs-toggle="modal" data-bs-target="#modalEmpresas">
+                    Ver todas las Empresas
+                </button>-->
+                
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- //MODAL ORGANIZACIONES//-->
+<div class="modal fade" id="modalOrganizaciones" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title fw-bold">Organizaciones Aliadas</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light">
+                <div class="row g-4 justify-content-center">
+                    
+                    <div class="col-6 col-md-4">
+                        <a href="https://amecafe.org.mx/" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
+                            <img src="/Imegenes/AMECAFE.jpg" class="img-fluid mb-2" style="max-height: 80px;">
+                            <p class="small fw-bold text-dark mb-0">AMECAFE</p>
+                        </a>
+                    </div>
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- //MODAL GOBIERNO//-->
+
+<div class="modal fade" id="modalGobierno" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title fw-bold">Instituciones Gubernamentales</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-light">
+                <div class="row g-4 justify-content-center">
+                    
+                    <div class="col-6 col-md-4">
+                        <a href="https://incafech.gob.mx/" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
+                            <img src="/Imegenes/INCAFECH.webp" class="img-fluid mb-2" style="max-height: 80px;">
+                            <p class="small fw-bold text-dark mb-0">INCAFECH</p>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <a href="https://www.gob.mx/agricultura" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
+                            <img src="/Imegenes/SADER.jpg" class="img-fluid mb-2" style="max-height: 80px;">
+                            <p class="small fw-bold text-dark mb-0">SADER</p>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <a href="https://www.gob.mx/fira" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
+                            <img src="/Imegenes/FIRA.png" class="img-fluid mb-2" style="max-height: 80px;">
+                            <p class="small fw-bold text-dark mb-0">FIRA</p>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <a href="https://www.gob.mx/inifap" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
+                            <img src="/Imegenes/INAFAP.jpg" class="img-fluid mb-2" style="max-height: 80px;">
+                            <p class="small fw-bold text-dark mb-0">INIFAP</p>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <a href="https://www.gob.mx/siap" target="_blank" class="logo-item bg-white p-3 d-block text-center rounded">
+                            <img src="/Imegenes/SIAP.jpg" class="img-fluid mb-2" style="max-height: 80px;">
+                            <p class="small fw-bold text-dark mb-0">SIAP</p>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <footer class="footer-section bg-primary-custom text-white py-5">
         <div class="container">
@@ -1598,9 +1625,6 @@
                 <div class="col-lg-8 mb-4">
                     <div class="row">
                         <!-- Logo -->
-                        <div class="col-md-3 mb-4">
-                            <img src="/Imegenes/Imagen1.png" alt="ADICAM" class="footer-logo img-fluid">
-                        </div>
 
                         <!-- Enlaces -->
                         <div class="col-md-3 mb-3">

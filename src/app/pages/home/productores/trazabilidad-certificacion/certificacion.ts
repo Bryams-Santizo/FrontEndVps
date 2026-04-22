@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TrazabilidadService } from '../../../../services/trazabilidad.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BANCO_PREGUNTAS } from '../../../../preguntas.data';
 
 @Component({
   selector: 'app-trazabilidad',
@@ -12,8 +13,26 @@ import { FormsModule } from '@angular/forms';
 })
 export class TrazabilidadComponent {
   pasoActual: number = 1;
-  productor = { nombreProductor: '', nombreFinca: '', ubicacion: '', hectareas: null, altitudPromedio: null, volumenProduccion: null, variedades: '' };
+  productor = { 
+    nombreProductor: '', 
+    nombreFinca: '', 
+    ubicacion: '', 
+    hectareas: null, 
+    altitudPromedio: null, 
+    volumenProduccion: null, 
+    variedades: '' 
+  };
   productorIdGuardado: number = 0;
+
+  estadosDisponibles = ['Chiapas', 'Veracruz', 'Oaxaca'];
+  municipiosData = [
+    { estado: 'Chiapas', municipio: 'Tapachula', altitud: 170 },
+    { estado: 'Chiapas', municipio: 'Unión Juárez', altitud: 1300 },
+    { estado: 'Chiapas', municipio: 'Motozintla', altitud: 1200 },
+    { estado: 'Veracruz', municipio: 'Coatepec', altitud: 1200 },
+    { estado: 'Oaxaca', municipio: 'Pluma Hidalgo', altitud: 1300 }
+  ];
+  municipiosFiltrados: any[] = [];
 
   mercados = ['Europa', 'Asia', 'USA', 'Nacional'];
   mercadoSeleccionado: string = '';
@@ -21,37 +40,29 @@ export class TrazabilidadComponent {
   certificacionSeleccionada: any = null;
   esDiagnosticoGeneral: boolean = false;
 
-  // BANCO DE PREGUNTAS REALES SEPARADAS POR TIPO
-  preguntasOrganicas = [
-    { texto: '¿Evita estrictamente el uso de pesticidas, herbicidas y fertilizantes sintéticos (banda roja/amarilla)?', respuesta: false, tipo: 'Orgánica' },
-    { texto: '¿Aplica compostas, abonos orgánicos y cuenta con un plan de nutrición de suelos documentado?', respuesta: false, tipo: 'Orgánica' },
-    { texto: '¿Tiene establecidas barreras vivas para evitar la contaminación cruzada de fincas vecinas convencionales?', respuesta: false, tipo: 'Orgánica' },
-    { texto: '¿Lleva un registro estricto (bitácora) de todas las labores de campo e insumos aplicados?', respuesta: false, tipo: 'Orgánica' }
-  ];
-
-  preguntasComercioJusto = [
-    { texto: '¿Garantiza el pago de un salario digno y prohíbe estrictamente el trabajo infantil en su finca?', respuesta: false, tipo: 'Comercio Justo' },
-    { texto: '¿Está organizado en una cooperativa o grupo que toma decisiones de manera democrática en asamblea?', respuesta: false, tipo: 'Comercio Justo' },
-    { texto: '¿Ofrece condiciones seguras de trabajo y respeta la equidad de género en las labores y pagos?', respuesta: false, tipo: 'Comercio Justo' }
-  ];
-
-  preguntasRainforest = [
-    { texto: '¿Mantiene una cobertura de sombra diversificada con especies nativas en su cafetal?', respuesta: false, tipo: 'Rainforest' },
-    { texto: '¿Protege los cuerpos de agua (ríos, manantiales) y evita la deforestación de bosques primarios?', respuesta: false, tipo: 'Rainforest' },
-    { texto: '¿Trata adecuadamente las aguas mieles y la pulpa resultantes del beneficio húmedo del café?', respuesta: false, tipo: 'Rainforest' }
-  ];
-
-  // Las preguntas que se mostrarán en pantalla
   preguntasActuales: any[] = [];
   resultadoFinal: any = null;
 
   constructor(private trazabilidadService: TrazabilidadService) {}
 
+  onEstadoChange(estado: string) {
+    this.municipiosFiltrados = this.municipiosData.filter(m => m.estado === estado);
+    this.productor.altitudPromedio = null;
+  }
+
+  onMunicipioChange(municipioNombre: string) {
+    const mun = this.municipiosFiltrados.find(m => m.municipio === municipioNombre);
+    if (mun) {
+      this.productor.altitudPromedio = mun.altitud;
+      this.productor.ubicacion = `${mun.municipio}, ${mun.estado}`;
+    }
+  }
+
   guardarPerfil() {
     this.trazabilidadService.guardarProductor(this.productor).subscribe({
       next: (res) => {
         this.productorIdGuardado = res.id; 
-        this.pasoActual = 2; // Despliega la sección 2 abajo
+        this.pasoActual = 2;
       },
       error: (err) => alert('Error al guardar productor: ' + err.message)
     });
@@ -62,71 +73,79 @@ export class TrazabilidadComponent {
     this.trazabilidadService.obtenerCertificaciones(mercado).subscribe({
       next: (res) => {
         this.certificacionesDisponibles = res;
-        this.pasoActual = 2; // Mantiene visible el menú
+        this.pasoActual = 2;
       },
       error: (err) => console.error('Error al cargar', err)
     });
   }
 
-  // DIAGNÓSTICO GENERAL (Suma todas las preguntas)
   iniciarDiagnosticoGeneral() {
     this.esDiagnosticoGeneral = true;
-    this.certificacionSeleccionada = { nombre: 'Diagnóstico Integral ADICAM', id: null };
-    // Une todas las preguntas en un solo gran examen
-    this.preguntasActuales = [...this.preguntasOrganicas, ...this.preguntasComercioJusto, ...this.preguntasRainforest];
-    this.preguntasActuales.forEach(p => p.respuesta = false);
-    this.pasoActual = 3; // Despliega el test abajo
+    this.certificacionSeleccionada = { nombre: 'Diagnóstico Integral ADICAM', id: 0 };
+    this.preguntasActuales = [
+      ...BANCO_PREGUNTAS.organica, 
+      ...BANCO_PREGUNTAS.comercio_justo, 
+      ...BANCO_PREGUNTAS.rainforest_utz
+    ];
+    this.preguntasActuales.forEach(p => {
+  if (p.tipo === 'boolean') p.respuesta = false;
+  else p.respuesta = 0; // Esto cubre 'number', 'scale' y 'percentage'
+});
+    this.pasoActual = 3;
   }
 
-  // TESTING ESPECÍFICO (Asigna solo las preguntas que corresponden)
   iniciarTesting(certificacion: any) {
     this.esDiagnosticoGeneral = false;
     this.certificacionSeleccionada = certificacion;
     
-    // Filtro inteligente según el nombre de la certificación real
     const nombre = certificacion.nombre.toLowerCase();
-    if (nombre.includes('orgánica') || nombre.includes('organic')) {
-      this.preguntasActuales = [...this.preguntasOrganicas];
-    } else if (nombre.includes('justo') || nombre.includes('fairtrade')) {
-      this.preguntasActuales = [...this.preguntasComercioJusto];
-    } else if (nombre.includes('rainforest') || nombre.includes('utz')) {
-      this.preguntasActuales = [...this.preguntasRainforest];
-    } else {
-      // Por defecto si es Denominación de Origen u otra
-      this.preguntasActuales = [...this.preguntasOrganicas, ...this.preguntasRainforest]; 
-    }
+    if (nombre.includes('orgánica')) this.preguntasActuales = [...BANCO_PREGUNTAS.organica];
+    else if (nombre.includes('justo')) this.preguntasActuales = [...BANCO_PREGUNTAS.comercio_justo];
+    else if (nombre.includes('rainforest') || nombre.includes('utz')) this.preguntasActuales = [...BANCO_PREGUNTAS.rainforest_utz];
+    else this.preguntasActuales = [...BANCO_PREGUNTAS.organica];
 
-    this.preguntasActuales.forEach(p => p.respuesta = false); 
+    this.preguntasActuales.forEach(p => p.respuesta = (p.tipo === 'boolean' ? false : 0));
     this.pasoActual = 3;
   }
 
   finalizarTest() {
-    let certificacionFinalId = this.certificacionSeleccionada.id;
+    let aciertos = 0;
+    let recomendacionesFaltantes: string[] = [];
 
-    if (this.esDiagnosticoGeneral) {
-      let puntosOrg = this.preguntasActuales.filter(p => p.tipo === 'Orgánica' && p.respuesta).length;
-      let puntosCom = this.preguntasActuales.filter(p => p.tipo === 'Comercio Justo' && p.respuesta).length;
-      let puntosRain = this.preguntasActuales.filter(p => p.tipo === 'Rainforest' && p.respuesta).length;
+  this.preguntasActuales.forEach(p => {
+  let cumple = false;
+  
+  if (p.tipo === 'boolean') {
+    cumple = (p.respuesta === p.meta);
+  } else if (p.tipo === 'scale' || p.tipo === 'number' || p.tipo === 'percentage') {
+    // La lógica de "mayor o igual" sigue funcionando perfecto, 
+    // siempre que en tus DATOS la meta sea 80 y no 8.
+    cumple = (p.respuesta >= p.meta);
+  }
 
-      let maxPuntos = Math.max(puntosOrg, puntosCom, puntosRain);
-      
-      // Asignamos el ID de la BD según donde salió mejor
-      if (maxPuntos === puntosOrg) certificacionFinalId = 1; // ID Orgánica
-      else if (maxPuntos === puntosCom) certificacionFinalId = 2; // ID Comercio Justo
-      else certificacionFinalId = 3; // ID Rainforest
-    }
+  if (cumple) aciertos++;
+  else recomendacionesFaltantes.push(p.recomendacion);
+});
 
-    const aciertos = this.preguntasActuales.filter(p => p.respuesta).length;
     const total = this.preguntasActuales.length;
+    const stringRecomendaciones = recomendacionesFaltantes.join("\n- ");
+    const certId = this.esDiagnosticoGeneral ? 1 : this.certificacionSeleccionada.id;
 
-    this.trazabilidadService.calcularEvaluacion(this.productorIdGuardado, certificacionFinalId, aciertos, total)
-      .subscribe({
-        next: (res) => {
-          this.resultadoFinal = res;
-          this.pasoActual = 4; // Despliega los resultados al final
-        },
-        error: (err) => alert('Error al procesar: ' + err.message)
-      });
+    // Ahora el servicio acepta los 5 parámetros, por lo que el error desaparecerá
+    this.trazabilidadService.calcularEvaluacion(
+      this.productorIdGuardado, 
+      certId, 
+      aciertos, 
+      total, 
+      stringRecomendaciones
+    ).subscribe({
+      next: (res) => {
+        this.resultadoFinal = res;
+        this.resultadoFinal.porcentajeAMostrar = res.porcentajeCumplimiento.toFixed(2).replace('.', ',');
+        this.pasoActual = 4;
+      },
+      error: (err) => alert('Error al procesar: ' + err.message)
+    });
   }
 
   descargarReporte() {

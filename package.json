@@ -34,6 +34,7 @@
     "@ng-bootstrap/ng-bootstrap": "^19.0.1",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
+    "build": "^0.1.4",
     "chart.js": "^4.5.1",
     "express": "^5.1.0",
     "geojson": "^0.5.0",
@@ -41,6 +42,8 @@
     "jspdf-autotable": "^5.0.2",
     "leaflet": "^1.9.4",
     "leaflet.markercluster": "^1.5.3",
+    "npm": "^11.11.0",
+    "run": "^1.5.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

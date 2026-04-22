@@ -18,12 +18,15 @@ export interface IColaboracion {
   duracion: string;
   beneficios: string;
   personaContacto: string;
-  documentosAdjuntos?: string;
-  cartaIntencion?: string;
+
+  documentosAdjuntos?: string;   // imagen (o archivo) principal
+  cartaIntencion?: string;       // pdf u otro
   estado: string;
+
   // Campos mapeados para la visualización en el frontend
-  documentoUrl?: string;
-  cartaUrl?: string;
+  imagenUrl?: string | null;
+  documentoUrl?: string | null;
+  cartaUrl?: string | null;      // opcional si luego lo usas
 }
 
 /* ============================
@@ -35,28 +38,36 @@ export interface IColaboracion {
 })
 export class ColaboracionService {
 
-  // 🔥 URL centralizada desde la configuración de producción
+  // 🔥 API centralizada (en navegador: /api/colaboraciones)
   private apiColaboraciones = `${API_BASE}/colaboraciones`;
+
+  // ✅ Base pública para archivos estáticos (según tu nginx: location ^~ /uploads/)
+  // Esto funciona en prod y en dev (si también sirves /uploads).
+  private uploadsBase = `/uploads`;
 
   constructor(private http: HttpClient) { }
 
   /**
-   * Obtiene todas las colaboraciones y mapea los nombres de archivo 
-   * a URLs completas para que el navegador pueda acceder a ellos.
+   * Obtiene todas las colaboraciones y mapea nombres de archivo a URLs públicas (/uploads)
    */
   getColaboraciones(): Observable<IColaboracion[]> {
-    // Se asume que el servidor de archivos está en la misma base que la API
-    // pero en la carpeta /uploads/
-    const serverBase = API_BASE.replace('/api', ''); 
-
     return this.http.get<IColaboracion[]>(this.apiColaboraciones).pipe(
-      map(data => {
-        return data.map(colab => ({
-          ...colab,
-          documentoUrl: colab.documentosAdjuntos ? `${serverBase}/uploads/${colab.documentosAdjuntos}` : undefined,
-          cartaUrl: colab.cartaIntencion ? `${serverBase}/uploads/${colab.cartaIntencion}` : undefined
-        }));
-      })
+      map(data => data.map(colab => ({
+        ...colab,
+
+        // ✅ imagen superior de la ficha
+        imagenUrl: colab.documentosAdjuntos
+          ? `${this.uploadsBase}/${colab.documentosAdjuntos}`
+          : null,
+
+        // ✅ pdf/icono descarga
+        documentoUrl: colab.cartaIntencion
+          ? `${this.uploadsBase}/${colab.cartaIntencion}`
+          : null,
+
+        // si luego quieres separar:
+        // cartaUrl: colab.cartaIntencion ? `${this.uploadsBase}/${colab.cartaIntencion}` : null,
+      })))
     );
   }
 
@@ -75,7 +86,7 @@ export class ColaboracionService {
   }
 
   /**
-   * Actualiza una colaboración permitiendo el envío de nuevos archivos (FormData)
+   * Actualiza una colaboración permitiendo envío de nuevos archivos (FormData)
    */
   actualizarColaboracionFormData(id: number, formData: FormData): Observable<IColaboracion> {
     return this.http.put<IColaboracion>(`${this.apiColaboraciones}/${id}`, formData);

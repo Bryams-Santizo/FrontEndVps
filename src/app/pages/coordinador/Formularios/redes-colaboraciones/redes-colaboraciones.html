@@ -146,36 +146,35 @@
                 </div>
                 <input type="text" [(ngModel)]="colaboracion.personaContacto" name="personaContacto" required>
             </div>
-
-           <div class="campo campo-full">
+            <div class="campo campo-full">
                 <div class="label-with-tooltip">
-                    <label>Documentos adjuntos</label>
+                    <label>Imagen de la colaboración (JPG/PNG)</label>
                     <div class="tooltip-container">
                         <i class="info-icon">?</i>
-                        <span class="tooltip-text">
-                            Archivos complementarios relacionados con la necesidad o proyecto (ej: bases, requerimientos técnicos).
-                        </span>
+                        <span class="tooltip-text">Esta imagen aparecerá como portada en la ficha pública.</span>
                     </div>
                 </div>
-                <input type="file" (change)="onFileChange($event, 'documentosAdjuntos')">
-                <small *ngIf="editandoId && colaboracion.documentosAdjuntos" style="color: #2563eb; margin-top: 5px; display: block;">
-                    Archivo actual: <strong>{{ colaboracion.documentosAdjuntos }}</strong> (Sube uno nuevo si deseas reemplazarlo)
+                <input type="file" (change)="onFileChange($event, 'documentosAdjuntos')" accept="image/*">
+
+                <small *ngIf="editandoId && colaboracion.documentosAdjuntos"
+                    style="color: #2563eb; margin-top: 5px; display: block;">
+                    Imagen actual: <strong>{{ colaboracion.documentosAdjuntos }}</strong>
                 </small>
             </div>
 
             <div class="campo campo-full">
                 <div class="label-with-tooltip">
-                    <label>Carta de intención / cooperación</label>
+                    <label>Documento PDF (Convocatoria/Detalles)</label>
                     <div class="tooltip-container">
                         <i class="info-icon">?</i>
-                        <span class="tooltip-text">
-                            Documento formal firmado que expresa el compromiso e intención de colaborar.
-                        </span>
+                        <span class="tooltip-text">Archivo descargable para los interesados.</span>
                     </div>
                 </div>
-                <input type="file" (change)="onFileChange($event, 'cartaIntencion')">
-                <small *ngIf="editandoId && colaboracion.cartaIntencion" style="color: #2563eb; margin-top: 5px; display: block;">
-                    Archivo actual: <strong>{{ colaboracion.cartaIntencion }}</strong> (Sube uno nuevo si deseas reemplazarlo)
+                <input type="file" (change)="onFileChange($event, 'cartaIntencion')" accept=".pdf">
+
+                <small *ngIf="editandoId && colaboracion.cartaIntencion"
+                    style="color: #2563eb; margin-top: 5px; display: block;">
+                    PDF actual: <strong>{{ colaboracion.cartaIntencion }}</strong>
                 </small>
             </div>
 
@@ -191,16 +190,17 @@
                     Actualizar Registro
                 </button>
 
-                <button type="button" (click)="cancelarEdicion()" class="btn-guardar" style="background-color: #6b7280;">
+                <button type="button" (click)="cancelarEdicion()" class="btn-guardar"
+                    style="background-color: #6b7280;">
                     Cancelar
                 </button>
             </div>
         </div>
 
-        </div>
-
-        
     </div>
+
+
+</div>
 
 
 <div class="contenedor" style="margin-top: 20px;">
@@ -223,7 +223,7 @@
                     <td style="padding: 12px;">{{ item.tipoColaboracion }}</td>
                     <td style="padding: 12px;">{{ item.estado }}</td>
                     <td style="padding: 12px;">{{ item.duracion }}</td>
-                    
+
                     <td style="padding: 12px; text-align: center; display: flex; gap: 8px; justify-content: center;">
                         <button (click)="editarColaboracion(item)"
                             style="background: #fbbf24; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">
@@ -235,7 +235,7 @@
                         </button>
                     </td>
                 </tr>
-                
+
                 <tr *ngIf="listaColaboraciones.length === 0" style="border-bottom: 1px solid #e2e8f0;">
                     <td colspan="5" style="padding: 12px; text-align: center; color: #64748b;">
                         No hay colaboraciones registradas.

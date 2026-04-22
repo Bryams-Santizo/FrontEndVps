@@ -79,21 +79,23 @@ export class RedesColaboracionesComponent implements OnInit {
   }
 
   guardarDatos(): void {
-    const datos = { ...this.colaboracion };
+    // 1. Clonamos el objeto para no afectar la vista
+    const datosParaEnviar = { ...this.colaboracion };
     
-    if (this.mostrarOtroTipo && !datos.especificacionOtroTipo?.trim() && !this.editandoId) {
-      alert('Por favor, especifique el tipo de colaboración "Otro".');
-      return;
-    }
+    // 2. ELIMINAMOS los campos que el Backend no conoce
+    delete (datosParaEnviar as any).imagenUrl;
+    delete (datosParaEnviar as any).documentoUrl;
+    delete (datosParaEnviar as any).cartaUrl;
 
-    if (this.mostrarOtroTipo && datos.especificacionOtroTipo) {
-      datos.tipoColaboracion = datos.especificacionOtroTipo;
+    // ... lógica del "Otro" tipo de colaboración ...
+    if (this.mostrarOtroTipo && this.colaboracion.especificacionOtroTipo) {
+        datosParaEnviar.tipoColaboracion = this.colaboracion.especificacionOtroTipo;
     }
-    delete datos.especificacionOtroTipo;
+    delete (datosParaEnviar as any).especificacionOtroTipo;
 
-    // AHORA SIEMPRE CREAMOS UN FORMDATA (Tanto para Nuevo como para Editar)
     const formData = new FormData();
-    formData.append('colaboracion', JSON.stringify(datos)); 
+    // 3. Enviamos el objeto LIMPIO
+    formData.append('colaboracion', JSON.stringify(datosParaEnviar)); 
     
     if (this.documentoArchivo) formData.append('fileDocumento', this.documentoArchivo);
     if (this.cartaArchivo) formData.append('fileCarta', this.cartaArchivo);

@@ -1,9 +1,9 @@
 <nav class="navbar-superior">
-    <div class="logo-container">
-        <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
-        <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
-        <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
-    </div>
+  <div class="logo-container">
+    <img src="/Imegenes/pleca_educacion_dic24.png" alt="Logo de Educación">
+    <img src="/Imegenes/pleca_tecnm.jpg" alt="Logo de TecNM">
+    <img src="/Imegenes/Imagen1.png" alt="Logo de Chiapas">
+  </div>
 </nav>
 
 <nav class="navbar-inferior">
@@ -17,100 +17,86 @@
 </nav>
 
 <div class="container">
-  
-
   <div class="modulo-calculadora">
     <div class="calc-card">
 
       <div class="calc-header">
-        <h2>Calculadora del Productor de Café</h2>
-        <p class="text-muted">
-          El resultado es un estimado y puede variar por temporada, región y mercado.
-        </p>
+        <div class="header-main">
+          <h2>Calculadora del Productor de Café</h2>
+          <span class="badge-rt"
+            [ngClass]="{'online': precioBolsaQuintal > 0, 'offline': errorConexion || cargandoPrecio}">
+            <span class="dot"></span>
+            {{ cargandoPrecio ? 'Consultando Bolsa...' : (precioBolsaQuintal > 0 ? 'Bolsa: Conectada' : 'Bolsa: Sin
+            Conexión') }}
+          </span>
+        </div>
+        <p class="text-muted">Precios convertidos desde la Bolsa de Chicago (CME Group).</p>
       </div>
 
       <div class="calc-body">
+        <div *ngIf="errorConexion" class="alert-error">
+          No se pudieron obtener datos reales de la bolsa. Verifique su conexión o API Key.
+        </div>
 
-        <!-- UNIDAD -->
         <div class="input-group">
           <label>¿Cómo venderás tu café?</label>
           <select [(ngModel)]="unidadVenta">
-            <option value="quintal">Quintales (Costal)</option>
+            <option value="quintal">Quintales (46kg)</option>
             <option value="kilo">Kilogramos</option>
           </select>
         </div>
 
-        <!-- CANTIDAD -->
         <div class="input-group">
-          <label>Cantidad</label>
-          <input type="number" [(ngModel)]="cantidad" placeholder="Ej: 20">
+          <label>Cantidad (en {{ unidadVenta }})</label>
+          <input type="number" [(ngModel)]="cantidad" placeholder="0">
         </div>
 
-        <!-- TIPO DE CAFÉ -->
         <div class="input-group">
           <label>Tipo de café</label>
           <select [(ngModel)]="tipoCafe">
+            <option value="oro">Oro (Precio Bolsa Real)</option>
+            <option value="pergamino">Pergamino (85% de Bolsa)</option>
             <option value="cereza">Cereza</option>
-            <option value="pergamino">Pergamino</option>
-            <option value="oro">Oro</option>
             <option value="tostado">Tostado</option>
             <option value="molido">Molido</option>
           </select>
         </div>
 
-        <!-- CALIDAD -->
-        <div class="input-group">
-          <label>Calidad</label>
-          <select [(ngModel)]="calidad">
-            <option value="comercial">Comercial</option>
-            <option value="primera">Primera</option>
-            <option value="especial">Especial</option>
-          </select>
-        </div>
-
-        <!-- CERTIFICACIÓN -->
-        <div class="input-group">
-          <label>Certificación</label>
-          <select [(ngModel)]="certificacion">
-            <option value="ninguna">Ninguna</option>
-            <option value="organico">Orgánico</option>
-            <option value="comercioJusto">Comercio Justo</option>
-          </select>
-        </div>
-
         <hr>
 
-        <!-- RESULTADOS -->
-        <div class="results">
-
+        <div class="results" *ngIf="precioReferencia > 0; else noData">
           <div class="result-item">
             <span>Precio de referencia aplicado:</span>
-            <span class="value">
-              {{ precioReferencia | currency }} /
-              {{ unidadVenta === 'quintal' ? 'quintal' : 'kg' }}
+            <span class="value text-green">
+              {{ precioReferencia | currency:'USD':'symbol':'1.2-2' }} / {{ unidadVenta }}
+              <small *ngIf="tipoCafe === 'oro' || tipoCafe === 'pergamino'">(Cotización Real)</small>
             </span>
           </div>
 
           <div class="result-item">
-            <span>Total equivalente en kilos:</span>
-            <span class="value">{{ totalKilos }} kg</span>
+            <span>Total en kilogramos:</span>
+            <span class="value">{{ totalKilos | number:'1.1-1' }} kg</span>
           </div>
 
           <div class="result-item highlight">
-            <span>Valor estimado de la cosecha:</span>
-            <span class="value total">
-              {{ totalEstimado | currency }}
-            </span>
+            <span>Valor Total Estimado:</span>
+            <span class="value total">{{ totalEstimado | currency:'USD':'symbol':'1.2-2' }}</span>
           </div>
-
         </div>
 
+        <ng-template #noData>
+          <div class="no-data-msg">
+            <p>Esperando datos reales del mercado para calcular...</p>
+          </div>
+        </ng-template>
       </div>
 
       <div class="calc-footer">
-        <small class="text-muted">
-          *Estimación basada en precios promedio. No representa un precio oficial de compra.
-        </small>
+        <p *ngIf="precioBolsaQuintal > 0">
+          Última actualización de la bolsa: <strong>{{ fechaActualizacion }}</strong>
+        </p>
+        <small class="text-muted">*Datos verificados mediante API Alpha Vantage. No se utilizan valores
+          simulados.</small>
       </div>
 
     </div>

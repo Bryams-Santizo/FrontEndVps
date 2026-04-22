@@ -138,29 +138,16 @@
                 <input type="text" [(ngModel)]="datos.responsable" name="responsable" required>
             </div>
 
-            <div class="campo campo-full">
-                <div class="label-with-tooltip">
-                    <label>Documentos técnicos (PDF)</label>
-                    <div class="tooltip-container">
-                        <i class="info-icon">?</i>
-                        <span class="tooltip-text">Manuales o fichas técnicas.</span>
-                    </div>
-                </div>
-                <input type="file" (change)="seleccionarArchivo($event,'documentos')" accept=".pdf">
-                <small *ngIf="editandoId" class="text-info">Subir nuevo para reemplazar el anterior.</small>
-            </div>
+         <div class="campo campo-full">
+            
+    <div class="label-with-tooltip">
+        <label>Imagen de la Tecnología (JPG, PNG)</label>
+    </div>
+    <input type="file" (change)="seleccionarArchivo($event,'documentos')" accept="image/*">
+    <small *ngIf="editandoId" class="text-info">Subir nueva imagen para reemplazar.</small>
+</div>
 
-            <div class="campo campo-full">
-                <div class="label-with-tooltip">
-                    <label>Carta de autorización (PDF)</label>
-                    <div class="tooltip-container">
-                        <i class="info-icon">?</i>
-                        <span class="tooltip-text">Documento oficial firmado.</span>
-                    </div>
-                </div>
-                <input type="file" (change)="seleccionarArchivo($event,'carta')" accept=".pdf">
-                <small *ngIf="editandoId" class="text-info">Subir nuevo para reemplazar el anterior.</small>
-            </div>
+            
 
         </div>
 

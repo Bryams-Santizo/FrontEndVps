@@ -39,31 +39,67 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-/* Grid más denso: tarjetas más pequeñas para ver más a la vez */
+/* Grid más denso: tarjetas más pequeñas para ver más a la vez *//* ... resto de tus estilos de Navbar y variables ... */
+
+/* Grid más denso, tarjetas más pequeñas */
 .fichas-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1.5rem;
 }
 
-/* Card Compacta */
+/* Card Compacta y Cuadrada */
 .ficha-institucional {
     background: var(--blanco);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    height: 450px; /* Altura fija para uniformidad */
+    /* Altura fija un poco más alta para que quepa todo sin scroll excesivo */
+    height: 520px; 
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     transition: transform 0.2s;
+    overflow: hidden; /* Importante para la imagen redondeada arriba */
 }
 
 .ficha-institucional:hover {
     transform: translateY(-5px);
 }
 
-/* Header más delgado */
-.ficha-header {
+/* 1. Ajuste de la imagen superior (Banner Prominente y Cuadrado) */
+.ficha-imagen-container {
+    width: 100%;
+    /* Aumentamos la altura de la imagen para que sea más cuadrada */
+    height: 180px; 
+    overflow: hidden;
+    background: #e5e7eb;
+}
+
+.ficha-imagen-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Evita deformaciones */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.ficha-imagen-container img:hover {
+    transform: scale(1.05);
+}
+
+.ficha-imagen-container.no-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
     padding: 1rem;
+}
+
+/* Header Compacto */
+.ficha-header {
+    padding: 0.8rem 1rem;
     border-bottom: 2px solid var(--oro-tecnm);
 }
 
@@ -71,86 +107,98 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .tipo-badge {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 700;
     color: var(--blanco);
     background: var(--azul-tecnm);
-    padding: 0.2rem 0.6rem;
+    padding: 0.2rem 0.5rem;
     border-radius: 4px;
     text-transform: uppercase;
 }
 
 .ubicacion-text {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
     color: var(--oro-tecnm);
 }
 
 .institucion-nombre {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: var(--azul-tecnm);
     margin: 0;
+    /* Truncado suave si es muy largo */
     display: -webkit-box;
-    
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-/* Contenido con scroll interno si es muy largo */
+/* 2. Contenido con Scroll Interno */
 .ficha-contenido { 
     padding: 1rem; 
     flex-grow: 1; 
-    overflow-y: auto; /* Permite scroll solo dentro de la tarjeta si hay mucho texto */
+    overflow-y: auto; /* Scroll solo dentro si el texto es muy largo */
 }
 
-/* Scrollbar personalizado para las tarjetas */
-.ficha-contenido::-webkit-scrollbar { width: 4px; }
-.ficha-contenido::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+/* Scrollbar sutil */
+.ficha-contenido::-webkit-scrollbar { width: 3px; }
+.ficha-contenido::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
 
-.seccion-info { margin-bottom: 1rem; }
+.seccion-info { margin-bottom: 0.8rem; }
 .seccion-info label {
     display: block;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 700;
-    color: #666;
+    color: #6b7280;
     text-transform: uppercase;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.5px;
 }
 
 .seccion-info p {
-    font-size: 0.85rem;
-    color: #333;
+    font-size: 0.8rem;
+    color: #1f2937;
     line-height: 1.4;
     margin: 0;
 }
 
+/* Estilo para los Beneficios */
+.beneficios-box {
+    background-color: #ecfdf5; /* Verde muy tenue */
+    padding: 0.6rem;
+    border-radius: 6px;
+    border-left: 3px solid #10b981; /* Verde esmeralda */
+}
+
+.beneficios-box label { color: #065f46; }
+
 .perfil-box {
     background-color: #f1f5f9;
-    padding: 0.8rem;
+    padding: 0.6rem;
     border-radius: 6px;
     border-left: 3px solid var(--oro-tecnm);
 }
 
-/* Tabla interna más pequeña */
+/* Tabla interna compacta */
 .tabla-contenedor {
     border: 1px solid #e2e8f0;
     border-radius: 6px;
     margin-top: 0.5rem;
 }
 .fila-tabla { display: flex; border-bottom: 1px solid #e2e8f0; }
-.fila-tabla.single { border-bottom: none; }
-.celda { padding: 8px; flex: 1; text-align: center; }
+.fila-tabla:last-child { border-bottom: none; }
+.celda { padding: 6px; flex: 1; text-align: center; }
 .celda:not(:last-child) { border-right: 1px solid #e2e8f0; }
 
-.label-tabla { font-size: 0.6rem; color: #666; font-weight: 700; }
-.valor-tabla { font-size: 0.8rem; font-weight: 700; color: var(--azul-tecnm); }
+.label-tabla { font-size: 0.55rem; color: #6b7280; font-weight: 700; text-transform: uppercase;}
+.valor-tabla { font-size: 0.75rem; font-weight: 700; color: var(--azul-tecnm); display: block; margin-top: 2px;}
 
-/* Footer Fijo abajo */
+/* 3. Footer Fijo y Separado */
 .ficha-footer {
     padding: 0.8rem 1rem;
     background: var(--azul-tecnm);
@@ -158,26 +206,44 @@
     justify-content: space-between;
     align-items: center;
     color: #ffffff;
+    margin-top: auto; /* Empuja el footer al fondo */
 }
 
-.nombre-contacto { font-size: 0.8rem; font-weight: 600; }
+.contacto-principal {
+    display: flex;
+    flex-direction: column; /* Apila el label y el nombre */
+    gap: 3px; /* Espacio entre label y nombre para que no se peguen */
+}
+
+.label-contacto {
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7); /* Blanco tenue */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nombre-contacto { 
+    font-size: 0.75rem; 
+    font-weight: 600; 
+    color: #ffffff;
+}
+
 .evidencias {
     display: flex;
-    gap: 15px; /* Más espacio entre iconos */
+    gap: 15px;
     align-items: center;
 }
 
 .icon-doc { 
-    width: 24px; /* Tamaño fijo para el contenedor del SVG */
-    height: 24px;
+    width: 22px;
+    height: 22px;
     color: #ffffff;
-    opacity: 0.15; /* Muy tenue si no hay archivo */
-    cursor: not-allowed;
+    opacity: 0.2; /* Tenue si no hay archivo */
     transition: all 0.3s ease;
 }
 
-
-
+/* SVG del icono PDF */
 .icon-doc svg {
     width: 100%;
     height: 100%;
@@ -187,10 +253,31 @@
 .icon-doc.file-on { 
     opacity: 1; 
     cursor: pointer;
-    filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
 }
 
 .icon-doc.file-on:hover { 
-    transform: scale(1.15);
+    transform: scale(1.1);
     color: var(--oro-tecnm); /* Cambia a dorado al pasar el mouse */
+}
+
+.btn-pdf-nuevo {
+    background: var(--oro-tecnm);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-pdf-nuevo:hover {
+    background: #96784d; /* Un tono más oscuro de oro */
+}
+
+.sin-archivo {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.4);
+    font-style: italic;
 }
