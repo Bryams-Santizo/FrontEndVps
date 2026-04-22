@@ -1,0 +1,162 @@
+<nav class="navbar-superior">
+  <div class="logo-container">
+    <img src="/Imegenes/pleca_educacion_dic24.png" alt="Educación">
+    <img src="/Imegenes/pleca_tecnm.jpg" alt="TecNM">
+    <img src="/Imegenes/Imagen1.png" alt="Logo Adicional">
+  </div>
+</nav>
+
+<nav class="navbar-inferior">
+  <div class="titulo-navbar">
+    Mapa Regional de Café Chiapas
+  </div>
+
+  <div class="nav-botones">
+    <button class="btn btn-outline-light" [class.active]="seccionActiva === 'mundo'" (click)="irSeccion('mundo')">
+      México en el mundo
+    </button>
+    <button class="btn btn-outline-light" [class.active]="seccionActiva === 'nacional'" (click)="irSeccion('nacional')">
+      Panorama nacional
+    </button>
+    <button class="btn btn-outline-light" [class.active]="seccionActiva === 'estado'" (click)="irSeccion('estado')">
+      Café en tu estado
+    </button>
+  </div>
+</nav>
+
+<div class="contenedor-principal-mapa mt-3 px-3">
+  <div class="row g-2 h-100">
+    <div class="col-md-9">
+      <div id="map-container" class="mapa-pro"></div>
+    </div>
+
+    <div class="col-md-3 sidebar-institucional">
+      
+      <div *ngIf="selectedRegionData; else indicadoresGenerales" class="p-3">
+        <div class="d-flex justify-content-between align-items-start">
+          <h4 class="text-white border-bottom pb-2 mb-3">{{ selectedRegionData.nombreRegion }}</h4>
+          <button class="btn btn-sm btn-outline-warning" (click)="selectedRegionData = null">X</button>
+        </div>
+
+        <div class="mb-3">
+          <label class="small text-warning fw-bold">Municipios (clic para detalle):</label>
+          <div class="d-flex flex-wrap gap-1 mt-1">
+            <button *ngFor="let m of selectedRegionData.municipios"
+              (click)="seleccionarMunicipio(m, selectedRegionData.nombreRegion)" 
+              data-bs-toggle="modal" data-bs-target="#modalMunicipio"
+              class="badge border border-light small bg-transparent btn-municipio-link text-white">
+              {{m}}
+            </button>
+          </div>
+        </div>
+
+       
+
+        <button class="btn btn-light w-100 mt-4 fw-bold shadow-lg" (click)="generateReport()">
+          <i class="fas fa-file-pdf"></i> REPORTE PDF
+        </button>
+      </div>
+
+      <ng-template #indicadoresGenerales>
+  <div class="p-3">
+    <h5 class="text-warning border-bottom pb-2 mb-3">
+      {{ seccionActiva === 'mundo' ? 'México en el Mundo' : (seccionActiva === 'nacional' ? 'Panorama Nacional' : 'Datos de Chiapas') }}
+    </h5>
+
+    <!-- Navegación de subsecciones (Solo si no es mundo) -->
+    <div *ngIf="seccionActiva !== 'mundo'" class="btn-group w-100 mb-3" role="group">
+      <button class="btn btn-sm btn-outline-warning" [class.active]="subSeccion === 'produccion'" (click)="subSeccion = 'produccion'">Producción</button>
+      <button class="btn btn-sm btn-outline-warning" [class.active]="subSeccion === 'estructura'" (click)="subSeccion = 'estructura'">Estructura</button>
+      <button class="btn btn-sm btn-outline-warning" [class.active]="subSeccion === 'socio'" (click)="subSeccion = 'socio'">Socioeco.</button>
+    </div>
+
+    <div class="lista-datos-scroll">
+      <div *ngFor="let item of getListaActiva()" class="item-indicador mb-3 border-bottom border-secondary pb-2">
+        <small class="text-white-50 d-block" style="font-size: 0.75rem;">{{ item.label }}</small>
+        
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="fw-bold">{{ item.valor }}</span>
+          <!-- Al hacer clic, pasamos el objeto completo para saber si tiene desglose -->
+         <button class="btn btn-sm text-info p-0" 
+        (click)="verGrafico(item)"
+        data-bs-toggle="modal" 
+        data-bs-target="#modalGraficoIndicador">
+  <i class="fas fa-chart-line"></i>
+</button>
+        </div>
+
+        <!-- NUEVO: Desglose visual para Exportaciones/Importaciones -->
+        <div *ngIf="item.tieneDesglose" class="mt-2 d-flex gap-1 flex-wrap">
+          <span class="badge bg-dark border border-secondary text-info" style="font-size: 0.65rem;">Grano</span>
+          <span class="badge bg-dark border border-secondary text-info" style="font-size: 0.65rem;">Tostado</span>
+          <span class="badge bg-dark border border-secondary text-info" style="font-size: 0.65rem;">Soluble</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalMunicipio" tabindex="-1" aria-hidden="true">
+  </div>
+
+  
+
+
+  <!-- Modal para Gráficos de Indicadores -->
+<div class="modal fade" id="modalGraficoIndicador" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-white border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">
+          <i class="fas fa-chart-bar me-2"></i>{{ itemSeleccionado?.label }}
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Filtros de Fecha y Tipo -->
+        <div class="row g-3 mb-4 align-items-end">
+          <div class="col-md-4">
+            <label class="small text-white-50">Rango de años:</label>
+            <div class="input-group input-group-sm">
+              <input type="number" class="form-control bg-secondary text-white border-none" [(ngModel)]="filtroAnios.inicio" placeholder="Inicio">
+              <span class="input-group-text bg-dark text-white border-secondary">-</span>
+              <input type="number" class="form-control bg-secondary text-white border-none" [(ngModel)]="filtroAnios.fin" placeholder="Fin">
+            </div>
+          </div>
+
+          <!-- Solo se muestra si el item tiene desglose -->
+          <div class="col-md-8" *ngIf="itemSeleccionado?.tieneDesglose">
+            <label class="small text-white-50 d-block">Desglose por profundidad:</label>
+            <div class="btn-group btn-group-sm w-100" role="group">
+              <input type="checkbox" class="btn-check" id="btnGrano" [(ngModel)]="filtrosTipo.grano" autocomplete="off">
+              <label class="btn btn-outline-info" for="btnGrano">Grano Verde</label>
+
+              <input type="checkbox" class="btn-check" id="btnTostado" [(ngModel)]="filtrosTipo.tostado" autocomplete="off">
+              <label class="btn btn-outline-info" for="btnTostado">Tostado</label>
+
+              <input type="checkbox" class="btn-check" id="btnSoluble" [(ngModel)]="filtrosTipo.soluble" autocomplete="off">
+              <label class="btn btn-outline-info" for="btnSoluble">Soluble</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contenedor del Gráfico -->
+        <div class="bg-secondary rounded p-3" style="height: 400px; position: relative;">
+  <canvas id="miGraficoCanvas"></canvas>
+</div>
+
+      </div>
+      <div class="modal-footer border-secondary">
+        <button type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">Cerrar</button>
+       <button type="button" class="btn btn-warning btn-sm" (click)="generarGrafico()">
+  Actualizar Datos
+</button>
+      </div>
+    </div>
+  </div>
+</div>
