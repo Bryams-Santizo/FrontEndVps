@@ -118,8 +118,20 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/home/productores/trazabilidad-certificacion/certificacion').then(m => m.TrazabilidadComponent)
   },
+  {
+    path: 'mapas',
+    loadComponent: () =>
+      import('./pages/home/mapas/mapas').then(m => m.mapas)
+  },
+  {
+    path: 'globo',
+    loadComponent: () =>
+      import('./pages/home/globo/mapa.component').then(m => m.mundo)
+  },
+  
      
       
+
 
 
 
