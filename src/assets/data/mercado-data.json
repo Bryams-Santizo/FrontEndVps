@@ -1,0 +1,118 @@
+{
+  "segmentos": {
+    "especialidad": {
+      "nombre": "Especialidad",
+      "trazabilidad": "total",
+      "certificaciones": [
+        {
+          "nombre": "Protocolo SCA",
+          "tipo": "clave",
+          "descripcion": "Evaluación de taza 84+ puntos"
+        },
+        {
+          "nombre": "Q-Grader",
+          "tipo": "validacion",
+          "descripcion": "Catador certificado"
+        }
+      ]
+    },
+
+    "premium": {
+      "nombre": "Premium",
+      "trazabilidad": "media",
+      "certificaciones": [
+        {
+          "nombre": "Denominación de origen",
+          "tipo": "clave"
+        },
+        {
+          "nombre": "BPM",
+          "tipo": "validacion"
+        }
+      ]
+    },
+
+    "certificado": {
+      "nombre": "Certificado",
+      "trazabilidad": "alta",
+      "certificaciones": [
+        {
+          "nombre": "Orgánico",
+          "tipo": "ambiental"
+        },
+        {
+          "nombre": "Rainforest Alliance",
+          "tipo": "ambiental"
+        },
+        {
+          "nombre": "Fairtrade",
+          "tipo": "social"
+        },
+        {
+          "nombre": "SPP",
+          "tipo": "social"
+        }
+      ]
+    },
+
+    "nicho": {
+      "nombre": "Nicho",
+      "trazabilidad": "total",
+      "certificaciones": [
+        {
+          "nombre": "Bird Friendly",
+          "tipo": "biodiversidad"
+        },
+        {
+          "nombre": "Women Coffee Alliance",
+          "tipo": "social"
+        },
+        {
+          "nombre": "Procesos Honey/Natural",
+          "tipo": "proceso"
+        }
+      ]
+    },
+
+    "volumen": {
+      "nombre": "Volumen",
+      "trazabilidad": "basica",
+      "certificaciones": [
+        {
+          "nombre": "4C",
+          "tipo": "base"
+        }
+      ]
+    }
+  },
+
+  "mexico": {
+    "base": {
+      "certificaciones": [
+        "NOM-149",
+        "Orgánico SAGARPA",
+        "Sustentabilidad básica"
+      ],
+      "trazabilidad": true
+    }
+  },
+
+  "paises": {
+    "Germany": {
+      "certificaciones": ["Orgánico", "Fairtrade", "EUDR"],
+      "requisitos": "Regulación estricta europea"
+    },
+    "United States of America": {
+      "certificaciones": ["FDA", "Orgánico USDA"],
+      "requisitos": "Registro FDA obligatorio"
+    },
+    "Japan": {
+      "certificaciones": ["JAS", "Control de residuos"],
+      "requisitos": "Altos estándares sanitarios"
+    },
+    "Norway": {
+      "certificaciones": ["Especialidad", "Trazabilidad total"],
+      "requisitos": "Mercado gourmet"
+    }
+  }
+}
