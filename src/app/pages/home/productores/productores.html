@@ -9,96 +9,340 @@
 <nav class="navbar-inferior">
   <div class="titulo-navbar">Panel de Productores</div>
 
-  <ul class="navbar-nav fw-semibold gap-3">
-    <li class="nav-item"><a class="nav-link text-white" routerLink="/certificaciones"><i
-          class="bi bi-people me-2"></i>Certificaciones</a></li>
-          </ul>
-
 </nav>
 
-<div class="container">
-  <div class="modulo-calculadora">
-    <div class="calc-card">
-
-      <div class="calc-header">
-        <div class="header-main">
-          <h2>Calculadora del Productor de Café</h2>
-          <span class="badge-rt"
-            [ngClass]="{'online': precioBolsaQuintal > 0, 'offline': errorConexion || cargandoPrecio}">
-            <span class="dot"></span>
-            {{ cargandoPrecio ? 'Consultando Bolsa...' : (precioBolsaQuintal > 0 ? 'Bolsa: Conectada' : 'Bolsa: Sin
-            Conexión') }}
-          </span>
-        </div>
-        <p class="text-muted">Precios convertidos desde la Bolsa de Chicago (CME Group).</p>
+<div *ngIf="vistaActual === 'menu'" class="menu-inicial fade-in">
+  <div class="text-center mb-5">
+    <h1 class="text-institucional">CALCULADORA Y SIMULADOR </h1>
+    <p class="text-muted">Seleccione la herramienta que desea utilizar</p>
+  </div>
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-5">
+      <div class="opcion-card" (click)="vistaActual  = 'calculadora'">
+        <i class="bi bi-calculator-fill"></i>
+        <h3>Calculadora Tradicional</h3>
+        <p>Consulta rápida de precios de bolsa y conversión de unidades.</p>
       </div>
-
-      <div class="calc-body">
-        <div *ngIf="errorConexion" class="alert-error">
-          No se pudieron obtener datos reales de la bolsa. Verifique su conexión o API Key.
-        </div>
-
-        <div class="input-group">
-          <label>¿Cómo venderás tu café?</label>
-          <select [(ngModel)]="unidadVenta">
-            <option value="quintal">Quintales (46kg)</option>
-            <option value="kilo">Kilogramos</option>
-          </select>
-        </div>
-
-        <div class="input-group">
-          <label>Cantidad (en {{ unidadVenta }})</label>
-          <input type="number" [(ngModel)]="cantidad" placeholder="0">
-        </div>
-
-        <div class="input-group">
-          <label>Tipo de café</label>
-          <select [(ngModel)]="tipoCafe">
-            <option value="oro">Oro (Precio Bolsa Real)</option>
-            <option value="pergamino">Pergamino (85% de Bolsa)</option>
-            <option value="cereza">Cereza</option>
-            <option value="tostado">Tostado</option>
-            <option value="molido">Molido</option>
-          </select>
-        </div>
-
-        <hr>
-
-        <div class="results" *ngIf="precioReferencia > 0; else noData">
-          <div class="result-item">
-            <span>Precio de referencia aplicado:</span>
-            <span class="value text-green">
-              {{ precioReferencia | currency:'USD':'symbol':'1.2-2' }} / {{ unidadVenta }}
-              <small *ngIf="tipoCafe === 'oro' || tipoCafe === 'pergamino'">(Cotización Real)</small>
-            </span>
-          </div>
-
-          <div class="result-item">
-            <span>Total en kilogramos:</span>
-            <span class="value">{{ totalKilos | number:'1.1-1' }} kg</span>
-          </div>
-
-          <div class="result-item highlight">
-            <span>Valor Total Estimado:</span>
-            <span class="value total">{{ totalEstimado | currency:'USD':'symbol':'1.2-2' }}</span>
-          </div>
-        </div>
-
-        <ng-template #noData>
-          <div class="no-data-msg">
-            <p>Esperando datos reales del mercado para calcular...</p>
-          </div>
-        </ng-template>
+    </div>
+    <div class="col-md-5">
+      <div class="opcion-card especial" (click)="vistaActual = 'simulador'">
+        <div class="badge-premium">Recomendado</div>
+        <i class="bi bi-graph-up-arrow"></i>
+        <h3>Simulador ADICAM</h3>
+        <p>Análisis de exportación, mermas, logística y validación TecNM.</p>
       </div>
-
-      <div class="calc-footer">
-        <p *ngIf="precioBolsaQuintal > 0">
-          Última actualización de la bolsa: <strong>{{ fechaActualizacion }}</strong>
-        </p>
-        <small class="text-muted">*Datos verificados mediante API Alpha Vantage. No se utilizan valores
-          simulados.</small>
-      </div>
-
     </div>
   </div>
 </div>
+
+
+
+<!-- BOTÓN PARA REGRESAR AL MENÚ -->
+<button class="btn-regresar" (click)="regresar()">
+
+  <span class="text">Regresar</span>
+</button>
+
+<div class="modulo-calculadora" *ngIf="vistaActual === 'calculadora'">
+  <div class="calc-card">
+    <div class="calc-header">
+      <div class="header-main">
+        <h2>Calculadora del Productor de Café</h2>
+        <span class="badge-rt"
+          [ngClass]="{'online': precioBolsaQuintal > 0, 'offline': errorConexion || cargandoPrecio}">
+          <span class="dot"></span>
+          {{ cargandoPrecio ? 'Consultando Bolsa...' : (precioBolsaQuintal > 0 ? 'Bolsa: Conectada' : 'Bolsa: Sin
+          Conexión') }}
+        </span>
+      </div>
+      <p class="text-muted">Precios convertidos desde la Bolsa de Chicago (CME Group).</p>
+    </div>
+
+    <div class="calc-body">
+      <div *ngIf="errorConexion" class="alert-error">
+        No se pudieron obtener datos reales de la bolsa. Verifique su conexión o API Key.
+      </div>
+
+      <div class="input-group">
+        <label>¿Cómo venderás tu café?</label>
+        <select [(ngModel)]="unidadVenta">
+          <option value="quintal">Quintales (46kg)</option>
+          <option value="kilo">Kilogramos</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Cantidad (en {{ unidadVenta }})</label>
+        <input type="number" [(ngModel)]="cantidad" placeholder="0">
+      </div>
+
+      <div class="input-group">
+        <label>Tipo de café</label>
+        <select [(ngModel)]="tipoCafe">
+          <option value="oro">Oro (Precio Bolsa Real)</option>
+          <option value="pergamino">Pergamino (85% de Bolsa)</option>
+          <option value="cereza">Cereza</option>
+          <option value="tostado">Tostado</option>
+          <option value="molido">Molido</option>
+        </select>
+      </div>
+
+      <hr>
+
+      <div class="results" *ngIf="precioReferencia > 0; else noData">
+        <div class="result-item">
+          <span>Precio de referencia aplicado:</span>
+          <span class="value text-green">
+            {{ precioReferencia | currency:'USD':'symbol':'1.2-2' }} / {{ unidadVenta }}
+            <small *ngIf="tipoCafe === 'oro' || tipoCafe === 'pergamino'">(Cotización Real)</small>
+          </span>
+        </div>
+
+        <div class="result-item">
+          <span>Total en kilogramos:</span>
+          <span class="value">{{ totalKilos | number:'1.1-1' }} kg</span>
+        </div>
+
+        <div class="result-item highlight">
+          <span>Valor Total Estimado:</span>
+          <span class="value total">{{ totalEstimado | currency:'USD':'symbol':'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <ng-template #noData>
+        <div class="no-data-msg">
+          <p>Esperando datos reales del mercado para calcular...</p>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="calc-footer">
+      <p *ngIf="precioBolsaQuintal > 0">
+        Última actualización de la bolsa: <strong>{{ fechaActualizacion }}</strong>
+      </p>
+      <small class="text-muted">*Datos verificados mediante API Alpha Vantage. No se utilizan valores
+        simulados.</small>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- SIMULADOR ADICAM -->
+<div *ngIf="vistaActual === 'simulador'" class="fade-in">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h3 class="text-institucional m-0">SIMULADOR ESTRATÉGICO ADICAM</h3>
+  </div>
+
+  <div class="row">
+    <!-- FORMULARIO PASO A PASO -->
+    <div class="col-lg-8">
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-institucional text-white">Punto 1: Configuración de Origen y Destino</div>
+        <div class="card-body row g-3">
+
+          <div class="col-md-4">
+            <label>Nombre / Cooperativa</label>
+            <input type="text" class="form-control" [(ngModel)]="sim.nombre" placeholder="Nombre Ej. Finca El Oro">
+          </div>
+          <div class="col-md-4">
+            <label>Estado Origen</label>
+            <select class="form-select" [(ngModel)]="sim.origenEstado">
+              <option *ngFor="let e of estadosMexico" [value]="e">{{e}}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>Mercado Objetivo</label>
+            <select class="form-select" [(ngModel)]="sim.mercadoObjetivo">
+              <option value="Nacional">Nacional</option>
+              <option value="Internacional">Internacional</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>Destino ({{sim.mercadoObjetivo === 'Nacional' ? 'Estado' : 'País'}})</label>
+            <select class="form-select" [(ngModel)]="sim.destinoFinal">
+              <ng-container *ngIf="sim.mercadoObjetivo === 'Nacional'">
+                <option value="EDOMEX">Estado de México</option>
+                <option value="CDMX">Ciudad de México</option>
+                <option value="Jalisco">Jalisco</option>
+              </ng-container>
+              <ng-container *ngIf="sim.mercadoObjetivo === 'Internacional'">
+                <option *ngFor="let p of paisesDestino" [value]="p">{{p}}</option>
+              </ng-container>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>Variedad</label>
+            <select class="form-select" [(ngModel)]="sim.variedad">
+              <option value="Arabica">Arábica</option>
+              <option value="Robusta">Robusta</option>
+              <option value="Mezcla">Mezcla</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>Segmento</label>
+            <select class="form-select" [(ngModel)]="sim.segmento">
+              <option value="Volumen">Volumen (Commodity)</option>
+              <option value="Certificado">Certificado (4C/UTZ)</option>
+              <option value="Organico">Orgánico + Comercio Justo</option>
+              <option value="Premium">Premium (Gourmet)</option>
+              <option value="Especialidad">Especialidad (SCA)</option>
+              <option value="Nicho">Nicho / Micro-lote</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label>Estado Inicial</label>
+            <select class="form-select" [(ngModel)]="sim.estadoInicial">
+              <option value="Cereza">Cereza</option>
+              <option value="Pergamino">Pergamino</option>
+              <option value="Oro">Oro</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4 border-primary">
+        <div class="card-header bg-primary text-white">Punto 2: Diagnóstico Técnico (Validación TecNM)</div>
+        <div class="card-body">
+          <div class="row align-items-center mb-3">
+            <div class="col-7">¿Cuentas con polígono GNSS validado?</div>
+            <div class="col-5">
+              <div class="btn-group w-100">
+                <button class="btn btn-outline-primary" [class.active]="sim.tieneGNSS === 'Si'"
+                  (click)="sim.tieneGNSS = 'Si'">Si</button>
+                <button class="btn btn-outline-primary" [class.active]="sim.tieneGNSS === 'No'"
+                  (click)="sim.tieneGNSS = 'No'">No</button>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-center mb-3">
+            <div class="col-7">¿Tienes reporte de suelo (< 1 año)?</div>
+                <div class="col-5">
+                  <div class="btn-group w-100">
+                    <button class="btn btn-outline-primary" [class.active]="sim.tieneSuelo === 'Si'"
+                      (click)="sim.tieneSuelo = 'Si'">Si</button>
+                    <button class="btn btn-outline-primary" [class.active]="sim.tieneSuelo === 'No'"
+                      (click)="sim.tieneSuelo = 'No'">No</button>
+                  </div>
+                </div>
+            </div>
+            <div class="mt-3">
+              <label class="fw-bold">Certificaciones actuales:</label>
+              <div class="d-flex gap-3 mt-2">
+                <div class="form-check"><input type="checkbox" class="form-check-input" [(ngModel)]="sim.certCheck.sca">
+                  SCA</div>
+                <div class="form-check"><input type="checkbox" class="form-check-input"
+                    [(ngModel)]="sim.certCheck.organico"> Orgánico</div>
+                <div class="form-check"><input type="checkbox" class="form-check-input"
+                    [(ngModel)]="sim.certCheck.fairtrade"> Fairtrade</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-dark text-white">Punto 3 y 4: Operación y Logística</div>
+          <div class="card-body row g-3">
+            <div class="col-md-6">
+              <label>Cantidad (Entrada)</label>
+              <div class="input-group">
+                <input type="number" class="form-control" [(ngModel)]="sim.volumenEntrada">
+                <select class="form-select w-25" [(ngModel)]="sim.unidadVolumen">
+                  <option value="kg">Kg</option>
+                  <option value="quintal">Qq (46kg)</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>Presentación de Venta</label>
+              <select class="form-select" [(ngModel)]="sim.presentacionVenta">
+                <option value="Cereza">Cereza</option>
+                <option value="Pergamino">Pergamino</option>
+                <option value="Oro">Oro (Verde)</option>
+                <option value="Tostado">Tostado</option>
+                <option value="Molido">Molido</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label>Flete Terrestre (Estimado)</label>
+              <input type="number" class="form-control" [(ngModel)]="sim.fleteTerrestre">
+            </div>
+            <div class="col-md-4">
+              <label>Puerto/Punto Salida</label>
+              <select class="form-select" [(ngModel)]="sim.puntoSalida" [disabled]="sim.mercadoObjetivo === 'Nacional'">
+                <option value="Veracruz">Veracruz (Atlántico)</option>
+                <option value="Lazaro">Lázaro Cárdenas (Pacífico)</option>
+                <option value="NuevoLaredo">Nuevo Laredo (USA Terrestre)</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label>Maquila/Etiquetado (Por Kg)</label>
+              <input type="number" class="form-control" [(ngModel)]="sim.costoMaquila">
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-success btn-lg w-100 py-3 mb-5 fw-bold shadow" (click)="ejecutarSimulador()">
+          <i class="bi bi-play-circle"></i> GENERAR DIAGNÓSTICO ADICAM
+        </button>
+      </div>
+
+      <!-- DASHBOARD COMPARATIVO -->
+      <div class="col-lg-4">
+        <div class="sticky-top" style="top: 20px;">
+          <div class="card border-0 shadow-lg overflow-hidden">
+            <div class="card-header bg-institucional text-white text-center py-3">
+              <h5 class="m-0">EL MOMENTO DE LA VERDAD</h5>
+            </div>
+            <div class="card-body">
+              <div class="scenario mb-4">
+                <h6 class="text-muted border-bottom pb-2">ESCENARIO A: VENTA LOCAL</h6>
+                <div class="d-flex justify-content-between mt-2">
+                  <span>Utilidad Estimada:</span>
+                  <span class="fw-bold">{{utilidadTradicional | currency}}</span>
+                </div>
+              </div>
+
+              <div class="scenario bg-light p-3 rounded border-start border-4"
+                [class.border-success]="res.viabilidad === 'Verde'"
+                [class.border-warning]="res.viabilidad === 'Amarillo'"
+                [class.border-danger]="res.viabilidad === 'Rojo'">
+                <h6 class="text-primary border-bottom pb-2">ESCENARIO B: MODELO ADICAM</h6>
+                <div class="small mb-1 d-flex justify-content-between">
+                  <span>Peso Final (Neto):</span>
+                  <span>{{res.pesoFinal | number:'1.1-1'}} kg</span>
+                </div>
+                <div class="small mb-1 d-flex justify-content-between text-danger">
+                  <span>Inversión TecNM:</span>
+                  <span>- {{res.inversionPuestaPunto | currency}}</span>
+                </div>
+                <div class="small mb-1 d-flex justify-content-between text-danger">
+                  <span>Logística y Empaque:</span>
+                  <span>- {{res.costoLogisticaTotal + res.costoEmpaqueTotal | currency}}</span>
+                </div>
+                <div class="mt-3 p-2 bg-white rounded text-center">
+                  <p class="mb-0 small">Utilidad Neta Real</p>
+                  <h3 class="m-0" [class.text-success]="res.utilidadADICAM > 0">{{res.utilidadADICAM | currency}}</h3>
+                </div>
+              </div>
+
+              <div class="semaforo text-center mt-4 p-3 rounded"
+                [style.background-color]="res.viabilidad === 'Verde' ? '#d4edda' : res.viabilidad === 'Amarillo' ? '#fff3cd' : '#f8d7da'">
+                <h5 class="m-0"
+                  [style.color]="res.viabilidad === 'Verde' ? '#155724' : res.viabilidad === 'Amarillo' ? '#856404' : '#721c24'">
+                  VIABILIDAD: {{res.viabilidad}}
+                </h5>
+              </div>
+
+              <button class="btn btn-primary w-100 mt-4 py-2" *ngIf="res.viabilidad !== 'Rojo'">
+                Solicitar Validación al TecNM
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
