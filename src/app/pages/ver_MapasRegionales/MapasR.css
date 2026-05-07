@@ -85,4 +85,20 @@
         max-width: 30%;
         object-fit: contain;
     }
+
+  /* Ajuste de Modal */
+    .btn-productor:hover {
+    background-color: #444 !important;
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+.animated.fadeIn {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 }
