@@ -8,120 +8,203 @@
 
 <nav class="navbar-inferior">
   <div class="titulo-navbar">
-  Mercados
+    Mercados
   </div>
 </nav>
 
 <div class="globo-page">
+
+  <!-- 🔹 PANEL IZQUIERDO -->
   <aside class="sidebar sidebar-left">
     <h2 class="sidebar-title">Filtros de Mercado</h2>
-    
+
+    <!-- Tipo de mercado -->
     <div class="market-selector">
-      <button (click)="setMarket('nacional')" [class.active]="selectedMarket === 'nacional'" class="btn-toggle">
+      <button (click)="setMarket('nacional')" 
+              [class.active]="selectedMarket === 'nacional'" 
+              class="btn-toggle">
         NACIONAL
       </button>
-      <button (click)="setMarket('internacional')" [class.active]="selectedMarket === 'internacional'" class="btn-toggle">
+
+      <button (click)="setMarket('internacional')" 
+              [class.active]="selectedMarket === 'internacional'" 
+              class="btn-toggle">
         INTERNACIONAL
       </button>
     </div>
 
     <hr class="divider">
 
+    <!-- Segmentos -->
     <div class="market-list">
       <h3 class="section-label">Selecciona Segmento</h3>
-      <button *ngFor="let s of segmentsData" 
-              (click)="selectSegment(s)" 
-              [class.active]="selectedSegment?.id === s.id" 
+
+      <button *ngFor="let s of segmentsData"
+              (click)="selectSegment(s)"
+              [class.active]="selectedSegment?.id === s.id"
               class="btn-market-card">
         {{ s.nombre }}
       </button>
     </div>
 
+    <!-- Nichos -->
     <div class="market-list fade-in" *ngIf="selectedSegment">
       <h3 class="section-label-gold">Nichos de Alto Valor</h3>
-      <p style="font-size: 0.6rem; margin-bottom: 10px; opacity: 0.8;">Especialidades dentro de este segmento:</p>
-      <button *ngFor="let n of getNichesForSegment(selectedSegment.id)" 
-              (click)="selectNiche(n)" 
+
+      <button *ngFor="let n of getNichesForSegment(selectedSegment.id)"
+              (click)="selectNiche(n)"
               [class.active]="selectedNiche?.nombre === n.nombre"
               class="btn-niche-card">
         {{ n.nombre }}
       </button>
     </div>
+
   </aside>
 
+  <!-- 🔹 GLOBO -->
   <main class="globe-wrapper">
     <div id="coffee-globe"></div>
+
     <div class="view-indicator">
-      {{ selectedMarket === 'nacional' ? ' MÉXICO: ANÁLISIS POR ESTADO' : ' MUNDIAL: ANÁLISIS DE EXPORTACIÓN' }}
+      {{ selectedMarket === 'nacional'
+        ? 'MÉXICO: ANÁLISIS POR ESTADO'
+        : 'MUNDIAL: ANÁLISIS DE EXPORTACIÓN' }}
     </div>
   </main>
 
+  <!-- 🔹 PANEL DERECHO -->
   <aside class="sidebar sidebar-right" *ngIf="selectedSegment">
+
     <div class="info-content fade-in">
+
       <div class="header-segment">
         <span class="badge-category">{{ selectedMarket | uppercase }}</span>
         <h2 class="info-title">{{ selectedSegment.nombre }}</h2>
       </div>
+
       <div class="gold-line"></div>
-      
-      <p class="market-desc">{{ selectedSegment.descripcion }}</p>
 
-      <div class="analysis-card">
-        <h4 class="card-subtitle"><i class="icon-money"></i> ECONOMÍA Y PRECIOS</h4>
-        <div class="variable-grid">
-          <div class="var-item full">
-            <span class="var-label">Estructura de Precio:</span>
-            <span class="var-value highlight-gold">{{ selectedSegment.indicadores.precio }}</span>
+      <!--  TABS NUEVOS -->
+      <div class="tabs-container">
+        <button (click)="activeTab = 'caracteristicas'" 
+                [class.active]="activeTab === 'caracteristicas'">
+          Características
+        </button>
+
+        <button (click)="activeTab = 'requisitos'" 
+                [class.active]="activeTab === 'requisitos'">
+          Requisitos
+        </button>
+
+        <button (click)="activeTab = 'economia'" 
+                [class.active]="activeTab === 'economia'">
+          Economía
+        </button>
+      </div>
+
+      <!-- 🔹 CONTENIDO TAB -->
+      <div class="tab-content">
+
+        <!-- CARACTERISTICAS -->
+        <div *ngIf="activeTab === 'caracteristicas'">
+          <p class="market-desc">{{ selectedSegment.descripcion }}</p>
+
+          <div class="analysis-card">
+            <h4>Precio</h4>
+            <p>{{ selectedSegment.indicadores.precio }}</p>
           </div>
-          <div class="var-item">
-            <span class="var-label">Volumen:</span>
-            <span class="var-value">{{ selectedSegment.indicadores.volumen }}</span>
-          </div>
-          <div class="var-item">
-            <span class="var-label">Actor Clave:</span>
-            <span class="var-value">{{ selectedSegment.indicadores.dominio }}</span>
+
+          <div class="analysis-card">
+            <h4>Comercialización</h4>
+            <p>{{ selectedSegment.indicadores.dominio }}</p>
           </div>
         </div>
-      </div>
 
-      <div class="analysis-card alternate">
-        <h4 class="card-subtitle"><i class="icon-check"></i> REQUISITOS DE ENTRADA</h4>
-        <div class="info-list">
-          <div class="info-list-item">
-            <strong>Calidad/Físico:</strong> {{ selectedSegment.indicadores.entrada }}
-          </div>
-          <div class="info-list-item">
-            <strong>Normativa:</strong> {{ selectedSegment.detallesExtendidos.normativa }}
-          </div>
-          <div class="info-list-item">
-            <strong>Logística:</strong> {{ selectedSegment.detallesExtendidos.logistica }}
+        <!-- REQUISITOS -->
+        <div *ngIf="activeTab === 'requisitos'">
+          <div class="analysis-card">
+            <p><strong>Calidad:</strong> {{ selectedSegment.indicadores.entrada }}</p>
+            <p><strong>Normativa:</strong> {{ selectedSegment.detallesExtendidos.normativa }}</p>
+            <p><strong>Logística:</strong> {{ selectedSegment.detallesExtendidos.logistica }}</p>
           </div>
         </div>
+
+        <!-- ECONOMIA -->
+        <div *ngIf="activeTab === 'economia'">
+          <div class="analysis-card">
+            <p><strong>Volumen:</strong> {{ selectedSegment.indicadores.volumen }}</p>
+            <p><strong>Actor Clave:</strong> {{ selectedSegment.indicadores.dominio }}</p>
+          </div>
+        </div>
+
       </div>
 
-      <div class="analysis-card">
-        <h4 class="card-subtitle"><i class="icon-user"></i> PERFIL DEL CONSUMIDOR</h4>
-        <p class="small-text">{{ selectedSegment.detallesExtendidos.consumidor }}</p>
-      </div>
-
+      <!--  LISTA CLICKEABLE -->
       <h3 class="section-label-gold">
-        {{ selectedMarket === 'nacional' ? 'ESTADOS ESTRATÉGICOS' : 'DESTINOS LÍDERES' }}
+        {{ selectedMarket === 'nacional'
+          ? 'ESTADOS ESTRATÉGICOS'
+          : 'DESTINOS LÍDERES' }}
       </h3>
-      
+
       <div class="items-grid">
-        <div *ngFor="let item of (selectedMarket === 'nacional' ? selectedSegment.estados : selectedSegment.paises)" 
-             class="badge-item-gold">
+        <div *ngFor="let item of (selectedMarket === 'nacional'
+                                ? selectedSegment.estados
+                                : selectedSegment.paises)"
+             (click)="selectLocation(item)"
+             class="badge-item-gold clickable">
           {{ item }}
         </div>
       </div>
 
-      
     </div>
   </aside>
 
-  <aside class="sidebar sidebar-right" *ngIf="!selectedSegment && !selectedNiche">
+  <!-- 🔹 PANEL VACÍO -->
+  <aside class="sidebar sidebar-right" *ngIf="!selectedSegment">
     <div class="empty-state">
-      <p>Seleccione un segmento de mercado para iniciar el análisis geográfico.</p>
+      <p>Seleccione un segmento para iniciar.</p>
     </div>
   </aside>
+
+</div>
+
+<!-- NUEVO PANEL INFERIOR -->
+<div class="bottom-panel" *ngIf="selectedLocation">
+
+  <div class="bottom-header">
+    <h2>{{ selectedLocation }}</h2>
+  </div>
+
+  <!-- INFO DINÁMICA -->
+  <div class="bottom-content">
+
+    <!-- NACIONAL -->
+    <div *ngIf="selectedMarket === 'nacional'">
+
+      <p><strong>Perfil del consumidor:</strong> {{ locationData.perfil }}</p>
+      <p><strong>Canal de ventas:</strong> {{ locationData.canal }}</p>
+      <p><strong>Logística:</strong> {{ locationData.logistica }}</p>
+      <p><strong>Precios:</strong> {{ locationData.precios }}</p>
+      <p><strong>Actores clave:</strong> {{ locationData.actores }}</p>
+
+    </div>
+
+    <!-- INTERNACIONAL -->
+    <div *ngIf="selectedMarket === 'internacional'">
+
+      <p><strong>Perfil del mercado:</strong> {{ locationData.perfil }}</p>
+      <p><strong>Requisitos:</strong> {{ locationData.requisitos }}</p>
+      <p><strong>Ventana de compra:</strong> {{ locationData.ventana }}</p>
+      <p><strong>Competencia:</strong> {{ locationData.competencia }}</p>
+      <p><strong>Actores clave:</strong> {{ locationData.actores }}</p>
+
+    </div>
+
+  </div>
+
+  <!-- FUTURO: GRAFICAS -->
+  <div class="chart-placeholder">
+  Aquí irá la gráfica de importaciones / tendencias
+  </div>
+
 </div>
