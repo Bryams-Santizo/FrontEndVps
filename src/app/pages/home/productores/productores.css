@@ -3,7 +3,6 @@
 
 .navbar-inferior { background: #003b6f; color: #fff; padding: 10px 20px; font-weight: bold; }
 
-
 .container {
   padding: 30px;
   background-color: #f8f9fa;
@@ -136,4 +135,194 @@
 
 .btn-save:hover {
   background: #218838;
+}
+
+
+
+
+.btn-regresar {
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
+  background-color: #007bff; /* Azul primario */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Bordes redondeados modernos */
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+  gap: 8px;
+}
+
+/* Al pasar el mouse (Hover) */
+.btn-regresar:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+  box-shadow: 0 4px 8px rgba(0, 86, 179, 0.3);
+  transform: translateX(-3px); /* Se mueve ligeramente a la izquierda */
+}
+
+/* Al hacer clic (Active) */
+.btn-regresar:active {
+  transform: scale(0.95); /* Efecto de presionado */
+}
+
+.btn-regresar .icon {
+  font-weight: bold;
+}
+
+/* Estilos para el simulador */
+.punto-sim {
+  margin-bottom: 25px;
+  padding: 15px;
+  border-left: 4px solid #1B396A;
+}
+
+.gray-bg { background: #f9f9f9; }
+
+.check-group {
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+
+
+/* =========================================
+   ESTILOS FINALES: MENÚ Y SIMULADOR ADICAM
+   ========================================= */
+
+/* 1. CENTRADO GENERAL */
+.menu-inicial, .fade-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* 2. CARDS DEL MENÚ SEPARADAS (50px / 5cm aprox) */
+.menu-inicial .row {
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 30px;
+    gap: 50px !important; /* Separación entre las dos opciones */
+    display: flex;
+    justify-content: center;
+}
+
+.opcion-card {
+    background: #ffffff !important;
+    border: 2px solid #003b6f !important;
+    border-radius: 20px !important;
+    padding: 40px !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05) !important;
+    position: relative;
+    height: 100%;
+}
+
+.opcion-card:hover {
+    transform: translateY(-10px) !important;
+    background: #003b6f !important;
+    color: #ffffff !important;
+    box-shadow: 0 15px 35px rgba(0, 59, 111, 0.3) !important;
+}
+
+.opcion-card i {
+    font-size: 3.5rem !important;
+    color: #003b6f !important;
+    margin-bottom: 20px !important;
+    display: block !important;
+}
+
+.opcion-card:hover i {
+    color: #D4AF37 !important; /* Dorado al hover */
+}
+
+/* Badge "Recomendado" */
+.badge-premium {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background: #D4AF37 !important;
+    color: #003b6f !important;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 3. SIMULADOR: COLORES INSTITUCIONALES */
+.text-institucional {
+    color: #003b6f !important;
+    font-weight: bold;
+}
+
+.bg-institucional {
+    background-color: #003b6f !important;
+    color: #ffffff !important;
+}
+
+/* Forzar azul en headers que dicen bg-primary o bg-dark en tu HTML */
+.card-header.bg-primary, 
+.card-header.bg-dark,
+.card-header.bg-institucional {
+    background-color: #003b6f !important;
+    border-bottom: 2px solid #D4AF37 !important; /* Línea dorada divisoria */
+    font-weight: bold !important;
+}
+
+/* Forzar botones azules institucionales */
+.btn-outline-primary {
+    border-color: #003b6f !important;
+    color: #003b6f !important;
+}
+
+.btn-outline-primary.active, .btn-outline-primary:hover {
+    background-color: #003b6f !important;
+    color: #ffffff !important;
+}
+
+.btn-primary, .btn-success {
+    background-color: #003b6f !important;
+    border: none !important;
+    font-weight: bold !important;
+}
+
+/* DASHBOARD DERECHO (El momento de la verdad) */
+.scenario {
+    background: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 15px !important;
+    margin-bottom: 15px !important;
+    border-left: 5px solid #003b6f !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+}
+
+.scenario h6 {
+    color: #003b6f !important;
+    font-weight: bold !important;
+    text-transform: uppercase;
+}
+
+/* Inputs y Selects */
+.form-control:focus, .form-select:focus {
+    border-color: #003b6f !important;
+    box-shadow: 0 0 0 0.25rem rgba(0, 59, 111, 0.2) !important;
+}
+
+/* 4. ANIMACIONES */
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
