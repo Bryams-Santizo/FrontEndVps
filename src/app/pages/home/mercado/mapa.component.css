@@ -161,7 +161,9 @@
     width: 100%; 
     height: 100%; 
     outline: none;
-    transform: translateX(-300px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .view-indicator {
@@ -331,3 +333,162 @@
     background: rgba(255,255,255,0.1);
     margin: 20px 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+    TABS (CARACTERISTICAS / REQUISITOS / ECONOMIA)
+   ========================================= */
+.tabs-container {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.tabs-container button {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.tabs-container button:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.tabs-container button.active {
+    background: #ffd700;
+    color: #1a3c6d;
+    border-color: #ffd700;
+    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
+}
+
+/* CONTENIDO TAB */
+.tab-content {
+    animation: fadeIn 0.3s ease;
+}
+
+/* =========================================
+    ITEMS CLICKEABLES (ESTADOS / PAISES)
+   ========================================= */
+.clickable {
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.clickable:hover {
+    background: #ffd700;
+    color: #1a3c6d;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+/* =========================================
+    PANEL INFERIOR (NUEVA VISTA)
+   ========================================= */
+.bottom-panel {
+    width: 100%;
+    background: linear-gradient(180deg, #0d1f38 0%, #1a3c6d 100%);
+    color: white;
+    padding: 20px 30px;
+    border-top: 3px solid #ffd700;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.4);
+    animation: slideUp 0.4s ease;
+}
+
+/* Header del panel */
+.bottom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.bottom-header h2 {
+    color: #ffd700;
+    font-size: 1.2rem;
+}
+
+/* Contenido */
+.bottom-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    font-size: 0.8rem;
+}
+
+.bottom-content p {
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-radius: 6px;
+    border-left: 3px solid #ffd700;
+}
+
+/* Placeholder gráfica */
+.chart-placeholder {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px dashed rgba(255,255,255,0.3);
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Animación panel inferior */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+    RESPONSIVE (IMPORTANTE)
+   ========================================= */
+@media (max-width: 1200px) {
+    .globo-page {
+        grid-template-columns: 260px 1fr 300px;
+    }
+}
+
+@media (max-width: 900px) {
+    .globo-page {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .sidebar-left,
+    .sidebar-right {
+        height: auto;
+    }
+
+    .bottom-content {
+        grid-template-columns: 1fr;
+    }
+}
+
