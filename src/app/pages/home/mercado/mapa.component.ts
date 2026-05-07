@@ -3,7 +3,6 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 
-
 @Component({
   selector: 'app-globo-cafetalero',
   standalone: true,
@@ -20,6 +19,10 @@ export class mundo implements AfterViewInit, OnDestroy {
   private globe: any;
   private worldFeatures: any[] = [];
 private mexicoFeatures: any[] = [];
+
+activeTab: string = 'caracteristicas';
+selectedLocation: any = null;
+locationData: any = {};
 
   // 1. SEGMENTOS PRINCIPALES
  segmentsData = [
@@ -262,6 +265,22 @@ try {
   this.globe.polygonCapColor(() => 'rgba(255, 255, 255, 0.2)');
   this.globe.polygonAltitude(0.01);
   this.globe.polygonStrokeColor(() => '#ffd700');
+}
+
+selectLocation(loc: any) {
+  this.selectedLocation = loc;
+
+  // Aquí luego conectas con tu JSON real
+  this.locationData = {
+    perfil: 'Ejemplo perfil',
+    canal: 'Ejemplo canal',
+    logistica: 'Ejemplo logística',
+    precios: 'Ejemplo precios',
+    actores: 'Ejemplo actores',
+    requisitos: 'Ejemplo requisitos',
+    ventana: 'Ejemplo ventana',
+    competencia: 'Ejemplo competencia'
+  };
 }
 
   ngOnDestroy() {}
