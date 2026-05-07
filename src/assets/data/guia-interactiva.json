@@ -1,0 +1,33 @@
+{
+  "modulos": [
+    {
+      "ruta": "/verproyectos",
+      "nombre": "Proyectos",
+      "descripcion": "Aquí puedes ver las iniciativas actuales para mejorar la cafeticultura. Puedes compartir ideas o innovar con otros.",
+      "consejo": "Si tienes un proyecto nuevo, regístralo para buscar colaboradores."
+    },
+    {
+      "ruta": "/certificaciones",
+      "nombre": "Certificaciones",
+      "descripcion": "Este es el módulo de Trazabilidad. Te ayudamos a ver si tu café cumple con normas internacionales como Orgánico o Fairtrade.",
+      "semaforo_info": "Recuerda: Verde es listo, Amarillo requiere apoyo técnico y Rojo necesita capacitación urgente."
+    },
+    {
+      "ruta": "/asistencia",
+      "nombre": "Asistencia Técnica",
+      "descripcion": "Si tienes problemas con plagas como la Roya o dudas de suelo, aquí puedes solicitar apoyo directo del TecNM.",
+      "consejo": "Describe detalladamente tu problema para que un experto te contacte rápido."
+    }
+  ],
+  "servicios_tecnicos": {
+    "trazabilidad": "Validamos tu polígono GNSS y altitud para exportación.",
+    "auditoria": "Realizamos simulacros tipo Certimex para evitar que pierdas tu inversión.",
+    "capacitacion": "Te enseñamos Nutrición de Suelo, Manejo de Plagas y protocolos de fermentación."
+  }
+
+  
+
+
+
+  
+}
