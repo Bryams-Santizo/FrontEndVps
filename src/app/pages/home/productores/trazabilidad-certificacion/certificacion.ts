@@ -3,6 +3,7 @@ import { TrazabilidadService } from '../../../../services/trazabilidad.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BANCO_PREGUNTAS } from '../../../../preguntas.data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trazabilidad',
@@ -43,7 +44,7 @@ export class TrazabilidadComponent {
   preguntasActuales: any[] = [];
   resultadoFinal: any = null;
 
-  constructor(private trazabilidadService: TrazabilidadService) {}
+  constructor(private trazabilidadService: TrazabilidadService,  private router: Router) {}
 
   onEstadoChange(estado: string) {
     this.municipiosFiltrados = this.municipiosData.filter(m => m.estado === estado);
@@ -151,4 +152,18 @@ export class TrazabilidadComponent {
   descargarReporte() {
     this.trazabilidadService.descargarPdf(this.resultadoFinal.id);
   }
+
+irATransferencia() {
+  this.router.navigate(['/tranferencia']);
+}
+
+formularioValido(): boolean {
+  return !!(
+    this.productor.nombreProductor &&
+    this.productor.nombreFinca &&
+    this.productor.ubicacion &&
+    this.productor.volumenProduccion &&
+    this.productor.variedades
+  );
+}
 }
