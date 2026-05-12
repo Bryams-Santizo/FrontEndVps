@@ -128,12 +128,27 @@ export class ProductoresComponent implements OnInit {
   }
 
   // --- LÓGICA SIMULADOR ---
-  get utilidadTradicional(): number {
-    let kilos = this.sim.unidadVolumen === 'quintal' ? this.sim.volumenEntrada * 46 : this.sim.volumenEntrada;
-    let precioLocal = 45; // Precio promedio local simulado (Coyotes)
-    return kilos * precioLocal;
-  }
+get utilidadTradicional(): number {
+  let kilos = this.sim.unidadVolumen === 'quintal'
+    ? this.sim.volumenEntrada * 46
+    : this.sim.volumenEntrada;
 
+  let precioLocal = this.obtenerPrecioSegmentoFrontend(this.sim.segmento);
+
+  return kilos * precioLocal;
+}
+
+obtenerPrecioSegmentoFrontend(segmento: string): number {
+  switch(segmento) {
+    case 'Volumen': return 77.18;
+    case 'Certificado': return 81.03;
+    case 'Organico': return 92.58;
+    case 'Premium': return 94.50;
+    case 'Especialidad': return 144.72;
+    case 'Nicho': return 270.00;
+    default: return 77.18;
+  }
+}
 
   // --- NAVEGACIÓN ---
   cambiarVista(vista: 'menu' | 'calculadora' | 'simulador') {
@@ -161,4 +176,3 @@ export class ProductoresComponent implements OnInit {
     });
     }
 }
-
