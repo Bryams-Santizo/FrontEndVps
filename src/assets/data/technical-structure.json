@@ -1,0 +1,110 @@
+[
+  {
+    "id": "especialidad",
+    "titulo": "Mercado de Especialidad (84+ SCA)",
+    "bloques": [
+      {
+        "tipo": "Características",
+        "texto": "Cero defectos primarios, trazabilidad total, perfiles únicos."
+      },
+      {
+        "tipo": "Requisitos",
+        "lista": [
+          "Humedad 10-12%",
+          "Aw < 0.70",
+          "Empaque GrainPro",
+          "Trazabilidad completa"
+        ]
+      },
+      {
+        "tipo": "Economía",
+        "texto": "Alta rentabilidad con alto riesgo técnico."
+      }
+    ]
+  },
+  {
+    "id": "premium",
+    "titulo": "Mercado Premium",
+    "bloques": [
+      {
+        "tipo": "Características",
+        "texto": "Taza limpia, balanceada."
+      },
+      {
+        "tipo": "Requisitos",
+        "lista": [
+          "Grado 1 o 2",
+          "8-12 defectos"
+        ]
+      },
+      {
+        "tipo": "Economía",
+        "texto": "Depende de consistencia."
+      }
+    ]
+  },
+  {
+    "id": "volumen",
+    "titulo": "Mercado de Volumen",
+    "bloques": [
+      {
+        "tipo": "Características",
+        "texto": "Producción masiva para industria."
+      },
+      {
+        "tipo": "Requisitos",
+        "lista": [
+          "Grado 3-5",
+          "Humedad <12%"
+        ]
+      },
+      {
+        "tipo": "Economía",
+        "texto": "Margen bajo, depende de escala."
+      }
+    ]
+  },
+  {
+    "id": "certificado",
+    "titulo": "Mercado Certificado",
+    "bloques": [
+      {
+        "tipo": "Características",
+        "texto": "Orgánico, justo, sostenible."
+      },
+      {
+        "tipo": "Requisitos",
+        "lista": [
+          "Auditoría anual",
+          "Geolocalización"
+        ]
+      },
+      {
+        "tipo": "Economía",
+        "texto": "Costos altos, primas variables."
+      }
+    ]
+  },
+  {
+    "id": "valor-agregado",
+    "titulo": "Valor Agregado",
+    "bloques": [
+      {
+        "tipo": "Características",
+        "texto": "Innovación en procesos y marca."
+      },
+      {
+        "tipo": "Requisitos",
+        "lista": [
+          "Registro de marca",
+          "Etiquetado",
+          "COFEPRIS"
+        ]
+      },
+      {
+        "tipo": "Economía",
+        "texto": "Alta utilidad, riesgo de inventario."
+      }
+    ]
+  }
+]
