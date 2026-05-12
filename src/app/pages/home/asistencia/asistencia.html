@@ -10,135 +10,214 @@
   <div class="titulo-navbar">Asistencia</div>
 </nav>
 
-
 <div class="form-container">
   <h2 class="titulo">Solicitud de Asistencia Técnica</h2>
   <p class="instrucciones"></p>
 
-<!-- SELECCIÓN DE SERVICIO -->
-<section class="card-form">
-  <h3 class="subtitulo">Tipo de Servicio de Asistencia</h3>
-
-  <div class="form-group full">
-    <label>Seleccione el servicio que requiere:</label>
-    <select [(ngModel)]="tipoServicio" (change)="cambiarServicio()">
-      <option value="" disabled selected>Seleccione una opción...</option>
-      <option value="trazabilidad">
-        Ficha básica de trazabilidad de campo (GNSS)
-      </option>
-      <option value="auditoria">
-        Servicios de auditoría interna
-      </option>
-    </select>
-  </div>
-
-  <!-- OPCIÓN 1 -->
-  <div *ngIf="tipoServicio === 'trazabilidad'" class="info-box">
-    <h4>Ficha básica de trazabilidad de campo</h4>
-    <p>
-      Identificación del origen del café mediante sistema GNSS, permitiendo
-      registrar ubicación exacta de parcelas y garantizar la trazabilidad del producto.
-    </p>
-  </div>
-
-  <!-- OPCIÓN 2 -->
-  <div *ngIf="tipoServicio === 'auditoria'" class="info-box">
-    <h4>Servicios de Auditoría Interna</h4>
-
-    <p>
-      Consiste en la identificación de <b>no conformidades</b> antes de auditorías
-      de Certimex, Mayacert o CCOF, con el objetivo de corregir y evitar pérdida de certificación.
-    </p>
-
-    <p><b>Rubros evaluados:</b></p>
-
-    <ul>
-      <li><b>Manejo del cultivo:</b>
-        <ul>
-          <li>Uso exclusivo de insumos permitidos</li>
-          <li>Barreras vivas contra contaminación</li>
-        </ul>
-      </li>
-
-      <li><b>Infraestructura y bodega:</b>
-        <ul>
-          <li>Separación café orgánico / convencional</li>
-          <li>Limpieza de maquinaria</li>
-        </ul>
-      </li>
-
-      <li><b>Documentación (Trazabilidad):</b>
-        <ul>
-          <li>Control de cosecha vs entregas</li>
-          <li>Bitácora de campo actualizada</li>
-        </ul>
-      </li>
-
-      <li><b>Aspectos sociales y ambientales:</b>
-        <ul>
-          <li>Manejo de aguas mieles</li>
-          <li>Uso de equipo de protección</li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</section>
-
-
+  <!-- SELECCIÓN DE SERVICIO -->
   <section class="card-form">
+    <h3 class="subtitulo">Tipo de Servicio de Asistencia</h3>
+
+    <div class="form-group full">
+      <label>Seleccione el servicio que requiere:</label>
+
+      <select
+        [(ngModel)]="solicitud.tipoSolicitante"
+        (change)="manejarCambioTipo()">
+
+        <option value="" disabled selected>
+          Seleccione una opción...
+        </option>
+
+        <option value="trazabilidad">
+          Ficha básica de trazabilidad de campo (GNSS)
+        </option>
+
+        <option value="auditoria">
+          Servicios de auditoría interna
+        </option>
+      </select>
+    </div>
+
+    <!-- OPCIÓN 1 -->
+    <div
+      *ngIf="solicitud.tipoSolicitante === 'trazabilidad'"
+      class="info-box">
+
+      <h4>Ficha básica de trazabilidad de campo</h4>
+
+      <p>
+        Identificación del origen del café mediante sistema GNSS,
+        permitiendo registrar ubicación exacta de parcelas y garantizar
+        la trazabilidad del producto.
+      </p>
+    </div>
+
+    <!-- OPCIÓN 2 -->
+    <div
+      *ngIf="solicitud.tipoSolicitante === 'auditoria'"
+      class="info-box">
+
+      <h4>Servicios de Auditoría Interna</h4>
+
+      <p>
+        Consiste en la identificación de
+        <b>no conformidades</b>
+        antes de auditorías de Certimex, Mayacert o CCOF,
+        con el objetivo de corregir y evitar pérdida de certificación.
+      </p>
+
+      <p><b>Rubros evaluados:</b></p>
+
+      <ul>
+        <li>
+          <b>Manejo del cultivo:</b>
+          <ul>
+            <li>Uso exclusivo de insumos permitidos</li>
+            <li>Barreras vivas contra contaminación</li>
+          </ul>
+        </li>
+
+        <li>
+          <b>Infraestructura y bodega:</b>
+          <ul>
+            <li>Separación café orgánico / convencional</li>
+            <li>Limpieza de maquinaria</li>
+          </ul>
+        </li>
+
+        <li>
+          <b>Documentación (Trazabilidad):</b>
+          <ul>
+            <li>Control de cosecha vs entregas</li>
+            <li>Bitácora de campo actualizada</li>
+          </ul>
+        </li>
+
+        <li>
+          <b>Aspectos sociales y ambientales:</b>
+          <ul>
+            <li>Manejo de aguas mieles</li>
+            <li>Uso de equipo de protección</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DATOS DEL SOLICITANTE -->
+  <section class="card-form">
+
     <h3 class="subtitulo">Datos del Solicitante</h3>
 
     <div class="form-grid">
+
       <div class="form-group full">
         <label>Nombre completo o contacto responsable:</label>
-        <input type="text" [(ngModel)]="solicitud.nombreSolicitante" name="nombreSolicitante" placeholder="">
+
+        <input
+          type="text"
+          [(ngModel)]="solicitud.nombreSolicitante"
+          name="nombreSolicitante">
       </div>
 
       <div class="form-group ancho-50">
+
         <label>Usted es:</label>
-        <select [(ngModel)]="solicitud.tipoSolicitante" name="tipoSolicitante" (change)="manejarCambioTipo()">
-          <option value="" disabled selected>Seleccione una opción...</option>
-          <option value="Productor">Productor Individual</option>
-          <option value="Cooperativa">Cooperativa / Asociación</option>
-          <option value="Empresa">Empresa Rural</option>
-          <option value="Otro">Otro</option>
+
+        <select
+          [(ngModel)]="solicitud.tipoSolicitante"
+          name="tipoSolicitante"
+          (change)="manejarCambioTipo()">
+
+          <option value="" disabled selected>
+            Seleccione una opción...
+          </option>
+
+          <option value="Productor">
+            Productor Individual
+          </option>
+
+          <option value="Cooperativa">
+            Cooperativa / Asociación
+          </option>
+
+          <option value="Empresa">
+            Empresa Rural
+          </option>
+
+          <option value="Otro">
+            Otro
+          </option>
         </select>
       </div>
 
-      <div class="form-group ancho-50" *ngIf="mostrarOtro">
+      <div
+        class="form-group ancho-50"
+        *ngIf="mostrarOtro">
+
         <label>Especifique cuál:</label>
-        <input type="text" [(ngModel)]="campoOtro" placeholder="¿Qué tipo de entidad?">
+
+        <input
+          type="text"
+          [(ngModel)]="campoOtro"
+          placeholder="¿Qué tipo de entidad?">
       </div>
 
       <div class="form-group full">
-        <label>Ubicación (Municipio, Localidad o Parcela):</label>
-        <input type="text" [(ngModel)]="solicitud.ubicacion" placeholder="">
+
+        <label>
+          Ubicación (Municipio, Localidad o Parcela):
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="solicitud.ubicacion">
       </div>
 
       <div class="form-group full">
-        <label>Describa el problema o necesidad técnica:</label>
-        <textarea rows="4" [(ngModel)]="solicitud.problemaEspecifico"
-          placeholder="Describa brevemente en qué necesita apoyo (plagas, fertilización, comercialización, etc.)"></textarea>
+
+        <label>
+          Describa el problema o necesidad técnica:
+        </label>
+
+        <textarea
+          rows="4"
+          [(ngModel)]="solicitud.problemaEspecifico"
+          placeholder="Describa brevemente en qué necesita apoyo (plagas, fertilización, comercialización, etc.)">
+        </textarea>
       </div>
 
       <div class="form-group ancho-50">
+
         <label>Correo Electrónico:</label>
-        <input type="email" [(ngModel)]="solicitud.emailSolicitante" name="emailSolicitante"
-          placeholder="">
+
+        <input
+          type="email"
+          [(ngModel)]="solicitud.emailSolicitante"
+          name="emailSolicitante">
       </div>
 
       <div class="form-group full">
-        <label>Telefono</label>
-        <input type="text" [(ngModel)]="solicitud.telefono" placeholder="">
+
+        <label>Teléfono</label>
+
+        <input
+          type="text"
+          [(ngModel)]="solicitud.telefono">
       </div>
-
-
-
 
     </div>
 
     <div class="contenedor-btn">
-      <button class="btn-guardar" (click)="enviarSolicitud()">Enviar Solicitud al TecNM</button>
+
+      <button
+        class="btn-guardar"
+        (click)="enviarSolicitud()">
+
+        Enviar Solicitud al TecNM
+      </button>
     </div>
+
   </section>
 </div>

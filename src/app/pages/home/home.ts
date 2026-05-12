@@ -147,7 +147,7 @@ navegarAFiltro(subtema: string) {
 
   // 🚩 FUNCIONES AUXILIARES PARA EL HTML (ORIGINALES - INTACTAS)
   obtenerUrlEvidencia(nombreArchivo: string): string {
-    return `http://localhost:8080/uploads/${nombreArchivo}`; 
+    return `/uploads/${nombreArchivo}`; 
   }
 
   formatearDia(fechaStr: string): string {
