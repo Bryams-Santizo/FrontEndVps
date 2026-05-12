@@ -3,7 +3,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-//  CHART
+// CHART
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
@@ -17,7 +17,7 @@ Chart.register(...registerables);
 export class mundo implements AfterViewInit, OnDestroy, OnInit {
 
   // =============================
-  // 🔹 ESTADOS
+  //  ESTADOS
   // =============================
   selectedMarket: string = 'internacional';
   selectedSegment: any = null;
@@ -67,7 +67,7 @@ export class mundo implements AfterViewInit, OnDestroy, OnInit {
   }
 
   // =============================
-  //  INTERACCIONES
+  // INTERACCIONES
   // =============================
   selectSegment(segment: any) {
     this.selectedSegment = segment;
@@ -81,7 +81,7 @@ export class mundo implements AfterViewInit, OnDestroy, OnInit {
     this.selectedLocation = loc;
     this.locationData = this.locationsData[this.selectedMarket]?.[loc] || {};
 
-    //  GENERAR GRAFICA
+    // GENERAR GRAFICA
     this.createChart();
   }
 
@@ -203,7 +203,7 @@ createChart() {
   //  SI NO HAY DATA → NO GRAFICA
   if (!this.locationData) return;
 
-  //  DATOS DINÁMICOS DESDE JSON
+  // DATOS DINÁMICOS DESDE JSON
   const dataValues = this.selectedMarket === 'nacional'
     ? [
         this.locationData.demanda || 50,
