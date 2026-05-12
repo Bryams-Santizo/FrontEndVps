@@ -14,3 +14,33 @@
   margin-bottom: 30px;
   text-align: center;
 }
+
+.cta-servicios-container {
+  background: #f4f8ff;
+  border-radius: 12px;
+  padding: 25px;
+}
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.cta-card {
+  background: linear-gradient(135deg, #0d47a1, #1565c0); /* azul institucional */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.cta-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
