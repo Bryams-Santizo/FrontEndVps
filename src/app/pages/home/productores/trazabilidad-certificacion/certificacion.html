@@ -12,6 +12,12 @@
   </div>
 </nav>
 
+<div class="alert alert-primary border-start border-4 border-primary shadow-sm mb-4">
+  <i class="bi bi-lightbulb-fill"></i>
+  <strong>Recomendación:</strong> Para obtener un diagnóstico personalizado y preciso, complete todos los campos del
+  formulario con información real y actualizada.
+</div>
+
 <div class="container mt-5 mb-5">
   <div class="card shadow-sm p-4">
 
@@ -55,9 +61,13 @@
           </div>
         </div>
         <div class="text-end mt-4">
-          <button class="btn btn-primary btn-lg px-5 shadow-sm" (click)="guardarPerfil()" *ngIf="pasoActual === 1">
+          <button class="btn btn-primary btn-lg px-5 shadow-sm" (click)="guardarPerfil()"
+            [disabled]="!formularioValido()" *ngIf="pasoActual === 1">
             <i class="bi bi-save"></i> Guardar y Continuar
           </button>
+          <div *ngIf="!formularioValido()" class="text-danger mt-2">
+   Por favor, complete todos los campos obligatorios para continuar.
+</div>
           <span class="badge bg-success fs-6 py-2 px-3" *ngIf="pasoActual >= 2">
             <i class="bi bi-check-lg"></i> Datos Registrados
           </span>
@@ -167,18 +177,21 @@
       </div>
     </div>
 
+
+
     <div *ngIf="pasoActual === 4" class="text-center animate__animated animate__fadeInUp">
+     
       <h2 class="mb-4">Resultados del Diagnóstico</h2>
 
-    <div class="p-5 mb-4 rounded-3 shadow-sm"
-    [ngClass]="resultadoFinal.porcentajeCumplimiento >= 80 ? 'bg-success text-white' : 'bg-secondary text-white'">
-    
-    <span class="display-1 fw-bold">
-        {{ resultadoFinal.porcentajeCumplimiento | number:'1.2-2' }}%
-    </span>
-    
-    <h4 class="mt-2">Índice de Cumplimiento Técnico</h4>
-  </div>
+      <div class="p-5 mb-4 rounded-3 shadow-sm"
+        [ngClass]="resultadoFinal.porcentajeCumplimiento >= 80 ? 'bg-success text-white' : 'bg-secondary text-white'">
+
+        <span class="display-1 fw-bold">
+          {{ resultadoFinal.porcentajeCumplimiento | number:'1.2-2' }}%
+        </span>
+
+        <h4 class="mt-2">Índice de Cumplimiento Técnico</h4>
+      </div>
 
       <div class="card p-4 my-4 text-start border-0 bg-light shadow-sm">
         <h5 class="fw-bold border-bottom pb-2 text-primary">Recomendaciones de ADICAM:</h5>
@@ -191,5 +204,33 @@
     </div>
 
   </div>
-</div>
 
+  <div class="cta-servicios-container mt-5">
+
+    <h4 class="text-center text-primary fw-bold mb-4">
+      <i class="bi bi-lightbulb"></i> Servicios Recomendados
+    </h4>
+
+    <div class="cta-grid">
+
+      <div class="cta-card" (click)="irATransferencia()">
+        <p>¿Requieres servicio de geolocalización por sistema GNSS?</p>
+      </div>
+
+      <div class="cta-card" (click)="irATransferencia()">
+        <p>¿Te interesaría realizar una preauditoría previa a certificación?</p>
+      </div>
+
+      <div class="cta-card" (click)="irATransferencia()">
+        <p>¿Requieres asistencia técnica en buenas prácticas agrícolas?</p>
+      </div>
+
+      <div class="cta-card" (click)="irATransferencia()">
+        <p>¿Requieres asistencia técnica en procesos post cosecha?</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
