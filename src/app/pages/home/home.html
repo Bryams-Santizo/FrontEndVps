@@ -152,6 +152,7 @@
 
 
     <!-- FASES -->
+   <!-- FASES -->
     <section id="proyectos-aplicados" class="py-5 bg-white">
         <div class="container">
             <div class="text-center mb-5 wow animate_animated animate_fadeIn">
@@ -219,23 +220,17 @@
                                 <p>Se refiere a todas las actividades necesarias para iniciar una plantación de café:
                                     elegir variedades, preparar suelos y organizar cómo se sembrará.</p>
 
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Métodos de selección de variedades')">✔ Métodos de
-                                    selección de
-                                    variedades</button>
 
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Manejo genético y viveros')">
-                                    ✔ Manejo genético y viveros
+
+                                <button *ngFor="let sub of subtemas" class="btn btn-outline-primary w-100 mb-2"
+                                    (click)="abrirModal(sub)" data-bs-toggle="modal" data-bs-target="#modalSubtema">
+
+                                    ✔ {{ sub.nombre }}
                                 </button>
 
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Preparación de suelos')">✔ Preparación de suelos</button>
 
 
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Diseño y trazado de plantaciones')"> ✔ Diseño y trazado de
-                                    plantaciones</button>
+
 
                             </div>
                         </div>
@@ -253,21 +248,12 @@
                             <div class="modal-body">
                                 <p>Son las prácticas para mantener el cafetal sano y productivo: fertilización,
                                     control de sombra, podas, riego y manejo de malezas.</p>
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Fertilización y nutrición')"> ✔ Fertilización y
-                                    nutrición</button>
+                                <button *ngFor="let sub of manejo_del_cultivo"
+                                    class="btn btn-outline-primary w-100 mb-2" (click)="abrirModal(sub)"
+                                    data-bs-toggle="modal" data-bs-target="#modalSubtema">
 
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Manejo de sombra')">✔ Manejo de sombra</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Manejo de arvenses')">✔ Manejo de arvenses</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Podas y renovación')">✔ Podas y renovación</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Manejo hídrico')">✔ Manejo hídrico</button>
+                                    ✔ {{ sub.nombre }}
+                                </button>
 
                             </div>
                         </div>
@@ -285,22 +271,11 @@
                             <div class="modal-body">
                                 <p>Incluye la prevención y control de plagas y enfermedades que dañan el café, como
                                     roya, broca y hongos.</p>
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Roya')">✔ Roya</button>
+                                <button *ngFor="let sub of sanidad_vegetal" class="btn btn-outline-primary w-100 mb-2"
+                                    (click)="abrirModal(sub)" data-bs-toggle="modal" data-bs-target="#modalSubtema">
 
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Broca')">✔ Broca</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Enfermedades foliares y sistémicas')">✔ Enfermedades
-                                    foliares y
-                                    sistémicas</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Plagas secundarias')">✔ Plagas secundarias</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Manejo integrado (MIP)')">✔ Manejo integrado (MIP)</button>
+                                    ✔ {{ sub.nombre }}
+                                </button>
 
                             </div>
                         </div>
@@ -319,27 +294,12 @@
                                 <p>Uso de tecnologías modernas y métodos avanzados
                                     (sensores, drones, sistemas agroforestales) para mejorar la producción y hacerlo de
                                     forma sostenible.</p>
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Sistemas agroforestales')">✔ Sistemas
-                                    agroforestales</button>
+                                <button *ngFor="let sub of tecnificacion_buenas_practicas"
+                                    class="btn btn-outline-primary w-100 mb-2" (click)="abrirModal(sub)"
+                                    data-bs-toggle="modal" data-bs-target="#modalSubtema">
 
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Tecnología para monitoreo agrícola')">✔ Tecnología para
-                                    monitoreo
-                                    agrícola</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Agricultura de precisión')">✔ Agricultura de
-                                    precisión</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Modelos de predicción climática')">✔ Modelos de predicción
-                                    climática</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('(sensores, drones, etc.)')">✔ Innovaciones en campo
-                                    (sensores,
-                                    drones, etc.)</button>
+                                    ✔ {{ sub.nombre }}
+                                </button>
 
                             </div>
                         </div>
@@ -358,22 +318,12 @@
                                 <p>Administración del trabajo, costos, documentación y
                                     prácticas necesarias para que el productor gestione su finca de manera eficiente y
                                     formal.</p>
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Costos de producción')">✔ Costos de producción</button>
+                                <button *ngFor="let sub of organizacion_gestion"
+                                    class="btn btn-outline-primary w-100 mb-2" (click)="abrirModal(sub)"
+                                    data-bs-toggle="modal" data-bs-target="#modalSubtema">
 
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Administración de unidades productivas')">✔ Administración
-                                    de unidades
-                                    productivas</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro(' Formalización')">✔ Formalización</button>
-
-                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
-                                    (click)="navegarAFiltro('Buenas prácticas agrícolas certificables (BPA)')">✔ Buenas
-                                    prácticas agrícolas
-                                    certificables (BPA)</button>
-
+                                    ✔ {{ sub.nombre }}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -933,6 +883,9 @@
                                     (click)="navegarAFiltro('Cooperativas y empresas sociales')">✔ Cooperativas y
                                     empresas
                                     sociales</button>
+
+                                <button type="button" class="btn btn-outline-primary w-100 mb-2"
+                                    (click)="navegarAFiltro('Turismo de experiencia')">✔ Turismo de experiencia</button>
                             </div>
 
                         </div>
@@ -942,6 +895,37 @@
             </div> <!-- row -->
         </div> <!-- container -->
     </section>
+
+    <!-- MODAL GLOBAL -->
+    <div class="modal fade" id="modalSubtema" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header bg-primary-custom text-white">
+                    <h5 class="modal-title">
+                        {{ subtemaActual?.nombre }}
+                    </h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p>{{ subtemaActual?.descripcion }}</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+
+                    <button class="btn btn-primary" (click)="navegarAFiltro(subtemaActual.nombre)"
+                        data-bs-dismiss="modal">
+                        Ver proyectos
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- carrucel de los tec-->
 
