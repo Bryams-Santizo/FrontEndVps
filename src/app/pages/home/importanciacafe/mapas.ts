@@ -3,8 +3,12 @@ import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
-
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 // Interfaces para mantener el tipado fuerte que tenías
+
+type TipoCafe = 'grano' | 'tostado' | 'soluble';
+
 interface IMunicipioData {
   nombre: string; zona: string; actores: any; infoProductores: any;
   altura: string; variedades: string[]; produccionHa: string; clima: string;
@@ -32,6 +36,12 @@ export class mapas implements OnInit, AfterViewInit {
   private markersGroup: any = null;
   private chiapasLayer: any = null;
 
+  private geoJsonLayer: any = null;
+
+public datosChiapas: any = {};
+public datosMundo: any[] = [];
+public datosNacionales: any = {};
+
   // ESTADOS DE NAVEGACIÓN
   public seccionActiva: string = 'mundo';
   public subSeccion: string = 'produccion';
@@ -46,99 +56,198 @@ export class mapas implements OnInit, AfterViewInit {
   public selectedMunicipio: IMunicipioData | null = null;
   public selectedRegionData: IRegionData | null = null;
 
-  // --- DATA DE LOS 36 PUNTOS ---
- public datosMundo = [
-  { label: 'Posición en el ranking mundial', valor: '9° Lugar' },
-  { label: 'Producción Nacional', valor: '4.5M' },
-  { label: '% Producción Mundial', valor: '2.8%' },
-  { label: 'Valor de la producción nacional', valor: '$480M USD' },
-  // Agregamos la bandera 'tieneDesglose'
-  { label: 'Valor Exportaciones', valor: '$480M USD', tieneDesglose: true },
-  { label: 'Valor de las exportaciones como proporción del comercio mundial', valor: '$480M USD' },
-  { label: 'Valor de las importaciones', valor: '$120M USD', tieneDesglose: true },
-  { label: 'Valor de las importaciones como proporción del comercio mundial', valor: '$480M USD' },
-  { label: 'Valor por variedades exportadas', valor: 'Ver detalle', tieneDesglose: true },
-];
+  private coffeeData: any;
+ 
 
-  public datosNacionales = {
-    produccion: [
-  { label: 'Superficie Sembrada', valor: '712,148 ha' },
-  { label: 'Superficie cosechada (ha)', valor: '642,500 ha' }, 
-  { label: 'Producción total (ton)', valor: '248,300 ton' }, // Equivalente a aprox. 4.1M de sacos
-  { label: 'Valor de producción ($)', valor: '$19,250M MXN' },
-  { label: 'Rendimiento ton/ha', valor: '0.39 ton/ha' }, // Rendimiento promedio nacional de café pergamino
-],
-   estructura: [
-  { label: 'Unidades de Producción', valor: '515,000' },
-  { label: 'Superficie promedio/productor', valor: '1.3 ha' },
-  { label: 'Variedades Arábica', valor: '94%' }, // El 6% restante es Robusta
-  { label: 'Tamaño promedio de parcela', valor: '1.2 ha' }, 
-  { label: 'Sistemas productivos predominantes', valor: 'Bajo Sombra' },
-  { label: 'Altitud productiva predominante', valor: '900 - 1,200 msnm' },
-  { label: 'Tipo de cafetal %', valor: '95% Tradicional' },
-  { label: 'Edad promedio de las plantaciones', valor: '18 - 22 años' },
-  { label: 'Precio medio rural ($/ton)', valor: '$75,400 MXN' }, // Estimado para café pergamino
-  { label: 'Producción por productor', valor: '480 kg/año' },
-  { label: 'Producción vendida como', valor: 'Café Pergamino' }
-],
-    socio: [
-  { label: 'Población total', valor: '515,000 productores' }, // Unidades de producción estimadas
-  { label: 'Población rural (%)', valor: '98%' }, // La caficultura es casi totalmente rural
-  { label: 'Población en edad productiva (15-64 años)', valor: '62%' },
-  { label: 'PEA (Población Económicamente Activa)', valor: '50.2%' }, // Dato general sector primario 2025
-  { label: 'Tasa de dependencia', valor: '3.8 personas/hogar' },
-  { label: 'Tasa de migración (expulsión/recepción)', valor: 'Alta (hasta 20% en zonas críticas)' }, //
-  { label: 'Ingreso promedio por hogar', valor: '$2,100 MXN mensuales' }, // Basado en $106 USD promedio productor
-  { label: '% población en pobreza', valor: '75%' }, // Estimación en zonas serranas cafetaleras
-  { label: '% pobreza extrema', valor: '32%' }, // Concentrada en zonas indígenas de Chiapas y Oaxaca
-  { label: 'Familias dependientes', valor: '3 millones de personas' } // Impacto indirecto total
-]
-  };
+  // --- DATA DE LOS 36 PUNTOS ---
+
 
   constructor(
+    private http: HttpClient,
+     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+this.http.get('assets/data/indicadores-cafe.json').subscribe((data: any) => {
+  this.datosMundo = data.mundo.indicadores;
+  this.datosNacionales = data.nacional;
+  this.datosChiapas = data.chiapas; //  FALTABA
+});
 
-  async ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      const leafletModule = await import('leaflet');
-      L = leafletModule.default || leafletModule;
+  this.http.get('assets/data/coffee-data.json').subscribe(data => {
+    this.coffeeData = data;
+  });
+}
+async ngAfterViewInit() {
+  if (isPlatformBrowser(this.platformId)) {
+    const leafletModule = await import('leaflet');
+    L = leafletModule.default || leafletModule;
+
+    // pequeño delay para asegurar DOM limpio
+    setTimeout(() => {
       this.initMap();
-    }
+    }, 100);
   }
+}
+
+public getListaActiva() {
+  if (this.seccionActiva === 'mundo') return this.datosMundo;
+
+  if (this.seccionActiva === 'estado') {
+    return this.datosChiapas[this.subSeccion] || [];
+  }
+
+  if (this.seccionActiva === 'nacional') {
+    return this.datosNacionales[this.subSeccion] || [];
+  }
+
+  return [];
+}
 
   private initMap() {
-    if (!L) return;
-    this.map = L.map('map-container').setView([23.6, -102.5], 5);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map);
-    this.markersGroup = L.layerGroup().addTo(this.map);
-   
+  if (!L) return;
+
+  //  DESTRUIR mapa anterior si existe
+  if (this.map) {
+    this.map.off();
+    this.map.remove();
+    this.map = null;
   }
 
+  // RESET estado SIEMPRE al entrar
+  this.seccionActiva = 'mundo';
+  this.selectedRegionData = null;
+
+  // Crear mapa limpio
+  this.map = L.map('map-container', {
+    center: [20, 10],
+    zoom: 2
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(this.map);
+
+  this.markersGroup = L.layerGroup().addTo(this.map);
+
+  this.irSeccion('mundo');
+}
+
+ngOnDestroy() {
+  if (this.map) {
+    this.map.off();
+    this.map.remove();
+    this.map = null;
+  }
+}
+
   // --- LÓGICA DE NAVEGACIÓN ---
- // --- LÓGICA DE NAVEGACIÓN CORREGIDA ---
 public irSeccion(seccion: string) {
+  if (!this.map || !this.coffeeData) return;
+
   this.seccionActiva = seccion;
-  this.selectedRegionData = null; 
-  this.markersGroup?.clearLayers(); 
+  this.markersGroup?.clearLayers();
 
   if (seccion === 'mundo') {
     this.map.flyTo([20, 10], 2);
-    this.dibujarPuntos(this.puntosMundo); // <--- AHORA SÍ DIBUJA LOS PUNTOS DEL MUNDO
-  } 
-  else if (seccion === 'nacional') {
+    this.renderizarMundo();
+
+  } else if (seccion === 'nacional') {
     this.map.flyTo([23.6, -102.5], 5);
-    // En nacional no dibujamos puntos para que se vea limpio el mapa
-  } 
-  else if (seccion === 'estado') {
-    this.map.flyTo([17.5, -96], 6); 
-    this.dibujarPuntos(this.puntosNacionales);
+    this.renderizarEstados(); //  AQUÍ ESTÁ LA CLAVE
+
+  } else if (seccion === 'estado') {
+    this.map.flyTo([23.6, -102.5], 5);
+    this.renderizarEstados();
   }
 }
+
+  private renderizarMundo() {
+    this.coffeeData.rankingMundial.forEach((p: any) => {
+      const marker = L.circleMarker(p.coords, { radius: 8, fillColor: p.color, color: '#fff', fillOpacity: 0.9 })
+        .addTo(this.markersGroup);
+      
+      // Ranking y nombre siempre visibles
+      marker.bindTooltip(`${p.pos}. ${p.nombre}`, { 
+        permanent: true, 
+        direction: 'right', 
+        className: 'etiqueta-mapa' 
+      });
+    });
+  }
+
+private renderizarEstados() {
+  this.markersGroup?.clearLayers();
+
+  this.http.get('assets/data/mexico-estados.geojson.json').subscribe((geo: any) => {
+
+    if (this.chiapasLayer) {
+      this.map.removeLayer(this.chiapasLayer);
+    }
+
+    this.chiapasLayer = L.geoJSON(geo, {
+      style: (feature: any) => {
+        const estado = feature.properties.name;
+        const prod = this.coffeeData.estadosMexico[estado]?.prod;
+
+        return {
+          fillColor: this.getColorEstado(prod),
+          weight: 1,
+          color: '#fff',
+          fillOpacity: 0.7
+        };
+      },
+
+      onEachFeature: (feature: any, layer: any) => {
+        const estado = feature.properties.name;
+        const info = this.coffeeData.estadosMexico[estado];
+
+        if (info) {
+          layer.bindTooltip(`${estado}: ${info.prod}`, {
+            permanent: true,
+            direction: 'center',
+            className: 'etiqueta-mapa'
+          });
+
+          layer.on('click', () => {
+            this.ngZone.run(() => {
+              this.cargarEstado(estado, info);
+            });
+          });
+        }
+      }
+    }).addTo(this.map);
+  });
+}
+getColorEstado(prod: string) {
+  if (!prod) return '#ccc';
+
+  const val = parseFloat(prod);
+
+  if (val >= 30) return '#4b2e2b';
+  if (val >= 20) return '#6F4E37';
+  if (val >= 10) return '#a67c52';
+  return '#d2b48c';
+}
+private cargarEstado(nombre: string, info: any) {
+  this.selectedRegionData = {
+    nombreRegion: nombre,
+    totalProduccion: info.ton + " Ton",
+    actoresDetalle: {
+      productores: info.productores,
+      clima: info.clima
+    },
+    municipios: ["Zona cafetalera", "Región alta", "Región media"]
+  } as any;
+}
+
+  // Función para el botón de regresar
+public regresarMenu() {
+  this.router.navigate(['/home']);
+}
+
+
 
 private dibujarPuntos(listaPuntos: any[]) {
   if (!L || !this.markersGroup) return;
@@ -174,10 +283,7 @@ private dibujarPuntos(listaPuntos: any[]) {
   });
 }
 
-  public getListaActiva() {
-    if (this.seccionActiva === 'mundo') return this.datosMundo;
-    return (this.datosNacionales as any)[this.subSeccion];
-  }
+ 
 
 // --- // --- LÓGICA DEL MAPA (Leaflet) ------
 
@@ -197,15 +303,7 @@ private puntosMundo = [
   { nombre: 'Vietnam', coords: [14.05, 108.27], color: '#6F4E37' }
 ];
 
-
-
-
   // --- LÓGICA DEL MAPA (Leaflet) ---
-  
-
-  
-
-  
 
   public resetMapa() {
     this.map.flyTo([23.6, -102.5], 5);
@@ -222,40 +320,74 @@ private puntosMundo = [
 
 generarGrafico() {
   const ctx = document.getElementById('miGraficoCanvas') as HTMLCanvasElement;
-  
-  // Si ya existe un gráfico, lo destruimos para crear uno nuevo
+
   if (this.chart) {
     this.chart.destroy();
   }
 
-  // Datos de prueba (Aquí conectarías con tu lógica de años)
-  const etiquetasAnios = Array.from({length: (this.filtroAnios.fin - this.filtroAnios.inicio + 1)}, (_, i) => this.filtroAnios.inicio + i);
+  const indicador = this.itemSeleccionado;
+
+  if (!indicador) return;
+
+  let labels: number[] = [];
+  let datasets: any[] = [];
+
+  // CASO CON DESGLOSE
+  if (indicador.tieneDesglose) {
+  const colores: any = {
+  grano: '#4b2e2b',
+  tostado: '#c08457',
+  soluble: '#f59e0b'
+};
+
+const tipos: TipoCafe[] = ['grano', 'tostado', 'soluble'];
+
+const base = indicador.serie[tipos[0]] || [];
+labels = base.map((d: any) => d.anio);
+
+   tipos.forEach(tipo => {
+  if (this.filtrosTipo[tipo] && indicador.serie[tipo]) {
+
+    const dataFiltrada = indicador.serie[tipo]
+      .filter((d: any) => d.anio >= this.filtroAnios.inicio && d.anio <= this.filtroAnios.fin);
+
+    datasets.push({
+      label: tipo.toUpperCase(),
+      data: dataFiltrada.map((d: any) => d.valor),
+      backgroundColor: colores[tipo],
+      borderColor: colores[tipo]
+    });
+  }
+});
+
+  } else {
+    const dataFiltrada = indicador.serie
+      .filter((d: any) => d.anio >= this.filtroAnios.inicio && d.anio <= this.filtroAnios.fin);
+
+    labels = dataFiltrada.map((d: any) => d.anio);
+
+    datasets.push({
+  label: indicador.label,
+  data: dataFiltrada.map((d: any) => d.valor),
+  borderColor: '#f59e0b',
+  backgroundColor: 'rgba(245, 158, 11, 0.2)',
+  tension: 0.4,
+  fill: true
+});
+  }
+
 
   this.chart = new Chart(ctx, {
-    type: this.itemSeleccionado.tieneDesglose ? 'bar' : 'line',
-    data: {
-      labels: etiquetasAnios,
-      datasets: this.itemSeleccionado.tieneDesglose ? [
-        { label: 'Grano', data: etiquetasAnios.map(() => Math.random() * 100), backgroundColor: '#4b3832' },
-        { label: 'Tostado', data: etiquetasAnios.map(() => Math.random() * 50), backgroundColor: '#855e42' },
-        { label: 'Soluble', data: etiquetasAnios.map(() => Math.random() * 30), backgroundColor: '#c0a48c' }
-      ] : [
-        { label: this.itemSeleccionado.label, data: etiquetasAnios.map(() => Math.random() * 100), borderColor: '#ffc107', tension: 0.1 }
-      ]
-    },
+    type: indicador.tieneDesglose ? 'bar' : 'line',
+    data: { labels, datasets },
     options: {
       responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        y: { beginAtZero: true, grid: { color: '#444' } },
-        x: { grid: { display: false } }
-      },
-      plugins: {
-        legend: { labels: { color: 'white' } }
-      }
+      maintainAspectRatio: false
     }
   });
 }
+
+
   public actualizarGrafico() {
     console.log("Actualizando gráfico de:", this.itemSeleccionado?.label);
     console.log("Rango:", this.filtroAnios.inicio, "-", this.filtroAnios.fin);
@@ -275,9 +407,7 @@ generarGrafico() {
     };
   }
 
-  public generateReport() {
-    alert('Generando PDF...');
-  }
+
 
 // 1. Agregar esta función para obtener el valor específico del estado
 public getValorEstado(label: string): string {
@@ -291,9 +421,7 @@ public getValorEstado(label: string): string {
     'Rendimiento ton/ha': '0.85', // Ejemplo
     'Unidades de Producción': this.selectedRegionData.actoresDetalle?.productores || '—'
   };
-
   return mapaDatos[label] || 'Consultando...';
 }
-
 
 }
