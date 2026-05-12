@@ -16,6 +16,7 @@
 
   <!-- 🔹 PANEL IZQUIERDO -->
   <aside class="sidebar sidebar-left">
+
     <h2 class="sidebar-title">Filtros de Mercado</h2>
 
     <!-- Tipo de mercado -->
@@ -47,6 +48,46 @@
       </button>
     </div>
 
+    <!-- 🔥 ESTRUCTURA TÉCNICA (DINÁMICA DESDE JSON) -->
+    <div class="detailed-market-info" *ngIf="technicalData.length">
+
+      <h3 class="section-label-gold">Estructura Técnica</h3>
+
+      <div class="accordion-container">
+
+        <details *ngFor="let t of technicalData"
+                 class="market-details"
+                 [open]="selectedSegment?.id === t.id">
+
+          <summary class="market-summary">
+            {{ t.titulo }}
+          </summary>
+
+          <div class="accordion-content">
+
+            <div *ngFor="let b of t.bloques" class="sub-section">
+
+              <span class="badge-tech">{{ b.tipo }}</span>
+
+              <p *ngIf="b.texto" class="text-mini">
+                {{ b.texto }}
+              </p>
+
+              <ul *ngIf="b.lista" class="tech-list">
+                <li *ngFor="let li of b.lista">
+                  {{ li }}
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
+
+        </details>
+
+      </div>
+    </div>
+
     <!-- Nichos -->
     <div class="market-list fade-in" *ngIf="selectedSegment">
       <h3 class="section-label-gold">Nichos de Alto Valor</h3>
@@ -61,6 +102,7 @@
 
   </aside>
 
+
   <!-- 🔹 GLOBO -->
   <main class="globe-wrapper">
     <div id="coffee-globe"></div>
@@ -71,6 +113,7 @@
         : 'MUNDIAL: ANÁLISIS DE EXPORTACIÓN' }}
     </div>
   </main>
+
 
   <!-- 🔹 PANEL DERECHO -->
   <aside class="sidebar sidebar-right" *ngIf="selectedSegment">
@@ -84,7 +127,7 @@
 
       <div class="gold-line"></div>
 
-      <!--  TABS NUEVOS -->
+      <!-- 🔥 TABS -->
       <div class="tabs-container">
         <button (click)="activeTab = 'caracteristicas'" 
                 [class.active]="activeTab === 'caracteristicas'">
@@ -102,10 +145,9 @@
         </button>
       </div>
 
-      <!-- 🔹 CONTENIDO TAB -->
+      <!-- 🔹 CONTENIDO -->
       <div class="tab-content">
 
-        <!-- CARACTERISTICAS -->
         <div *ngIf="activeTab === 'caracteristicas'">
           <p class="market-desc">{{ selectedSegment.descripcion }}</p>
 
@@ -120,7 +162,6 @@
           </div>
         </div>
 
-        <!-- REQUISITOS -->
         <div *ngIf="activeTab === 'requisitos'">
           <div class="analysis-card">
             <p><strong>Calidad:</strong> {{ selectedSegment.indicadores.entrada }}</p>
@@ -129,7 +170,6 @@
           </div>
         </div>
 
-        <!-- ECONOMIA -->
         <div *ngIf="activeTab === 'economia'">
           <div class="analysis-card">
             <p><strong>Volumen:</strong> {{ selectedSegment.indicadores.volumen }}</p>
@@ -139,7 +179,7 @@
 
       </div>
 
-      <!--  LISTA CLICKEABLE -->
+      <!-- 🔥 DESTINOS -->
       <h3 class="section-label-gold">
         {{ selectedMarket === 'nacional'
           ? 'ESTADOS ESTRATÉGICOS'
@@ -159,6 +199,7 @@
     </div>
   </aside>
 
+
   <!-- 🔹 PANEL VACÍO -->
   <aside class="sidebar sidebar-right" *ngIf="!selectedSegment">
     <div class="empty-state">
@@ -168,17 +209,73 @@
 
 </div>
 
-<!-- NUEVO PANEL INFERIOR -->
+
+
+<!-- 🔥 PANEL INFERIOR COMPLETO -->
 <div class="bottom-panel" *ngIf="selectedLocation">
 
+  <!-- ========================= -->
+  <!-- 🔹 HEADER -->
+  <!-- ========================= -->
   <div class="bottom-header">
-    <h2>{{ selectedLocation }}</h2>
+
+    <div class="header-left">
+      <h2>{{ selectedLocation }}</h2>
+      <p class="hint">GIRA EL MAPA PARA VISUALIZAR LOS PAÍSES</p>
+    </div>
+
+    <!-- 🔥 BOTÓN A LA DERECHA -->
+  <div class="header-right">
+
+  <div 
+    routerLink="/certificaciones"
+    style="
+      background: linear-gradient(135deg, #1a3c6d, #0d1f38);
+      border-left: 4px solid #ffd700;
+      border: 1px solid rgba(255,215,0,0.35);
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      max-width: 260px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+      transition: all 0.25s ease;
+    "
+
+    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.5)'"
+    onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 14px rgba(0,0,0,0.35)'"
+  >
+
+    <p style="
+      font-size: 0.7rem;
+      color: #e0f2fe;
+      margin: 0 0 6px 0;
+      line-height: 1.3;
+    ">
+      ¿QUIERES EVALUAR TUS COMPETENCIAS PARA ACCEDER A ESTE SEGMENTO DE MERCADO?
+    </p>
+
+    <span style="
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #ffd700;
+      letter-spacing: 0.4px;
+    ">
+      Ir a Certificaciones →
+    </span>
+
   </div>
 
-  <!-- INFO DINÁMICA -->
+</div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- 🔹 CONTENIDO -->
+  <!-- ========================= -->
   <div class="bottom-content">
 
-    <!-- NACIONAL -->
+    <!-- 🔹 NACIONAL -->
     <div *ngIf="selectedMarket === 'nacional'">
 
       <p><strong>Perfil del consumidor:</strong> {{ locationData.perfil }}</p>
@@ -187,9 +284,35 @@
       <p><strong>Precios:</strong> {{ locationData.precios }}</p>
       <p><strong>Actores clave:</strong> {{ locationData.actores }}</p>
 
+      <div class="market-table">
+        <h4>Condiciones del Mercado</h4>
+        <table>
+          <tr>
+            <th>Concepto</th>
+            <th>Nacional 🇲🇽</th>
+          </tr>
+          <tr>
+            <td>Precio y Moneda</td>
+            <td>MXN, basado en centrales de abasto</td>
+          </tr>
+          <tr>
+            <td>Normativa</td>
+            <td>NOM-149-SCFI</td>
+          </tr>
+          <tr>
+            <td>Contratación</td>
+            <td>Facturación SAT</td>
+          </tr>
+          <tr>
+            <td>Logística</td>
+            <td>Transporte terrestre</td>
+          </tr>
+        </table>
+      </div>
+
     </div>
 
-    <!-- INTERNACIONAL -->
+    <!-- 🔹 INTERNACIONAL -->
     <div *ngIf="selectedMarket === 'internacional'">
 
       <p><strong>Perfil del mercado:</strong> {{ locationData.perfil }}</p>
@@ -198,13 +321,38 @@
       <p><strong>Competencia:</strong> {{ locationData.competencia }}</p>
       <p><strong>Actores clave:</strong> {{ locationData.actores }}</p>
 
+      <div class="market-table">
+        <h4>Condiciones del Mercado</h4>
+        <table>
+          <tr>
+            <th>Concepto</th>
+            <th>Internacional 🌎</th>
+          </tr>
+          <tr>
+            <td>Precio y Moneda</td>
+            <td>USD + Bolsa NY</td>
+          </tr>
+          <tr>
+            <td>Normativa</td>
+            <td>FDA / EUDR</td>
+          </tr>
+          <tr>
+            <td>Contratación</td>
+            <td>Contratos GCA/NCA</td>
+          </tr>
+          <tr>
+            <td>Logística</td>
+            <td>Exportación marítima (FCL)</td>
+          </tr>
+        </table>
+      </div>
+
     </div>
 
   </div>
 
-  <!-- FUTURO: GRAFICAS -->
-  <div class="chart-placeholder">
-  Aquí irá la gráfica de importaciones / tendencias
+  <div class="chart-container">
+    <canvas id="marketChart"></canvas>
   </div>
 
 </div>
