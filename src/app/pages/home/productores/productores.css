@@ -3,6 +3,7 @@
 
 .navbar-inferior { background: #003b6f; color: #fff; padding: 10px 20px; font-weight: bold; }
 
+
 .container {
   padding: 30px;
   background-color: #f8f9fa;
@@ -140,6 +141,7 @@
 
 
 
+
 .btn-regresar {
   display: flex;
   align-items: center;
@@ -186,6 +188,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 
 
 
