@@ -1,0 +1,303 @@
+{
+  "mundo": {
+    "titulo": "México en el Mundo",
+    "descripcion": "Análisis de competitividad y comercio exterior (2024-2025)",
+    "indicadores": [
+      {
+        "label": "Posición en el ranking mundial",
+        "valorActual": "9° - 13° Lugar",
+        "fuente": "OIC / SADER, 2024",
+        "color": "#ffc107",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2020, "valor": 10 },
+          { "anio": 2021, "valor": 9 },
+          { "anio": 2022, "valor": 10 },
+          { "anio": 2023, "valor": 11 },
+          { "anio": 2024, "valor": 10 }
+        ]
+      },
+      {
+        "label": "Producción Nacional",
+        "valorActual": "4.1 - 4.5 Millones de sacos",
+        "fuente": "SIAP / SADER, 2025",
+        "color": "#28a745",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2020, "valor": 4.1 },
+          { "anio": 2021, "valor": 4.0 },
+          { "anio": 2022, "valor": 4.3 },
+          { "anio": 2023, "valor": 4.4 },
+          { "anio": 2024, "valor": 4.5 }
+        ]
+      },
+      {
+        "label": "% Producción Mundial",
+        "valorActual": "1.7% - 2.8%",
+        "fuente": "OIC / FAO",
+        "color": "#17a2b8",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2020, "valor": 2.3 },
+          { "anio": 2021, "valor": 2.1 },
+          { "anio": 2022, "valor": 2.4 },
+          { "anio": 2023, "valor": 2.6 },
+          { "anio": 2024, "valor": 2.7 }
+        ]
+      },
+      {
+        "label": "Valor de la producción nacional",
+        "valorActual": "$480M USD",
+        "fuente": "Estimación SIAP / Mercado",
+        "color": "#6c757d",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2021, "valor": 430 },
+          { "anio": 2022, "valor": 450 },
+          { "anio": 2023, "valor": 470 },
+          { "anio": 2024, "valor": 480 }
+        ]
+      },
+      {
+        "label": "Valor Exportaciones",
+        "valorActual": "$874M USD",
+        "fuente": "Banxico / INEGI, 2025",
+        "color": "#6F4E37",
+        "tipoGrafico": "bar",
+        "tieneDesglose": true,
+        "serie": {
+          "grano": [
+            { "anio": 2022, "valor": 720 },
+            { "anio": 2023, "valor": 800 },
+            { "anio": 2024, "valor": 874 }
+          ],
+          "tostado": [
+            { "anio": 2022, "valor": 60 },
+            { "anio": 2023, "valor": 70 },
+            { "anio": 2024, "valor": 80 }
+          ],
+          "soluble": [
+            { "anio": 2022, "valor": 55 },
+            { "anio": 2023, "valor": 60 },
+            { "anio": 2024, "valor": 70 }
+          ]
+        }
+      },
+      {
+        "label": "Valor de las exportaciones como proporción del comercio mundial",
+        "valorActual": "+171%",
+        "fuente": "INEGI, 2025",
+        "color": "#20c997",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2022, "valor": 40 },
+          { "anio": 2023, "valor": 85 },
+          { "anio": 2024, "valor": 171 }
+        ]
+      },
+      {
+        "label": "Valor de las importaciones",
+        "valorActual": "$187M USD",
+        "fuente": "BANXICO, 2025",
+        "color": "#dc3545",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2022, "valor": 150 },
+          { "anio": 2023, "valor": 170 },
+          { "anio": 2024, "valor": 187 }
+        ]
+      },
+      {
+        "label": "Valor de las importaciones como proporción del comercio mundial",
+        "valorActual": "0.8% - 1.2%",
+        "fuente": "Estimación FAO",
+        "color": "#adb5bd",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": []
+      },
+      {
+        "label": "Valor por variedades exportadas",
+        "valorActual": "Ver desglose",
+        "fuente": "INEGI / Banxico",
+        "color": "#f59e0b",
+        "tipoGrafico": "bar",
+        "tieneDesglose": true,
+        "serie": {
+          "grano": [
+            { "anio": 2024, "valor": 874 }
+          ],
+          "tostado": [
+            { "anio": 2024, "valor": 80 }
+          ],
+          "soluble": [
+            { "anio": 2024, "valor": 70 }
+          ]
+        }
+      }
+    ]
+  },
+
+  "nacional": {
+    "produccion": [
+      {
+        "label": "Superficie Sembrada",
+        "valorActual": "712,148 ha",
+        "fuente": "SIAP, 2024",
+        "color": "#ffc107",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2021, "valor": 712000 },
+          { "anio": 2022, "valor": 713500 },
+          { "anio": 2023, "valor": 712148 }
+        ]
+      },
+      {
+        "label": "Superficie Cosechada",
+        "valorActual": "642,500 ha",
+        "fuente": "SIAP",
+        "color": "#17a2b8",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2021, "valor": 642000 },
+          { "anio": 2022, "valor": 643000 },
+          { "anio": 2023, "valor": 642500 }
+        ]
+      },
+      {
+        "label": "Producción Total",
+        "valorActual": "1.08M Ton",
+        "fuente": "SIAP 24/25",
+        "color": "#28a745",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2021, "valor": 1020000 },
+          { "anio": 2022, "valor": 1050000 },
+          { "anio": 2023, "valor": 1080000 }
+        ]
+      },
+      {
+        "label": "Rendimiento",
+        "valorActual": "1.5 - 2.1 ton/ha",
+        "fuente": "Estimación técnica",
+        "color": "#6c757d",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2021, "valor": 1.7 },
+          { "anio": 2022, "valor": 1.9 },
+          { "anio": 2023, "valor": 2.1 }
+        ]
+      }
+    ],
+
+    "estructura": [
+      {
+        "label": "Unidades de Producción",
+        "valorActual": "515,000",
+        "fuente": "SADER",
+        "color": "#ffc107",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": [
+          { "anio": 2021, "valor": 505000 },
+          { "anio": 2022, "valor": 510000 },
+          { "anio": 2023, "valor": 515000 }
+        ]
+      },
+      {
+        "label": "Tamaño Promedio de Parcela",
+        "valorActual": "1.2 - 1.3 ha",
+        "fuente": "Promedio nacional",
+        "color": "#6F4E37",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": []
+      },
+      {
+        "label": "Variedades Predominantes",
+        "valorActual": "94% Arábica / 6% Robusta",
+        "fuente": "SIAP",
+        "color": "#17a2b8",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": []
+      },
+      {
+        "label": "Sistema de Producción",
+        "valorActual": "Bajo Sombra",
+        "fuente": "INEGI",
+        "color": "#28a745",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": []
+      }
+    ],
+
+    "socio": [
+      {
+        "label": "Población de Productores",
+        "valorActual": "515,000",
+        "fuente": "SADER",
+        "color": "#ffc107",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": []
+      },
+      {
+        "label": "Población Rural",
+        "valorActual": "98%",
+        "fuente": "INEGI",
+        "color": "#17a2b8",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": []
+      },
+      {
+        "label": "Ingreso Promedio",
+        "valorActual": "$2,100 - $3,500 MXN",
+        "fuente": "CONEVAL",
+        "color": "#28a745",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": []
+      },
+      {
+        "label": "Pobreza",
+        "valorActual": "75%",
+        "fuente": "CONEVAL",
+        "color": "#dc3545",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": []
+      },
+      {
+        "label": "Pobreza Extrema",
+        "valorActual": "32%",
+        "fuente": "CONEVAL",
+        "color": "#6F4E37",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": []
+      },
+      {
+        "label": "Migración",
+        "valorActual": "Alta (~20%)",
+        "fuente": "SEGOB",
+        "color": "#20c997",
+        "tipoGrafico": "line",
+        "tieneDesglose": false,
+        "serie": []
+      }
+    ]
+  }
+}
