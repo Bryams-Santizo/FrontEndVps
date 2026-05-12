@@ -1,0 +1,95 @@
+{
+  "nacional": {
+    "Ciudad de México": {
+      "perfil": "Consumidor educado",
+      "canal": "B2B + B2C gourmet",
+      "logistica": "12-14 hrs desde Chiapas",
+      "precios": "$350 - $600 MXN/kg",
+      "actores": "BUNA, Almanegra, Etrusca",
+      "demanda": 95,
+      "precioNivel": 90,
+      "acceso": 95,
+      "competenciaNivel": 90
+    },
+    "Jalisco": {
+      "perfil": "Joven experimental",
+      "canal": "Restaurantes y tostadores",
+      "logistica": "Corredor Bajío",
+      "precios": "$300 - $500",
+      "actores": "Estelar, PalReal",
+      "demanda": 85,
+      "precioNivel": 80,
+      "acceso": 85,
+      "competenciaNivel": 75
+    },
+    "Nuevo León": {
+      "perfil": "Ejecutivo premium",
+      "canal": "Retail lujo",
+      "logistica": "Ruta norte",
+      "precios": "$280 - $450",
+      "actores": "Forajido",
+      "demanda": 80,
+      "precioNivel": 90,
+      "acceso": 75,
+      "competenciaNivel": 85
+    },
+    "Veracruz": {
+      "perfil": "Mixto",
+      "canal": "Abasto + turismo",
+      "logistica": "Puerto",
+      "precios": "$180 - $220",
+      "actores": "La Parroquia",
+      "demanda": 88,
+      "precioNivel": 70,
+      "acceso": 90,
+      "competenciaNivel": 80
+    },
+    "Puebla": {
+      "perfil": "Tradicional",
+      "canal": "Tiendas locales",
+      "logistica": "Cercanía CDMX",
+      "precios": "$245 - $330",
+      "actores": "Kusii",
+      "demanda": 75,
+      "precioNivel": 75,
+      "acceso": 85,
+      "competenciaNivel": 70
+    }
+  },
+
+  "internacional": {
+    "Estados Unidos": {
+      "perfil": "Sofisticado",
+      "requisitos": "FDA",
+      "ventana": "Ene-Abr",
+      "competencia": "Colombia",
+      "actores": "Royal Coffee",
+      "demanda": 95,
+      "precioNivel": 90,
+      "acceso": 85,
+      "competenciaNivel": 90
+    },
+    "Alemania": {
+      "perfil": "Ético",
+      "requisitos": "Orgánico + EUDR",
+      "ventana": "Nov-Ene",
+      "competencia": "Perú",
+      "actores": "NKG",
+      "demanda": 85,
+      "precioNivel": 80,
+      "acceso": 75,
+      "competenciaNivel": 70
+    },
+    "Japón": {
+      "perfil": "Alta calidad",
+      "requisitos": "LMR estrictos",
+      "ventana": "Feb-Mayo",
+      "competencia": "Jamaica",
+      "actores": "UCC",
+      "demanda": 88,
+      "precioNivel": 95,
+      "acceso": 70,
+      "competenciaNivel": 85
+    }
+  }
+}
