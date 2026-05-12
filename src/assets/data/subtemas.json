@@ -1,0 +1,238 @@
+{
+  "subtemas": [
+    {
+      "nombre": "Métodos de selección de variedades",
+      "descripcion": "Proceso mediante el cual se identifican y eligen plantas de café con características deseables como mayor producción, calidad del grano, resistencia a enfermedades y adaptación climática."
+    },
+    {
+      "nombre": "Manejo genético y viveros",
+      "descripcion": "Conjunto de técnicas utilizadas para conservar, seleccionar y mejorar las características hereditarias de las plantas de café."
+    },
+    {
+      "nombre": "Preparación de suelos",
+      "descripcion": "Conjunto de actividades realizadas antes de la siembra para mejorar el suelo."
+    },
+    {
+      "nombre": "Diseño y trazado de plantaciones",
+      "descripcion": "Proceso de planificación de la distribución de las plantas para optimizar producción."
+    }
+  ],
+  "manejo_del_cultivo": [
+    {
+      "nombre": "Fertilización y nutrición",
+      "descripcion": "Proceso mediante el cual se suministran nutrientes esenciales al cultivo de café para favorecer su crecimiento, desarrollo y producción."
+    },
+    {
+      "nombre": "Manejo de arvenses",
+      "descripcion": "Prácticas para controlar plantas no deseadas que compiten por recursos."
+    },
+    {
+      "nombre": "Podas y renovación",
+      "descripcion": "Eliminación de ramas viejas y sustitución de plantas para mantener productividad."
+    },
+    {
+      "nombre": "Manejo hídrico",
+      "descripcion": "Uso y control adecuado del agua para asegurar el desarrollo del cultivo."
+    }
+  ],
+  "sanidad_vegetal": [
+    {
+      "nombre": "Roya del café",
+      "descripcion": "Enfermedad causada por el hongo Hemileia vastatrix que afecta hojas y producción."
+    },
+    {
+      "nombre": "Broca del café",
+      "descripcion": "Plaga causada por Hypothenemus hampei que perfora los frutos."
+    },
+    {
+      "nombre": "Enfermedades foliares y sistémicas",
+      "descripcion": "Afectan hojas o toda la planta a través de sus tejidos."
+    },
+    {
+      "nombre": "Plagas secundarias",
+      "descripcion": "Organismos de impacto menor pero dañinos en ciertas condiciones."
+    },
+    {
+      "nombre": "Manejo integrado de plagas",
+      "descripcion": "Estrategia que combina métodos biológicos, culturales, físicos y químicos."
+    }
+  ],
+  "tecnificacion_buenas_practicas": [
+    {
+      "nombre": "Sistemas agroforestales",
+      "descripcion": "Integración del café con árboles para mejorar biodiversidad y suelo."
+    },
+    {
+      "nombre": "Tecnología para monitoreo agrícola",
+      "descripcion": "Uso de sensores, drones y sistemas digitales."
+    },
+    {
+      "nombre": "Agricultura de precisión",
+      "descripcion": "Uso de datos y tecnología para optimizar recursos."
+    },
+    {
+      "nombre": "Modelos de predicción climática",
+      "descripcion": "Herramientas para anticipar cambios climáticos."
+    },
+    {
+      "nombre": "Innovaciones en el campo",
+      "descripcion": "Nuevas tecnologías y técnicas agrícolas."
+    }
+  ],
+  "organizacion_gestion": [
+    {
+      "nombre": "Costos de producción",
+      "descripcion": "Gastos necesarios para producir café."
+    },
+    {
+      "nombre": "Administración de unidades productivas",
+      "descripcion": "Gestión de recursos para mejorar eficiencia."
+    },
+    {
+      "nombre": "Formalización",
+      "descripcion": "Cumplimiento de requisitos legales."
+    },
+    {
+      "nombre": "Buenas Prácticas Agrícolas",
+      "descripcion": "Normas para producción segura y sostenible."
+    }
+  ],
+  "sustentabilidad": [
+    {
+      "nombre": "Suelo",
+      "descripcion": "Conservación de fertilidad y prevención de erosión."
+    },
+    {
+      "nombre": "Agua",
+      "descripcion": "Uso eficiente y reducción de contaminación."
+    },
+    {
+      "nombre": "Biodiversidad",
+      "descripcion": "Protección de especies y ecosistemas."
+    },
+    {
+      "nombre": "Captura de carbono",
+      "descripcion": "Absorción de CO2 por sistemas cafetaleros."
+    },
+    {
+      "nombre": "Adaptación al cambio climático",
+      "descripcion": "Estrategias frente a cambios climáticos."
+    }
+  ],
+  "procesamiento_calidad": {
+    "beneficiado_humedo": [
+      {
+        "nombre": "Cosecha y selección",
+        "descripcion": "Recolección y clasificación del grano."
+      },
+      {
+        "nombre": "Despulpado",
+        "descripcion": "Eliminación de la pulpa del fruto."
+      },
+      {
+        "nombre": "Fermentación",
+        "descripcion": "Proceso biológico para eliminar mucílago."
+      },
+      {
+        "nombre": "Lavado",
+        "descripcion": "Limpieza del grano tras fermentación."
+      },
+      {
+        "nombre": "Manejo de aguas mieles",
+        "descripcion": "Tratamiento de aguas residuales."
+      }
+    ],
+    "secado_almacenamiento": [
+      {
+        "nombre": "Secado en patios",
+        "descripcion": "Secado al sol en superficies abiertas."
+      },
+      {
+        "nombre": "Guardiola",
+        "descripcion": "Secado mecánico con aire caliente."
+      },
+      {
+        "nombre": "Secado solar",
+        "descripcion": "Uso de camas africanas ventiladas."
+      },
+      {
+        "nombre": "Control de humedad",
+        "descripcion": "Regulación de humedad del grano."
+      },
+      {
+        "nombre": "Trillado",
+        "descripcion": "Eliminación del pergamino."
+      }
+    ],
+    "procesos_diferenciados": [
+      {
+        "nombre": "Método honey",
+        "descripcion": "Secado con mucílago adherido."
+      },
+      {
+        "nombre": "Método natural",
+        "descripcion": "Secado del fruto completo."
+      },
+      {
+        "nombre": "Fermentaciones controladas",
+        "descripcion": "Control de variables en fermentación."
+      },
+      {
+        "nombre": "Micro-lotes",
+        "descripcion": "Producciones pequeñas de alta calidad."
+      }
+    ]
+  },
+  "comercializacion": {
+    "tostado_molido": [
+      {
+        "nombre": "Perfiles de tostado",
+        "descripcion": "Tueste claro, medio y oscuro."
+      },
+      {
+        "nombre": "Control de calidad",
+        "descripcion": "Control de temperatura y tiempo."
+      },
+      {
+        "nombre": "Innovaciones en tostado",
+        "descripcion": "Automatización y control digital."
+      },
+      {
+        "nombre": "Estándares de molienda",
+        "descripcion": "Molienda uniforme según preparación."
+      }
+    ],
+    "mercados": [
+      {
+        "nombre": "Mercado interno",
+        "descripcion": "Comercialización nacional."
+      },
+      {
+        "nombre": "Exportación",
+        "descripcion": "Venta en mercados internacionales."
+      },
+      {
+        "nombre": "Mercados emergentes",
+        "descripcion": "E-commerce y consumo joven."
+      }
+    ],
+    "certificaciones": [
+      {
+        "nombre": "Orgánico",
+        "descripcion": "Producción sin químicos sintéticos."
+      },
+      {
+        "nombre": "Comercio justo",
+        "descripcion": "Pago justo a productores."
+      },
+      {
+        "nombre": "Rainforest",
+        "descripcion": "Sostenibilidad ambiental."
+      },
+      {
+        "nombre": "UTZ",
+        "descripcion": "Buenas prácticas agrícolas."
+      }
+    ]
+  }
+}
