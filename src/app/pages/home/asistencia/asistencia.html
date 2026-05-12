@@ -15,6 +15,76 @@
   <h2 class="titulo">Solicitud de Asistencia Técnica</h2>
   <p class="instrucciones"></p>
 
+<!-- SELECCIÓN DE SERVICIO -->
+<section class="card-form">
+  <h3 class="subtitulo">Tipo de Servicio de Asistencia</h3>
+
+  <div class="form-group full">
+    <label>Seleccione el servicio que requiere:</label>
+    <select [(ngModel)]="tipoServicio" (change)="cambiarServicio()">
+      <option value="" disabled selected>Seleccione una opción...</option>
+      <option value="trazabilidad">
+        Ficha básica de trazabilidad de campo (GNSS)
+      </option>
+      <option value="auditoria">
+        Servicios de auditoría interna
+      </option>
+    </select>
+  </div>
+
+  <!-- OPCIÓN 1 -->
+  <div *ngIf="tipoServicio === 'trazabilidad'" class="info-box">
+    <h4>Ficha básica de trazabilidad de campo</h4>
+    <p>
+      Identificación del origen del café mediante sistema GNSS, permitiendo
+      registrar ubicación exacta de parcelas y garantizar la trazabilidad del producto.
+    </p>
+  </div>
+
+  <!-- OPCIÓN 2 -->
+  <div *ngIf="tipoServicio === 'auditoria'" class="info-box">
+    <h4>Servicios de Auditoría Interna</h4>
+
+    <p>
+      Consiste en la identificación de <b>no conformidades</b> antes de auditorías
+      de Certimex, Mayacert o CCOF, con el objetivo de corregir y evitar pérdida de certificación.
+    </p>
+
+    <p><b>Rubros evaluados:</b></p>
+
+    <ul>
+      <li><b>Manejo del cultivo:</b>
+        <ul>
+          <li>Uso exclusivo de insumos permitidos</li>
+          <li>Barreras vivas contra contaminación</li>
+        </ul>
+      </li>
+
+      <li><b>Infraestructura y bodega:</b>
+        <ul>
+          <li>Separación café orgánico / convencional</li>
+          <li>Limpieza de maquinaria</li>
+        </ul>
+      </li>
+
+      <li><b>Documentación (Trazabilidad):</b>
+        <ul>
+          <li>Control de cosecha vs entregas</li>
+          <li>Bitácora de campo actualizada</li>
+        </ul>
+      </li>
+
+      <li><b>Aspectos sociales y ambientales:</b>
+        <ul>
+          <li>Manejo de aguas mieles</li>
+          <li>Uso de equipo de protección</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
   <section class="card-form">
     <h3 class="subtitulo">Datos del Solicitante</h3>
 
