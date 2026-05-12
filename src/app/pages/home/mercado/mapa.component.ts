@@ -27,14 +27,14 @@ export class mundo implements AfterViewInit, OnDestroy, OnInit {
   activeTab: string = 'caracteristicas';
 
   // =============================
-  // 🔹 DATA
+  //  DATA
   // =============================
   segmentsData: any[] = [];
   technicalData: any[] = [];
   locationsData: any = {};
 
   // =============================
-  // 🔹 GLOBO
+  //  GLOBO
   // =============================
   private globe: any;
   private worldFeatures: any[] = [];
