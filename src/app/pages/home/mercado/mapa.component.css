@@ -349,6 +349,7 @@
 
 
 
+
 /* =========================================
     TABS (CARACTERISTICAS / REQUISITOS / ECONOMIA)
    ========================================= */
@@ -490,5 +491,7 @@
     .bottom-content {
         grid-template-columns: 1fr;
     }
-}
 
+
+    
+}
