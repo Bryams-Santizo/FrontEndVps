@@ -1,0 +1,130 @@
+{
+  "segments": [
+    {
+      "id": "especialidad",
+      "nombre": "Mercado de Especialidad",
+      "descripcion": "Café con puntuación de 84 o más puntos SCA, cero defectos primarios, trazabilidad total y perfiles sensoriales complejos.",
+      "indicadores": {
+        "precio": "Bolsa NY + prima de 1 a 4 USD/libra (según puntaje)",
+        "dominio": "Importadores, tostadores y comercializadores especializados",
+        "entrada": "Alta calidad física y trazabilidad completa",
+        "volumen": "Microlotes desde 60 kg"
+      },
+      "detallesExtendidos": {
+        "normativa": "NOM-149 / FDA / EUDR",
+        "logistica": "GrainPro + exportación o consolidación"
+      },
+      "estados": [
+        "Ciudad de México",
+        "Jalisco",
+        "Nuevo León"
+      ],
+      "paises": [
+        "Corea del Sur",
+        "Noruega",
+        "Suecia"
+      ]
+    },
+
+    {
+      "id": "premium",
+      "nombre": "Mercado Premium",
+      "descripcion": "Café de 80-83 puntos SCA, balanceado, limpio y consistente.",
+      "indicadores": {
+        "precio": "Bolsa NY + $20 a $50 USD por saco",
+        "dominio": "HORECA, supermercados premium",
+        "entrada": "Defectos mínimos, consistencia",
+        "volumen": "Lotes estables"
+      },
+      "detallesExtendidos": {
+        "normativa": "NOM-149 / FDA",
+        "logistica": "Contenedores o consolidado"
+      },
+      "estados": [
+        "Ciudad de México",
+        "Estado de México",
+        "Querétaro",
+        "Quintana Roo"
+      ],
+      "paises": [
+        "Estados Unidos",
+        "Japón"
+      ]
+    },
+
+    {
+      "id": "volumen",
+      "nombre": "Mercado de Volumen",
+      "descripcion": "Café comercial para consumo masivo.",
+      "indicadores": {
+        "precio": "Contrato C Bolsa NY",
+        "dominio": "Traders e industria",
+        "entrada": "Preparación estándar",
+        "volumen": "Producción total"
+      },
+      "detallesExtendidos": {
+        "normativa": "NOM-149",
+        "logistica": "Sacos de yute"
+      },
+      "estados": [
+        "Estado de México",
+        "Veracruz",
+        "Ciudad de México"
+      ],
+      "paises": [
+        "Bélgica",
+        "Estados Unidos"
+      ]
+    },
+
+    {
+      "id": "certificado",
+      "nombre": "Mercado Certificado",
+      "descripcion": "Café con certificaciones orgánicas o éticas.",
+      "indicadores": {
+        "precio": "Bolsa + primas",
+        "dominio": "Cooperativas e importadores éticos",
+        "entrada": "Certificación obligatoria",
+        "volumen": "Contratos"
+      },
+      "detallesExtendidos": {
+        "normativa": "EUDR",
+        "logistica": "Separación de lotes"
+      },
+      "estados": [
+        "Ciudad de México",
+        "Baja California",
+        "Jalisco"
+      ],
+      "paises": [
+        "Alemania",
+        "Países Bajos"
+      ]
+    },
+
+    {
+      "id": "valor",
+      "nombre": "Valor Agregado",
+      "descripcion": "Café transformado o con procesos innovadores.",
+      "indicadores": {
+        "precio": "Costo + margen",
+        "dominio": "Venta directa",
+        "entrada": "Procesos y marca",
+        "volumen": "Variable"
+      },
+      "detallesExtendidos": {
+        "normativa": "COFEPRIS / FDA",
+        "logistica": "Empaque especializado"
+      },
+      "estados": [
+        "Nuevo León",
+        "Ciudad de México",
+        "Puebla"
+      ],
+      "paises": [
+        "Taiwán",
+        "Emiratos Árabes Unidos"
+      ]
+    }
+  ]
+}
