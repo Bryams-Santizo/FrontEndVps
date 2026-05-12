@@ -1,287 +1,262 @@
-import { AfterViewInit, Component, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+//  CHART
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-globo-cafetalero',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './mapa.component.html',
   styleUrls: ['./mapa.component.css']
 })
-export class mundo implements AfterViewInit, OnDestroy {
+export class mundo implements AfterViewInit, OnDestroy, OnInit {
+
+  // =============================
+  // 🔹 ESTADOS
+  // =============================
   selectedMarket: string = 'internacional';
   selectedSegment: any = null;
   selectedNiche: any = null;
-  selectedMarketType: any = null; // Declarada para compatibilidad con tus métodos antiguos
-  
+  selectedLocation: string | null = null;
+  locationData: any = {};
+  activeTab: string = 'caracteristicas';
+
+  // =============================
+  // 🔹 DATA
+  // =============================
+  segmentsData: any[] = [];
+  technicalData: any[] = [];
+  locationsData: any = {};
+
+  // =============================
+  // 🔹 GLOBO
+  // =============================
   private globe: any;
   private worldFeatures: any[] = [];
-private mexicoFeatures: any[] = [];
+  private mexicoFeatures: any[] = [];
 
-activeTab: string = 'caracteristicas';
-selectedLocation: any = null;
-locationData: any = {};
+  //  CHART
+  private chart: any;
 
-  // 1. SEGMENTOS PRINCIPALES
- segmentsData = [
-    {
-      id: 'especialidad',
-      nombre: 'Mercado de Especialidad',
-      descripcion: 'Café con 84+ puntos SCA, cero defectos primarios y trazabilidad total.',
-      estados: ['Ciudad de México', 'Jalisco', 'Baja California', 'Chiapas', 'Oaxaca'],
-      paises: ['South Korea', 'Norway', 'Sweden', 'United States of America', 'Taiwan'],
-      indicadores: { 
-        volumen: 'Microlotes', 
-        precio: 'Bolsa NY + Prima ($1.00 - $4.00 USD/lb)', 
-        dominio: 'Tostadores/Importadores Especializados', 
-        entrada: 'Puntaje SCA 84+, Humedad 10-12%' 
-      },
-      detallesExtendidos: {
-        logistica: 'Bolsas GrainPro en sacos de yute. Consumo mensual/bimestral.',
-        normativa: 'Nacional: NOM-149-SCFI | Int: FDA (EEUU) y EUDR (Europa).',
-        consumidor: 'Alto poder adquisitivo, educado en cultura de café y métodos de filtrado.'
-      }
-    },
-    {
-      id: 'premium',
-      nombre: 'Mercado Premium',
-      descripcion: 'Puntaje SCA 80-83. Taza limpia y balanceada para consumo masivo de alta calidad.',
-      estados: ['Ciudad de México', 'Estado de México', 'Querétaro', 'Quintana Roo'],
-      paises: ['Japan', 'United States of America', 'Italy', 'Spain'],
-      indicadores: { 
-        volumen: 'Contenedores Consolidados', 
-        precio: 'Bolsa NY + Diferencial (+$20 a +$50 USD/saco)', 
-        dominio: 'Cadenas regionales / HORECA', 
-        entrada: 'Grado 1 o 2, <12 defectos secundarios' 
-      },
-      detallesExtendidos: {
-        logistica: 'FCL (Full Container Load). Recomendado GrainPro.',
-        normativa: 'Estricto control de LMR (Límites de Residuos Químicos) en Japón/UE.',
-        consumidor: 'Busca sabor familiar de alta calidad y consistencia en el perfil.'
-      }
-    },
-    {
-      id: 'certificado',
-      nombre: 'Mercado Certificado',
-      descripcion: 'Valor basado en cumplimiento ético, social y ambiental (Orgánico, Fairtrade).',
-      estados: ['Ciudad de México', 'Baja California', 'Jalisco', 'Chiapas'],
-      paises: ['Germany', 'Netherlands', 'Belgium', 'Canada'],
-      indicadores: { 
-        volumen: 'Medio / Cooperativas', 
-        precio: 'Bolsa NY + Primas Fijas Acumulables', 
-        dominio: 'Importadores Éticos', 
-        entrada: 'Auditoría Anual, Geolocalización (EUDR)' 
-      },
-      detallesExtendidos: {
-        logistica: 'Separación física estricta para evitar contaminación cruzada.',
-        normativa: 'Certificado digital trazable obligatorio para aduana europea.',
-        consumidor: 'Prioriza el impacto social y ambiental sobre el perfil sensorial.'
-      }
-    },
-    {
-      id: 'volumen',
-      nombre: 'Mercado de Volumen',
-      descripcion: 'Enfocado en consumo masivo, industria de solubles y mezclas comerciales.',
-      estados: ['Estado de México', 'Veracruz', 'Chiapas', 'Puebla'],
-      paises: ['Belgium', 'United States of America', 'Germany'],
-      indicadores: { 
-        volumen: 'Masivo / Escala', 
-        precio: 'Referencia directa Contrato C (Bolsa NY)', 
-        dominio: 'Grandes Traders / Industria', 
-        entrada: 'Humedad máx 12%, Grado 3-5' 
-      },
-      detallesExtendidos: {
-        logistica: 'Sacos de yute tradicionales. Eficiencia de costos por kilo.',
-        normativa: 'Certificados fitosanitarios básicos y contratos GCA/NCA.',
-        consumidor: 'Sensible al precio, consumo de café molido o instantáneo.'
-      }
-    },
-    {
-      id: 'valor-agregado',
-      nombre: 'Mercado de Valor Agregado',
-      descripcion: 'Procesos disruptivos (Honey, Anaeróbicos) o producto terminado (Tostado en origen).',
-      estados: ['Nuevo León', 'Jalisco', 'Ciudad de México', 'Puebla'],
-      paises: ['Taiwan', 'United Arab Emirates', 'China'],
-      indicadores: { 
-        volumen: 'Nicho / B2C', 
-        precio: 'Costo de Producción + Margen de Marca', 
-        dominio: 'E-commerce / Tiendas Gourmet', 
-        entrada: 'Registro Marca, Tabla Nutricional, pH/Brix' 
-      },
-      detallesExtendidos: {
-        logistica: 'Empaque con válvula desgasificadora y diseño de alta calidad.',
-        normativa: 'Etiquetado en idioma destino y cumplimiento COFEPRIS/FDA.',
-        consumidor: 'Buscador de experiencias, valora el diseño y la innovación.'
-      }
-    }
-  ];
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private http: HttpClient
+  ) {}
 
-  // 2. NICHOS DE ALTO VALOR
-  nichesData = [
-    {
-      nombre: 'Café de Especialidad (Micro-lotes)',
-      segmentoRef: 'especialidad',
-      detalles: 'Alto margen potencial, exportación directa.',
-      paises: ['Japan', 'United States of America', 'Norway'],
-      estados: ['Chiapas', 'Oaxaca']
-    },
-    {
-      nombre: 'Café Orgánico Certificado',
-      segmentoRef: 'certificado',
-      detalles: 'Enfoque en sostenibilidad y salud.',
-      paises: ['Germany', 'Canada', 'Netherlands'],
-      estados: ['Chiapas', 'Guerrero']
-    },
-    {
-      nombre: 'Cafeterías de Especialidad (RTD)',
-      segmentoRef: 'premium',
-      detalles: 'Mercado interno, marca propia Chiapas.',
-      paises: ['Mexico'],
-      estados: ['Ciudad de México', 'Jalisco', 'Chiapas']
-    }
-  ];
+  // =============================
+  //  INIT
+  // =============================
+  ngOnInit(): void {
+    this.loadJSONs();
+  }
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  loadJSONs() {
+    this.http.get('assets/data/segments.json')
+      .subscribe((data: any) => this.segmentsData = data.segments);
 
-  // LÓGICA DE SELECCIÓN
+    this.http.get('assets/data/technical-structure.json')
+      .subscribe((data: any) => this.technicalData = data);
+
+    this.http.get('assets/data/locations.json')
+      .subscribe((data: any) => this.locationsData = data);
+  }
+
+  // =============================
+  //  INTERACCIONES
+  // =============================
   selectSegment(segment: any) {
     this.selectedSegment = segment;
-    this.selectedNiche = null; 
+    this.selectedNiche = null;
+    this.selectedLocation = null;
+    this.destroyChart();
     this.applyHighlight(segment);
   }
 
-  selectNiche(niche: any) {
-    this.selectedNiche = niche;
-    this.applyHighlight(niche);
+  selectLocation(loc: string) {
+    this.selectedLocation = loc;
+    this.locationData = this.locationsData[this.selectedMarket]?.[loc] || {};
+
+    //  GENERAR GRAFICA
+    this.createChart();
   }
 
-  getNichesForSegment(segmentId: string) {
-    return this.nichesData.filter(n => n.segmentoRef === segmentId);
+  setMarket(type: string) {
+    this.selectedMarket = type;
+    this.selectedSegment = null;
+    this.selectedLocation = null;
+    this.destroyChart();
+
+    if (!this.globe) return;
+
+    if (type === 'nacional') {
+      this.globe.polygonsData(this.mexicoFeatures);
+      this.globe.pointOfView({ lat: 23.5, lng: -102, altitude: 1.8 }, 1200);
+    } else {
+      this.globe.polygonsData(this.worldFeatures);
+      this.globe.pointOfView({ lat: 15, lng: -40, altitude: 2.5 }, 1200);
+    }
+
+    this.resetStyles();
   }
 
-  private applyHighlight(data: any) {
-  if (!this.globe || !data) return;
+  // =============================
+  //  GRAFICA
+  // =============================
+ 
 
-  // Determinamos qué lista de nombres buscar
-  const targets = this.selectedMarket === 'nacional' 
-    ? (data.estados || []) 
-    : (data.paises || []);
+  destroyChart() {
+    if (this.chart) {
+      this.chart.destroy();
+      this.chart = null;
+    }
+  }
 
-  this.globe.polygonCapColor((f: any) => {
-    // Extraemos el nombre del polígono (name para estados, ADMIN para países)
-    const geoName = (f.properties.name || f.properties.ADMIN || '').toLowerCase().trim();
-    
-    // Verificamos si el nombre está en nuestra lista de objetivos
-    const isMatch = targets.some((t: string) => t.toLowerCase().trim() === geoName);
-    
-    if (isMatch) return '#ffd700'; // Amarillo para los seleccionados
-    
-    // Si no hay match, color semitransparente
-    return 'rgba(255, 255, 255, 0.15)';
-  });
-
-  this.globe.polygonAltitude((f: any) => {
-    const geoName = (f.properties.name || f.properties.ADMIN || '').toLowerCase().trim();
-    const isMatch = targets.some((t: string) => t.toLowerCase().trim() === geoName);
-    return isMatch ? 0.06 : 0.01; // Elevación sutil para resaltar
-  });
-}
-
-  // CONFIGURACIÓN DEL GLOBO
+  // =============================
+  //  GLOBO
+  // =============================
   async ngAfterViewInit() {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const GlobeModule = await import('globe.gl');
     const Globe = GlobeModule.default;
+
     const container = document.getElementById('coffee-globe');
     if (!container) return;
 
     this.globe = new Globe(container)
       .backgroundColor('rgba(0,0,0,0)')
       .showAtmosphere(true)
-      .atmosphereColor('#ffffff')
+      .atmosphereColor('#1a3c6d')
       .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
       .polygonStrokeColor(() => '#ffd700')
-      .polygonCapColor(() => 'rgba(255, 255, 255, 0.2)')
-      .polygonSideColor(() => 'rgba(26, 60, 109, 0.1)')
+      .polygonCapColor(() => 'rgba(255,255,255,0.2)')
+      .polygonSideColor(() => 'rgba(26,60,109,0.3)')
       .polygonLabel((f: any) => `
-          <div style="background: #1a3c6d; color: white; padding: 8px; border: 1px solid #ffd700; border-radius: 5px;">
-            <b style="color: #ffd700;">${f.properties.name || f.properties.ADMIN}</b>
-          </div>
-        `);
+        <div style="background:#1a3c6d;color:white;padding:8px;border:1px solid gold;border-radius:4px;">
+          <b>${f.properties.name || f.properties.ADMIN}</b>
+        </div>
+      `);
 
-   // REEMPLAZA TU BLOQUE try { ... } ACTUAL CON ESTE:
-try {
-  // 1. Cargar Mapa Mundial
-  const resWorld = await fetch('https://unpkg.com/world-atlas@2/countries-110m.json');
-  const worldRaw = await resWorld.json();
-  const topojson = await import('topojson-client');
-  this.worldFeatures = (topojson.feature(worldRaw, worldRaw.objects.countries) as any).features;
+    try {
+      const [world, mexico] = await Promise.all([
+        fetch('https://unpkg.com/world-atlas@2/countries-110m.json'),
+        fetch('https://raw.githubusercontent.com/angelnmara/geojson/master/mexicoHigh.json')
+      ]);
 
-  // 2. NUEVO: Cargar Mapa Detallado de México (Estados reales)
- const resMexico = await fetch('https://raw.githubusercontent.com/angelnmara/geojson/master/mexicoHigh.json');
-  const mexicoRaw = await resMexico.json();
-  this.mexicoFeatures = mexicoRaw.features;
+      const worldRaw = await world.json();
+      const topojson = await import('topojson-client');
 
-  // 3. Iniciar el globo
-  this.setMarket('internacional');
+      this.worldFeatures = (topojson.feature(worldRaw, worldRaw.objects.countries) as any).features;
 
-  window.addEventListener('resize', () => {
-    if (this.globe) {
-      this.globe.width(container.clientWidth).height(container.clientHeight);
+      const mexicoRaw = await mexico.json();
+      this.mexicoFeatures = mexicoRaw.features;
+
+      this.setMarket('internacional');
+
+    } catch (e) {
+      console.error('Error cargando mapas', e);
+    }
+  }
+
+  applyHighlight(data: any) {
+    if (!this.globe) return;
+
+    const targets = this.selectedMarket === 'nacional'
+      ? data.estados || []
+      : data.paises || [];
+
+    const lower = targets.map((t: string) => t.toLowerCase());
+
+    this.globe.polygonCapColor((f: any) => {
+      const name = (f.properties.name || f.properties.ADMIN || '').toLowerCase();
+      return lower.includes(name) ? '#ffd700' : 'rgba(255,255,255,0.15)';
+    });
+
+    this.globe.polygonAltitude((f: any) => {
+      const name = (f.properties.name || f.properties.ADMIN || '').toLowerCase();
+      return lower.includes(name) ? 0.06 : 0.01;
+    });
+  }
+
+  resetStyles() {
+    if (!this.globe) return;
+    this.globe.polygonCapColor(() => 'rgba(255,255,255,0.2)');
+    this.globe.polygonAltitude(0.01);
+  }
+
+  ngOnDestroy() {
+    this.destroyChart();
+  }
+createChart() {
+  if (!isPlatformBrowser(this.platformId)) return;
+
+  const canvas: any = document.getElementById('marketChart');
+  if (!canvas) return;
+
+  this.destroyChart();
+
+  //  SI NO HAY DATA → NO GRAFICA
+  if (!this.locationData) return;
+
+  //  DATOS DINÁMICOS DESDE JSON
+  const dataValues = this.selectedMarket === 'nacional'
+    ? [
+        this.locationData.demanda || 50,
+        this.locationData.precioNivel || 50,
+        this.locationData.acceso || 50,
+        this.locationData.competenciaNivel || 50
+      ]
+    : [
+        this.locationData.demanda || 60,
+        this.locationData.precioNivel || 60,
+        this.locationData.acceso || 60,
+        this.locationData.competenciaNivel || 60
+      ];
+
+  this.chart = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: ['Demanda', 'Precio', 'Acceso', 'Competencia'],
+      datasets: [{
+        label: 'Indicadores de Mercado',
+        data: dataValues
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100
+        }
+      },
+      plugins: {
+        legend: {
+          display: true
+        }
+      }
     }
   });
-} catch (err) {
-  console.error("Error cargando mapas:", err);
 }
-  }
+  // Obtener nichos por segmento
+getNichesForSegment(segmentId: string) {
+  if (!this.technicalData || this.technicalData.length === 0) return [];
 
-  setMarket(type: string) {
-  this.selectedMarket = type;
-  this.selectedSegment = null;
-  this.selectedNiche = null;
-  
-  if (!this.globe) return;
+  const segment = this.technicalData.find((s: any) => s.id === segmentId);
 
-  if (type === 'nacional') {
-    // Forzamos la carga exclusiva de los estados de México
-    this.globe.polygonsData(this.mexicoFeatures);
-    // Ajuste de cámara para ver México de frente
-    this.globe.pointOfView({ lat: 23.5, lng: -102, altitude: 1.8 }, 1500);
-  } else {
-    this.globe.polygonsData(this.worldFeatures);
-    this.globe.pointOfView({ lat: 15, lng: -40, altitude: 2.5 }, 1500);
-  }
-  
-  // Resetear estilos inmediatamente para que no se vea blanco o amarillo total
-  this.resetStyles();
+  return segment?.nichos || [];
 }
 
-  private resetStyles() {
-  if (!this.globe) return;
-  // Color base para todos los polígonos cuando no hay nada seleccionado
-  this.globe.polygonCapColor(() => 'rgba(255, 255, 255, 0.2)');
-  this.globe.polygonAltitude(0.01);
-  this.globe.polygonStrokeColor(() => '#ffd700');
+// Seleccionar nicho
+selectNiche(niche: any) {
+  this.selectedNiche = niche;
+
+  // Opcional: puedes actualizar gráfica o info aquí
+  console.log('Nicho seleccionado:', niche);
 }
-
-selectLocation(loc: any) {
-  this.selectedLocation = loc;
-
-  // Aquí luego conectas con tu JSON real
-  this.locationData = {
-    perfil: 'Ejemplo perfil',
-    canal: 'Ejemplo canal',
-    logistica: 'Ejemplo logística',
-    precios: 'Ejemplo precios',
-    actores: 'Ejemplo actores',
-    requisitos: 'Ejemplo requisitos',
-    ventana: 'Ejemplo ventana',
-    competencia: 'Ejemplo competencia'
-  };
-}
-
-  ngOnDestroy() {}
 }
