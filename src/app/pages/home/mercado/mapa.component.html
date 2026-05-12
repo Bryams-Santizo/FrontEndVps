@@ -14,7 +14,7 @@
 
 <div class="globo-page">
 
-  <!--  PANEL IZQUIERDO -->
+  <!-- PANEL IZQUIERDO -->
   <aside class="sidebar sidebar-left">
 
     <h2 class="sidebar-title">Filtros de Mercado</h2>
@@ -48,7 +48,7 @@
       </button>
     </div>
 
-    <!--  ESTRUCTURA TÉCNICA (DINÁMICA DESDE JSON) -->
+    <!-- ESTRUCTURA TÉCNICA (DINÁMICA DESDE JSON) -->
     <div class="detailed-market-info" *ngIf="technicalData.length">
 
       <h3 class="section-label-gold">Estructura Técnica</h3>
@@ -103,7 +103,7 @@
   </aside>
 
 
-  <!--  GLOBO -->
+  <!-- GLOBO -->
   <main class="globe-wrapper">
     <div id="coffee-globe"></div>
 
@@ -145,7 +145,7 @@
         </button>
       </div>
 
-      <!--  CONTENIDO -->
+      <!-- CONTENIDO -->
       <div class="tab-content">
 
         <div *ngIf="activeTab === 'caracteristicas'">
@@ -200,7 +200,7 @@
   </aside>
 
 
-  <!-- 🔹 PANEL VACÍO -->
+  <!--  PANEL VACÍO -->
   <aside class="sidebar sidebar-right" *ngIf="!selectedSegment">
     <div class="empty-state">
       <p>Seleccione un segmento para iniciar.</p>
@@ -215,7 +215,7 @@
 <div class="bottom-panel" *ngIf="selectedLocation">
 
   <!-- ========================= -->
-  <!-- HEADER -->
+  <!--  HEADER -->
   <!-- ========================= -->
   <div class="bottom-header">
 
@@ -271,11 +271,11 @@
 
 
   <!-- ========================= -->
-  <!-- CONTENIDO -->
+  <!--  CONTENIDO -->
   <!-- ========================= -->
   <div class="bottom-content">
 
-    <!-- NACIONAL -->
+    <!--  NACIONAL -->
     <div *ngIf="selectedMarket === 'nacional'">
 
       <p><strong>Perfil del consumidor:</strong> {{ locationData.perfil }}</p>
@@ -312,7 +312,7 @@
 
     </div>
 
-    <!--  INTERNACIONAL -->
+    <!-- INTERNACIONAL -->
     <div *ngIf="selectedMarket === 'internacional'">
 
       <p><strong>Perfil del mercado:</strong> {{ locationData.perfil }}</p>
@@ -326,7 +326,7 @@
         <table>
           <tr>
             <th>Concepto</th>
-            <th>Internacional </th>
+            <th>Internacional</th>
           </tr>
           <tr>
             <td>Precio y Moneda</td>
