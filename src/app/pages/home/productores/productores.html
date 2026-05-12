@@ -9,6 +9,7 @@
 <nav class="navbar-inferior">
   <div class="titulo-navbar">Panel de Productores</div>
 
+
 </nav>
 
 <div *ngIf="vistaActual === 'menu'" class="menu-inicial fade-in">
@@ -37,6 +38,7 @@
 
 
 
+
 <!-- BOTÓN PARA REGRESAR AL MENÚ -->
 <button class="btn-regresar" (click)="regresar()">
 
@@ -57,6 +59,7 @@
       </div>
       <p class="text-muted">Precios convertidos desde la Bolsa de Chicago (CME Group).</p>
     </div>
+
 
     <div class="calc-body">
       <div *ngIf="errorConexion" class="alert-error">
@@ -126,6 +129,7 @@
 
   </div>
 </div>
+
 
 
 <!-- SIMULADOR ADICAM -->
@@ -291,58 +295,92 @@
       </div>
 
       <!-- DASHBOARD COMPARATIVO -->
-      <div class="col-lg-4">
-        <div class="sticky-top" style="top: 20px;">
-          <div class="card border-0 shadow-lg overflow-hidden">
-            <div class="card-header bg-institucional text-white text-center py-3">
-              <h5 class="m-0">EL MOMENTO DE LA VERDAD</h5>
-            </div>
-            <div class="card-body">
-              <div class="scenario mb-4">
-                <h6 class="text-muted border-bottom pb-2">ESCENARIO A: VENTA LOCAL</h6>
-                <div class="d-flex justify-content-between mt-2">
-                  <span>Utilidad Estimada:</span>
-                  <span class="fw-bold">{{utilidadTradicional | currency}}</span>
-                </div>
-              </div>
-
-              <div class="scenario bg-light p-3 rounded border-start border-4"
-                [class.border-success]="res.viabilidad === 'Verde'"
-                [class.border-warning]="res.viabilidad === 'Amarillo'"
-                [class.border-danger]="res.viabilidad === 'Rojo'">
-                <h6 class="text-primary border-bottom pb-2">ESCENARIO B: MODELO ADICAM</h6>
-                <div class="small mb-1 d-flex justify-content-between">
-                  <span>Peso Final (Neto):</span>
-                  <span>{{res.pesoFinal | number:'1.1-1'}} kg</span>
-                </div>
-                <div class="small mb-1 d-flex justify-content-between text-danger">
-                  <span>Inversión TecNM:</span>
-                  <span>- {{res.inversionPuestaPunto | currency}}</span>
-                </div>
-                <div class="small mb-1 d-flex justify-content-between text-danger">
-                  <span>Logística y Empaque:</span>
-                  <span>- {{res.costoLogisticaTotal + res.costoEmpaqueTotal | currency}}</span>
-                </div>
-                <div class="mt-3 p-2 bg-white rounded text-center">
-                  <p class="mb-0 small">Utilidad Neta Real</p>
-                  <h3 class="m-0" [class.text-success]="res.utilidadADICAM > 0">{{res.utilidadADICAM | currency}}</h3>
-                </div>
-              </div>
-
-              <div class="semaforo text-center mt-4 p-3 rounded"
-                [style.background-color]="res.viabilidad === 'Verde' ? '#d4edda' : res.viabilidad === 'Amarillo' ? '#fff3cd' : '#f8d7da'">
-                <h5 class="m-0"
-                  [style.color]="res.viabilidad === 'Verde' ? '#155724' : res.viabilidad === 'Amarillo' ? '#856404' : '#721c24'">
-                  VIABILIDAD: {{res.viabilidad}}
-                </h5>
-              </div>
-
-              <button class="btn btn-primary w-100 mt-4 py-2" *ngIf="res.viabilidad !== 'Rojo'">
-                Solicitar Validación al TecNM
-              </button>
-            </div>
+    <div class="col-lg-4">
+  <div class="sticky-top" style="top: 20px;">
+    <div class="card border-0 shadow-lg overflow-hidden">
+      <div class="card-header bg-institucional text-white text-center py-3">
+        <h5 class="m-0">EL MOMENTO DE LA VERDAD</h5>
+      </div>
+      <div class="card-body">
+        <div class="scenario mb-4">
+          <h6 class="text-muted border-bottom pb-2">ESCENARIO A: VENTA LOCAL</h6>
+          <div class="d-flex justify-content-between mt-2">
+            <span>Utilidad Estimada:</span>
+            <span class="fw-bold">{{utilidadTradicional | currency}}</span>
           </div>
         </div>
+
+        <div class="scenario bg-light p-3 rounded border-start border-4"
+          [class.border-success]="res.viabilidad === 'Verde'"
+          [class.border-warning]="res.viabilidad === 'Amarillo'"
+          [class.border-danger]="res.viabilidad === 'Rojo'">
+          
+          <h6 class="text-primary border-bottom pb-2">ESCENARIO B: MODELO ADICAM</h6>
+
+          <div class="small mb-1 d-flex justify-content-between">
+            <span>Peso Final (Neto):</span>
+            <span>{{res.pesoFinal | number:'1.1-1'}} kg</span>
+          </div>
+
+          <!-- Desglose Inversión -->
+          <div class="small mb-1 d-flex justify-content-between text-danger">
+            <span>Trazabilidad:</span>
+            <span>- {{res.inversionPuestaPunto | currency}}</span>
+          </div>
+          <div class="small mb-1 d-flex justify-content-between text-danger">
+            <span>Análisis de suelo:</span>
+            <span>- {{res.inversionPuestaPunto | currency}}</span>
+          </div>
+          <div class="small mb-1 d-flex justify-content-between text-danger">
+            <span>Certificaciones:</span>
+            <span>- {{res.inversionPuestaPunto | currency}}</span>
+          </div>
+
+          <!-- Desglose Logística -->
+          <div class="small mb-1 d-flex justify-content-between text-danger">
+            <span>Flete terrestre:</span>
+            <span>- {{res.costoLogisticaTotal | currency}}</span>
+          </div>
+          <div class="small mb-1 d-flex justify-content-between text-danger">
+            <span>Gastos aduanales:</span>
+            <span>- {{res.costoLogisticaTotal | currency}}</span>
+          </div>
+          <div class="small mb-1 d-flex justify-content-between text-danger">
+            <span>Certificados fitosanitarios:</span>
+            <span>- {{res.costoLogisticaTotal | currency}}</span>
+          </div>
+          <div class="small mb-1 d-flex justify-content-between text-danger">
+            <span>Certificado de origen AMECAFE:</span>
+            <span>- {{res.costoLogisticaTotal | currency}}</span>
+          </div>
+
+          <div class="mt-3 p-2 bg-white rounded text-center">
+            <p class="mb-0 small">Beneficio de incursionar en nuevo segmento</p>
+            <h3 class="m-0" [class.text-success]="res.utilidadADICAM > 0">
+              {{res.utilidadADICAM | currency}}
+            </h3>
+          </div>
+
+          <!-- Leyenda -->
+          <div class="text-center mt-2">
+            <small class="text-muted">A MAYOR VOLUMEN MENORES COSTOS</small>
+          </div>
+        </div>
+
+        <div class="semaforo text-center mt-4 p-3 rounded"
+          [style.background-color]="res.viabilidad === 'Verde' ? '#d4edda' : res.viabilidad === 'Amarillo' ? '#fff3cd' : '#f8d7da'">
+          <h5 class="m-0"
+            [style.color]="res.viabilidad === 'Verde' ? '#155724' : res.viabilidad === 'Amarillo' ? '#856404' : '#721c24'">
+            VIABILIDAD: {{res.viabilidad}}
+          </h5>
+        </div>
+
+        <button class="btn btn-primary w-100 mt-4 py-2" *ngIf="res.viabilidad !== 'Rojo'">
+          Solicitar Validación al TecNM
+        </button>
       </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
