@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router'; 
 import { HttpClientModule } from '@angular/common/http'; 
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 // Importaciones de Eventos
 import { EventoService, IEventoVisualizacion } from '../../services/eventos.service';
@@ -38,6 +39,29 @@ cargandoColaboraciones: boolean = true;
   cargando: boolean = true;
   // -------------------------------------
 
+subtemas: any[] = [];
+subtemaActual: any;
+manejo_del_cultivo: any[] = [];
+sanidad_vegetal: any[] = [];
+tecnificacion_buenas_practicas: any[] = [];
+organizacion_gestion: any[] = [];
+sustentabilidad: any[] = [];
+
+beneficiado_humedo: any[] = [];
+secado_almacenamiento: any[] = [];
+procesos_diferenciados: any[] = [];
+aseguramiento_calidad: any[] = [];
+infraestructura: any[] = [];
+gestion_ambiental: any[] = [];
+
+tostado_molido: any[] = [];
+desarrollo_producto: any[] = [];
+desarrollo_marca: any[] = [];
+mercados: any[] = [];
+comercializacion: any[] = [];
+certificaciones: any[] = [];
+gestion_empresarial: any[] = [];
+
   // =========================================================
   // 🚩 PROPIEDADES PARA PROYECTOS (AÑADIDAS)
   proyectos: ProyectoPublico[] = []; 
@@ -50,7 +74,8 @@ capacitaciones: ICapacitacion[] = [];
     private eventoService: EventoService,
     private proyectoService: ProyectoService ,// 🚩 AÑADIDO
     private capacitacionService: CapacitacionService,
-    private colaboracionservice: ColaboracionService
+    private colaboracionservice: ColaboracionService,
+    private http: HttpClient
     ) { }
 
     
@@ -60,9 +85,35 @@ capacitaciones: ICapacitacion[] = [];
     this.cargarProyectos(); // 🚩 CARGA DE PROYECTOS AÑADIDA
     this.cargarCapacitaciones();
     this.obtenercolaboraciones();
+    this.http.get('assets/data/subtemas.json')
+    .subscribe((data: any) => {
+      this.subtemas = data.subtemas;
+      this.manejo_del_cultivo = data.manejo_del_cultivo;
+      this.sanidad_vegetal = data.sanidad_vegetal;
+      this.tecnificacion_buenas_practicas = data.tecnificacion_buenas_practicas;
+      this.organizacion_gestion = data.organizacion_gestion;
+this.sustentabilidad = data.sustentabilidad;
+
+this.beneficiado_humedo = data.beneficiado_humedo;
+this.secado_almacenamiento = data.secado_almacenamiento;
+this.procesos_diferenciados = data.procesos_diferenciados;
+this.aseguramiento_calidad = data.aseguramiento_calidad;
+this.infraestructura = data.infraestructura;
+this.gestion_ambiental = data.gestion_ambiental;
+
+this.tostado_molido = data.tostado_molido;
+this.desarrollo_producto = data.desarrollo_producto;
+this.desarrollo_marca = data.desarrollo_marca;
+this.mercados = data.mercados;
+this.comercializacion = data.comercializacion;
+this.certificaciones = data.certificaciones;
+this.gestion_empresarial = data.gestion_empresarial;
+    });
   }
 
-
+abrirModal(subtema: any) {
+  this.subtemaActual = subtema;
+}
 
 navegarAFiltro(subtema: string) {
   // Forzamos la limpieza de Bootstrap para que no bloquee el hilo de ejecución
@@ -96,7 +147,7 @@ navegarAFiltro(subtema: string) {
 
   // 🚩 FUNCIONES AUXILIARES PARA EL HTML (ORIGINALES - INTACTAS)
   obtenerUrlEvidencia(nombreArchivo: string): string {
-    return `/uploads/${nombreArchivo}`; 
+    return `http://localhost:8080/uploads/${nombreArchivo}`; 
   }
 
   formatearDia(fechaStr: string): string {
