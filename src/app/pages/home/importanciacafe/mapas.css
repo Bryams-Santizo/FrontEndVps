@@ -1,5 +1,5 @@
 /* ========================================================== */
-/* 🔝 NAVBARS */
+/*  NAVBARS */
 /* ========================================================== */
 
 .navbar-superior { 
@@ -12,7 +12,7 @@
     height: 60px; 
 }
 
-/* 🔥 NAVBAR INFERIOR CORREGIDO */
+/*  NAVBAR INFERIOR CORREGIDO */
 .navbar-inferior { 
     background: #003b6f; 
     color: #fff; 
@@ -22,7 +22,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: nowrap; /* 🔥 evita que se bajen */
+    flex-wrap: nowrap; /*  evita que se bajen */
 }
 
 /* Título */
@@ -54,7 +54,7 @@
 
 
 /* ========================================================== */
-/* 📦 CONTENEDOR PRINCIPAL */
+/*  CONTENEDOR PRINCIPAL */
 /* ========================================================== */
 
 .contenedor-principal-mapa { 
@@ -72,7 +72,7 @@
 
 
 /* ========================================================== */
-/* 🗺️ MAPA */
+/*  MAPA */
 /* ========================================================== */
 
 #map-container { 
@@ -85,7 +85,7 @@
 
 
 /* ========================================================== */
-/* 📊 ELEMENTOS */
+/*  ELEMENTOS */
 /* ========================================================== */
 
 .item-info { 
@@ -109,7 +109,7 @@
 
 
 /* ========================================================== */
-/* 🪟 MODAL */
+/*  MODAL */
 /* ========================================================== */
 
 .modal-content {
@@ -119,12 +119,12 @@
 
 
 /* ========================================================== */
-/* 📱 RESPONSIVE (MÓVIL) */
+/*  RESPONSIVE (MÓVIL) */
 /* ========================================================== */
 
 @media screen and (max-width: 768px) {
 
-    /* 🔥 NAVBAR RESPONSIVE */
+    /*  NAVBAR RESPONSIVE */
     .navbar-inferior {
         flex-direction: column;
         align-items: flex-start;
