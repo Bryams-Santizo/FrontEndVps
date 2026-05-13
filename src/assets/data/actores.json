@@ -1,0 +1,1259 @@
+{
+  "Bella Vista": {
+    "productores": [
+      {
+        "clave": "CH.BV.001",
+        "nombre": "CH.BV.001",
+        "madurez": "Alta",
+        "oferta": 450,
+        "altura": 1890,
+        "variedad": "Geisha",
+        "proceso": "Natural",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.002",
+        "nombre": "CH.BV.002",
+        "madurez": "Media",
+        "oferta": 1200,
+        "altura": 1750,
+        "variedad": "Bourbon",
+        "proceso": "Lavado",
+        "trazabilidad": 40,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.003",
+        "nombre": "CH.BV.003",
+        "madurez": "Alta",
+        "oferta": 800,
+        "altura": 1810,
+        "variedad": "Caturra",
+        "proceso": "Honey",
+        "trazabilidad": 85,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.004",
+        "nombre": "CH.BV.004",
+        "madurez": "Media",
+        "oferta": 2500,
+        "altura": 1650,
+        "variedad": "Typica",
+        "proceso": "Lavado",
+        "trazabilidad": 20,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.005",
+        "nombre": "CH.BV.005",
+        "madurez": "Media",
+        "oferta": 600,
+        "altura": 1780,
+        "variedad": "Sarchimor",
+        "proceso": "Honey",
+        "trazabilidad": 90,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.010",
+        "nombre": "CH.BV.010",
+        "madurez": "Media",
+        "oferta": 950,
+        "altura": 1720,
+        "variedad": "Garnica",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.011",
+        "nombre": "CH.BV.011",
+        "madurez": "Media",
+        "oferta": 1100,
+        "altura": 1845,
+        "variedad": "Caturra",
+        "proceso": "Natural",
+        "trazabilidad": 45,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.012",
+        "nombre": "CH.BV.012",
+        "madurez": "Media",
+        "oferta": 450,
+        "altura": 1910,
+        "variedad": "Geisha",
+        "proceso": "Honey",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.013",
+        "nombre": "CH.BV.013",
+        "madurez": "Media",
+        "oferta": 3000,
+        "altura": 1620,
+        "variedad": "Bourbon",
+        "proceso": "Lavado",
+        "trazabilidad": 25,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.014",
+        "nombre": "CH.BV.014",
+        "madurez": "Media",
+        "oferta": 1400,
+        "altura": 1790,
+        "variedad": "Typica",
+        "proceso": "Lavado",
+        "trazabilidad": 80,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.019",
+        "nombre": "CH.BV.019",
+        "madurez": "Media",
+        "oferta": 850,
+        "altura": 1860,
+        "variedad": "Pacamara",
+        "proceso": "Natural",
+        "trazabilidad": 35,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.020",
+        "nombre": "CH.BV.020",
+        "madurez": "Media",
+        "oferta": 1250,
+        "altura": 1740,
+        "variedad": "Caturra",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.021",
+        "nombre": "CH.BV.021",
+        "madurez": "Media",
+        "oferta": 2100,
+        "altura": 1680,
+        "variedad": "Bourbon",
+        "proceso": "Honey",
+        "trazabilidad": 90,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.024",
+        "nombre": "CH.BV.024",
+        "madurez": "Media",
+        "oferta": 500,
+        "altura": 1880,
+        "variedad": "Geisha",
+        "proceso": "Natural",
+        "trazabilidad": 50,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.025",
+        "nombre": "CH.BV.025",
+        "madurez": "Media",
+        "oferta": 1350,
+        "altura": 1765,
+        "variedad": "Caturra",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.028",
+        "nombre": "CH.BV.028",
+        "madurez": "Media",
+        "oferta": 900,
+        "altura": 1825,
+        "variedad": "Bourbon",
+        "proceso": "Honey",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.029",
+        "nombre": "CH.BV.029",
+        "madurez": "Media",
+        "oferta": 2800,
+        "altura": 1640,
+        "variedad": "Typica",
+        "proceso": "Lavado",
+        "trazabilidad": 30,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.032",
+        "nombre": "CH.BV.032",
+        "madurez": "Media",
+        "oferta": 750,
+        "altura": 1875,
+        "variedad": "Geisha",
+        "proceso": "Lavado",
+        "trazabilidad": 95,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.033",
+        "nombre": "CH.BV.033",
+        "madurez": "Media",
+        "oferta": 1600,
+        "altura": 1715,
+        "variedad": "Caturra",
+        "proceso": "Natural",
+        "trazabilidad": 20,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.034",
+        "nombre": "CH.BV.034",
+        "madurez": "Media",
+        "oferta": 3200,
+        "altura": 1600,
+        "variedad": "Bourbon",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.037",
+        "nombre": "CH.BV.037",
+        "madurez": "Media",
+        "oferta": 480,
+        "altura": 1930,
+        "variedad": "Pacamara",
+        "proceso": "Natural",
+        "trazabilidad": 80,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.038",
+        "nombre": "CH.BV.038",
+        "madurez": "Media",
+        "oferta": 1150,
+        "altura": 1795,
+        "variedad": "Typica",
+        "proceso": "Honey",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.041",
+        "nombre": "CH.BV.041",
+        "madurez": "Media",
+        "oferta": 1400,
+        "altura": 1735,
+        "variedad": "Bourbon",
+        "proceso": "Natural",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.042",
+        "nombre": "CH.BV.042",
+        "madurez": "Media",
+        "oferta": 550,
+        "altura": 1855,
+        "variedad": "Geisha",
+        "proceso": "Honey",
+        "trazabilidad": 25,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.045",
+        "nombre": "CH.BV.045",
+        "madurez": "Media",
+        "oferta": 2400,
+        "altura": 1670,
+        "variedad": "Caturra",
+        "proceso": "Lavado",
+        "trazabilidad": 10,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.046",
+        "nombre": "CH.BV.046",
+        "madurez": "Media",
+        "oferta": 920,
+        "altura": 1815,
+        "variedad": "Typica",
+        "proceso": "Natural",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.049",
+        "nombre": "CH.BV.049",
+        "madurez": "Media",
+        "oferta": 670,
+        "altura": 1885,
+        "variedad": "Pacamara",
+        "proceso": "Lavado",
+        "trazabilidad": 30,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.050",
+        "nombre": "CH.BV.050",
+        "madurez": "Media",
+        "oferta": 1100,
+        "altura": 1705,
+        "variedad": "Sarchimor",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.051",
+        "nombre": "CH.BV.051",
+        "madurez": "Media",
+        "oferta": 420,
+        "altura": 1940,
+        "variedad": "Geisha",
+        "proceso": "Natural",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.052",
+        "nombre": "CH.BV.052",
+        "madurez": "Media",
+        "oferta": 1350,
+        "altura": 1725,
+        "variedad": "Bourbon",
+        "proceso": "Lavado",
+        "trazabilidad": 35,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.053",
+        "nombre": "CH.BV.053",
+        "madurez": "Media",
+        "oferta": 900,
+        "altura": 1815,
+        "variedad": "Caturra",
+        "proceso": "Honey",
+        "trazabilidad": 80,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.054",
+        "nombre": "CH.BV.054",
+        "madurez": "Media",
+        "oferta": 2700,
+        "altura": 1630,
+        "variedad": "Typica",
+        "proceso": "Lavado",
+        "trazabilidad": 25,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.055",
+        "nombre": "CH.BV.055",
+        "madurez": "Media",
+        "oferta": 580,
+        "altura": 1795,
+        "variedad": "Sarchimor",
+        "proceso": "Natural",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.060",
+        "nombre": "CH.BV.060",
+        "madurez": "Media",
+        "oferta": 880,
+        "altura": 1745,
+        "variedad": "Garnica",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.061",
+        "nombre": "CH.BV.061",
+        "madurez": "Media",
+        "oferta": 1150,
+        "altura": 1855,
+        "variedad": "Caturra",
+        "proceso": "Natural",
+        "trazabilidad": 40,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.062",
+        "nombre": "CH.BV.062",
+        "madurez": "Media",
+        "oferta": 430,
+        "altura": 1925,
+        "variedad": "Geisha",
+        "proceso": "Honey",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.063",
+        "nombre": "CH.BV.063",
+        "madurez": "Media",
+        "oferta": 3200,
+        "altura": 1610,
+        "variedad": "Bourbon",
+        "proceso": "Lavado",
+        "trazabilidad": 30,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.064",
+        "nombre": "CH.BV.064",
+        "madurez": "Media",
+        "oferta": 1550,
+        "altura": 1785,
+        "variedad": "Typica",
+        "proceso": "Lavado",
+        "trazabilidad": 75,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.069",
+        "nombre": "CH.BV.069",
+        "madurez": "Media",
+        "oferta": 820,
+        "altura": 1875,
+        "variedad": "Pacamara",
+        "proceso": "Natural",
+        "trazabilidad": 30,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.070",
+        "nombre": "CH.BV.070",
+        "madurez": "Media",
+        "oferta": 1300,
+        "altura": 1735,
+        "variedad": "Caturra",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.071",
+        "nombre": "CH.BV.071",
+        "madurez": "Media",
+        "oferta": 2250,
+        "altura": 1695,
+        "variedad": "Bourbon",
+        "proceso": "Honey",
+        "trazabilidad": 85,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.074",
+        "nombre": "CH.BV.074",
+        "madurez": "Media",
+        "oferta": 490,
+        "altura": 1895,
+        "variedad": "Geisha",
+        "proceso": "Natural",
+        "trazabilidad": 45,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.075",
+        "nombre": "CH.BV.075",
+        "madurez": "Media",
+        "oferta": 1420,
+        "altura": 1775,
+        "variedad": "Caturra",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.078",
+        "nombre": "CH.BV.078",
+        "madurez": "Media",
+        "oferta": 950,
+        "altura": 1840,
+        "variedad": "Bourbon",
+        "proceso": "Honey",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.079",
+        "nombre": "CH.BV.079",
+        "madurez": "Media",
+        "oferta": 2950,
+        "altura": 1655,
+        "variedad": "Typica",
+        "proceso": "Lavado",
+        "trazabilidad": 20,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.082",
+        "nombre": "CH.BV.082",
+        "madurez": "Media",
+        "oferta": 780,
+        "altura": 1885,
+        "variedad": "Geisha",
+        "proceso": "Lavado",
+        "trazabilidad": 90,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.083",
+        "nombre": "CH.BV.083",
+        "madurez": "Media",
+        "oferta": 1750,
+        "altura": 1730,
+        "variedad": "Caturra",
+        "proceso": "Natural",
+        "trazabilidad": 15,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.084",
+        "nombre": "CH.BV.084",
+        "madurez": "Media",
+        "oferta": 3400,
+        "altura": 1625,
+        "variedad": "Bourbon",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.087",
+        "nombre": "CH.BV.087",
+        "madurez": "Media",
+        "oferta": 520,
+        "altura": 1945,
+        "variedad": "Pacamara",
+        "proceso": "Natural",
+        "trazabilidad": 75,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.088",
+        "nombre": "CH.BV.088",
+        "madurez": "Media",
+        "oferta": 1220,
+        "altura": 1805,
+        "variedad": "Typica",
+        "proceso": "Honey",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.091",
+        "nombre": "CH.BV.091",
+        "madurez": "Media",
+        "oferta": 1550,
+        "altura": 1750,
+        "variedad": "Bourbon",
+        "proceso": "Natural",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.BV.092",
+        "nombre": "CH.BV.092",
+        "madurez": "Media",
+        "oferta": 600,
+        "altura": 1870,
+        "variedad": "Geisha",
+        "proceso": "Honey",
+        "trazabilidad": 20,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.095",
+        "nombre": "CH.BV.095",
+        "madurez": "Media",
+        "oferta": 2600,
+        "altura": 1685,
+        "variedad": "Caturra",
+        "proceso": "Lavado",
+        "trazabilidad": 15,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.BV.096",
+        "nombre": "CH.BV.096",
+        "madurez": "Media",
+        "oferta": 980,
+        "altura": 1830,
+        "variedad": "Typica",
+        "proceso": "Natural",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.BV.099",
+        "nombre": "CH.BV.099",
+        "madurez": "Media",
+        "oferta": 710,
+        "altura": 1895,
+        "variedad": "Pacamara",
+        "proceso": "Lavado",
+        "trazabilidad": 25,
+        "estatus": "En proceso"
+      }
+    ],
+    "empresas": [
+      {
+        "nombre": "Mayan Harvest",
+        "giro": "Cooperativa"
+      },
+      {
+        "nombre": "Café Don Pedro",
+        "giro": "Tostador Local"
+      }
+    ],
+    "institutos": []
+  },
+  "Frontera Comalapa": {
+    "productores": [
+      {
+        "clave": "CH.FC.006",
+        "nombre": "CH.FC.006",
+        "madurez": "Media",
+        "oferta": 5000,
+        "altura": 1100,
+        "variedad": "Marsellesa",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.007",
+        "nombre": "CH.FC.007",
+        "madurez": "Baja",
+        "oferta": 8500,
+        "altura": 950,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 30,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.008",
+        "nombre": "CH.FC.008",
+        "madurez": "Media",
+        "oferta": 3200,
+        "altura": 1250,
+        "variedad": "Caturra",
+        "proceso": "Natural",
+        "trazabilidad": 50,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.009",
+        "nombre": "CH.FC.009",
+        "madurez": "Media",
+        "oferta": 12000,
+        "altura": 850,
+        "variedad": "Mezcla",
+        "proceso": "Lavado",
+        "trazabilidad": 10,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.015",
+        "nombre": "CH.FC.015",
+        "madurez": "Media",
+        "oferta": 6200,
+        "altura": 1150,
+        "variedad": "Sarchimor",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.016",
+        "nombre": "CH.FC.016",
+        "madurez": "Media",
+        "oferta": 9000,
+        "altura": 980,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 15,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.017",
+        "nombre": "CH.FC.017",
+        "madurez": "Media",
+        "oferta": 4500,
+        "altura": 1280,
+        "variedad": "Caturra",
+        "proceso": "Honey",
+        "trazabilidad": 60,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.018",
+        "nombre": "CH.FC.018",
+        "madurez": "Media",
+        "oferta": 15000,
+        "altura": 890,
+        "variedad": "Mezcla",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.022",
+        "nombre": "CH.FC.022",
+        "madurez": "Media",
+        "oferta": 11000,
+        "altura": 1020,
+        "variedad": "Marsellesa",
+        "proceso": "Lavado",
+        "trazabilidad": 20,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.023",
+        "nombre": "CH.FC.023",
+        "madurez": "Media",
+        "oferta": 7500,
+        "altura": 1180,
+        "variedad": "Sarchimor",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.026",
+        "nombre": "CH.FC.026",
+        "madurez": "Media",
+        "oferta": 14000,
+        "altura": 870,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 10,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.027",
+        "nombre": "CH.FC.027",
+        "madurez": "Media",
+        "oferta": 5800,
+        "altura": 1210,
+        "variedad": "Caturra",
+        "proceso": "Natural",
+        "trazabilidad": 75,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.030",
+        "nombre": "CH.FC.030",
+        "madurez": "Media",
+        "oferta": 18000,
+        "altura": 910,
+        "variedad": "Mezcla",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.031",
+        "nombre": "CH.FC.031",
+        "madurez": "Media",
+        "oferta": 4200,
+        "altura": 1320,
+        "variedad": "Sarchimor",
+        "proceso": "Honey",
+        "trazabilidad": 40,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.035",
+        "nombre": "CH.FC.035",
+        "madurez": "Media",
+        "oferta": 9500,
+        "altura": 1050,
+        "variedad": "Marsellesa",
+        "proceso": "Lavado",
+        "trazabilidad": 15,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.036",
+        "nombre": "CH.FC.036",
+        "madurez": "Media",
+        "oferta": 12500,
+        "altura": 940,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.039",
+        "nombre": "CH.FC.039",
+        "madurez": "Media",
+        "oferta": 6700,
+        "altura": 1230,
+        "variedad": "Caturra",
+        "proceso": "Lavado",
+        "trazabilidad": 35,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.040",
+        "nombre": "CH.FC.040",
+        "madurez": "Media",
+        "oferta": 22000,
+        "altura": 860,
+        "variedad": "Mezcla",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.043",
+        "nombre": "CH.FC.043",
+        "madurez": "Media",
+        "oferta": 8800,
+        "altura": 1080,
+        "variedad": "Sarchimor",
+        "proceso": "Lavado",
+        "trazabilidad": 60,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.044",
+        "nombre": "CH.FC.044",
+        "madurez": "Media",
+        "oferta": 13500,
+        "altura": 990,
+        "variedad": "Marsellesa",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.047",
+        "nombre": "CH.FC.047",
+        "madurez": "Media",
+        "oferta": 5300,
+        "altura": 1290,
+        "variedad": "Bourbon",
+        "proceso": "Honey",
+        "trazabilidad": 45,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.048",
+        "nombre": "CH.FC.048",
+        "madurez": "Media",
+        "oferta": 16000,
+        "altura": 930,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.056",
+        "nombre": "CH.FC.056",
+        "madurez": "Media",
+        "oferta": 5200,
+        "altura": 1120,
+        "variedad": "Marsellesa",
+        "proceso": "Lavado",
+        "trazabilidad": 95,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.057",
+        "nombre": "CH.FC.057",
+        "madurez": "Media",
+        "oferta": 9800,
+        "altura": 960,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 20,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.058",
+        "nombre": "CH.FC.058",
+        "madurez": "Media",
+        "oferta": 3500,
+        "altura": 1270,
+        "variedad": "Caturra",
+        "proceso": "Honey",
+        "trazabilidad": 55,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.059",
+        "nombre": "CH.FC.059",
+        "madurez": "Media",
+        "oferta": 14500,
+        "altura": 840,
+        "variedad": "Mezcla",
+        "proceso": "Lavado",
+        "trazabilidad": 10,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.065",
+        "nombre": "CH.FC.065",
+        "madurez": "Media",
+        "oferta": 6800,
+        "altura": 1160,
+        "variedad": "Sarchimor",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.066",
+        "nombre": "CH.FC.066",
+        "madurez": "Media",
+        "oferta": 10200,
+        "altura": 975,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 15,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.067",
+        "nombre": "CH.FC.067",
+        "madurez": "Media",
+        "oferta": 4800,
+        "altura": 1295,
+        "variedad": "Caturra",
+        "proceso": "Honey",
+        "trazabilidad": 65,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.068",
+        "nombre": "CH.FC.068",
+        "madurez": "Media",
+        "oferta": 17500,
+        "altura": 885,
+        "variedad": "Mezcla",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.072",
+        "nombre": "CH.FC.072",
+        "madurez": "Media",
+        "oferta": 12500,
+        "altura": 1035,
+        "variedad": "Marsellesa",
+        "proceso": "Lavado",
+        "trazabilidad": 25,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.073",
+        "nombre": "CH.FC.073",
+        "madurez": "Media",
+        "oferta": 8200,
+        "altura": 1195,
+        "variedad": "Sarchimor",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.076",
+        "nombre": "CH.FC.076",
+        "madurez": "Media",
+        "oferta": 16500,
+        "altura": 860,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 10,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.077",
+        "nombre": "CH.FC.077",
+        "madurez": "Media",
+        "oferta": 6200,
+        "altura": 1225,
+        "variedad": "Caturra",
+        "proceso": "Natural",
+        "trazabilidad": 70,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.080",
+        "nombre": "CH.FC.080",
+        "madurez": "Media",
+        "oferta": 21000,
+        "altura": 905,
+        "variedad": "Mezcla",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.081",
+        "nombre": "CH.FC.081",
+        "madurez": "Media",
+        "oferta": 4500,
+        "altura": 1335,
+        "variedad": "Sarchimor",
+        "proceso": "Honey",
+        "trazabilidad": 35,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.085",
+        "nombre": "CH.FC.085",
+        "madurez": "Media",
+        "oferta": 11000,
+        "altura": 1065,
+        "variedad": "Marsellesa",
+        "proceso": "Lavado",
+        "trazabilidad": 20,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.086",
+        "nombre": "CH.FC.086",
+        "madurez": "Media",
+        "oferta": 13800,
+        "altura": 935,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.089",
+        "nombre": "CH.FC.089",
+        "madurez": "Media",
+        "oferta": 7100,
+        "altura": 1245,
+        "variedad": "Caturra",
+        "proceso": "Lavado",
+        "trazabilidad": 30,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.090",
+        "nombre": "CH.FC.090",
+        "madurez": "Media",
+        "oferta": 25000,
+        "altura": 855,
+        "variedad": "Mezcla",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.093",
+        "nombre": "CH.FC.093",
+        "madurez": "Media",
+        "oferta": 9500,
+        "altura": 1095,
+        "variedad": "Sarchimor",
+        "proceso": "Lavado",
+        "trazabilidad": 65,
+        "estatus": "En proceso"
+      },
+      {
+        "clave": "CH.FC.094",
+        "nombre": "CH.FC.094",
+        "madurez": "Media",
+        "oferta": 15200,
+        "altura": 985,
+        "variedad": "Marsellesa",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.097",
+        "nombre": "CH.FC.097",
+        "madurez": "Media",
+        "oferta": 5700,
+        "altura": 1310,
+        "variedad": "Bourbon",
+        "proceso": "Honey",
+        "trazabilidad": 40,
+        "estatus": "Disponible"
+      },
+      {
+        "clave": "CH.FC.098",
+        "nombre": "CH.FC.098",
+        "madurez": "Media",
+        "oferta": 18500,
+        "altura": 925,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "En bodega"
+      },
+      {
+        "clave": "CH.FC.100",
+        "nombre": "CH.FC.100",
+        "madurez": "Media",
+        "oferta": 12000,
+        "altura": 875,
+        "variedad": "Oro Azteca",
+        "proceso": "Lavado",
+        "trazabilidad": 100,
+        "estatus": "Disponible"
+      }
+    ],
+    "empresas": [
+      {
+        "nombre": "AMSA (ECOM)",
+        "giro": "Exportadora"
+      },
+      {
+        "nombre": "Exp. Café California",
+        "giro": "Exportadora"
+      },
+      {
+        "nombre": "Cafetería Rocatli",
+        "giro": "Tienda/Barra"
+      },
+      {
+        "nombre": "Agroquímicos de la Frontera",
+        "giro": "Insumos Agrícolas"
+      },
+      {
+        "nombre": "Sinergia Agrícola",
+        "giro": "Consultoría/Insumos"
+      },
+      {
+        "nombre": "Agroveterinaria El Campo",
+        "giro": "Insumos Mixtos"
+      },
+      {
+        "nombre": "Fertilizantes y Semillas del Sur",
+        "giro": "Distribuidora"
+      },
+      {
+        "nombre": "Agroinsumos La Sierra",
+        "giro": "Especializada"
+      },
+      {
+        "nombre": "Yara México",
+        "giro": "Marca Global"
+      }
+    ],
+    "institutos": [
+      {
+        "nombre": "TecNM Campus Comalapa",
+        "tipo": "Instituto Técnico"
+      }
+    ]
+  },
+  "empresas_y_cooperativas": {
+    "instituto_tecnico": [
+      {
+        "nombre_marca": "TecNM Campus Comalapa",
+        "ubicacion": "F. Comalapa",
+        "servicios_clave": ["GNSS", "Suelos", "Cata", "DC-3"],
+        "contacto": "Enlace ADICAM"
+      }
+    ],
+    "exportadoras": [
+      {
+        "nombre_marca": "AMSA (ECOM)",
+        "ubicacion": "F. Comalapa",
+        "servicios_clave": ["Compra Pergamino", "Exportación"],
+        "contacto": "963 632 4372"
+      },
+      {
+        "nombre_marca": "Exp. Café California",
+        "ubicacion": "F. Comalapa",
+        "servicios_clave": ["Acopio de grandes volúmenes"],
+        "contacto": "963 631 0755"
+      }
+    ],
+    "cooperativas": [
+      {
+        "nombre_marca": "Mayan Harvest",
+        "ubicacion": "Bella Vista",
+        "servicios_clave": ["Café de Especialidad (Mujeres)"],
+        "contacto": "Redes Sociales"
+      }
+    ],
+    "tostadores_locales": [
+      {
+        "nombre_marca": "Café Don Pedro",
+        "ubicacion": "Bella Vista",
+        "servicios_clave": ["Tostado", "Molido", "Venta Directa"],
+        "contacto": "Facebook Oficial"
+      }
+    ],
+    "tiendas_barra": [
+      {
+        "nombre_marca": "Cafetería Rocatli",
+        "ubicacion": "F. Comalapa",
+        "servicios_clave": ["Consumo local", "Catación"],
+        "contacto": "963 631 0665"
+      }
+    ],
+    "insumos_agricolas": [
+      {
+        "nombre_marca": "Agroquímicos de la Frontera",
+        "ubicacion": "Av. Central Nte., Centro",
+        "servicios_clave": ["Fertilizantes granulados", "Foliares"],
+        "contacto": "963 631 0244"
+      },
+      {
+        "nombre_marca": "Agroveterinaria El Campo",
+        "ubicacion": "2a. Av. Sur Poniente",
+        "servicios_clave": ["Herramientas", "Control biológico"],
+        "contacto": "963 631 0512"
+      }
+    ],
+    "consultoria_insumos": [
+      {
+        "nombre_marca": "Sinergia Agrícola",
+        "ubicacion": "Carr. Comalapa - Motozintla",
+        "servicios_clave": ["Nutrición vegetal", "Control de plagas"],
+        "contacto": "963 135 4480"
+      }
+    ],
+    "distribuidoras": [
+      {
+        "nombre_marca": "Fertilizantes y Semillas del Sur",
+        "ubicacion": "Barrio Candelaria",
+        "servicios_clave": ["Enmiendas de suelo", "Cal agrícola"],
+        "contacto": "Local / Ventanilla"
+      }
+    ],
+    "especializadas": [
+      {
+        "nombre_marca": "Agroinsumos La Sierra",
+        "ubicacion": "Salida a Bella Vista",
+        "servicios_clave": ["Bio-estimulantes para café de altura"],
+        "contacto": "963 631 0987"
+      }
+    ],
+    "marcas_globales": [
+      {
+        "nombre_marca": "Yara México (Punto de Venta)",
+        "ubicacion": "Distribuidores autorizados local",
+        "servicios_clave": ["Programas de nutrición específicos"],
+        "contacto": "Web / Local"
+      }
+    ]
+  }
+}
