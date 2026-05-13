@@ -1,0 +1,30 @@
+{
+  "rankingMundial": [
+    { "pos": 1, "nombre": "Brasil", "coords": [-14.23, -51.92], "color": "#6F4E37" },
+    { "pos": 2, "nombre": "Vietnam", "coords": [14.05, 108.27], "color": "#6F4E37" },
+    { "pos": 3, "nombre": "Colombia", "coords": [4.57, -74.29], "color": "#6F4E37" },
+    { "pos": 4, "nombre": "Indonesia", "coords": [-0.78, 113.92], "color": "#6F4E37" },
+    { "pos": 5, "nombre": "Etiopía", "coords": [9.14, 40.48], "color": "#6F4E37" },
+    { "pos": 6, "nombre": "Honduras", "coords": [15.2, -86.24], "color": "#6F4E37" },
+    { "pos": 7, "nombre": "India", "coords": [20.59, 78.96], "color": "#6F4E37" },
+    { "pos": 8, "nombre": "Uganda", "coords": [1.37, 32.29], "color": "#6F4E37" },
+    { "pos": 9, "nombre": "México", "coords": [23.6, -102.5], "color": "green" },
+    { "pos": 10, "nombre": "Guatemala", "coords": [15.78, -90.23], "color": "#6F4E37" }
+  ],
+  "estadosMexico": {
+    "Chiapas": { "coords": [16.5, -92.5], "prod": "34%", "ton": "367,200", "productores": "180,000", "clima": "Cálido Húmedo" },
+    "Veracruz": { "coords": [19.5, -96.5], "prod": "24%", "ton": "259,200", "productores": "90,000", "clima": "Templado Húmedo" },
+    "Puebla": { "coords": [19.0, -98.0], "prod": "21.1%", "ton": "227,800", "productores": "54,000", "clima": "Fresco" },
+    "Oaxaca": { "coords": [17.0, -96.5], "prod": "8.3%", "ton": "89,640", "productores": "100,000", "clima": "Montañoso" },
+    "Guerrero": { "coords": [17.55, -99.50], "prod": "3.7%", "ton": "40,000", "productores": "25,000", "clima": "Cálido" },
+"Hidalgo": { "coords": [20.10, -98.75], "prod": "2.7%", "ton": "29,000", "productores": "18,000", "clima": "Templado" },
+"Nayarit": { "coords": [21.75, -104.85], "prod": "1.3%", "ton": "14,000", "productores": "8,000", "clima": "Húmedo" },
+"San Luis Potosí": { "coords": [22.15, -100.98], "prod": "1.1%", "ton": "12,000", "productores": "7,000", "clima": "Seco" },
+"Jalisco": { "coords": [20.67, -103.35], "prod": "0.5%", "ton": "5,000", "productores": "3,000", "clima": "Templado" },
+"Colima": { "coords": [19.24, -103.72], "prod": "0.4%", "ton": "4,000", "productores": "2,500", "clima": "Cálido" },
+"Estado de México": { "coords": [19.28, -99.65], "prod": "0.3%", "ton": "3,000", "productores": "2,000", "clima": "Frío" },
+"Tabasco": { "coords": [17.98, -92.93], "prod": "0.2%", "ton": "2,000", "productores": "1,500", "clima": "Húmedo" },
+"Querétaro": { "coords": [20.59, -100.39], "prod": "0.1%", "ton": "1,000", "productores": "800", "clima": "Seco" },
+"Morelos": { "coords": [18.68, -99.10], "prod": "0.1%", "ton": "1,000", "productores": "700", "clima": "Cálido" }
+  }
+}
