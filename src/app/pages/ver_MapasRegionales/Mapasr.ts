@@ -4,9 +4,17 @@ import { FormsModule } from '@angular/forms';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
+import actoresJson from '../../../assets/data/actores.json';
 import datosCafeDeJson from '../../../assets/data/regiones-cafe.json';
 import coordsMunicipiosJson from '../../../assets/data/coords.json';
+import iconMapJson from '../../../assets/data/iconMap.json';
+import data from '../../../assets/data/regiones-cafe.json';
+const iconMap = iconMapJson as Record<string, string>;
 const coordsMunicipios = coordsMunicipiosJson as unknown as Record<string, [number, number]>;
+
+function normalizar(texto: string) {
+  return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
 
 interface IRegionalData {
   nombreRegion: string;
@@ -53,6 +61,15 @@ let L: any = null;
 })
 export class MapaR implements OnInit, AfterViewInit {
 
+public vistaActual: 'productores' | 'empresas' | 'institutos' = 'productores';
+public empresasMunicipio: any[] = [];
+public institutosMunicipio: any[] = [];
+public modoTabla: boolean = true;
+municipios: any[] = [];
+
+public filtroEslabon: string = '';
+public filtroCertificacion: string = '';
+public actoresData: any = actoresJson;
   private map: any;
   private markersGroup: any = null;
   private capaEstadoActual: any = null;
@@ -67,9 +84,11 @@ export class MapaR implements OnInit, AfterViewInit {
   public nombreEstadoSeleccionado: string = 'México';
 
   // 🔥 AGREGADO (para que no marque error en HTML)
-  public eslabones: string[] = ['Producción', 'Transformación', 'Comercialización'];
+  public eslabones: string[] = ['productores', 'cooperativas', 'exportacion', 'ayuntamiento'];
   public certificaciones: string[] = ['Orgánico', 'Fair Trade', 'Rainforest'];
   public productoresMunicipio: any[] = [];
+  
+
 
 
   
@@ -79,9 +98,21 @@ export class MapaR implements OnInit, AfterViewInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  this.municipios = Object.entries(data).map(([nombre, info]: any) => ({
+    nombre,
+    ...info
+  }));
+}
 
   async ngAfterViewInit() {
+
+    document.addEventListener('abrirListado', () => {
+  this.ngZone.run(() => {
+    this.activarListado();
+  });
+});
+
     if (isPlatformBrowser(this.platformId)) {
       const leafletModule = await import('leaflet');
       L = leafletModule.default || leafletModule;
@@ -99,6 +130,8 @@ export class MapaR implements OnInit, AfterViewInit {
     this.isLoading = false;
     this.cdr.detectChanges();
   }
+
+  
 
   async cargarMapaCompleto() {
     this.markersGroup.clearLayers();
@@ -132,7 +165,44 @@ export class MapaR implements OnInit, AfterViewInit {
       console.error("Error cargando el mapa:", error);
     }
   }
+crearIconoHTML(tipo: string) {
+  const icono = this.obtenerIcono(tipo);
 
+  return L.divIcon({
+    className: '',
+    html: `
+      <div style="
+        width:32px;
+        height:32px;
+        border-radius:50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        color:white;
+        font-size:16px;
+        background:${this.getColor(tipo)};
+        box-shadow:0 2px 6px rgba(0,0,0,0.4);
+      ">
+        <i class="bi ${icono}"></i>
+      </div>
+    `,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16]
+  });
+}
+getColor(tipo: string): string {
+  switch (tipo) {
+    case 'productores': return '#28a745';
+    case 'empresas': return '#0d6efd';
+    case 'cooperativas': return '#ffc107';
+    case 'institutos': return '#6f42c1';
+    default: return '#6c757d';
+  }
+}
+
+obtenerIcono(tipo: string): string {
+  return iconMap[tipo] || 'bi-circle';
+}
   private seleccionarEstado(feature: any) {
     const nombre = feature.properties.name;
     this.nombreEstadoSeleccionado = nombre;
@@ -142,7 +212,9 @@ export class MapaR implements OnInit, AfterViewInit {
     // 🔥 FIX
     this.map.flyToBounds(bounds, { padding: [20, 20], duration: 1.2 });
 
-    this.markersGroup.clearLayers();
+    if (this.markersGroup) {
+  this.markersGroup.clearLayers();
+}
 
     L.geoJSON(feature, {
       style: { color: '#6F4E37', weight: 3, fillOpacity: 0.1 }
@@ -160,6 +232,7 @@ export class MapaR implements OnInit, AfterViewInit {
   }
 
 private cargarZonasIndividuales() {
+  this.markersGroup.clearLayers();
 
   const zonas = [
     { name: "Soconusco", mun: ["Tapachula","Cacahoatán","Unión Juárez","Tuxtla Chico","Huixtla","Huehuetán","Tuzantán"] },
@@ -177,9 +250,13 @@ private cargarZonasIndividuales() {
 
     z.mun.forEach(nombre => {
 
-      const coord = coordsMunicipios[nombre];
-      if (!coord) return;
+     const key = Object.keys(coordsMunicipios).find(k => normalizar(k) === normalizar(nombre));
+const coord = key ? coordsMunicipios[key] : null;
 
+      if (!coord) {
+  console.warn("No hay coordenadas para:", nombre);
+  return;
+}
       const marker = L.circleMarker(coord, {
         radius: 6,
         color: '#fff',
@@ -226,61 +303,54 @@ private cargarZonasIndividuales() {
     };
   }
 
- public seleccionarMunicipio(nombreMun: string, zona: string) {
-  // 1. Navegación y Transición en el Mapa
+public seleccionarMunicipio(nombreMun: string, zona: string) {
+  // 1. Mover mapa al municipio
   const coord = coordsMunicipios[nombreMun];
   if (coord) {
-    this.map.flyTo(coord, 12, {
-      animate: true,
-      duration: 1.5
-    });
-    
-    // Dibujamos los puntos específicos (Clusters y Maduros)
+    this.map.flyTo(coord, 12, { animate: true, duration: 1.5 });
+    this.markersGroup.clearLayers();
     this.dibujarPuntosLocalidades(nombreMun);
   }
 
-  // 2. Gestión de Datos (Lectura directa desde la raíz del JSON)
-  const todos: any = datosCafeDeJson || {};
-  
-  // Buscamos el municipio. Usamos .trim() por si hay espacios extra
-  const datos = todos[nombreMun.trim()];
+  // 2. Obtener datos geográficos/estadísticos (para el MODAL) desde datos-cafe.json
+  const todosRegiones = datosCafeDeJson as Record<string, any>;
+  const keyRegion = Object.keys(todosRegiones).find(k => k.toLowerCase() === nombreMun.toLowerCase());
+  const datosRegionales = keyRegion ? todosRegiones[keyRegion] : null;
 
-  if (datos) {
-    console.log("¡Datos encontrados para!", nombreMun);
+  // 3. Obtener datos de actores (para las TABLAS) desde el nuevo actores.json
+  // Intentamos buscar por nombre exacto o por la abreviatura que usa el mapa
+  const nombreParaActores = nombreMun === 'Frontera Comalapa' ? 'F. Comalapa' : nombreMun;
+  const datosActores = this.actoresData[nombreParaActores] || this.actoresData[nombreMun];
+
+  // 4. COMBINACIÓN DE DATOS
+  if (datosRegionales || datosActores) {
+    // Para el MODAL: Mezclamos la zona, los datos regionales y lo que venga de actores
     this.selectedMunicipio = { 
       nombre: nombreMun, 
-      zona, 
-      ...datos 
+      zona: zona, 
+      ...datosRegionales, // Aquí vienen altura, clima, producciónHa, etc.
+      actores: datosRegionales?.actores || datosActores?.resumenActores // Prioriza el contador del modal
     };
-    // Cargamos productores si existen en el JSON del municipio
-    this.productoresMunicipio = datos.productores || [];
+
+    // Para las TABLAS: Priorizamos la lista masiva de actores.json
+    this.productoresMunicipio = datosActores?.productores || datosRegionales?.productores || [];
+    this.empresasMunicipio = datosActores?.empresas || datosRegionales?.empresas || [];
+    this.institutosMunicipio = datosActores?.institutos || datosRegionales?.institutos || [];
+
   } else {
-    console.warn("No se encontraron datos en el JSON para:", nombreMun);
-    // Estado vacío o en proceso si no hay coincidencia
-    this.selectedMunicipio = {
-      nombre: nombreMun,
-      zona,
-      actores: {
-        productores: "Dato en proceso",
-        cooperativas: "Dato en proceso",
-        exportacion: "Dato en proceso",
-        ayuntamiento: "Dato en proceso"
-      },
-      infoProductores: {
-        perfil: "No disponible",
-        promedioFinca: "No disponible"
-      },
-      altura: "Dato en proceso",
-      variedades: ["No especificado"],
-      produccionHa: "Dato en proceso",
-      clima: "Variado"
-    };
+    // Reset si no hay nada
+    this.selectedMunicipio = null;
     this.productoresMunicipio = [];
+    this.empresasMunicipio = [];
+    this.institutosMunicipio = [];
   }
 
-  // 3. Forzar actualización de la vista para que la tarjeta se llene
+  // 5. Activar vista y detectar cambios
+  this.verListado = true;
   this.cdr.detectChanges();
 }
+
+
   public generateReport() {
     if (!this.selectedRegionData) return;
 
@@ -309,9 +379,77 @@ private cargarZonasIndividuales() {
     doc.save(`Reporte_Cafe_${d.nombreRegion}.pdf`);
   }
 
-  applyFilters() {
-    console.log('Filtros aplicados');
-  }
+applyFilters() {
+
+  if (!this.selectedMunicipio) return;
+
+  this.markersGroup.clearLayers();
+
+  const todos = datosCafeDeJson as Record<string, any>;
+  const key = Object.keys(todos).find(
+    k => k.toLowerCase() === this.selectedMunicipio!.nombre.toLowerCase()
+  );
+
+  const mun = key ? todos[key] : null;
+  if (!mun) return;
+
+  const lista = [
+    ...(mun.productores || []),
+    ...(mun.empresas || []),
+    ...(mun.institutos || [])
+  ];
+
+  const filtrados = lista.filter((item: any) => {
+
+    const cumpleEslabon = this.filtroEslabon
+      ? item.tipo === this.filtroEslabon
+      : true;
+
+    const cumpleCertificacion = this.filtroCertificacion
+      ? (item.certificaciones || []).includes(this.filtroCertificacion)
+      : true;
+
+    return cumpleEslabon && cumpleCertificacion;
+  });
+
+  filtrados.forEach((item: any) => {
+
+    if (!item.coords) return;
+
+    L.marker(item.coords, {
+      icon: this.crearIconoHTML(item.tipo || 'productores')
+    }).addTo(this.markersGroup);
+
+  });
+}
+
+private dibujarSoloTipo(lista: any[], tipo: string) {
+  lista.forEach((item: any) => {
+
+   
+    if (!item.coords) return;
+const latlng = item.coords;
+
+    L.marker(latlng, {
+      icon: this.crearIconoHTML(tipo)
+    }).addTo(this.markersGroup);
+  });
+}
+
+get municipiosFiltrados() {
+  return this.municipios.filter(m => {
+
+    const cumpleEslabon = this.filtroEslabon
+      ? m.actores?.[this.filtroEslabon]
+      : true;
+
+    const cumpleCertificacion = this.filtroCertificacion
+      ? (m.certificaciones || []).includes(this.filtroCertificacion)
+      : true;
+
+    return cumpleEslabon && cumpleCertificacion;
+  });
+}
 
 public activarListado() {
   this.verListado = true;
@@ -326,86 +464,62 @@ public activarListado() {
   }
 
 
-
-// En tu archivo .ts, actualiza o añade estos métodos:
-
-
-
-
 private dibujarPuntosLocalidades(municipio: string) {
-  // 1. Limpiamos los marcadores regionales previos
-  if (this.markersGroup) {
-    this.markersGroup.clearLayers();
-  }
 
-  // 2. Obtenemos los datos de productores de este municipio
-  // (Asumiendo que vienen en tu JSON de municipios)
-  const todos: any = (datosCafeDeJson as any).municipios || {};
+  const todos = datosCafeDeJson as Record<string, any>;
   const datosMun = todos[municipio];
-  
-  if (!datosMun || !datosMun.productores) return;
 
-  // 3. Iteramos sobre los productores/localidades para dibujarlos
-  datosMun.productores.forEach((p: any) => {
-    
-    // Determinamos el estilo según el "Nivel de Madurez" o "Tipo"
-    // Si es Cooperativa o Maduro, usamos un color distinto (Amarillo/Oro)
-    const esMaduro = p.madurez === 'Maduro' || p.tipo === 'Cooperativa';
-    
-    const markerOptions = {
-      radius: esMaduro ? 9 : 6, // Más grande si es maduro
-      fillColor: esMaduro ? '#FFD700' : '#6F4E37', // Oro para maduros, Café para comunes
-      color: '#FFFFFF',
-      weight: 2,
-      fillOpacity: 0.9
-    };
+  if (!datosMun) return;
 
-    // Usamos las coordenadas del productor/localidad
-    // Si el productor no tiene coord propia, podrías usar una pequeña variación 
-    // de la coord del municipio para que no se encimen.
+  const lista = [
+    ...(datosMun.productores || []),
+    ...(datosMun.empresas || []),
+    ...(datosMun.institutos || [])
+  ];
+
+  lista.forEach((p: any) => {
+
+    const tipo = p.tipo || 'productores';
     const latlng: [number, number] = p.coords || coordsMunicipios[municipio];
 
-    const marker = L.circleMarker(latlng, markerOptions).addTo(this.markersGroup);
+    const marker = L.marker(latlng, {
+      icon: this.crearIconoHTML(tipo)
+    }).addTo(this.markersGroup);
 
-    // 4. Creamos el Popup con el diseño que pediste
-    const popupContent = `
-      <div style="text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-        <strong style="color: #6F4E37; font-size: 14px;">${p.nombre}</strong><br>
-        <span style="font-size: 12px; color: #666;">${p.localidad || 'Localidad General'}</span>
-        <hr style="margin: 8px 0; border: 0; border-top: 1px solid #eee;">
-        
-        ${p.cantidad ? `
-          <div style="margin-bottom: 8px;">
-            <i class="fas fa-users"></i> <b>${p.cantidad}</b> Productores
-          </div>
-        ` : ''}
-
-        <p style="font-size: 11px; margin-bottom: 10px;">
-          ¿Quieres conocer los productores de nuestro municipio y el perfil de su producto?
-        </p>
-        
-        <button id="btn-lista-${p.clave}" 
-                class="btn btn-sm btn-dark" 
-                style="background-color: #003b6f; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 10px;">
-          VER LISTADO
-        </button>
+    marker.bindPopup(`
+      <div style="text-align:center;">
+        <strong>${p.nombre}</strong><br>
+        <small>${tipo}</small>
       </div>
-    `;
-
-    marker.bindPopup(popupContent);
-
-    // 5. Listener para el botón dentro del Popup
-    marker.on('popupopen', () => {
-      const btn = document.getElementById(`btn-lista-${p.clave}`);
-      if (btn) {
-        btn.onclick = () => {
-          this.ngZone.run(() => {
-            this.activarListado();
-          });
-        };
-      }
-    });
+    `);
   });
 }
+
+cambiarVista(vista: 'productores' | 'empresas' | 'institutos') {
+  this.vistaActual = vista;
+}
+
+private calcularCentro(municipios: string[]): [number, number] {
+  let lat = 0, lng = 0, count = 0;
+
+  municipios.forEach(m => {
+    const coord = coordsMunicipios[m];
+    if (coord) {
+      lat += coord[0];
+      lng += coord[1];
+      count++;
+    }
+  });
+
+  return [lat / count, lng / count];
+}
+
+regresarMapa() {
+  this.verListado = false;
+  this.selectedMunicipio = null;
+  this.selectedRegionData = null;
+  this.cargarMapaCompleto();
+}
+
 
 }
