@@ -9,139 +9,203 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+
       "architect": {
+
         "build": {
           "builder": "@angular/build:application",
+
           "options": {
             "browser": "src/main.ts",
+
             "polyfills": [
               "zone.js"
             ],
+
             "tsConfig": "tsconfig.app.json",
+
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
               },
+
               "src/assets",
+
               {
                 "glob": "**/*",
                 "input": "src/Imegenes",
                 "output": "/Imegenes"
               },
-              
+
               {
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
-                "output": "/assets/images" 
+                "output": "/assets/images"
               }
-              
             ],
+
             "styles": [
-              
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
               "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
-              
+
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+
               "src/styles.css"
             ],
+
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
+
             "server": "src/main.server.ts",
+
             "outputMode": "server",
+
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+
+            "allowedCommonJsDependencies": [
+              "leaflet",
+              "jspdf",
+              "canvg",
+              "raf",
+              "rgbcolor",
+              "frame-ticker"
+            ]
           },
+
           "configurations": {
+
             "production": {
+
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1MB",
-                  "maximumError": "2MB"
+                  "maximumWarning": "5MB",
+                  "maximumError": "8MB"
                 },
+
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "100kB",
-                  "maximumError": "300kB"
+                  "maximumWarning": "200kB",
+                  "maximumError": "500kB"
                 },
+
                 {
                   "type": "all",
-                  "maximumWarning": "800kB",
-                  "maximumError": "2MB"
+                  "maximumWarning": "5MB",
+                  "maximumError": "8MB"
                 }
               ],
+
+              "optimization": true,
+
+              "extractLicenses": true,
+
+              "sourceMap": false,
+
               "outputHashing": "all"
             },
+
             "development": {
+
               "optimization": false,
+
               "extractLicenses": false,
+
               "sourceMap": true
             }
           },
+
           "defaultConfiguration": "production"
         },
+
         "serve": {
           "builder": "@angular/build:dev-server",
+
           "configurations": {
+
             "production": {
               "buildTarget": "CafeHub:build:production"
             },
+
             "development": {
               "buildTarget": "CafeHub:build:development"
             }
           },
+
           "defaultConfiguration": "development"
         },
+
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
         },
+
         "test": {
           "builder": "@angular/build:karma",
+
           "options": {
+
             "polyfills": [
               "zone.js",
               "zone.js/testing"
             ],
+
             "tsConfig": "tsconfig.spec.json",
+
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
               },
+
               {
                 "glob": "**/*",
                 "input": "src/Imegenes",
                 "output": "/Imegenes"
               },
-              
+
               {
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
-                "output": "/assets/images" 
+                "output": "/assets/images"
               }
-              
             ],
+
             "styles": [
-              
               "node_modules/leaflet/dist/leaflet.css",
+
               "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
+
               "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
-              
+
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+
               "src/styles.css"
             ],
+
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
+
+            "allowedCommonJsDependencies": [
+              "leaflet",
+              "jspdf",
+              "canvg",
+              "raf",
+              "rgbcolor",
+              "frame-ticker"
             ]
           }
         }
+
       }
     }
   },
+
   "cli": {
     "analytics": "f7d98da6-1595-4f7d-abfa-424533435be6"
   }
