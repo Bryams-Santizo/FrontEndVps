@@ -86,6 +86,7 @@
         object-fit: contain;
     }
 
+
   /* Ajuste de Modal */
     .btn-productor:hover {
     background-color: #444 !important;
@@ -102,3 +103,55 @@
     to { opacity: 1; transform: translateY(0); }
 }
 }
+
+.icono-mapa {
+  background: transparent !important;
+  border: none !important;
+}
+
+.icono {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* 🌱 PRODUCTORES */
+.icono.productores {
+  background: #28a745;
+}
+
+/* 🏢 EMPRESAS */
+.icono.empresas {
+  background: #0d6efd;
+}
+
+/* 👥 COOPERATIVAS */
+.icono.cooperativas {
+  background: #ffc107;
+  color: black;
+}
+
+/* 🏛️ INSTITUTOS */
+.icono.institutos {
+  background: #6f42c1;
+}
+.icono {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.icono.productores { background: #28a745; }
+.icono.empresas { background: #0d6efd; }
+.icono.cooperativas { background: #ffc107; }
+.icono.institutos { background: #6f42c1; }
